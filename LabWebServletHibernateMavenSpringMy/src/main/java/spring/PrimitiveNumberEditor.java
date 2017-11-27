@@ -27,5 +27,4 @@ public class PrimitiveNumberEditor extends CustomNumberEditor {
 			super.setAsText(text);
 		}
 	}
-
 }

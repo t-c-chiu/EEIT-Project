@@ -8,25 +8,23 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.Resource;
 import org.springframework.web.context.support.ServletContextResource;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ViewResolverRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 import org.springframework.web.servlet.view.XmlViewResolver;
-
-import controller.DemoInterceptor;
 
 @Configuration
 @ComponentScan(basePackages = { "controller" })
 @EnableWebMvc
-public class MvcAnnotationConfig implements WebMvcConfigurer {
+public class SpringMvcConfig extends AbstractAnnotationConfigDispatcherServletInitializer implements WebMvcConfigurer {
 
 	@Autowired
 	private ServletContext serlvetContext;
 
-	@Override
-	public void addInterceptors(InterceptorRegistry registry) {
-		registry.addInterceptor(new DemoInterceptor()).addPathPatterns("/secure/*");
-	}
+	// @Override
+	// public void addInterceptors(InterceptorRegistry registry) {
+	// registry.addInterceptor(new DemoInterceptor()).addPathPatterns("/secure/*");
+	// }
 
 	@Override
 	public void configureViewResolvers(ViewResolverRegistry registry) {
@@ -34,7 +32,21 @@ public class MvcAnnotationConfig implements WebMvcConfigurer {
 		Resource resource = new ServletContextResource(serlvetContext, "/WEB-INF/myVs.xml");
 		viewResolver.setLocation(resource);
 		registry.viewResolver(viewResolver);
-		System.out.println("xvr1");
+	}
+
+	@Override
+	protected Class<?>[] getRootConfigClasses() {
+		return null;
+	}
+
+	@Override
+	protected Class<?>[] getServletConfigClasses() {
+		return new Class[] { SpringMvcConfig.class };
+	}
+
+	@Override
+	protected String[] getServletMappings() {
+		return new String[] { "*.controller" };
 	}
 
 	// @Bean
@@ -46,7 +58,7 @@ public class MvcAnnotationConfig implements WebMvcConfigurer {
 	// System.out.println("xvr2");
 	// return viewResolver;
 	// }
-	
+
 	// @Bean
 	// public ResourceBundleViewResolver rbvr() {
 	// ResourceBundleViewResolver rbvr = new ResourceBundleViewResolver();

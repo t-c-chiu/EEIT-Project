@@ -11,6 +11,9 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBuilder;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.web.context.AbstractContextLoaderInitializer;
+import org.springframework.web.context.WebApplicationContext;
+import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
 
 import model.CustomerBean;
 import model.ProductBean;
@@ -18,7 +21,7 @@ import model.ProductBean;
 @Configuration
 @ComponentScan(basePackages = { "model" })
 @EnableTransactionManagement
-public class AnnotationConfig {
+public class SpringConfig extends AbstractContextLoaderInitializer {
 
 	@Bean
 	public DataSource dataSource() {
@@ -42,5 +45,12 @@ public class AnnotationConfig {
 	@Bean
 	public HibernateTransactionManager transactionManager() {
 		return new HibernateTransactionManager(sessionFactory());
+	}
+
+	@Override
+	protected WebApplicationContext createRootApplicationContext() {
+		AnnotationConfigWebApplicationContext ctx = new AnnotationConfigWebApplicationContext();
+		ctx.register(SpringConfig.class);
+		return ctx;
 	}
 }
