@@ -17,7 +17,9 @@ public class ReplyArticle {
 	private int number;
 	private int status;
 	private String memberId;
-	private Date date;
+	private String contents;
+	private Date date = new Date();
+	private byte[] photo;
 
 	public int getReplyId() {
 		return replyId;
@@ -67,14 +69,20 @@ public class ReplyArticle {
 		this.date = date;
 	}
 
-	public byte[] getContents() {
+	public String getContents() {
 		return contents;
 	}
 
-	public void setContents(byte[] contents) {
+	public void setContents(String contents) {
 		this.contents = contents;
 	}
 
-	private byte[] contents;
+	public byte[] getPhoto() {
+		return photo;
+	}
+
+	public void setPhoto(byte[] photo) {
+		this.photo = photo;
+	}
 
 }

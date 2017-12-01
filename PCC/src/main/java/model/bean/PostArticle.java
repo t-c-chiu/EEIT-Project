@@ -18,8 +18,9 @@ public class PostArticle {
 	private String memberId;
 	private String topic;
 	private String category;
-	private Date date;
-	private byte[] contents;
+	private Date date = new Date();
+	private String contents;
+	private byte[] photo;
 
 	public int getMessageId() {
 		return messageId;
@@ -77,11 +78,19 @@ public class PostArticle {
 		this.date = date;
 	}
 
-	public byte[] getContents() {
+	public String getContents() {
 		return contents;
 	}
 
-	public void setContents(byte[] contents) {
+	public void setContents(String contents) {
 		this.contents = contents;
+	}
+
+	public byte[] getPhoto() {
+		return photo;
+	}
+
+	public void setPhoto(byte[] photo) {
+		this.photo = photo;
 	}
 }
