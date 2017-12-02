@@ -25,13 +25,12 @@ public class PostArticleService {
 		}
 		String type = photo.getContentType().substring(photo.getContentType().indexOf("/")).replace("/", ".");
 		System.out.println(type);
-		// try {
-		// photo.transferTo(new File("C:\\Users\\ZGA\\Desktop\\Code/" + messageId +
-		// type));
-		// return messageId;
-		// } catch (IllegalStateException | IOException e1) {
-		// e1.printStackTrace();
-		return -1;
-		// }
+//		try {
+//			photo.transferTo(new File(messageId + type));
+//			return messageId;
+//		} catch (IllegalStateException | IOException e1) {
+//			e1.printStackTrace();
+			return -1;
+//		}
 	}
 }
