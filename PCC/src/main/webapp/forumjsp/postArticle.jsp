@@ -5,15 +5,15 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Forum</title>
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<title>發文</title>
 </head>
 <body>
-
-	<form action="<c:url value="/test.controller"/>" method="post" enctype="multipart/form-data">
-		<input type="text" name="topic"/><br>
-		<input type="file" name="file" /><br>
+<h1>發文</h1>
+	<form action="<c:url value="/post.forum"/>" method="post" enctype="multipart/form-data">
+		topic:<input type="text" name="topic"/><br>
+		category:<input type="text" name="category"/><br>
+		contents:<textarea rows="10" cols="30" name="contents"></textarea><br>
+		photo:<input type="file" name="photo" /><br>
 		<input type="submit"/>
 	</form>
 

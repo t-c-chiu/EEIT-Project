@@ -12,9 +12,9 @@ public class PostArticle {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int messageId;
-	private int status;
-	private int likes;
+	private Integer messageId;
+	private Integer status;
+	private Integer likes;
 	private String memberId;
 	private String topic;
 	private String category;
@@ -22,27 +22,27 @@ public class PostArticle {
 	private String contents;
 	private byte[] photo;
 
-	public int getMessageId() {
+	public Integer getMessageId() {
 		return messageId;
 	}
 
-	public void setMessageId(int messageId) {
+	public void setMessageId(Integer messageId) {
 		this.messageId = messageId;
 	}
 
-	public int getStatus() {
+	public Integer getStatus() {
 		return status;
 	}
 
-	public void setStatus(int status) {
+	public void setStatus(Integer status) {
 		this.status = status;
 	}
 
-	public int getLikes() {
+	public Integer getLikes() {
 		return likes;
 	}
 
-	public void setLikes(int likes) {
+	public void setLikes(Integer likes) {
 		this.likes = likes;
 	}
 
@@ -93,4 +93,12 @@ public class PostArticle {
 	public void setPhoto(byte[] photo) {
 		this.photo = photo;
 	}
+
+	@Override
+	public String toString() {
+		return "PostArticle [messageId=" + messageId + ", status=" + status + ", likes=" + likes + ", memberId="
+				+ memberId + ", topic=" + topic + ", category=" + category + ", date=" + date + ", contents=" + contents
+				+ "]";
+	}
+
 }

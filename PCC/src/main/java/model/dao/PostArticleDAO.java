@@ -20,13 +20,13 @@ public class PostArticleDAO {
 		return sessionFactory.getCurrentSession();
 	}
 
-	public boolean insert(PostArticle bean) {
+	public int insert(PostArticle bean) {
 		try {
-			getSession().save(bean);
-			return true;
+			int messageId = (int) getSession().save(bean);
+			return messageId;
 		} catch (Exception e) {
 			e.printStackTrace();
-			return false;
+			return -1;
 		}
 	}
 
