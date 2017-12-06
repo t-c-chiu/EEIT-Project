@@ -28,9 +28,11 @@
 </head>
 <body>
 
+<h3>訂房系統</h3>
+
 	<form>
 		<table width="400" border="0" align="center">
-
+			
 
 			<tr>
 				<td>預定住房日</td>
@@ -42,6 +44,21 @@
 				<td><input type="text" id="endDate"></td>
 			</tr>
 
+
+			<tr>
+				<td>入住人</td>
+				<td><input type="text" id="name"></td>
+			</tr>
+
+			<tr>
+				<td>聯絡email</td>
+				<td><input type="text" id="email"></td>
+			</tr>
+
+			<tr>
+				<td>電話</td>
+				<td><input type="text" id="phone"></td>
+			</tr>
 
 
 
