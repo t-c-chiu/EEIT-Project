@@ -53,7 +53,6 @@ public class PostArticleDAO {
 			updateBean.setTopic(bean.getTopic());
 			updateBean.setCategory(bean.getCategory());
 			updateBean.setContents(bean.getContents());
-			updateBean.setPhoto(bean.getPhoto());
 			updateBean.setDate(new Date());
 			return true;
 		}
