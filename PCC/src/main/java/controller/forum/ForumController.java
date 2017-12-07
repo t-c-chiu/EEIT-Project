@@ -1,5 +1,6 @@
 package controller.forum;
 
+import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,7 @@ import org.springframework.web.multipart.support.ByteArrayMultipartFileEditor;
 import model.bean.Member;
 import model.bean.PostArticle;
 import model.bean.ReplyArticle;
+import model.service.CollectArticleService;
 import model.service.PostArticleService;
 import model.service.ReplyArticleService;
 
@@ -27,6 +29,8 @@ public class ForumController {
 	PostArticleService postArticleService;
 	@Autowired
 	ReplyArticleService replyArticleService;
+	@Autowired
+	CollectArticleService collectArticleService;
 
 	@InitBinder
 	public void init(WebDataBinder binder) {
@@ -69,5 +73,16 @@ public class ForumController {
 		replyArticle.setMemberId(member.getMemberId());
 		System.out.println(replyArticle);
 		return "";
+	}
+
+	@RequestMapping(path = "/collect.forum", method = RequestMethod.GET)
+	public String collectArticle(int messageId, String memberId, Model model) throws IOException {
+		int isSuccess = collectArticleService.collectArticle(messageId, memberId);
+		if (isSuccess == -1) {
+			model.addAttribute("msg", "您已收藏過此文章");
+		} else {
+			model.addAttribute("msg", "收藏成功");
+		}
+		return "articleDetail";
 	}
 }

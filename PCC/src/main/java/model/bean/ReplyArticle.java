@@ -12,34 +12,34 @@ public class ReplyArticle {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int replyId;
-	private int messageId;
-	private int status;
+	private Integer replyId;
+	private Integer messageId;
+	private Integer status;
 	private String memberId;
 	private String contents;
 	private Date date = new Date();
 
-	public int getReplyId() {
+	public Integer getReplyId() {
 		return replyId;
 	}
 
-	public void setReplyId(int replyId) {
+	public void setReplyId(Integer replyId) {
 		this.replyId = replyId;
 	}
 
-	public int getMessageId() {
+	public Integer getMessageId() {
 		return messageId;
 	}
 
-	public void setMessageId(int messageId) {
+	public void setMessageId(Integer messageId) {
 		this.messageId = messageId;
 	}
 
-	public int getStatus() {
+	public Integer getStatus() {
 		return status;
 	}
 
-	public void setStatus(int status) {
+	public void setStatus(Integer status) {
 		this.status = status;
 	}
 

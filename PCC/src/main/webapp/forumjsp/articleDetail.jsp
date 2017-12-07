@@ -20,7 +20,12 @@
 		<hr>
 		內容:${mainArticle.contents}
 		<hr>
-		<button>讚:${mainArticle.likes}</button>
+		Likes:${mainArticle.likes}
+		<hr>
+		<a><button>喜歡本文</button></a>
+		<a href="<c:url value="/collect.forum?memberId=${member.memberId}&messageId=${mainArticle.messageId}" />">
+			<button id="collect">蒐藏本文</button>
+		</a><br>${msg}
 		<hr>
 	</div>
 	<div>
