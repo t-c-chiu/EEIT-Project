@@ -20,7 +20,7 @@ import model.service.PostArticleService;
 import model.service.ReplyArticleService;
 
 @Controller
-@SessionAttributes(value = {  "bean" })
+@SessionAttributes(value = { "bean" })
 public class ForumController {
 
 	@Autowired
