@@ -67,4 +67,10 @@ public class ReplyArticle {
 		this.contents = contents;
 	}
 
+	@Override
+	public String toString() {
+		return "ReplyArticle [replyId=" + replyId + ", messageId=" + messageId + ", status=" + status + ", memberId="
+				+ memberId + ", contents=" + contents + ", date=" + date + "]";
+	}
+
 }

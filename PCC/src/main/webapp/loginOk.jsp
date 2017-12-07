@@ -10,5 +10,7 @@
 <body>
 <h1>成功登入</h1>
 
+<a href="<c:url value="/forumjsp/postArticle.jsp"/>">發文</a>
+
 </body>
 </html>
