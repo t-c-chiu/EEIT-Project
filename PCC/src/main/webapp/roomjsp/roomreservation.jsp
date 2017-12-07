@@ -28,39 +28,64 @@
 </head>
 <body>
 
-<h3>訂房系統</h3>
 
-	<form>
+
+	<form action="<c:url value="/roomreservation.controller"/>"
+		method="post">
 		<table width="400" border="0" align="center">
-			
+			<tr>
+				<td><h3>訂房系統</h3></td>
+			</tr>
 
 			<tr>
 				<td>預定住房日</td>
-				<td><input type="text" id="beginDate"></td>
+				<td><input type="text" name="beginDate" id="beginDate"></td>
 			</tr>
 
 			<tr>
 				<td>預定退房日</td>
-				<td><input type="text" id="endDate"></td>
+				<td><input type="text" name="endDate" id="endDate"></td>
+			</tr>
+
+
+			<tr>
+				<td>房間ID(暫)</td>
+				<td><input type="text" name="roomId"></td>
+			</tr>
+
+
+			<tr>
+				<td>會員ID(暫)</td>
+				<td><input type="text" name="memberId"></td>
 			</tr>
 
 
 			<tr>
 				<td>入住人</td>
-				<td><input type="text" id="name"></td>
+				<td><input type="text" name="name"></td>
 			</tr>
 
 			<tr>
 				<td>聯絡email</td>
-				<td><input type="text" id="email"></td>
+				<td><input type="text" name="email"></td>
 			</tr>
 
 			<tr>
 				<td>電話</td>
-				<td><input type="text" id="phone"></td>
+				<td><input type="text" name="phone"></td>
 			</tr>
 
 
+			<tr>
+				<td>總價(暫)</td>
+				<td><input type="text" name="totalPrice"></td>
+			</tr>
+
+			<tr>
+				<td>
+				<input type="submit" name="RoomReservation" value="送出">
+				</td>
+			</tr>
 
 		</table>
 

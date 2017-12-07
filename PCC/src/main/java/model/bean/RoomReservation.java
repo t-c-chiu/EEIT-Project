@@ -66,4 +66,10 @@ public class RoomReservation {
 	public void setEndDate(Date endDate) {
 		this.endDate = endDate;
 	}
+
+	@Override
+	public String toString() {
+		return "RoomReservation [roomReserverId=" + roomReserverId + ", roomId=" + roomId + ", totalPrice=" + totalPrice
+				+ ", memberId=" + memberId + ", beginDate=" + beginDate + ", endDate=" + endDate + "]";
+	}
 }
