@@ -50,7 +50,6 @@ public class ReplyArticleDAO {
 		ReplyArticle updateBean = selectByReplyId(bean.getReplyId());
 		if (updateBean != null) {
 			updateBean.setContents(bean.getContents());
-			updateBean.setPhoto(bean.getPhoto());
 			updateBean.setDate(new Date());
 			return true;
 		}

@@ -14,12 +14,10 @@ public class ReplyArticle {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int replyId;
 	private int messageId;
-	private int number;
 	private int status;
 	private String memberId;
 	private String contents;
 	private Date date = new Date();
-	private byte[] photo;
 
 	public int getReplyId() {
 		return replyId;
@@ -35,14 +33,6 @@ public class ReplyArticle {
 
 	public void setMessageId(int messageId) {
 		this.messageId = messageId;
-	}
-
-	public int getNumber() {
-		return number;
-	}
-
-	public void setNumber(int number) {
-		this.number = number;
 	}
 
 	public int getStatus() {
@@ -77,12 +67,10 @@ public class ReplyArticle {
 		this.contents = contents;
 	}
 
-	public byte[] getPhoto() {
-		return photo;
-	}
-
-	public void setPhoto(byte[] photo) {
-		this.photo = photo;
+	@Override
+	public String toString() {
+		return "ReplyArticle [replyId=" + replyId + ", messageId=" + messageId + ", status=" + status + ", memberId="
+				+ memberId + ", contents=" + contents + ", date=" + date + "]";
 	}
 
 }
