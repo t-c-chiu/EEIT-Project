@@ -97,7 +97,8 @@ public class RoomReservation {
 	@Override
 	public String toString() {
 		return "RoomReservation [roomReserverId=" + roomReserverId + ", roomId=" + roomId + ", totalPrice=" + totalPrice
-				+ ", memberId=" + memberId + ", beginDate=" + beginDate + ", endDate=" + endDate + ", name=" + name
-				+ ", phone=" + phone + ", email=" + email + "]";
+				+ ", memberId=" + memberId + ", beginDate=" + beginDate + ", endDate=" + endDate + 
+				", name="+ name+ ", phone=" + phone + ", email=" + email 
+				+ "]";
 	}	
 }
