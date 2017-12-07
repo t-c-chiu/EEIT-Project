@@ -7,35 +7,36 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import javax.servlet.http.HttpServletRequest;
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 @Controller
 public class UploadImageController {
 
+	@Autowired
+	private ServletContext application;
+
 	@RequestMapping("/forumjsp/imageUpload.forum")
-	public String imageUpload(@RequestParam("upload") MultipartFile file,
-			@RequestParam("CKEditorFuncNum") String CKEditorFuncNum, HttpServletResponse response,
-			HttpServletRequest request) throws IOException {
+	public String imageUpload(MultipartFile upload, String CKEditorFuncNum, HttpServletResponse response)
+			throws IOException {
 		System.out.println("上傳IN");
 		PrintWriter out = response.getWriter();
-		String name = null;
-		name = new String(file.getOriginalFilename().getBytes("iso-8859-1"), "UTF-8");
-		String uploadContentType = file.getContentType();
+		String name = upload.getOriginalFilename();
+		String mimeType = application.getMimeType(name);
 
 		String expandedName = "";
-		if (uploadContentType.equals("image/jpeg")) {
+		if (mimeType.equals("image/jpeg")) {
 			expandedName = ".jpg";
-		} else if (uploadContentType.equals("image/png")) {
+		} else if (mimeType.equals("image/png")) {
 			expandedName = ".png";
-		} else if (uploadContentType.equals("image/gif")) {
+		} else if (mimeType.equals("image/gif")) {
 			expandedName = ".gif";
-		} else if (uploadContentType.equals("image/bmp")) {
+		} else if (mimeType.equals("image/bmp")) {
 			expandedName = ".bmp";
 		} else {
 			out.println("<script type=\"text/javascript\">");
@@ -47,21 +48,17 @@ public class UploadImageController {
 
 		DateFormat df = new SimpleDateFormat("yyyyMMddHHmmss");
 		name = df.format(new Date()) + expandedName;
-		String DirectoryName = request.getContextPath() + "/images";
-		System.out.println(DirectoryName);
 		try {
-			File file1 = new File(request.getServletContext().getRealPath("/images"), name);
-			System.out.println(file1.getPath());
-			file.transferTo(file1);
+			File file = new File(application.getRealPath("/images"), name);
+			upload.transferTo(file);
 
-			File file2 = new File("C:/Maven/git/PCC/src/main/webapp/images/", name);
-			file.transferTo(file1);
-			file.transferTo(file2);
+			System.out.println(file.getPath());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
-		String fileURL = request.getContextPath() + "/images/" + name;
+		String fileURL = application.getContextPath() + "/images/" + name;
+		System.out.println(fileURL);
 
 		out.println("<script type=\"text/javascript\">");
 		out.println("window.parent.CKEDITOR.tools.callFunction(" + CKEditorFuncNum + ",'" + fileURL + "','')");
@@ -69,5 +66,4 @@ public class UploadImageController {
 		out.close();
 		return null;
 	}
-
 }

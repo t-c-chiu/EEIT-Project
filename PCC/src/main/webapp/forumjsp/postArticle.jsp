@@ -22,7 +22,7 @@
 				width : 500
 			});
 		</script>
-			<br><input type="submit" value="發文"/>
+			<br><input type="submit" value="發文"/><a href="<c:url value="/forumjsp/showArticle.jsp"/>"><input type="button" value="取消"/></a>
 	</form>
 
 

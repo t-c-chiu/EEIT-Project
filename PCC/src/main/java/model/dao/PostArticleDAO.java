@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -39,12 +40,13 @@ public class PostArticleDAO {
 	}
 
 	public List<PostArticle> selectByCategory(String category) {
-		return getSession().createQuery("from PostArticle where category = " + category, PostArticle.class).list();
+		Query<PostArticle> query = getSession().createQuery("from PostArticle where category = ?", PostArticle.class);
+		return query.setParameter(0, category).list();
 	}
 
 	public int selectMessageIdByTopic(String topic) {
-		return getSession().createQuery("select messageId from PostArticle where topic = " + topic, int.class)
-				.getSingleResult();
+		Query<Integer> query = getSession().createQuery("select messageId from PostArticle where topic = ?", int.class);
+		return query.setParameter(0, topic).getSingleResult();
 	}
 
 	public boolean update(PostArticle bean) {

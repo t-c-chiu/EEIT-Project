@@ -33,7 +33,6 @@ public class PostArticleController {
 		if (messageId == -1) {
 			return "post.err";
 		}
-
 		model.addAttribute("bean", bean);
 		return "post.ok";
 	}
