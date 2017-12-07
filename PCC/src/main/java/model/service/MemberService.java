@@ -19,7 +19,6 @@ public class MemberService {
 		Member bean = memberDao.select(memberId);
 		// bean檢查完不是null就進入
 		if (bean != null) {
-			// 再檢查password，不是null就進入
 				// 資料庫的password
 				byte[] psd = bean.getPassword();
 				// 使用者輸入的password
