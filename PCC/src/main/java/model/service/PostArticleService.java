@@ -17,6 +17,7 @@ public class PostArticleService {
 	PostArticleDAO postArticleDAO;
 
 	public int postArticle(PostArticle bean) {
+		bean.setLikes(0);
 		return postArticleDAO.insert(bean);
 	}
 	
