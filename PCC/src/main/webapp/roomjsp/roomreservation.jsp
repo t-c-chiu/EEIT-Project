@@ -30,7 +30,7 @@
 
 
 
-	<form action="<c:url value="/roomreservation.controller"/>"
+	<form action="<c:url value="/controller.room"/>"
 		method="post">
 		<table width="400" border="0" align="center">
 			<tr>
