@@ -20,7 +20,6 @@ public class PostArticle {
 	private String category;
 	private Date date = new Date();
 	private String contents;
-	private byte[] photo;
 
 	public Integer getMessageId() {
 		return messageId;
@@ -84,14 +83,6 @@ public class PostArticle {
 
 	public void setContents(String contents) {
 		this.contents = contents;
-	}
-
-	public byte[] getPhoto() {
-		return photo;
-	}
-
-	public void setPhoto(byte[] photo) {
-		this.photo = photo;
 	}
 
 	@Override

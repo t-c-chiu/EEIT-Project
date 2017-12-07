@@ -5,40 +5,26 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<<<<<<< HEAD
-<script src="//cdn.ckeditor.com/4.7.3/standard/ckeditor.js"></script>
-<title>發文</title>
+<script src="<c:url value="/ckeditor/ckeditor.js"/>"></script>
 </head>
 <body>
 	<h1>發文</h1>
-
-	<textarea name="editor1"></textarea>
-	<script>CKEDITOR.replace("editor1");</script>
-<%-- 	<form action="<c:url value="/post.forum"/>" method="post" --%>
-<!-- 		enctype="multipart/form-data"> -->
-<!-- 		topic:<input type="text" name="topic" /><br> category:<input -->
-<!-- 			type="text" name="category" /><br> contents: -->
-<!-- 		<textarea rows="10" cols="30" name="contents"></textarea> -->
-<!-- 		<br> photo:<input type="file" name="photo" /><br> <input -->
-<!-- 			type="submit" /> -->
-<!-- 	</form> -->
-=======
-<title>發文</title>
-</head>
-<body>
-	<h1>發文</h1>
-	<script src="//cdn.ckeditor.com/4.7.3/standard/ckeditor.js"></script>
-	<textarea name="editor1"></textarea>
-	<script>CKEDITOR.replace("editor1");</script>
-	<form action="<c:url value="/post.forum"/>" method="post"
-		enctype="multipart/form-data">
-		topic:<input type="text" name="topic" /><br> category:<input
-			type="text" name="category" /><br> contents:
-		<textarea rows="10" cols="30" name="contents"></textarea>
-		<br> photo:<input type="file" name="photo" /><br> <input
-			type="submit" />
+	<form action="<c:url value="/post.forum"/>" method="post" enctype="multipart/form-data">
+		category: <select name="category">
+			<option value="pregnancy">懷孕討論</option>
+			<option value="child">育兒討論</option>
+			<option value="mood">心情分享</option>
+				</select><br>
+		topic: <input type="text" name="topic" /><br> 
+		contents: <textarea name="contents"></textarea><br>
+		<script>
+			CKEDITOR.replace("contents", {
+				width : 500
+			});
+		</script>
+			<br><input type="submit" value="發文"/><a href="<c:url value="/forumjsp/showArticle.jsp"/>"><input type="button" value="取消"/></a>
 	</form>
->>>>>>> branch 'master' of https://github.com/EEIT98Team05/RemoteRepository1127.git
+
 
 </body>
 </html>

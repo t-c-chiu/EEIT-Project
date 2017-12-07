@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.support.ByteArrayMultipartFileEditor;
 
 import model.bean.PostArticle;
@@ -27,14 +26,13 @@ public class PostArticleController {
 	}
 
 	@RequestMapping(path = "/post.forum", method = RequestMethod.POST)
-	public String postArticle(PostArticle bean, Model model, MultipartFile photo) {
+	public String postArticle(PostArticle bean, Model model) {
 		bean.setMemberId("Account");
-
-		int messageId = postArticleService.postArticle(bean, photo);
+		System.out.println(bean);
+		int messageId = postArticleService.postArticle(bean);
 		if (messageId == -1) {
 			return "post.err";
 		}
-
 		model.addAttribute("bean", bean);
 		return "post.ok";
 	}
