@@ -24,7 +24,7 @@ public class RoomReservationController {
 	@InitBinder
 	public void intialize(WebDataBinder webDataBinder) {		
 		webDataBinder.registerCustomEditor(java.util.Date.class, 
-				new CustomDateEditor(new SimpleDateFormat("yyyy/MM/dd"), true));
+				new CustomDateEditor(new SimpleDateFormat("MM/dd/yyyy"), true));
 				
 	}
 	
