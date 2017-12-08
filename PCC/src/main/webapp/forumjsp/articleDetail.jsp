@@ -20,9 +20,9 @@
 		<hr>
 		內容:<br>${mainArticle.contents}
 		<hr>
-		Likes:${mainArticle.likes}
+		文章收藏數:${mainArticle.likes}
 		<hr>
-		<a><button>喜歡本文</button></a>
+		
 		<a href="<c:url value="/collect.forum?memberId=${member.memberId}&messageId=${mainArticle.messageId}" />">
 			<button id="collect">收藏本文</button>
 		</a>${isCollect}
@@ -35,18 +35,18 @@
 			內容:<br>${replyArticle.contents}<hr>
 		</c:forEach>
 	</div>
-	<div>
-		回覆文章:
-		<form action="<c:url value="/reply.forum"/>" method="post">
-			<input type="hidden" name="messageId" value="${mainArticle.messageId}"/>
-			<textarea name="contents"></textarea>${replyMsg}<br>
-		<script>
-			CKEDITOR.replace("contents", {
-				width : 300
-			});
-		</script>
-			<input type="submit" value="回覆">
-		</form>
-	</div>
+		<div>
+			回覆文章:
+			<form action="<c:url value="/reply.forum"/>" method="post">
+				<input type="hidden" name="messageId" value="${mainArticle.messageId}"/>
+				<textarea name="contents"></textarea>${replyMsg}<br>
+			<script>
+				CKEDITOR.replace("contents", {
+					width : 300
+				});
+			</script>
+				<input type="submit" value="回覆">
+			</form>
+		</div>
 </body>
 </html>

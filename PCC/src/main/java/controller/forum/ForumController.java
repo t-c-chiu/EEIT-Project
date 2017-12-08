@@ -8,12 +8,10 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttribute;
-import org.springframework.web.multipart.support.ByteArrayMultipartFileEditor;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import model.bean.Member;
 import model.bean.PostArticle;
@@ -23,6 +21,7 @@ import model.service.PostArticleService;
 import model.service.ReplyArticleService;
 
 @Controller
+@SessionAttributes({ "listOfPostArticles" })
 public class ForumController {
 
 	@Autowired
@@ -31,11 +30,6 @@ public class ForumController {
 	ReplyArticleService replyArticleService;
 	@Autowired
 	CollectArticleService collectArticleService;
-
-	@InitBinder
-	public void init(WebDataBinder binder) {
-		binder.registerCustomEditor(byte[].class, "photo", new ByteArrayMultipartFileEditor());
-	}
 
 	@RequestMapping(path = "/post.forum", method = RequestMethod.POST)
 	public String postArticle(@SessionAttribute("member") Member member, PostArticle bean, Model model) {
@@ -52,24 +46,26 @@ public class ForumController {
 		}
 		bean.setMemberId(member.getMemberId());
 		postArticleService.postArticle(bean);
-		model.addAttribute("listOfPostArticles", showAllArticles());
+		model.addAttribute("listOfPostArticles", postArticleService.showArticleByOrder("date"));
+		return "showArticles";
+	}
+
+	@RequestMapping(path = "/showByOrder.forum", method = RequestMethod.GET)
+	public String showArticlesByOrder(String order, Model model) {
+		List<PostArticle> listOfPostArticles = postArticleService.showArticleByOrder(order);
+		model.addAttribute("listOfPostArticles", listOfPostArticles);
 		return "showArticles";
 	}
 
 	@RequestMapping(path = "/showAll.forum", method = RequestMethod.GET)
 	public String showArticles(String category, Model model) {
-		List<PostArticle> listOfPostArticles;
-		if ("all".equalsIgnoreCase(category)) {
-			listOfPostArticles = showAllArticles();
-		} else {
-			listOfPostArticles = postArticleService.showArticlesByCategory(category);
-		}
+		List<PostArticle> listOfPostArticles = postArticleService.showArticlesByCategory(category);
 		model.addAttribute("listOfPostArticles", listOfPostArticles);
 		return "showArticles";
 	}
 
 	@RequestMapping(path = "/showDetial.forum", method = RequestMethod.GET)
-	public String showArticleDetail(int messageId, Model model) {
+	public String showArticleDetail(Integer messageId, Model model) {
 		model.addAttribute("mainArticle", postArticleService.showArticleDetail(messageId));
 		model.addAttribute("replyArticles", showAllReplyArticles(messageId));
 		return "articleDetail";
@@ -77,10 +73,10 @@ public class ForumController {
 
 	@RequestMapping(path = "/reply.forum", method = RequestMethod.POST)
 	public String replyArticle(@SessionAttribute("member") Member member, ReplyArticle replyArticle, Model model) {
-		int messageId = replyArticle.getMessageId();
+		Integer messageId = replyArticle.getMessageId();
 		model.addAttribute("mainArticle", postArticleService.showArticleDetail(messageId));
 		model.addAttribute("replyArticles", showAllReplyArticles(messageId));
-		if(replyArticle.getContents()==null||replyArticle.getContents().trim().length()==0) {
+		if (replyArticle.getContents() == null || replyArticle.getContents().trim().length() == 0) {
 			model.addAttribute("replyMsg", "請輸入留言");
 			return "articleDetail";
 		}
@@ -91,7 +87,7 @@ public class ForumController {
 	}
 
 	@RequestMapping(path = "/collect.forum", method = RequestMethod.GET)
-	public String collectArticle(int messageId, String memberId, Model model) throws IOException {
+	public String collectArticle(Integer messageId, String memberId, Model model) throws IOException {
 		int collect = collectArticleService.collectArticle(messageId, memberId);
 		model.addAttribute("mainArticle", postArticleService.showArticleDetail(messageId));
 		model.addAttribute("replyArticles", showAllReplyArticles(messageId));
@@ -110,16 +106,7 @@ public class ForumController {
 		return "showArticles";
 	}
 
-	public String likeArticle(int messageId, String memberId, Model model) {
-
-		return "showArticles";
-	}
-
-	public List<PostArticle> showAllArticles() {
-		return postArticleService.showAllArticles();
-	}
-
-	public List<ReplyArticle> showAllReplyArticles(int messageId) {
+	public List<ReplyArticle> showAllReplyArticles(Integer messageId) {
 		return replyArticleService.showReplies(messageId);
 	}
 }

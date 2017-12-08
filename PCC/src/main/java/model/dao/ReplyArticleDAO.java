@@ -1,6 +1,5 @@
 package model.dao;
 
-import java.util.Date;
 import java.util.List;
 
 import org.hibernate.Session;
@@ -49,7 +48,6 @@ public class ReplyArticleDAO {
 		ReplyArticle updateBean = selectByReplyId(bean.getReplyId());
 		if (updateBean != null) {
 			updateBean.setContents(bean.getContents());
-			updateBean.setDate(new Date());
 			return true;
 		}
 		return false;

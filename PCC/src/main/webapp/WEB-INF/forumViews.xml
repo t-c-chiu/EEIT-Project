@@ -3,8 +3,8 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-	<bean id="showArticles"
-		class="org.springframework.web.servlet.view.InternalResourceView">
+	<bean id="showArticles" class="org.springframework.web.servlet.view.RedirectView">
+		<property name="contextRelative" value="true"></property>
 		<property name="url" value="/forumjsp/showArticle.jsp"></property>
 	</bean>
 
