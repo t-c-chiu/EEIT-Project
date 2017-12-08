@@ -27,26 +27,7 @@
 			</tr>
 
 		</table>
-		
-		<table width="400" border="0" align="center">
-			<c:if test="${!empty listOfRooms}">
-				<tr>
-					<th>圖片</th>
-					<th>房間編號</th>
-					<th>房型</th>
-					<th>每晚房價</th>
-				</tr>
-				<c:forEach var="room" items="${listOfRooms}">
-					<tr>					
-						<td><img src="<c:url value="/roomimage/${room.roomImage}.jpg"/>"></td>
-						<td>${room.roomId}</td>
-						<td>${room.roomType}</td>
-						<td>${room.price}</td>
-					</tr>
-				</c:forEach>
-			</c:if>
 
-		</table>
 
 	</form>
 

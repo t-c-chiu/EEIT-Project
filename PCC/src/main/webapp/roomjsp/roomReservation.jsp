@@ -19,6 +19,7 @@
 		$('#endDate').datepicker({
 			minDate : 0
 		});
+
 	});
 </script>
 
@@ -27,14 +28,54 @@
 </head>
 <body>
 
+	<table width="400" border="0" align="center">
+		<c:if test="${!empty listOfRooms}">
+			<tr>
+				<th>圖片</th>
+				<th>房間編號</th>
+				<th>房型</th>
+				<th>每晚房價</th>
+			</tr>
+			<c:forEach var="room" items="${listOfRooms}">
+				<tr>
+					<td><img height="120" width="160"
+						src="<c:url value="/roomimage/${room.roomImage}.jpg"/>"></td>
+					<td>${room.roomId}</td>
+					<td>${room.roomType}</td>
+					<td>${room.price}</td>
+				</tr>
+			</c:forEach>
+		</c:if>
 
+	</table>
 
-	<form action="<c:url value="/reserve.room"/>"
-		method="post">
+	<form action="<c:url value="/reserve.room"/>" method="post">
 		<table width="400" border="0" align="center">
 			<tr>
 				<td><h3>訂房系統</h3></td>
 			</tr>
+
+			<tr>
+				<td>會員ID</td>
+				<td><span>${member.memberId}</span></td>
+			</tr>
+
+
+			<tr>
+				<td>入住人</td>
+				<td><input type="text" name="name" value="${member.name}"></td>
+			</tr>
+
+			<tr>
+				<td>聯絡email</td>
+				<td><input type="text" name="email" value="${member.email}"></td>
+			</tr>
+
+			<tr>
+				<td>電話</td>
+				<td><input type="text" name="phone" value="${member.phone}"></td>
+			</tr>
+
 
 			<tr>
 				<td>預定住房日</td>
@@ -46,34 +87,10 @@
 				<td><input type="text" name="endDate" id="endDate"></td>
 			</tr>
 
-
 			<tr>
 				<td>房間ID(暫)</td>
 				<td><input type="text" name="roomId"></td>
 			</tr>
-
-
-			<tr>
-				<td>會員ID(暫)</td>
-				<td><input type="text" name="memberId"></td>
-			</tr>
-
-
-			<tr>
-				<td>入住人</td>
-				<td><input type="text" name="name"></td>
-			</tr>
-
-			<tr>
-				<td>聯絡email</td>
-				<td><input type="text" name="email"></td>
-			</tr>
-
-			<tr>
-				<td>電話</td>
-				<td><input type="text" name="phone"></td>
-			</tr>
-
 
 			<tr>
 				<td>總價(暫)</td>
@@ -81,8 +98,7 @@
 			</tr>
 
 			<tr>
-				<td>
-				<input type="submit" name="RoomReservation" value="送出">
+				<td><input type="submit" name="RoomReservation" value="送出">
 				</td>
 			</tr>
 
