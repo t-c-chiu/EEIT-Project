@@ -6,6 +6,12 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<script src='https://www.google.com/recaptcha/api.js'></script>
+<script type="text/javascript">
+  var onloadCallback = function() {
+    alert("grecaptcha is ready!");
+  };
+</script>
 </head>
 <body>
 <form action="<c:url value="/test.login"/>" method="POST">
@@ -20,10 +26,13 @@
 	<td><input type="text" name="password" value="${param.password }"></td>
 	<td>${errors.passwordError }</td>
 	</tr>
+
+
 	<tr>
 	<td align="left"><input type="submit" value="Login"></td>
 	</tr>
 </table>
+<div class="g-recaptcha" data-sitekey="6LddCjwUAAAAABdTF-IYq7MxxFI0UBq7fHKJKB6z"></div>
 </form>
 	${loginMsg}
 </body>
