@@ -1,12 +1,10 @@
 package model.service;
 
-import java.io.File;
-import java.io.IOException;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.multipart.MultipartFile;
 
 import model.bean.PostArticle;
 import model.dao.PostArticleDAO;
@@ -18,19 +16,26 @@ public class PostArticleService {
 	@Autowired
 	PostArticleDAO postArticleDAO;
 
-	public int postArticle(PostArticle bean, MultipartFile photo) {
-		int messageId = postArticleDAO.insert(bean);
-		if (messageId == -1) {
-			return messageId;
-		}
-		String type = photo.getContentType().substring(photo.getContentType().indexOf("/")).replace("/", ".");
-		System.out.println(type);
-//		try {
-//			photo.transferTo(new File(messageId + type));
-//			return messageId;
-//		} catch (IllegalStateException | IOException e1) {
-//			e1.printStackTrace();
-			return -1;
-//		}
+	public int postArticle(PostArticle bean) {
+		bean.setLikes(0);
+		bean.setStatus(0);
+		return postArticleDAO.insert(bean);
+	}
+
+	public List<PostArticle> showAllArticles() {
+		return postArticleDAO.select();
+	}
+
+	public List<PostArticle> showArticlesByCategory(String category) {
+		return postArticleDAO.selectByCategory(category);
+	}
+
+	public PostArticle showArticleDetail(int messageId) {
+		return postArticleDAO.selectByMessageId(messageId);
+	}
+
+	public List<PostArticle> showArticlesByTopic(String topic) {
+		topic = "%" + topic + "%";
+		return postArticleDAO.selectByTopic(topic);
 	}
 }
