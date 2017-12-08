@@ -27,7 +27,16 @@
 				<input type="submit" name="Room" value="送出">
 				</td>
 			</tr>
-
+			
+		</table>
+		<table>
+		<c:forEach var="room" items="{}">
+		<tr>
+		<td>${room.roomid}</td>
+		<td>${room.roomType}</td>
+		<td>${room.price}</td>		
+		</tr>				
+		</c:forEach>				
 		</table>
 
 	</form>

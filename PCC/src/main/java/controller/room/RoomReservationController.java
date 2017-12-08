@@ -15,7 +15,6 @@ import model.bean.RoomReservation;
 import model.service.RoomReservationService;
 
 @Controller
-@RequestMapping("/controller.room")
 public class RoomReservationController {
 	
 	@Autowired
@@ -28,7 +27,7 @@ public class RoomReservationController {
 				
 	}
 	
-	@RequestMapping(method= {RequestMethod.POST})
+	@RequestMapping(path="/reserve.room",method= RequestMethod.POST)
 	public String method(RoomReservation bean,Model model) {
 		RoomReservation result=roomReservationService.insert(bean);
 		
