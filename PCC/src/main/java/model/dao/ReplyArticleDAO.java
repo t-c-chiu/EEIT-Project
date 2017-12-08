@@ -22,8 +22,7 @@ public class ReplyArticleDAO {
 
 	public int insert(ReplyArticle bean) {
 		try {
-			int replyId = (int) getSession().save(bean);
-			return replyId;
+			return (int) getSession().save(bean);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return -1;

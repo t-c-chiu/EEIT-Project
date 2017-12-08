@@ -25,5 +25,6 @@
 	</tr>
 </table>
 </form>
+	${loginMsg}
 </body>
 </html>
