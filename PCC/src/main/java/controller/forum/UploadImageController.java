@@ -24,7 +24,6 @@ public class UploadImageController {
 	@RequestMapping("/forumjsp/imageUpload.forum")
 	public String imageUpload(MultipartFile upload, String CKEditorFuncNum, HttpServletResponse response)
 			throws IOException {
-		System.out.println("上傳IN");
 		PrintWriter out = response.getWriter();
 		String name = upload.getOriginalFilename();
 		String mimeType = application.getMimeType(name);
@@ -52,13 +51,11 @@ public class UploadImageController {
 			File file = new File(application.getRealPath("/images"), name);
 			upload.transferTo(file);
 
-			System.out.println(file.getPath());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
 		String fileURL = application.getContextPath() + "/images/" + name;
-		System.out.println(fileURL);
 
 		out.println("<script type=\"text/javascript\">");
 		out.println("window.parent.CKEDITOR.tools.callFunction(" + CKEditorFuncNum + ",'" + fileURL + "','')");
