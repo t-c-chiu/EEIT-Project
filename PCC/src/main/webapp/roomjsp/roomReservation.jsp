@@ -20,8 +20,19 @@
 			minDate : 0
 		});
 
+		$(".image").click(function() {
+			$(this).css({
+				'border-style' : 'double'
+			})
+			
+			$("#roomId").empty().append($(this).text())
+		});
+		
+		
+
 	});
 </script>
+
 
 
 <title>Insert title here</title>
@@ -29,25 +40,27 @@
 <body>
 
 	<table width="400" border="0" align="center">
-		<c:if test="${!empty listOfRooms}">
-			<tr>
-				<th>圖片</th>
-				<th>房間編號</th>
-				<th>房型</th>
-				<th>每晚房價</th>
-			</tr>
-			<c:forEach var="room" items="${listOfRooms}">
-				<tr>
-					<td><img height="120" width="160"
-						src="<c:url value="/roomimage/${room.roomImage}.jpg"/>"></td>
-					<td>${room.roomId}</td>
-					<td>${room.roomType}</td>
-					<td>${room.price}</td>
-				</tr>
-			</c:forEach>
-		</c:if>
 
+		<tr>
+			<th>圖片</th>
+			<th>房間編號</th>
+			<th>房型</th>
+			<th>每晚房價</th>
+		</tr>
+
+		<c:forEach var="room" items="${listOfRooms}">
+
+			<tr>
+				<td><img height="120" width="160"
+					src="<c:url value="/roomimage/${room.roomImage}.jpg"/>"></td>
+				<td class="image">${room.roomId}</td>
+				<td>${room.roomType}</td>
+				<td>${room.price}</td>
+			</tr>
+
+		</c:forEach>
 	</table>
+
 
 	<form action="<c:url value="/reserve.room"/>" method="post">
 		<table width="400" border="0" align="center">
@@ -89,7 +102,7 @@
 
 			<tr>
 				<td>房間ID(暫)</td>
-				<td><input type="text" name="roomId"></td>
+				<td><span id="roomId"></span></td>
 			</tr>
 
 			<tr>
