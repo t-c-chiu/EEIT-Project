@@ -21,6 +21,8 @@ public class ReplyArticleService {
 	}
 	
 	public int replyArticle(ReplyArticle replyArticle) {
+		replyArticle.setStatus(0);
 		return replyArticleDAO.insert(replyArticle);
 	}
+	
 }

@@ -28,4 +28,8 @@ public class CollectArticleService {
 		collectArticle.setMemberId(memberId);
 		return collectArticleDAO.insert(collectArticle);
 	}
+	
+//	public int likeArticle(int messageId, String memberId) {
+//		
+//	}
 }

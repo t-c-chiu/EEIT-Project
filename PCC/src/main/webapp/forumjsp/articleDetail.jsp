@@ -7,26 +7,33 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>文章資訊</title>
 <script src="<c:url value="/ckeditorbasic/ckeditor.js"/>"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
 <body>
+	<h1>文章:</h1>
 	<div>
-		作者:${mainArticle.memberId}
+		<span>作者:${mainArticle.memberId}</span> <span>發文日期:${mainArticle.date}</span>
 		<hr>
 		主題:${mainArticle.topic}
 		<hr>
 		分類:${mainArticle.category}
 		<hr>
-		發文日期:${mainArticle.date}
-		<hr>
-		內容:${mainArticle.contents}
+		內容:<br>${mainArticle.contents}
 		<hr>
 		Likes:${mainArticle.likes}
 		<hr>
 		<a><button>喜歡本文</button></a>
 		<a href="<c:url value="/collect.forum?memberId=${member.memberId}&messageId=${mainArticle.messageId}" />">
 			<button id="collect">蒐藏本文</button>
-		</a><br>${msg}
-		<hr>
+		</a>
+	</div>
+	<hr><hr>
+	<h2>留言區:</h2>
+	<div>
+		<c:forEach var="replyArticle" items="${replyArticles}">
+			<span>作者:${replyArticle.memberId}</span> <span>回文日期:${replyArticle.date}</span><hr>
+			內容:<br>${replyArticle.contents}<hr>
+		</c:forEach>
 	</div>
 	<div>
 		回覆文章:
@@ -41,5 +48,12 @@
 			<input type="submit" value="回覆">
 		</form>
 	</div>
+	<script>
+		$(function(){
+			$('#collect').click(function(){
+				alert('收藏成功');
+			})
+		})
+	</script>
 </body>
 </html>

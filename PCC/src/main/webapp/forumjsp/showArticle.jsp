@@ -8,7 +8,9 @@
 <title>討論區</title>
 </head>
 <body>
-
+	<form action="<c:url value="/search.forum" />" method="get">
+		<input type="text" name="topic"/><input type="submit" value="搜尋主題" />
+	</form>
 	<a href="<c:url value="/showAll.forum?category=all"/>">所有文章</a>
 	<a href="<c:url value="/showAll.forum?category=pregnancy"/>">懷孕討論</a>
 	<a href="<c:url value="/showAll.forum?category=child"/>">育兒討論</a>

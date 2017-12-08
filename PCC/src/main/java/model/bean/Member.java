@@ -13,8 +13,8 @@ public class Member {
 	private String phone;
 	private String area;
 	private String address;
-	private int role;
-	private int status;
+	private Integer role;
+	private Integer status;
 	private byte[] password;
 
 	public String getMemberId() {
@@ -65,19 +65,19 @@ public class Member {
 		this.address = address;
 	}
 
-	public int getRole() {
+	public Integer getRole() {
 		return role;
 	}
 
-	public void setRole(int role) {
+	public void setRole(Integer role) {
 		this.role = role;
 	}
 
-	public int getStatus() {
+	public Integer getStatus() {
 		return status;
 	}
 
-	public void setStatus(int status) {
+	public void setStatus(Integer status) {
 		this.status = status;
 	}
 

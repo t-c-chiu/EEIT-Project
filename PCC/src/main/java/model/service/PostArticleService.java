@@ -18,18 +18,24 @@ public class PostArticleService {
 
 	public int postArticle(PostArticle bean) {
 		bean.setLikes(0);
+		bean.setStatus(0);
 		return postArticleDAO.insert(bean);
 	}
-	
-	public List<PostArticle> showAllArticles(){
+
+	public List<PostArticle> showAllArticles() {
 		return postArticleDAO.select();
 	}
-	
-	public List<PostArticle> showArticlesByCategory(String category){
+
+	public List<PostArticle> showArticlesByCategory(String category) {
 		return postArticleDAO.selectByCategory(category);
 	}
-	
+
 	public PostArticle showArticleDetail(int messageId) {
 		return postArticleDAO.selectByMessageId(messageId);
+	}
+
+	public List<PostArticle> showArticlesByTopic(String topic) {
+		topic = "%" + topic + "%";
+		return postArticleDAO.selectByTopic(topic);
 	}
 }

@@ -11,9 +11,9 @@
 	<h1>發文</h1>
 	<form action="<c:url value="/post.forum"/>" method="post" enctype="multipart/form-data">
 		category: <select name="category">
-			<option value="pregnancy">懷孕討論</option>
-			<option value="child">育兒討論</option>
-			<option value="mood">心情分享</option>
+			<option value="懷孕討論">懷孕討論</option>
+			<option value="育兒討論">育兒討論</option>
+			<option value="心情分享">心情分享</option>
 				</select><br>
 		topic: <input type="text" name="topic" /><br> 
 		contents: <textarea name="contents"></textarea><br>
