@@ -1,6 +1,6 @@
 package model.bean;
 
-import java.util.Date;
+import java.sql.Timestamp;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -17,7 +17,7 @@ public class ReplyArticle {
 	private Integer status;
 	private String memberId;
 	private String contents;
-	private Date date = new Date();
+	private Timestamp date = new Timestamp(new java.util.Date().getTime());
 
 	public Integer getReplyId() {
 		return replyId;
@@ -51,11 +51,11 @@ public class ReplyArticle {
 		this.memberId = memberId;
 	}
 
-	public Date getDate() {
+	public Timestamp getDate() {
 		return date;
 	}
 
-	public void setDate(Date date) {
+	public void setDate(Timestamp date) {
 		this.date = date;
 	}
 

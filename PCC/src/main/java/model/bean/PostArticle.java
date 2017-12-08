@@ -1,6 +1,6 @@
 package model.bean;
 
-import java.util.Date;
+import java.sql.Timestamp;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -18,7 +18,7 @@ public class PostArticle {
 	private String memberId;
 	private String topic;
 	private String category;
-	private Date date = new Date();
+	private Timestamp date = new Timestamp(new java.util.Date().getTime());
 	private String contents;
 
 	public Integer getMessageId() {
@@ -69,11 +69,11 @@ public class PostArticle {
 		this.category = category;
 	}
 
-	public Date getDate() {
+	public Timestamp getDate() {
 		return date;
 	}
 
-	public void setDate(Date date) {
+	public void setDate(Timestamp date) {
 		this.date = date;
 	}
 

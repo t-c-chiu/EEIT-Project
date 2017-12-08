@@ -22,9 +22,10 @@ public class PostArticleService {
 		return postArticleDAO.insert(bean);
 	}
 
-	public List<PostArticle> showAllArticles() {
-		return postArticleDAO.select();
+	public List<PostArticle> showArticleByOrder(String order) {
+		return postArticleDAO.selectOrderBy(order);
 	}
+	
 
 	public List<PostArticle> showArticlesByCategory(String category) {
 		return postArticleDAO.selectByCategory(category);
@@ -38,4 +39,5 @@ public class PostArticleService {
 		topic = "%" + topic + "%";
 		return postArticleDAO.selectByTopic(topic);
 	}
+
 }

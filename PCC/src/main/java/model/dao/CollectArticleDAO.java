@@ -31,4 +31,11 @@ public class CollectArticleDAO {
 		return query.list();
 	}
 
+	public Integer selectCountByMessageId(int messageId) {
+		Query<Integer> query = getSession().createQuery("select count(*) from CollectArticle where messageId = ?",
+				Integer.class);
+		query.setParameter(0, messageId);
+		return query.getSingleResult();
+	}
+
 }

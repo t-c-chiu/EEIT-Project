@@ -1,5 +1,7 @@
 package model.bean;
 
+import java.util.Arrays;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
@@ -12,6 +14,22 @@ public class Room {
 	private int status;
 	private String roomType;
 	private byte[] roomPhoto;
+	private String roomImage;
+	
+
+	@Override
+	public String toString() {
+		return "Room [roomId=" + roomId + ", price=" + price + ", status=" + status + ", roomType=" + roomType
+				+ ", roomPhoto=" + Arrays.toString(roomPhoto) + ", roomImage=" + roomImage + "]";
+	}
+
+	public String getRoomImage() {
+		return roomImage;
+	}
+
+	public void setRoomImage(String roomImage) {
+		this.roomImage = roomImage;
+	}
 
 	public int getRoomId() {
 		return roomId;
