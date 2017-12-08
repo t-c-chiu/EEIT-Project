@@ -24,8 +24,8 @@
 		<hr>
 		<a><button>喜歡本文</button></a>
 		<a href="<c:url value="/collect.forum?memberId=${member.memberId}&messageId=${mainArticle.messageId}" />">
-			<button id="collect">蒐藏本文</button>
-		</a>
+			<button id="collect">收藏本文</button>
+		</a>${isCollect}
 	</div>
 	<hr><hr>
 	<h2>留言區:</h2>
@@ -39,7 +39,7 @@
 		回覆文章:
 		<form action="<c:url value="/reply.forum"/>" method="post">
 			<input type="hidden" name="messageId" value="${mainArticle.messageId}"/>
-			<textarea name="contents"></textarea><br>
+			<textarea name="contents"></textarea>${replyMsg}<br>
 		<script>
 			CKEDITOR.replace("contents", {
 				width : 300
@@ -48,12 +48,5 @@
 			<input type="submit" value="回覆">
 		</form>
 	</div>
-	<script>
-		$(function(){
-			$('#collect').click(function(){
-				alert('收藏成功');
-			})
-		})
-	</script>
 </body>
 </html>
