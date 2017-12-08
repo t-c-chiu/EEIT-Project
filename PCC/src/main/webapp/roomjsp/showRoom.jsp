@@ -14,6 +14,7 @@
 
 	<form action="<c:url value="/show.room"/>" method="get">
 		<table width="400" border="0" align="center">
+
 			<tr>
 				<td><h3>選房系統</h3></td>
 			</tr>
@@ -22,22 +23,11 @@
 						<option value="normal">一般房</option>
 						<option value="good">豪華房</option>
 				</select></td>
-			</tr>
-
-			<tr>
 				<td><input type="submit" name="Room" value="送出"></td>
 			</tr>
 
 		</table>
-		<table>
-			<c:forEach var="room" items="${listOfRooms}">
-				<tr>
-					<td>${room.roomId}</td>
-					<td>${room.roomType}</td>
-					<td>${room.price}</td>
-				</tr>
-			</c:forEach>
-		</table>
+
 
 	</form>
 
