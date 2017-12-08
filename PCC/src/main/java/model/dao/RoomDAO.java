@@ -21,7 +21,7 @@ public class RoomDAO {
 	}
 	
 	public List<Room> selectByType(String roomType){
-		Query<Room> query=getSession().createQuery("from room where roomType=?",Room.class);
+		Query<Room> query=getSession().createQuery("from Room where roomType=?",Room.class);
 		query.setParameter(0, roomType);
 		return query.list();		
 	}
