@@ -44,9 +44,9 @@ public class PostArticleDAO {
 		return query.setParameter(0, category).list();
 	}
 
-	public int selectMessageIdByTopic(String topic) {
-		Query<Integer> query = getSession().createQuery("select messageId from PostArticle where topic = ?", int.class);
-		return query.setParameter(0, topic).getSingleResult();
+	public List<PostArticle> selectByTopic(String topic) {
+		Query<PostArticle> query = getSession().createQuery("from PostArticle where topic like ?", PostArticle.class);
+		return query.setParameter(0, topic).list();
 	}
 
 	public boolean update(PostArticle bean) {
@@ -68,4 +68,5 @@ public class PostArticleDAO {
 		}
 		return false;
 	}
+	
 }

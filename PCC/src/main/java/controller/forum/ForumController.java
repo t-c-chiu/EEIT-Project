@@ -40,20 +40,16 @@ public class ForumController {
 	@RequestMapping(path = "/post.forum", method = RequestMethod.POST)
 	public String postArticle(@SessionAttribute("member") Member member, PostArticle bean, Model model) {
 		bean.setMemberId(member.getMemberId());
-		System.out.println(bean);
-		int messageId = postArticleService.postArticle(bean);
-		if (messageId == -1) {
-			return "post.err";
-		}
-		model.addAttribute("bean", bean);
-		return "post.ok";
+		postArticleService.postArticle(bean);
+		model.addAttribute("listOfPostArticles", showAllArticles());
+		return "showArticles";
 	}
 
 	@RequestMapping(path = "/showAll.forum", method = RequestMethod.GET)
-	public String showAllArticles(String category, Model model) {
+	public String showArticles(String category, Model model) {
 		List<PostArticle> listOfPostArticles;
 		if ("all".equalsIgnoreCase(category)) {
-			listOfPostArticles = postArticleService.showAllArticles();
+			listOfPostArticles = showAllArticles();
 		} else {
 			listOfPostArticles = postArticleService.showArticlesByCategory(category);
 		}
@@ -63,26 +59,45 @@ public class ForumController {
 
 	@RequestMapping(path = "/showDetial.forum", method = RequestMethod.GET)
 	public String showArticleDetail(int messageId, Model model) {
-		PostArticle article = postArticleService.showArticleDetail(messageId);
-		model.addAttribute("mainArticle", article);
+		model.addAttribute("mainArticle", postArticleService.showArticleDetail(messageId));
+		model.addAttribute("replyArticles", showAllReplyArticles(messageId));
 		return "articleDetail";
 	}
 
 	@RequestMapping(path = "/reply.forum", method = RequestMethod.POST)
-	public String replyArticle(@SessionAttribute("member") Member member, ReplyArticle replyArticle) {
+	public String replyArticle(@SessionAttribute("member") Member member, ReplyArticle replyArticle, Model model) {
+		int messageId = replyArticle.getMessageId();
 		replyArticle.setMemberId(member.getMemberId());
-		System.out.println(replyArticle);
-		return "";
+		replyArticleService.replyArticle(replyArticle);
+		model.addAttribute("mainArticle", postArticleService.showArticleDetail(messageId));
+		model.addAttribute("replyArticles", showAllReplyArticles(messageId));
+		return "articleDetail";
 	}
 
 	@RequestMapping(path = "/collect.forum", method = RequestMethod.GET)
 	public String collectArticle(int messageId, String memberId, Model model) throws IOException {
-		int isSuccess = collectArticleService.collectArticle(messageId, memberId);
-		if (isSuccess == -1) {
-			model.addAttribute("msg", "您已收藏過此文章");
-		} else {
-			model.addAttribute("msg", "收藏成功");
-		}
-		return "articleDetail";
+		collectArticleService.collectArticle(messageId, memberId);
+		model.addAttribute("listOfPostArticles", showAllArticles());
+		return "showArticles";
+	}
+
+	@RequestMapping(path = "/search.forum", method = RequestMethod.GET)
+	public String searchArticles(String topic, Model model) {
+		List<PostArticle> articles = postArticleService.showArticlesByTopic(topic);
+		model.addAttribute("listOfPostArticles", articles);
+		return "showArticles";
+	}
+
+	public String likeArticle(int messageId, String memberId, Model model) {
+
+		return "showArticles";
+	}
+
+	public List<PostArticle> showAllArticles() {
+		return postArticleService.showAllArticles();
+	}
+
+	public List<ReplyArticle> showAllReplyArticles(int messageId) {
+		return replyArticleService.showReplies(messageId);
 	}
 }
