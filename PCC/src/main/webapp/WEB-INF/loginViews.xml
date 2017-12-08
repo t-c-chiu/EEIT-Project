@@ -15,6 +15,6 @@
 	<bean id="login.success"
 		class="org.springframework.web.servlet.view.RedirectView">
 		<property name="contextRelative" value="true"></property>
-		<property name="url" value="/loginOk.jsp"></property>
+		<property name="url" value="/login/loginOk.jsp"></property>
 	</bean>
 </beans>
