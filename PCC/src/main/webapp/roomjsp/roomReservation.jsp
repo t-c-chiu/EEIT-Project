@@ -10,6 +10,10 @@
 <script src="http://code.jquery.com/jquery-1.8.3.js"></script>
 <script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
 
+<style>
+.color{border-style: solid}
+
+</style>
 
 <script>
 	$(function() {
@@ -49,12 +53,12 @@
 		});
 
 		$(".image").click(function() {
-			$(this).css({
-				'border-style' : 'double'
-			})
+			$(this).children("td").addClass("color")
+// 			var self = $(this).children("td")
+// 			$(this).children("td").not(self).removeClass("color")
+	
 
-			// 			$("#roomId").empty().append($(this).text())
-// 			$("#roomId").empty().val($(this).text())
+
 			$("#roomId").empty().val($(this).children("td:eq(1)").text())
 			price=$(this).children("td:eq(3)").text()
 			showPrice()
