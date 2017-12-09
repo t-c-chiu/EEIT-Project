@@ -27,7 +27,7 @@ public class PostArticleDAO {
 		return getSession().createQuery("from PostArticle order by " + order + " desc", PostArticle.class).list();
 	}
 
-	public PostArticle selectByMessageId(int messageId) {
+	public PostArticle selectByMessageId(Integer messageId) {
 		return getSession().get(PostArticle.class, messageId);
 	}
 
