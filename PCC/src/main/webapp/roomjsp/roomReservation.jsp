@@ -13,22 +13,38 @@
 
 <script>
 	$(function() {
+		
+		var price
+		var endDate
+		var beginDate
+		var totalPrice
+		
+		function showPrice(){
+			totalPrice = ((endDate-beginDate)*price)/(86400000)			
+			if(!isNaN(totalPrice)){
+			$('#totalPrice').empty().val(totalPrice)
+			}
+		}
 
 		$('#beginDate').datepicker({
 			numberOfMonths : 2,
 			minDate : 0,
-						dateFormat : "yy/mm/dd",
+			dateFormat : "yy/mm/dd",
 			onSelect : function(selected) {
 				$("#endDate").datepicker("option", "minDate", selected)
+				beginDate =$('#beginDate').datepicker('getDate');
+				showPrice()
 			}
 		});
 
 		$('#endDate').datepicker({
 			numberOfMonths : 2,
 			minDate : 0,
-						dateFormat : "yy/mm/dd",
+			dateFormat : "yy/mm/dd",
 			onSelect : function(selected) {
 				$("#beginDate").datepicker("option", "maxDate", selected)
+				endDate = $(this).datepicker('getDate');
+				showPrice()
 			}
 		});
 
@@ -38,7 +54,10 @@
 			})
 
 			// 			$("#roomId").empty().append($(this).text())
-			$("#roomId").empty().val($(this).text())
+// 			$("#roomId").empty().val($(this).text())
+			$("#roomId").empty().val($(this).children("td:eq(1)").text())
+			price=$(this).children("td:eq(3)").text()
+			showPrice()
 		});
 
 	});
@@ -61,10 +80,10 @@
 
 		<c:forEach var="room" items="${listOfRooms}">
 
-			<tr>
+			<tr class="image">
 				<td><img height="120" width="160"
 					src="<c:url value="/roomimage/${room.roomImage}.jpg"/>"></td>
-				<td class="image">${room.roomId}</td>
+				<td>${room.roomId}</td>
 				<td>${room.roomType}</td>
 				<td>${room.price}</td>
 			</tr>
@@ -81,7 +100,7 @@
 
 			<tr>
 				<td>會員ID</td>
-				<td><input type="text" name="memberId" value="${member.memberId}"></td>
+				<td><input type="text" name="memberId" value="${member.memberId}" disabled="disabled"></td>
 
 			</tr>
 
@@ -113,13 +132,12 @@
 
 			<tr>
 				<td>房間ID(暫)</td>
-				<!-- 				<td><span id="roomId"></span></td> -->
-				<td><input type="text" name="roomId" id="roomId"></td>
+				<td><input type="text" name="roomId" id="roomId" disabled="disabled"></td>
 			</tr>
 
 			<tr>
 				<td>總價(暫)</td>
-				<td><input type="text" name="totalPrice"></td>
+				<td><input type="text" name="totalPrice" id="totalPrice" disabled="disabled"></td>
 			</tr>
 
 			<tr>
