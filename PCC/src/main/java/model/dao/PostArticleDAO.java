@@ -19,14 +19,8 @@ public class PostArticleDAO {
 		return sessionFactory.getCurrentSession();
 	}
 
-	public int insert(PostArticle bean) {
-		try {
-			int messageId = (int) getSession().save(bean);
-			return messageId;
-		} catch (Exception e) {
-			e.printStackTrace();
-			return -1;
-		}
+	public Integer insert(PostArticle bean) {
+		return (Integer) getSession().save(bean);
 	}
 
 	public List<PostArticle> selectOrderBy(String order) {

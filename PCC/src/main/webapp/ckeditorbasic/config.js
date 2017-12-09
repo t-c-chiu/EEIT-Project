@@ -5,6 +5,8 @@
 
 CKEDITOR.editorConfig = function( config ) {
 	// Define changes to default configuration here.
+	config.enterMode = CKEDITOR.ENTER_BR;
+	config.shiftEnterMode = CKEDITOR.ENTER_P;
 	// For complete reference see:
 	// http://docs.ckeditor.com/#!/api/CKEDITOR.config
 

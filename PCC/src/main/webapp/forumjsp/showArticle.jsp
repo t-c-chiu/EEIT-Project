@@ -6,10 +6,26 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>討論區</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+	$(function(){
+		$('#topicButton').click(function(){
+			var topic = $('#topic').val();
+			if(topic.trim().length == 0){
+				$('#topicSpan').text('請輸入搜尋條件');
+				$('#topic').val('').focus();
+			}else{
+				$('#topicForm').submit();
+			}
+		})
+	})
+</script>
 </head>
 <body>
-	<form action="<c:url value="/search.forum" />" method="get">
-		<input type="text" name="topic"/><input type="submit" value="搜尋主題" />
+	<form id="topicForm" action="<c:url value="/search.forum" />" method="get">
+		<input id="topic" type="text" name="topic"/>
+		<input id="topicButton" type="button" value="搜尋主題" />
+		<span id="topicSpan"></span>
 	</form>
 	<a href="<c:url value="/showByOrder.forum?order=date"/>">最新文章</a>
 	<a href="<c:url value="/showByOrder.forum?order=likes"/>">最多收藏</a>
