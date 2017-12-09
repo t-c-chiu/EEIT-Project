@@ -1,6 +1,6 @@
 package model.bean;
 
-import java.util.Date;
+import java.sql.Timestamp;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,9 +14,10 @@ public class SystemMessage {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer systemMessageId;
 	private String memberId;
-	private Date date = new Date();
+	private Timestamp date;
 	private String contents;
 	private String title;
+	//0未讀 1已讀
 	private Integer status;
 
 	public Integer getSystemMessageId() {
@@ -35,11 +36,11 @@ public class SystemMessage {
 		this.memberId = memberId;
 	}
 
-	public Date getDate() {
+	public Timestamp getDate() {
 		return date;
 	}
 
-	public void setDate(Date date) {
+	public void setDate(Timestamp date) {
 		this.date = date;
 	}
 
@@ -65,5 +66,11 @@ public class SystemMessage {
 
 	public void setTitle(String title) {
 		this.title = title;
+	}
+
+	@Override
+	public String toString() {
+		return "SystemMessage [systemMessageId=" + systemMessageId + ", memberId=" + memberId + ", date=" + date
+				+ ", contents=" + contents + ", title=" + title + ", status=" + status + "]";
 	}
 }
