@@ -8,6 +8,18 @@
 <title>文章資訊</title>
 <script src="<c:url value="/ckeditorbasic/ckeditor.js"/>"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+	$(function(){
+		$('#replyButton').click(function(){
+			var contents = CKEDITOR.instances.contents.getData();
+			if(contents.length == 0){
+				$('#replyMsg').text('請輸入留言');
+			}else{
+				$("#replyForm").submit();
+			}
+		})
+	})
+</script>
 </head>
 <body>
 	<h1>文章:</h1>
@@ -48,17 +60,5 @@
 				<input id="replyButton" type="button" value="回覆">
 			</form>
 		</div>
-		<script>
-			$(function(){
-				$('#replyButton').click(function(){
-					var contents = CKEDITOR.instances.contents.getData();
-					if(contents.length == 0){
-						$('#replyMsg').text('請輸入留言');
-					}else{
-						$("#replyForm").submit();
-					}
-				})
-			})
-		</script>
 </body>
 </html>

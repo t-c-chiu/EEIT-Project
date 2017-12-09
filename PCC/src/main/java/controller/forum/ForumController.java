@@ -16,7 +16,7 @@ import model.bean.ReplyArticle;
 import model.service.ForumService;
 
 @Controller
-@SessionAttributes({ "listOfPostArticles" })
+@SessionAttributes({ "listOfPostArticles", "detail" })
 public class ForumController {
 
 	@Autowired
@@ -42,7 +42,7 @@ public class ForumController {
 
 	@RequestMapping(path = "/search.forum", method = RequestMethod.GET)
 	public String searchArticles(String topic, Model model) {
-		model.addAttribute("listOfPostArticles", forumService.showArticlesByTopic(topic));
+		model.addAttribute("listOfPostArticles", forumService.showArticlesByTopic(topic.trim()));
 		return "showArticles";
 	}
 

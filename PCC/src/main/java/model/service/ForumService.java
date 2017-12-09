@@ -74,7 +74,6 @@ public class ForumService {
 
 		PostArticle article = postArticleDAO.selectByMessageId(messageId);
 		article.setLikes(article.getLikes() + 1);
-
 		CollectArticle collectArticle = new CollectArticle();
 		collectArticle.setMessageId(messageId);
 		collectArticle.setMemberId(memberId);

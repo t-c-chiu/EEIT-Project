@@ -8,8 +8,8 @@
 		<property name="url" value="/forumjsp/showArticle.jsp"></property>
 	</bean>
 
-	<bean id="articleDetail"
-		class="org.springframework.web.servlet.view.InternalResourceView">
+	<bean id="articleDetail" class="org.springframework.web.servlet.view.RedirectView">
+		<property name="contextRelative" value="true"></property>
 		<property name="url" value="/forumjsp/articleDetail.jsp"></property>
 	</bean>
 
