@@ -13,22 +13,33 @@
 
 <script>
 	$(function() {
+
 		$('#beginDate').datepicker({
-			minDate : 0
+			numberOfMonths : 2,
+			minDate : 0,
+						dateFormat : "yy/mm/dd",
+			onSelect : function(selected) {
+				$("#endDate").datepicker("option", "minDate", selected)
+			}
 		});
+
 		$('#endDate').datepicker({
-			minDate : 0
+			numberOfMonths : 2,
+			minDate : 0,
+						dateFormat : "yy/mm/dd",
+			onSelect : function(selected) {
+				$("#beginDate").datepicker("option", "maxDate", selected)
+			}
 		});
 
 		$(".image").click(function() {
 			$(this).css({
 				'border-style' : 'double'
 			})
-			
-			$("#roomId").empty().append($(this).text())
+
+			// 			$("#roomId").empty().append($(this).text())
+			$("#roomId").empty().val($(this).text())
 		});
-		
-		
 
 	});
 </script>
@@ -70,9 +81,9 @@
 
 			<tr>
 				<td>會員ID</td>
-				<td><span>${member.memberId}</span></td>
-			</tr>
+				<td><input type="text" name="memberId" value="${member.memberId}"></td>
 
+			</tr>
 
 			<tr>
 				<td>入住人</td>
@@ -102,7 +113,8 @@
 
 			<tr>
 				<td>房間ID(暫)</td>
-				<td><span id="roomId"></span></td>
+				<!-- 				<td><span id="roomId"></span></td> -->
+				<td><input type="text" name="roomId" id="roomId"></td>
 			</tr>
 
 			<tr>
