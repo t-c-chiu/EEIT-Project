@@ -44,7 +44,8 @@
 		contents: <textarea name="contents" id="contents"></textarea><span id="contentsSpan"></span><br>
 		<script>
 			CKEDITOR.replace("contents", {
-				width : 600
+				width : 600,
+				height : 300
 			});
 		</script>
 			<br><input id="postButton" type="button" value="發文"/><a href="<c:url value="/forumjsp/showArticle.jsp"/>"><input type="button" value="取消"/></a>

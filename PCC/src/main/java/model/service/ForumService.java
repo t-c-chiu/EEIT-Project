@@ -12,9 +12,11 @@ import model.bean.CollectArticle;
 import model.bean.Member;
 import model.bean.PostArticle;
 import model.bean.ReplyArticle;
+import model.bean.ReportedArticle;
 import model.dao.CollectArticleDAO;
 import model.dao.PostArticleDAO;
 import model.dao.ReplyArticleDAO;
+import model.dao.ReportedArticleDAO;
 
 @Service
 @Transactional
@@ -26,6 +28,8 @@ public class ForumService {
 	private ReplyArticleDAO replyArticleDAO;
 	@Autowired
 	private CollectArticleDAO collectArticleDAO;
+	@Autowired
+	private ReportedArticleDAO reportedArticleDAO;
 
 	public List<PostArticle> postArticle(Member member, PostArticle postArticle) {
 		postArticle.setMemberId(member.getMemberId());
@@ -99,5 +103,14 @@ public class ForumService {
 		}
 		postArticleDAO.delete(article);
 		return showArticleByOrder("date");
+	}
+
+	public Integer reportArticle(Member member, String reason, PostArticle article) {
+		ReportedArticle reportedArticle = new ReportedArticle();
+		reportedArticle.setMemberId(member.getMemberId());
+		reportedArticle.setReason(reason);
+		reportedArticle.setMessageId(article.getMessageId());
+		reportedArticle.setStatus(0);
+		return reportedArticleDAO.insert(reportedArticle);
 	}
 }

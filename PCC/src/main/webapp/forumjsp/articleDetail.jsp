@@ -26,6 +26,17 @@
 			}
 			return isDelete;
 		})
+		
+		$('#report').click(function(){
+			var reason = prompt('請輸入檢舉理由');
+			if(reason == null || reason.trim().length == 0){
+				return false;
+			}
+			var href = $('#reportAnchor').attr('href');
+			href = href + reason;
+			$('#reportAnchor').attr('href', href);
+			return true;
+		})
 	})
 </script>
 </head>
@@ -34,48 +45,46 @@
 		<a href="<c:url value="/showByOrder.forum?order=date"/>"><button>回討論區首頁</button></a>
 		<hr>
 	<div>
-		<span>作者:${detail.post.memberId}</span> <span>發文日期:${detail.post.date}</span>
+		<span>作者:${detail.post.memberId}</span>&nbsp;&nbsp;&nbsp;&nbsp;<span>發文日期:${detail.post.date}</span>
 			<c:if test="${member.memberId eq detail.post.memberId}">
 				<a href="<c:url value="/forumjsp/modifyArticle.jsp"/>"><button>編輯內文</button></a>
 				<a id="deleteButton" href="<c:url value="/delete.forum"/>"><button>刪除文章</button></a>
 			</c:if>
 		<hr>
-		主題:${detail.post.topic}
+		主題:${detail.post.topic}&nbsp;&nbsp;&nbsp;&nbsp;分類:${detail.post.category}
 		<hr>
-		分類:${detail.post.category}
-		<hr>
-		內容:<br>${detail.post.contents}
+		${detail.post.contents}
 		<hr>
 		文章收藏數:${detail.post.likes}
 		<c:if test="${!(member.memberId eq detail.post.memberId)}">
 		<hr>
-			<a href="<c:url value="/collect.forum?" />">
+			<a href="<c:url value="/collect.forum"/>">
 				<button id="collect">收藏本文</button>
-			</a>${detail.collectMsg}<br>
+			</a>${detail.collectMsg}<br><br>
+			<a id="reportAnchor" href="<c:url value="/report.forum?reason="/>">
+				<button id="report">檢舉本文</button>
+			</a>
 		</c:if>
 	</div>
 	<hr><hr>
 	<h2>留言區:</h2>
 	<div>
 		<c:forEach var="replyArticle" items="${detail.reply}">
-			<span>作者:${replyArticle.memberId}</span> <span>回文日期:${replyArticle.date}</span><hr>
-			內容:<br>${replyArticle.contents}<hr>
+			<span>作者:${replyArticle.memberId}</span>&nbsp;&nbsp;&nbsp;&nbsp;<span>回文日期:${replyArticle.date}</span><hr>
+			<br>${replyArticle.contents}<hr>
 		</c:forEach>
 	</div>
-	<c:if test="${!(member.memberId eq detail.post.memberId)}">
 		<div>
-			回覆文章:
 			<form id="replyForm" action="<c:url value="/reply.forum"/>" method="post">
 				<input type="hidden" name="messageId" value="${detail.post.messageId}"/>
 				<textarea name="contents"></textarea><span id="replyMsg"></span><br>
 			<script>
 				CKEDITOR.replace("contents", {
-					width : 300
+					width : 400
 				});
 			</script>
 				<input id="replyButton" type="button" value="回覆"/>
 			</form>
 		</div>
-	</c:if>
 </body>
 </html>

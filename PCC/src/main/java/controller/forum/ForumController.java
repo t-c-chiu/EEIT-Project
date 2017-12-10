@@ -77,4 +77,12 @@ public class ForumController {
 		model.addAttribute("listOfPostArticles", forumService.deleteArticle((PostArticle) detail.get("post")));
 		return "showArticles";
 	}
+
+	@RequestMapping(path = "/report.forum", method = RequestMethod.GET)
+	public String reportArticle(String reason, @SessionAttribute("member") Member member,
+			@SessionAttribute("detail") Map<String, Object> detail, Model model) {
+		forumService.reportArticle(member, reason, (PostArticle) detail.get("post"));
+		System.out.println(reason);
+		return null;
+	}
 }
