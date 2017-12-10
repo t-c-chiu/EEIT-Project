@@ -82,7 +82,6 @@ public class ForumController {
 	public String reportArticle(String reason, @SessionAttribute("member") Member member,
 			@SessionAttribute("detail") Map<String, Object> detail, Model model) {
 		forumService.reportArticle(member, reason, (PostArticle) detail.get("post"));
-		System.out.println(reason);
-		return null;
+		return "articleDetail";
 	}
 }

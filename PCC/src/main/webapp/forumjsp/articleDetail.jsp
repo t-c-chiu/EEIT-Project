@@ -35,6 +35,7 @@
 			var href = $('#reportAnchor').attr('href');
 			href = href + reason;
 			$('#reportAnchor').attr('href', href);
+			alert('檢舉成功');
 			return true;
 		})
 	})
@@ -56,7 +57,7 @@
 		${detail.post.contents}
 		<hr>
 		文章收藏數:${detail.post.likes}
-		<c:if test="${!(member.memberId eq detail.post.memberId)}">
+		<c:if test="${!(member.memberId eq detail.post.memberId) && !empty member}">
 		<hr>
 			<a href="<c:url value="/collect.forum"/>">
 				<button id="collect">收藏本文</button>
