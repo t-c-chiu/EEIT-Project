@@ -11,8 +11,10 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import model.bean.Member;
 import model.bean.Room;
 import model.bean.RoomReservation;
 import model.service.RoomReservationService;
@@ -35,8 +37,8 @@ public class RoomReservationController {
 	}
 
 	@RequestMapping(path = "/reserve.room", method = RequestMethod.POST)
-	public String reserveRoom(RoomReservation bean, Model model) {
-		RoomReservation reservation = roomReservationService.insert(bean);
+	public String reserveRoom(@SessionAttribute("member") Member member, RoomReservation bean, Model model) {
+		RoomReservation reservation = roomReservationService.insert(member,bean);
 
 		if (reservation == null) {
 			return "reserve.error";

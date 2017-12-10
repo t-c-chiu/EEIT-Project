@@ -104,7 +104,8 @@
 
 			<tr>
 				<td>會員ID</td>
-				<td><input type="text" name="memberId" value="${member.memberId}" disabled="disabled"></td>
+<%-- 				<td><input type="text" name="memberId" value="${member.memberId}"></td> --%>
+				<td><span>${member.memberId}</span></td>
 
 			</tr>
 
@@ -136,12 +137,12 @@
 
 			<tr>
 				<td>房間ID(暫)</td>
-				<td><input type="text" name="roomId" id="roomId" disabled="disabled"></td>
+				<td><input type="text" name="roomId" id="roomId" readonly="readonly"></td>
 			</tr>
 
 			<tr>
 				<td>總價(暫)</td>
-				<td><input type="text" name="totalPrice" id="totalPrice" disabled="disabled"></td>
+				<td><input type="text" name="totalPrice" id="totalPrice" readonly="readonly" ></td>
 			</tr>
 
 			<tr>
