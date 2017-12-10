@@ -9,25 +9,39 @@
 <body>
 	<table width="400" border="0" align="center">
 		<tr>
-			<td></td>
-			<td></td>
+		　　　<td><h3>您已訂房成功！</h3></td>
+			<td><span>謝謝您！${member.name}</span></td>			
+		</tr>
+		
+		<tr>
+			<td>入住人</td>
+			<td>${roomReservation.name}</td>
+		</tr>
+		
+		<tr>
+			<td>電話</td>
+			<td>${roomReservation.phone}</td>
+		</tr>
+		
+		<tr>
+			<td>email</td>
+			<td>${roomReservation.email}</td>
+		</tr>
+		
+		<tr>
+			<td>訂房日</td>
+			<td>${roomReservation.beginDate}</td>
 		</tr>
 
 		<tr>
-			<td></td>
-			<td></td>
+			<td>退房日</td>
+			<td>${roomReservation.endDate}</td>
 		</tr>
 
 		<tr>
-			<td></td>
-			<td></td>
+			<td>總金額</td>
+			<td>${roomReservation.totalPrice}</td>
 		</tr>
-
-		<tr>
-			<td></td>
-			<td></td>
-		</tr>
-
 
 	</table>
 

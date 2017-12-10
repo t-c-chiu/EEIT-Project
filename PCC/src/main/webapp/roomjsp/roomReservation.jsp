@@ -8,35 +8,36 @@
 <link rel="stylesheet"
 	href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" />
 <script src="http://code.jquery.com/jquery-1.8.3.js"></script>
-<script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
+<script src="http://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 <style>
-.color{border-style: solid}
-
+.color {
+	border-style: solid
+}
 </style>
 
 <script>
 	$(function() {
-		
 		var price
 		var endDate
 		var beginDate
 		var totalPrice
-		
-		function showPrice(){
-			totalPrice = ((endDate-beginDate)*price)/(86400000)			
-			if(!isNaN(totalPrice)){
-			$('#totalPrice').empty().val(totalPrice)
+
+		function showPrice() {
+			totalPrice = ((endDate - beginDate) * price) / (86400000)
+			if (!isNaN(totalPrice)) {
+				$('#totalPrice').empty().val(totalPrice)
 			}
 		}
 
 		$('#beginDate').datepicker({
 			numberOfMonths : 2,
 			minDate : 0,
+			beforeShowDay: unavailable,
 			dateFormat : "yy/mm/dd",
 			onSelect : function(selected) {
 				$("#endDate").datepicker("option", "minDate", selected)
-				beginDate =$('#beginDate').datepicker('getDate');
+				beginDate = $('#beginDate').datepicker('getDate');
 				showPrice()
 			}
 		});
@@ -44,6 +45,7 @@
 		$('#endDate').datepicker({
 			numberOfMonths : 2,
 			minDate : 0,
+
 			dateFormat : "yy/mm/dd",
 			onSelect : function(selected) {
 				$("#beginDate").datepicker("option", "maxDate", selected)
@@ -53,16 +55,26 @@
 		});
 
 		$(".image").click(function() {
+			$(".image").children("td").removeClass("color")
 			$(this).children("td").addClass("color")
-// 			var self = $(this).children("td")
-// 			$(this).children("td").not(self).removeClass("color")
-	
-
+			// 			var self = $(this).children("td")
+			// 			$(this).children("td").not(self).removeClass("color")
 
 			$("#roomId").empty().val($(this).children("td:eq(1)").text())
-			price=$(this).children("td:eq(3)").text()
+			price = $(this).children("td:eq(3)").text()
 			showPrice()
 		});
+
+		var unavailableDates = [ "2018/1/1", "2018/1/3" ]
+		
+		 function unavailable(date) {
+	        dmy = date.getFullYear() + "/" + (date.getMonth() + 1) + "/" +date.getDate()  ;
+	        if ($.inArray(dmy, unavailableDates) == -1) {
+	            return [true, ""];
+	        } else {
+	            return [false, "", "Unavailable"];
+	        }
+	    }
 
 	});
 </script>
@@ -104,8 +116,8 @@
 
 			<tr>
 				<td>會員ID</td>
-				<td><input type="text" name="memberId" value="${member.memberId}" disabled="disabled"></td>
-
+				<%-- 				<td><input type="text" name="memberId" value="${member.memberId}"></td> --%>
+				<td><span>${member.memberId}</span></td>
 			</tr>
 
 			<tr>
@@ -123,7 +135,6 @@
 				<td><input type="text" name="phone" value="${member.phone}"></td>
 			</tr>
 
-
 			<tr>
 				<td>預定住房日</td>
 				<td><input type="text" name="beginDate" id="beginDate"></td>
@@ -136,12 +147,14 @@
 
 			<tr>
 				<td>房間ID(暫)</td>
-				<td><input type="text" name="roomId" id="roomId" disabled="disabled"></td>
+				<td><input type="text" name="roomId" id="roomId"
+					readonly="readonly"></td>
 			</tr>
 
 			<tr>
-				<td>總價(暫)</td>
-				<td><input type="text" name="totalPrice" id="totalPrice" disabled="disabled"></td>
+				<td>總價</td>
+				<td><input type="text" name="totalPrice" id="totalPrice"
+					readonly="readonly"></td>
 			</tr>
 
 			<tr>

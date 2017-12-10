@@ -18,10 +18,10 @@ public class RoomReservationDAO {
 		return sessionFactory.getCurrentSession();
 	}
 
-	public RoomReservation insert(RoomReservation bean) {
-		if (bean != null) {
-			this.getSession().save(bean);
-			return bean;
+	public RoomReservation insert(RoomReservation roomReservation) {
+		if (roomReservation != null) {
+			this.getSession().save(roomReservation);
+			return roomReservation;
 		}
 		return null;
 
