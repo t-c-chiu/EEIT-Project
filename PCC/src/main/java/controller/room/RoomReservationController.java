@@ -21,6 +21,7 @@ import model.service.RoomReservationService;
 import model.service.ShowRoomService;
 
 @Controller
+@SessionAttributes({"roomReservation"})
 public class RoomReservationController {
 
 	@Autowired
@@ -37,8 +38,8 @@ public class RoomReservationController {
 	}
 
 	@RequestMapping(path = "/reserve.room", method = RequestMethod.POST)
-	public String reserveRoom(@SessionAttribute("member") Member member, RoomReservation bean, Model model) {
-		RoomReservation reservation = roomReservationService.insert(member,bean);
+	public String reserveRoom(@SessionAttribute("member") Member member, RoomReservation roomReservation, Model model) {
+		RoomReservation reservation = roomReservationService.insert(member,roomReservation);
 
 		if (reservation == null) {
 			return "reserve.error";

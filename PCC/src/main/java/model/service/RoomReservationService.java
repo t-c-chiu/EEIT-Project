@@ -12,17 +12,15 @@ import model.dao.RoomReservationDAO;
 @Service
 @Transactional
 public class RoomReservationService {
-	
+
 	@Autowired
 	RoomReservationDAO roomReservationDAO;
-	
-	public RoomReservation insert(Member member,RoomReservation bean) {
-		RoomReservation result=null;
-		if(bean!=null) {
-			bean.setMemberId(member.getMemberId());
-			result=roomReservationDAO.insert(bean);
-		}
-		return result;			
+
+	public RoomReservation insert(Member member, RoomReservation roomReservation) {
+		roomReservation.setMemberId(member.getMemberId());
+		roomReservation = roomReservationDAO.insert(roomReservation);
+
+		return roomReservation;
 	};
 
 }

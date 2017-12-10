@@ -106,7 +106,6 @@
 				<td>會員ID</td>
 <%-- 				<td><input type="text" name="memberId" value="${member.memberId}"></td> --%>
 				<td><span>${member.memberId}</span></td>
-
 			</tr>
 
 			<tr>
@@ -124,7 +123,6 @@
 				<td><input type="text" name="phone" value="${member.phone}"></td>
 			</tr>
 
-
 			<tr>
 				<td>預定住房日</td>
 				<td><input type="text" name="beginDate" id="beginDate"></td>
@@ -141,7 +139,7 @@
 			</tr>
 
 			<tr>
-				<td>總價(暫)</td>
+				<td>總價</td>
 				<td><input type="text" name="totalPrice" id="totalPrice" readonly="readonly" ></td>
 			</tr>
 
