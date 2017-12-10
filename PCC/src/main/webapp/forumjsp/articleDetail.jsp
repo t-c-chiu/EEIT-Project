@@ -18,13 +18,27 @@
 				$("#replyForm").submit();
 			}
 		})
+		
+		$('#deleteButton').click(function(){
+			var isDelete = confirm('確定要刪除文章嗎?');
+			if(isDelete){
+				alert('刪除成功');
+			}
+			return isDelete;
+		})
 	})
 </script>
 </head>
 <body>
 	<h1>文章:</h1>
+		<a href="<c:url value="/showByOrder.forum?order=date"/>"><button>回討論區首頁</button></a>
+		<hr>
 	<div>
 		<span>作者:${detail.post.memberId}</span> <span>發文日期:${detail.post.date}</span>
+			<c:if test="${member.memberId eq detail.post.memberId}">
+				<a href="<c:url value="/forumjsp/modifyArticle.jsp"/>"><button>編輯內文</button></a>
+				<a id="deleteButton" href="<c:url value="/delete.forum"/>"><button>刪除文章</button></a>
+			</c:if>
 		<hr>
 		主題:${detail.post.topic}
 		<hr>
@@ -33,11 +47,12 @@
 		內容:<br>${detail.post.contents}
 		<hr>
 		文章收藏數:${detail.post.likes}
+		<c:if test="${!(member.memberId eq detail.post.memberId)}">
 		<hr>
-		
-		<a href="<c:url value="/collect.forum?memberId=${member.memberId}&messageId=${detail.post.messageId}" />">
-			<button id="collect">收藏本文</button>
-		</a>${detail.collectMsg}
+			<a href="<c:url value="/collect.forum?" />">
+				<button id="collect">收藏本文</button>
+			</a>${detail.collectMsg}<br>
+		</c:if>
 	</div>
 	<hr><hr>
 	<h2>留言區:</h2>
@@ -47,6 +62,7 @@
 			內容:<br>${replyArticle.contents}<hr>
 		</c:forEach>
 	</div>
+	<c:if test="${!(member.memberId eq detail.post.memberId)}">
 		<div>
 			回覆文章:
 			<form id="replyForm" action="<c:url value="/reply.forum"/>" method="post">
@@ -57,8 +73,9 @@
 					width : 300
 				});
 			</script>
-				<input id="replyButton" type="button" value="回覆">
+				<input id="replyButton" type="button" value="回覆"/>
 			</form>
 		</div>
+	</c:if>
 </body>
 </html>

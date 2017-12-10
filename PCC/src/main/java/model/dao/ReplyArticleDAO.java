@@ -32,11 +32,8 @@ public class ReplyArticleDAO {
 	}
 
 	public boolean delete(ReplyArticle bean) {
-		if (selectByReplyId(bean.getReplyId()) != null) {
-			getSession().delete(bean);
-			return true;
-		}
-		return false;
+		getSession().delete(bean);
+		return true;
 	}
 
 	public boolean update(ReplyArticle bean) {

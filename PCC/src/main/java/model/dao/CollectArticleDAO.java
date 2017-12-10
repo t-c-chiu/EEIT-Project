@@ -28,4 +28,14 @@ public class CollectArticleDAO {
 				.setParameter("memberId", memberId).list();
 	}
 
+	public List<CollectArticle> selectByMessageId(Integer messageId) {
+		return getSession().createQuery("from CollectArticle where messageId = :messageId", CollectArticle.class)
+				.setParameter("messageId", messageId).list();
+	}
+
+	public boolean delete(CollectArticle collectArticle) {
+		getSession().delete(collectArticle);
+		return true;
+	}
+
 }

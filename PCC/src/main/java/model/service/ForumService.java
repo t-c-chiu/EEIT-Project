@@ -82,4 +82,22 @@ public class ForumService {
 		return postAndReplyArticles;
 	}
 
+	public Map<String, Object> modifyArticle(PostArticle article, String contents) {
+		article.setContents(contents);
+		postArticleDAO.updateContents(article);
+		return showArticleDetail(article.getMessageId());
+	}
+
+	public List<PostArticle> deleteArticle(PostArticle article) {
+		List<ReplyArticle> replies = replyArticleDAO.selectByMessageId(article.getMessageId());
+		List<CollectArticle> collects = collectArticleDAO.selectByMessageId(article.getMessageId());
+		for (CollectArticle collect : collects) {
+			collectArticleDAO.delete(collect);
+		}
+		for (ReplyArticle reply : replies) {
+			replyArticleDAO.delete(reply);
+		}
+		postArticleDAO.delete(article);
+		return showArticleByOrder("date");
+	}
 }

@@ -55,11 +55,15 @@ public class PostArticleDAO {
 	}
 
 	public boolean delete(PostArticle bean) {
-		if (selectByMessageId(bean.getMessageId()) != null) {
-			getSession().delete(bean);
-			return true;
-		}
-		return false;
+		getSession().delete(bean);
+		return true;
 	}
 
+	public PostArticle updateContents(PostArticle article) {
+		PostArticle updateBean = selectByMessageId(article.getMessageId());
+		if (updateBean != null) {
+			updateBean.setContents(article.getContents());
+		}
+		return updateBean;
+	}
 }

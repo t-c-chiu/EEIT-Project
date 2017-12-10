@@ -1,6 +1,5 @@
 package model.dao;
 
-import java.sql.Timestamp;
 import java.util.List;
 
 import org.hibernate.Session;
@@ -26,7 +25,6 @@ public class SystemMessageDAO {
 		systemMessage.setTitle(title);
 		systemMessage.setContents(contents);
 		systemMessage.setStatus(0);
-		systemMessage.setDate(new Timestamp(new java.util.Date().getTime()));
 		return (Integer) getSession().save(systemMessage);
 	}
 

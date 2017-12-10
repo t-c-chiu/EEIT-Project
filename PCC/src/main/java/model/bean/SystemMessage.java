@@ -14,10 +14,10 @@ public class SystemMessage {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer systemMessageId;
 	private String memberId;
-	private Timestamp date;
+	private Timestamp date = new Timestamp(new java.util.Date().getTime());
 	private String contents;
 	private String title;
-	//0未讀 1已讀
+	// 0未讀 1已讀
 	private Integer status;
 
 	public Integer getSystemMessageId() {

@@ -1,6 +1,6 @@
 package controller.forum;
 
-import java.io.IOException;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -59,9 +59,22 @@ public class ForumController {
 	}
 
 	@RequestMapping(path = "/collect.forum", method = RequestMethod.GET)
-	public String collectArticle(Integer messageId, String memberId, Model model) throws IOException {
-		model.addAttribute("detail", forumService.collectArticle(messageId, memberId));
+	public String collectArticle(@SessionAttribute("member") Member member,
+			@SessionAttribute("detail") Map<String, Object> detail, Model model) {
+		PostArticle article = (PostArticle) detail.get("post");
+		model.addAttribute("detail", forumService.collectArticle(article.getMessageId(), member.getMemberId()));
 		return "articleDetail";
 	}
 
+	@RequestMapping(path = "/modify.forum", method = RequestMethod.POST)
+	public String modifyArticle(@SessionAttribute("detail") Map<String, Object> detail, String contents, Model model) {
+		model.addAttribute("detail", forumService.modifyArticle((PostArticle) detail.get("post"), contents));
+		return "articleDetail";
+	}
+
+	@RequestMapping(path = "/delete.forum", method = RequestMethod.GET)
+	public String deleteArticle(@SessionAttribute("detail") Map<String, Object> detail, Model model) {
+		model.addAttribute("listOfPostArticles", forumService.deleteArticle((PostArticle) detail.get("post")));
+		return "showArticles";
+	}
 }
