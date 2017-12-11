@@ -15,6 +15,7 @@
 			    <td>刪除訂單</td>
 				<td><input type="text" name="roomReserverId"></td>
 				<td><input type="submit" name="deleteReservation" value="刪除"></td>
+				<td>${messages.m1}</td>
 			</tr>
 		</table>
 	</form>
