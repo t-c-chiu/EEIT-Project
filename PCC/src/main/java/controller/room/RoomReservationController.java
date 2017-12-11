@@ -54,5 +54,13 @@ public class RoomReservationController {
 		model.addAttribute("listOfRooms", listOfRooms);
 		return "show.ok";
 	}
+	
+	@RequestMapping(path="/showReservation.room",method=RequestMethod.GET)
+	public String selectByMemberId(@SessionAttribute("member") Member member,Model model) {
+		List<RoomReservation> listOfReservation;
+		listOfReservation =roomReservationService.selectByMemberId(member);
+		model.addAttribute("listOfReservation",listOfReservation);
+		return "showReservation.ok";		
+	}
 
 }
