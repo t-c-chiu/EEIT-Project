@@ -8,6 +8,17 @@
 <title>Insert title here</title>
 </head>
 <body>
+    
+	<form action="<c:url value="/deleteReservation.room"/>" method="get">
+		<table width="400" border="0" align="center">
+			<tr>
+			    <td>刪除訂單</td>
+				<td><input type="text" name="roomReserverId"></td>
+				<td><input type="submit" name="deleteReservation" value="刪除"></td>
+			</tr>
+		</table>
+	</form>
+
 	<table width="400" border="0" align="center">
 
 		<tr>

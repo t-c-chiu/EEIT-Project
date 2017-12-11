@@ -28,5 +28,10 @@ public class RoomReservationService {
 	public List<RoomReservation> selectByMemberId(Member member) {						
 		return roomReservationDAO.selectByMemberId(member.getMemberId());		
 	}
+	
+	public boolean delete(int roomReserverId) {
+		roomReservationDAO.delete(roomReserverId);
+		return true;
+	}
 
 }

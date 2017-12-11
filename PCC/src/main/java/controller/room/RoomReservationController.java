@@ -62,5 +62,13 @@ public class RoomReservationController {
 		model.addAttribute("listOfReservation",listOfReservation);
 		return "showReservation.ok";		
 	}
+	
+	@RequestMapping(path="/deleteReservation.room",method=RequestMethod.GET)
+	public String delete(int roomReserverId,Model model) {
+		boolean deleteResult=roomReservationService.delete(roomReserverId);
+		model.addAttribute("deleteResult",deleteResult);
+		return"delete.ok";
+	}
 
+	
 }

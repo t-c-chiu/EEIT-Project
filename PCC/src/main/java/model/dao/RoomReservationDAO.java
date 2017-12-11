@@ -34,7 +34,18 @@ public class RoomReservationDAO {
 		Query<RoomReservation> query=getSession().createQuery("from RoomReservation where memberId=?",RoomReservation.class);
 		query.setParameter(0, memberId);
 		return query.list();				
-	}  
+	} 
+	
+	public boolean delete(int roomReserverId) {
+//		Query query=getSession().createQuery("delete RoomReservation from where roomReserverId=?");
+//		query.setParameter(0, roomReserverId);
+//		query.executeUpdate();
+//		return true;
+		
+		RoomReservation result=(RoomReservation)getSession().get(RoomReservation.class,roomReserverId);
+		getSession().delete(result);
+		return true;
+	}
 	
 
 }
