@@ -5,6 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
 <script src="<c:url value="/ckeditor/ckeditor.js"/>"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script>
@@ -31,6 +32,7 @@
 		})
 	})
 </script>
+
 </head>
 <body>
 	<h1>發文</h1>
