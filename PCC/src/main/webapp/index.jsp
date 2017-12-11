@@ -14,7 +14,25 @@
 </script>
 </head>
 <body>
-<form action="<c:url value="/test.login"/>" method="POST">
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '150874802202911',
+      xfbml      : true,
+      version    : 'v2.11'
+    });
+    FB.AppEvents.logPageView();
+  };
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "https://connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+</script>
+<form action="<c:url value="/login.login"/>" method="POST">
 <table>
 	<tr>
 	<td>帳號</td>
