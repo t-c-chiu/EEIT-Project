@@ -1,5 +1,7 @@
 package model.dao;
 
+import java.util.List;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +21,11 @@ public class ReportedArticleDAO {
 
 	public Integer insert(ReportedArticle reportedArticle) {
 		return (Integer) getSession().save(reportedArticle);
+	}
+
+	public List<ReportedArticle> selectByMessageId(Integer messageId) {
+		return getSession().createQuery("from ReportedArticle where messageId = :messageId", ReportedArticle.class)
+				.setParameter("messageId", messageId).list();
 	}
 
 }

@@ -95,6 +95,7 @@ public class ForumService {
 	public List<PostArticle> deleteArticle(PostArticle article) {
 		List<ReplyArticle> replies = replyArticleDAO.selectByMessageId(article.getMessageId());
 		List<CollectArticle> collects = collectArticleDAO.selectByMessageId(article.getMessageId());
+		rrr
 		for (CollectArticle collect : collects) {
 			collectArticleDAO.delete(collect);
 		}
