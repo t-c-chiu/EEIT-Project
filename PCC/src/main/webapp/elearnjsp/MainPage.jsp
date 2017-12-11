@@ -7,6 +7,13 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+	<h1></h1>
+	<form id="search" action="" method="get">
+		<input id="searchText" type="text" name="searchText">
+		<input id="searchButton" type="button" name="searchButton">
+	</form>
+	<a href="<c:url value="/elearnjsp/Curriculm.jsp"/>">開課</a>
+	<a href="<c:url value=""/>">現有課程</a>
+	
 </body>
 </html>
