@@ -5,7 +5,7 @@
 
 	<bean id="showArticles" class="org.springframework.web.servlet.view.RedirectView">
 		<property name="contextRelative" value="true"></property>
-		<property name="url" value="/forumjsp/showArticle.jsp"></property>
+		<property name="url" value="/pcc-front/pages/article.jsp"></property>
 	</bean>
 
 	<bean id="articleDetail" class="org.springframework.web.servlet.view.RedirectView">
