@@ -1,6 +1,6 @@
 package model.bean;
 
-import java.util.Date;
+import java.sql.Timestamp;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,40 +12,65 @@ public class SystemMessage {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int systemMessageId;
+	private Integer systemMessageId;
 	private String memberId;
-	private Date date;
+	private Timestamp date = new Timestamp(new java.util.Date().getTime());
 	private String contents;
-	private int status;
-	
-	public int getSystemMessageId() {
+	private String title;
+	// 0未讀 1已讀
+	private Integer status;
+
+	public Integer getSystemMessageId() {
 		return systemMessageId;
 	}
-	public void setSystemMessageId(int systemMessageId) {
+
+	public void setSystemMessageId(Integer systemMessageId) {
 		this.systemMessageId = systemMessageId;
 	}
+
 	public String getMemberId() {
 		return memberId;
 	}
+
 	public void setMemberId(String memberId) {
 		this.memberId = memberId;
 	}
-	public Date getDate() {
+
+	public Timestamp getDate() {
 		return date;
 	}
-	public void setDate(Date date) {
+
+	public void setDate(Timestamp date) {
 		this.date = date;
 	}
+
 	public String getContents() {
 		return contents;
 	}
+
 	public void setContents(String contents) {
 		this.contents = contents;
 	}
-	public int getStatus() {
+
+	public Integer getStatus() {
 		return status;
 	}
-	public void setStatus(int status) {
+
+	public void setStatus(Integer status) {
 		this.status = status;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	@Override
+	public String toString() {
+		return "SystemMessage [systemMessageId=" + systemMessageId + ", memberId=" + memberId + ", date=" + date
+				+ ", contents=" + contents + ", title=" + title + ", status=" + status + "]";
 	}
 }

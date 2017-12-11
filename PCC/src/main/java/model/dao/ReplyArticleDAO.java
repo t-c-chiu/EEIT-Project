@@ -1,6 +1,5 @@
 package model.dao;
 
-import java.util.Date;
 import java.util.List;
 
 import org.hibernate.Session;
@@ -20,38 +19,27 @@ public class ReplyArticleDAO {
 		return sessionFactory.getCurrentSession();
 	}
 
-	public int insert(ReplyArticle bean) {
-		try {
-			int replyId = (int) getSession().save(bean);
-			return replyId;
-		} catch (Exception e) {
-			e.printStackTrace();
-			return -1;
-		}
+	public Integer insert(ReplyArticle bean) {
+		return (Integer) getSession().save(bean);
 	}
 
-	public ReplyArticle selectByReplyId(int replyId) {
+	public ReplyArticle selectByReplyId(Integer replyId) {
 		return getSession().get(ReplyArticle.class, replyId);
 	}
 
-	public List<ReplyArticle> selectByMessageId(int messageId) {
+	public List<ReplyArticle> selectByMessageId(Integer messageId) {
 		return getSession().createQuery("from ReplyArticle where messageId = " + messageId, ReplyArticle.class).list();
 	}
 
 	public boolean delete(ReplyArticle bean) {
-		if (selectByReplyId(bean.getReplyId()) != null) {
-			getSession().delete(bean);
-			return true;
-		}
-		return false;
+		getSession().delete(bean);
+		return true;
 	}
 
 	public boolean update(ReplyArticle bean) {
 		ReplyArticle updateBean = selectByReplyId(bean.getReplyId());
 		if (updateBean != null) {
 			updateBean.setContents(bean.getContents());
-			updateBean.setPhoto(bean.getPhoto());
-			updateBean.setDate(new Date());
 			return true;
 		}
 		return false;

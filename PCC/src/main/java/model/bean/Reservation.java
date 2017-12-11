@@ -75,4 +75,12 @@ public class Reservation {
 	public void setTime(Date time) {
 		this.time = time;
 	}
+
+	@Override
+	public String toString() {
+		return "Reservation [reservationId=" + reservationId + ", memberId=" + memberId + ", way=" + way + ", demand="
+				+ demand + ", note=" + note + ", expectedday=" + expectedday + ", time=" + time + "]";
+	}
+	
+	
 }

@@ -10,23 +10,23 @@ public class CollectArticle {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int collectId;
-	private int messageId;
+	private Integer collectId;
+	private Integer messageId;
 	private String memberId;
 
-	public int getCollectId() {
+	public Integer getCollectId() {
 		return collectId;
 	}
 
-	public void setCollectId(int collectId) {
+	public void setCollectId(Integer collectId) {
 		this.collectId = collectId;
 	}
 
-	public int getMessageId() {
+	public Integer getMessageId() {
 		return messageId;
 	}
 
-	public void setMessageId(int messageId) {
+	public void setMessageId(Integer messageId) {
 		this.messageId = messageId;
 	}
 
