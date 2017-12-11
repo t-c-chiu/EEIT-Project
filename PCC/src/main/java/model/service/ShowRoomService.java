@@ -17,5 +17,6 @@ public class ShowRoomService {
 	public List<Room> selectRoomByType(String roomType){
 		return roomDAO.selectByType(roomType);
 	}
+	
 
 }

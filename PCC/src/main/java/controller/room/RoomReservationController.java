@@ -1,7 +1,9 @@
 package controller.room;
 
 import java.text.SimpleDateFormat;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
@@ -54,5 +56,27 @@ public class RoomReservationController {
 		model.addAttribute("listOfRooms", listOfRooms);
 		return "show.ok";
 	}
+	
+	@RequestMapping(path="/showReservation.room",method=RequestMethod.GET)
+	public String selectByMemberId(@SessionAttribute("member") Member member,Model model) {
+		List<RoomReservation> listOfReservation;
+		listOfReservation =roomReservationService.selectByMemberId(member);
+		model.addAttribute("listOfReservation",listOfReservation);
+		return "showReservation.ok";		
+	}
+	
+	@RequestMapping(path="/deleteReservation.room",method=RequestMethod.GET)
+	public String delete(int roomReserverId,Model model) {
+		boolean deleteResult=roomReservationService.delete(roomReserverId);
+		Map<String,String> messages=new HashMap<>();
+		model.addAttribute("messages", messages);
+		model.addAttribute("deleteResult",deleteResult);
+		if(deleteResult==true) {
+			messages.put("m1", "刪除成功");
+			return"delete.ok";		
+		}
+		return null;
+	}
 
+	
 }
