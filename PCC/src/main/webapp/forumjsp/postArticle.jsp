@@ -5,26 +5,52 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
 <script src="<c:url value="/ckeditor/ckeditor.js"/>"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+	$(function(){
+		$('#postButton').click(function(){
+			var topic = $('#topic').val();
+			var contents = CKEDITOR.instances.contents.getData();
+			var isSubmit = true;
+			if(topic.trim().length == 0){
+				$('#topicSpan').text('請輸入主題');
+				isSubmit = false;
+			}else{
+				$('#topicSpan').text('');
+			}
+			if(contents.length == 0){
+				$('#contentsSpan').text('請輸入內容');
+				isSubmit = false;
+			}else{
+				$('#contentsSpan').text('');
+			}
+			if(isSubmit){
+				$('#postForm').submit();
+			}
+		})
+	})
+</script>
+
 </head>
 <body>
 	<h1>發文</h1>
-	<form action="<c:url value="/post.forum"/>" method="post" enctype="multipart/form-data">
+	<form id="postForm" action="<c:url value="/post.forum"/>" method="post" enctype="multipart/form-data">
 		category: <select name="category">
-			<option value="pregnancy">懷孕討論</option>
-			<option value="child">育兒討論</option>
-			<option value="mood">心情分享</option>
+			<option value="懷孕討論">懷孕討論</option>
+			<option value="育兒討論">育兒討論</option>
+			<option value="心情分享">心情分享</option>
 				</select><br>
-		topic: <input type="text" name="topic" /><br> 
-		contents: <textarea name="contents"></textarea><br>
+		topic: <input type="text" name="topic" id="topic"/><span id="topicSpan"></span><br> 
+		contents: <textarea name="contents" id="contents"></textarea><span id="contentsSpan"></span><br>
 		<script>
 			CKEDITOR.replace("contents", {
-				width : 500
+				width : 600,
+				height : 300
 			});
 		</script>
-			<br><input type="submit" value="發文"/><a href="<c:url value="/forumjsp/showArticle.jsp"/>"><input type="button" value="取消"/></a>
+			<br><input id="postButton" type="button" value="發文"/><a href="<c:url value="/forumjsp/showArticle.jsp"/>"><input type="button" value="取消"/></a>
 	</form>
-
-
 </body>
 </html>

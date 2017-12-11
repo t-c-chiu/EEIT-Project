@@ -52,5 +52,6 @@
 </table>
 <div class="g-recaptcha" data-sitekey="6LddCjwUAAAAABdTF-IYq7MxxFI0UBq7fHKJKB6z"></div>
 </form>
+	${loginMsg}
 </body>
 </html>

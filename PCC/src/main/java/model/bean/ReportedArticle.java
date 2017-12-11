@@ -8,18 +8,24 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class PostArticle {
+public class ReportedArticle {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer reportId;
 	private Integer messageId;
 	private Integer status;
-	private Integer likes;
 	private String memberId;
-	private String topic;
-	private String category;
+	private String reason;
 	private Timestamp date = new Timestamp(new java.util.Date().getTime());
-	private String contents;
+
+	public Integer getReportId() {
+		return reportId;
+	}
+
+	public void setReportId(Integer reportId) {
+		this.reportId = reportId;
+	}
 
 	public Integer getMessageId() {
 		return messageId;
@@ -37,14 +43,6 @@ public class PostArticle {
 		this.status = status;
 	}
 
-	public Integer getLikes() {
-		return likes;
-	}
-
-	public void setLikes(Integer likes) {
-		this.likes = likes;
-	}
-
 	public String getMemberId() {
 		return memberId;
 	}
@@ -53,20 +51,12 @@ public class PostArticle {
 		this.memberId = memberId;
 	}
 
-	public String getTopic() {
-		return topic;
+	public String getReason() {
+		return reason;
 	}
 
-	public void setTopic(String topic) {
-		this.topic = topic;
-	}
-
-	public String getCategory() {
-		return category;
-	}
-
-	public void setCategory(String category) {
-		this.category = category;
+	public void setReason(String reason) {
+		this.reason = reason;
 	}
 
 	public Timestamp getDate() {
@@ -77,19 +67,10 @@ public class PostArticle {
 		this.date = date;
 	}
 
-	public String getContents() {
-		return contents;
-	}
-
-	public void setContents(String contents) {
-		this.contents = contents;
-	}
-
 	@Override
 	public String toString() {
-		return "PostArticle [messageId=" + messageId + ", status=" + status + ", likes=" + likes + ", memberId="
-				+ memberId + ", topic=" + topic + ", category=" + category + ", date=" + date + ", contents=" + contents
-				+ "]";
+		return "ReportedArticle [reportId=" + reportId + ", messageId=" + messageId + ", status=" + status
+				+ ", memberId=" + memberId + ", reason=" + reason + ", date=" + date + "]";
 	}
 
 }

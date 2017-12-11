@@ -7,39 +7,85 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>文章資訊</title>
 <script src="<c:url value="/ckeditorbasic/ckeditor.js"/>"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+	$(function(){
+		$('#replyButton').click(function(){
+			var contents = CKEDITOR.instances.contents.getData();
+			if(contents.length == 0){
+				$('#replyMsg').text('請輸入留言');
+			}else{
+				$("#replyForm").submit();
+			}
+		})
+		
+		$('#deleteButton').click(function(){
+			var isDelete = confirm('確定要刪除文章嗎?');
+			if(isDelete){
+				alert('刪除成功');
+			}
+			return isDelete;
+		})
+		
+		$('#report').click(function(){
+			var reason = prompt('請輸入檢舉理由');
+			if(reason == null || reason.trim().length == 0){
+				return false;
+			}
+			var href = $('#reportAnchor').attr('href');
+			href = href + reason;
+			$('#reportAnchor').attr('href', href);
+			alert('檢舉成功');
+			return true;
+		})
+	})
+</script>
 </head>
 <body>
+	<h1>文章:</h1>
+		<a href="<c:url value="/showByOrder.forum?order=date"/>"><button>回討論區首頁</button></a>
+		<hr>
 	<div>
-		作者:${mainArticle.memberId}
+		<span>作者:${detail.post.memberId}</span>&nbsp;&nbsp;&nbsp;&nbsp;<span>發文日期:${detail.post.date}</span>
+			<c:if test="${member.memberId eq detail.post.memberId}">
+				<a href="<c:url value="/forumjsp/modifyArticle.jsp"/>"><button>編輯內文</button></a>
+				<a id="deleteButton" href="<c:url value="/delete.forum"/>"><button>刪除文章</button></a>
+			</c:if>
 		<hr>
-		主題:${mainArticle.topic}
+		主題:${detail.post.topic}&nbsp;&nbsp;&nbsp;&nbsp;分類:${detail.post.category}
 		<hr>
-		分類:${mainArticle.category}
+		${detail.post.contents}
 		<hr>
-		發文日期:${mainArticle.date}
+		文章收藏數:${detail.post.likes}
+		<c:if test="${!(member.memberId eq detail.post.memberId) && !empty member}">
 		<hr>
-		內容:${mainArticle.contents}
-		<hr>
-		Likes:${mainArticle.likes}
-		<hr>
-		<a><button>喜歡本文</button></a>
-		<a href="<c:url value="/collect.forum?memberId=${member.memberId}&messageId=${mainArticle.messageId}" />">
-			<button id="collect">蒐藏本文</button>
-		</a><br>${msg}
-		<hr>
+			<a href="<c:url value="/collect.forum"/>">
+				<button id="collect">收藏本文</button>
+			</a>${detail.collectMsg}<br><br>
+			<a id="reportAnchor" href="<c:url value="/report.forum?reason="/>">
+				<button id="report">檢舉本文</button>
+			</a>
+		</c:if>
 	</div>
+	<hr><hr>
+	<h2>留言區:</h2>
 	<div>
-		回覆文章:
-		<form action="<c:url value="/reply.forum"/>" method="post">
-			<input type="hidden" name="messageId" value="${mainArticle.messageId}"/>
-			<textarea name="contents"></textarea><br>
-		<script>
-			CKEDITOR.replace("contents", {
-				width : 300
-			});
-		</script>
-			<input type="submit" value="回覆">
-		</form>
+		<c:forEach var="replyArticle" items="${detail.reply}">
+			<span>作者:${replyArticle.memberId}</span>&nbsp;&nbsp;&nbsp;&nbsp;<span>回文日期:${replyArticle.date}</span><hr>
+			<br>${replyArticle.contents}<hr>
+		</c:forEach>
 	</div>
+		<div>
+			<form id="replyForm" action="<c:url value="/reply.forum"/>" method="post">
+				<input type="hidden" name="messageId" value="${detail.post.messageId}"/>
+				<textarea name="contents"></textarea><span id="replyMsg"></span><br>
+			<script>
+				CKEDITOR.replace("contents", {
+					width : 400
+				});
+			</script>
+				<input id="replyButton" type="button" value="回覆"/>
+			</form>
+		</div>
 </body>
 </html>

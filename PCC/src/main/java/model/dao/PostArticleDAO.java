@@ -1,11 +1,9 @@
 package model.dao;
 
-import java.util.Date;
 import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -21,32 +19,28 @@ public class PostArticleDAO {
 		return sessionFactory.getCurrentSession();
 	}
 
-	public int insert(PostArticle bean) {
-		try {
-			int messageId = (int) getSession().save(bean);
-			return messageId;
-		} catch (Exception e) {
-			e.printStackTrace();
-			return -1;
-		}
+	public Integer insert(PostArticle bean) {
+		return (Integer) getSession().save(bean);
 	}
 
-	public List<PostArticle> select() {
-		return getSession().createQuery("from PostArticle", PostArticle.class).list();
+	public List<PostArticle> selectOrderBy(String order) {
+		return getSession().createQuery("from PostArticle order by " + order + " desc", PostArticle.class).list();
 	}
 
-	public PostArticle selectByMessageId(int messageId) {
+	public PostArticle selectByMessageId(Integer messageId) {
 		return getSession().get(PostArticle.class, messageId);
 	}
 
 	public List<PostArticle> selectByCategory(String category) {
-		Query<PostArticle> query = getSession().createQuery("from PostArticle where category = ?", PostArticle.class);
-		return query.setParameter(0, category).list();
+		return getSession()
+				.createQuery("from PostArticle where category = :category order by messageId desc", PostArticle.class)
+				.setParameter("category", category).list();
 	}
 
-	public int selectMessageIdByTopic(String topic) {
-		Query<Integer> query = getSession().createQuery("select messageId from PostArticle where topic = ?", int.class);
-		return query.setParameter(0, topic).getSingleResult();
+	public List<PostArticle> selectByTopic(String topic) {
+		return getSession()
+				.createQuery("from PostArticle where topic like :topic order by messageId desc", PostArticle.class)
+				.setParameter("topic", topic).list();
 	}
 
 	public boolean update(PostArticle bean) {
@@ -55,17 +49,21 @@ public class PostArticleDAO {
 			updateBean.setTopic(bean.getTopic());
 			updateBean.setCategory(bean.getCategory());
 			updateBean.setContents(bean.getContents());
-			updateBean.setDate(new Date());
 			return true;
 		}
 		return false;
 	}
 
 	public boolean delete(PostArticle bean) {
-		if (selectByMessageId(bean.getMessageId()) != null) {
-			getSession().delete(bean);
-			return true;
+		getSession().delete(bean);
+		return true;
+	}
+
+	public PostArticle updateContents(PostArticle article) {
+		PostArticle updateBean = selectByMessageId(article.getMessageId());
+		if (updateBean != null) {
+			updateBean.setContents(article.getContents());
 		}
-		return false;
+		return updateBean;
 	}
 }

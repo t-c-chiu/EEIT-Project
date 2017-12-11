@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.Resource;
-import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.context.support.ServletContextResource;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
@@ -16,9 +15,9 @@ import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatche
 import org.springframework.web.servlet.view.XmlViewResolver;
 
 @Configuration
+@ComponentScan(basePackages= {"controller.match"})
 @EnableWebMvc
-@ComponentScan(basePackages= {"controller.room"})
-public class SpringMvcConfigRoom extends AbstractAnnotationConfigDispatcherServletInitializer implements WebMvcConfigurer {
+public class SpringMvcConfigMatch extends AbstractAnnotationConfigDispatcherServletInitializer implements WebMvcConfigurer {
 	
 	@Autowired
 	private ServletContext application;
@@ -26,7 +25,7 @@ public class SpringMvcConfigRoom extends AbstractAnnotationConfigDispatcherServl
 	@Override
 	public void configureViewResolvers(ViewResolverRegistry registry) {
 		XmlViewResolver XmlViewResolver = new XmlViewResolver();
-		Resource resource = new ServletContextResource(application, "/WEB-INF/roomViews.xml");
+		Resource resource = new ServletContextResource(application, "/WEB-INF/matchViews.xml");
 		XmlViewResolver.setLocation(resource);
 		registry.viewResolver(XmlViewResolver);
 	}
@@ -38,17 +37,17 @@ public class SpringMvcConfigRoom extends AbstractAnnotationConfigDispatcherServl
 
 	@Override
 	protected Class<?>[] getServletConfigClasses() {
-		return new Class[] {SpringMvcConfigRoom.class};
+		return new Class[] {SpringMvcConfigMatch.class};
 	}
 
 	@Override
 	protected String[] getServletMappings() {
-		return new String[] {"*.room"};
+		return new String[] {"*.match"};
 	}
 
 	@Override
 	protected String getServletName() {
-		return "springMvcConfigRoom";
+		return "springMvcConfigMatch";
 	}
 	
 	

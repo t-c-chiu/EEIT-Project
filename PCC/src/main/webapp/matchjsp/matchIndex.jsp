@@ -7,10 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	memberId = ${bean.memberId}<hr>
-	category = ${bean.category}<hr>
-	topic = ${bean.topic}<hr>
-	date = ${bean.date}<hr>
-	contents = ${bean.contents}<hr>
+
+
 </body>
 </html>

@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -25,10 +24,18 @@ public class CollectArticleDAO {
 	}
 
 	public List<CollectArticle> selectByMemberId(String memberId) {
-		Query<CollectArticle> query = getSession().createQuery("from CollectArticle where memberId = ?",
-				CollectArticle.class);
-		query.setParameter(0, memberId);
-		return query.list();
+		return getSession().createQuery("from CollectArticle where memberId = :memberId", CollectArticle.class)
+				.setParameter("memberId", memberId).list();
+	}
+
+	public List<CollectArticle> selectByMessageId(Integer messageId) {
+		return getSession().createQuery("from CollectArticle where messageId = :messageId", CollectArticle.class)
+				.setParameter("messageId", messageId).list();
+	}
+
+	public boolean delete(CollectArticle collectArticle) {
+		getSession().delete(collectArticle);
+		return true;
 	}
 
 }
