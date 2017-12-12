@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -24,30 +23,33 @@ public class LoginController {
 	@Autowired
 	private MemberService memberService;
 
-	// 登入
-	@RequestMapping(path = "/login.login", method = {RequestMethod.POST,RequestMethod.GET},produces= {"application/json"})
-	public @ResponseBody String method(String memberId, String password, Model model) {
+	// 登入 成功版 
+	@RequestMapping(path = "/login.login", method = {RequestMethod.POST,RequestMethod.GET},produces= {"text/plain;charset=utf-8"})
+	public @ResponseBody String method(String memberId, String password,Model model) {
 		// 讀取使用者輸入資料
 		// 進行必要的資料型態轉換
 		// 進行資料檢查
-		System.out.println("controller hi");
+//		String memberId=member.getMemberId();
+//		String password=member.getPassword().toString();
+		System.out.println(memberId+password);
 		Map<String, String> errors = new HashMap<String, String>();
-		model.addAttribute("errors", errors);
-		Map<String, String> judgment = new HashMap<String, String>();
-		model.addAttribute("judgment", judgment);
+//		model.addAttribute("errors", errors);
+//		Map<String, String> judgment = new HashMap<String, String>();
+//		model.addAttribute("judgment", judgment);
 
-		if (memberId == null || memberId.trim().length() == 0) {
-			System.out.println("controller memberId");
-			errors.put("memberIdError", "請輸入帳號");
-		}
-		if (password == null || password.trim().length() == 0) {
-			System.out.println("controller password");
-			errors.put("passwordError", "請輸入密碼");
-		}
-		if (errors != null && !errors.isEmpty()) {
-			System.out.println("controller errors");
-			return "login.error";
-		}
+//		if (memberId == null || memberId.trim().length() == 0) {
+//			System.out.println("controller memberId");
+//			errors.put("memberIdError", "請輸入帳號");
+//		}
+//		if (password == null || password.trim().length() == 0) {
+//			System.out.println("controller password");
+//			errors.put("passwordError", "請輸入密碼");
+//		}
+//		//成功 都有填的話
+//		if (errors != null && !errors.isEmpty()) {
+//			System.out.println("controller errors");
+//			return "login.error";
+//		}
 
 		// 進行商業服務
 		Member bean = memberService.login(memberId, password);
@@ -55,102 +57,56 @@ public class LoginController {
 //		response.getWriter().println(judgment);
 		if (bean == null) {
 			errors.put("passwordError", "登入失敗");
-			judgment.put("judPass", "可以使用此帳號");
+//			judgment.put("judPass", "可以使用此帳號");
 			System.out.println("bean1"+bean);
-			System.out.println("judgment1"+judgment);
-			return "login.error";
+//			System.out.println("judgment1"+judgment);
+			return "登入失敗";
 		} else {
-			model.addAttribute("member", bean);
-			judgment.put("judNo", "已有人使用此帳號");
+//			model.addAttribute("member", bean);
+//			judgment.put("judNo", "已有人使用此帳號");
 //			response.getWriter().println(judgment);
 			System.out.println("bean2"+bean);
-			System.out.println("judgment2"+judgment);
-//			//角色判斷
-//			int role=bean.getRole();
-//			switch(role) {
-//			//管理員
-//			case 1:
-//				System.out.println("case1"+role);
-//				return "login.success.admin";
-//			//一般會員
-//			case 2:
-//				System.out.println("case2"+role);
-//				return "login.success.member";
-//			//去註冊	
-//			default:
-//				System.out.println("case3"+role);
-//				return "registy.error";
-//			}
-			return "";
+//			System.out.println("judgment2"+judgment);
+			//角色判斷
+			int role=bean.getRole();
+			switch(role) {
+			//管理員
+			case 1:
+				System.out.println("case1"+role);
+				return "管理員";
+			//一般會員
+			case 2:
+				System.out.println("case2"+role);
+				return "會員";
+			//不是會員	
+			default:
+				System.out.println("case3"+role);
+				return "不是會員";
+			}
+			
 		}
 		
 
 	}
 	
-	
-//1212/	10:33
-	@RequestMapping(path = "/login22.login", method = {RequestMethod.POST,RequestMethod.GET},produces= {"application/json"})
-	public @ResponseBody  Member  test( @RequestBody Member jsonString) {
-		
-		System.out.println(jsonString.getMemberId()+jsonString.getPassword());
-		Member bean = memberService.login(jsonString.getMemberId(), jsonString.getPassword().toString());
-		if(bean!=null) {
-//			bean.toString();
-			System.out.println("456");
-//			System.out.println(bean.toString());
-			return bean;
-		}else {			
-			System.out.println("789");
-			return null;
-		}
-	}
-	
-	
-	
-//	public String tojson(Object object) {
-//		ObjectMapper mapper=new ObjectMapper();
+//1212/	10:33 測試傳JSON進來
+//	@RequestMapping(path = "/login22.login", method = {RequestMethod.POST,RequestMethod.GET},produces= {"application/json"})
+//	public @ResponseBody  Member  test( @RequestBody Member jsonString) {
 //		
-//		try {
-//			return mapper.writeValueAsString(object);
-//		} catch (JsonProcessingException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
+//		System.out.println(jsonString.getMemberId()+jsonString.getPassword());
+//		Member bean = memberService.login(jsonString.getMemberId(), jsonString.getPassword().toString());
+//		if(bean!=null) {
+////			bean.toString();
+//			System.out.println("456");
+////			System.out.println(bean.toString());
+//			return bean;
+//		}else {			
+//			System.out.println("789");
+//			return null;
 //		}
-//		return null;
 //	}
-	// 登入
-//		@RequestMapping(path = "/testlogin.login", method = RequestMethod.POST)
-//		public String testmethod(String memberId, String password) {
-//			// 讀取使用者輸入資料
-//			// 進行必要的資料型態轉換
-//			// 進行資料檢查
-//			// 進行商業服務
-//			Member bean = memberService.login(memberId, password);
-//			// 依照執行結果挑選適當的View元件
-//			if (bean == null) {
-//				errors.put("passwordError", "登入失敗");
-//				return "login.error";
-//			} else {
-//				model.addAttribute("member", bean);
-//				//角色判斷
-//				int role=bean.getRole();
-//				switch(role) {
-//				//管理員
-//				case 1:
-//					return "login.success.admin";
-//				//一般會員
-//				case 2:
-//					return "login.success.member";
-//				//去註冊	
-//				default:
-//					return "registy.error";
-//				}
-//			}
-//		}
-	
-	
-	
-	
+
+
 
 	// 註冊
 	// @InitBinder
