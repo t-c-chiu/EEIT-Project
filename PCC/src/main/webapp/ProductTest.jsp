@@ -26,23 +26,39 @@
      <br><br>
      
 <!--      enctype="multipart/form-data" -->
+<!-- action="<c:url value="/controller.shopping"/>" method="post"  -->
      <br><br>
      <h1>以下為測試後台新增產品</h1>
-     <form action="<c:url value="/controller.shopping"/>" method="post" >
+     <form id="inserFormId">
 	<label>productName: </label><input id="productName" type="text" name="productName" /><br>
 	<label>category: </label><input id="category" type="text" name="category" /><br>
 	<label>stock: </label><input id="stock" type="text" name="stock" /><br>
 	<label>price: </label><input id="price" type="text" name="price" /><br>
 	<label>picture: </label><input id="picture" type="file" name="picture" /><br>
 
-	<input type="submit"value="上傳" />
+	<input type="submit"value="上傳" id="subInsert"/>
      
      </form>
      
      <script src="js/jquery.min.js"></script>
      <script type="text/javascript">
      
-     
+     $(document).ready(function(){
+    	 $('#subInsert').click(function(){
+			$.ajax({url:"/PCC/controller.shopping",
+					type:"POST",
+					data:$('#inserFormId').serialize(),
+					success: function(data){
+						alert(data);
+						
+					}
+			});
+			
+    		 
+    	 });
+    	 
+    	 
+     });
      
      </script>
      

@@ -8,8 +8,10 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import model.bean.Product;
 import model.service.ProductService;
@@ -51,14 +53,15 @@ public class ProductController {
 	@RequestMapping(
 			
 			method=RequestMethod.POST)
-		public String insertProduct(Product product,BindingResult bindingResult,Model model	) throws SQLException {
+		public @ResponseBody String insertProduct(@RequestBody Product product,BindingResult bindingResult,Model model	) throws SQLException {
 		System.out.println("Controller start "+product);
 		int saveOk=productService.insertProducts(product);
 //		int saveOk=productService.insertProducts(product);
 			model.addAttribute("saveOk", saveOk);
 
 			System.out.println("Controller ok ");
-			return "page.productBackstage";
+//			return "page.productBackstage";
+			return String.valueOf(saveOk);
 		}
 
 }
