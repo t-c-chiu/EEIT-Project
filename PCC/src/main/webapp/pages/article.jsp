@@ -115,109 +115,8 @@
 			</div>
 		</div><!-- Loader /- -->	
 		
-		<!-- Header -->
-		<header class="header-section header-section-1 container-fluid no-padding">
-			
-			<!-- Middel Header -->
-			<div class="middel-header">
-				<!-- Container -->
-				<div class="container">
-					<!-- Logo Block -->
-					<div class="col-md-4 col-sm-6 col-xs-12 logo-block">
-						<a href="index.html" class="navbar-brand">PCC <span>logo</span></a>
-					</div><!-- Logo Block /- -->
-					<!-- Search Block -->
-					<div class="col-md-5 col-sm-6 col-xs-6 search-block">
-						<div class="input-group">
-							<input class="form-control" placeholder="Search You Wants Here . . ." type="text">
-							<span class="input-group-btn">
-								<button class="btn btn-default" type="button"><i class="icon icon-Search"></i></button>
-							</span>
-						</div>
-					</div><!-- Search Block /- -->
-					<!-- Menu Icon -->
-					<div class="col-md-3 col-sm-6 col-xs-6 menu-icon">
-						<ul class="cart">
-							<li>
-								<a aria-expanded="true" aria-haspopup="true" data-toggle="dropdown" id="cart" class="btn dropdown-toggle" title="Add To Cart" href="#"><i class="icon icon-ShoppingCart"></i></a>
-								<ul class="dropdown-menu no-padding">
-									<li class="mini_cart_item">
-										<a title="Remove this item" class="remove" href="#">&#215;</a>
-										<a href="#" class="shop-thumbnail">
-											<img alt="poster_2_up" class="attachment-shop_thumbnail" src="images/product-wishlist-1.jpg">Flying Ninja
-										</a>
-										<span class="quantity">2 &#215; <span class="amount">Rs.12.00</span></span>
-									</li>
-									<li class="mini_cart_item">
-										<a title="Remove this item" class="remove" href="#">&#215;</a>
-										<a href="#" class="shop-thumbnail">
-											<img alt="poster_2_up" class="attachment-shop_thumbnail" src="../images/product-wishlist-2.jpg">Flying Ninja
-										</a>
-										<span class="quantity">2 &#215; <span class="amount">Rs.12.00</span></span>
-									</li>
-									<li class="button">
-										<a href="#" title="View Cart">View Cart</a>
-										<a href="#" title="Check Out">Check out</a>
-									</li>
-								</ul>
-							</li>
-							<li><a href="#" title="Like"><i class="icon icon-Heart"></i></a></li>
-							<li><a href="#" title="User"><i class="icon icon-User"></i></a></li>
-						</ul>
-					</div><!-- Menu Icon /- -->
-				</div><!-- Container /- -->
-			</div><!-- Middel Header /- -->
-			
-			<!-- Menu Block -->
-			<div class="container-fluid no-padding menu-block">
-				<!-- Container -->
-				<div class="container">
-					<!-- nav -->
-					<nav class="navbar navbar-default ow-navigation">
-						<div class="navbar-collapse collapse" id="navbar">
-							<ul class="nav navbar-nav">
-								<li class="dropdown">
-									<a href="../index.html" title="Home" class="dropdown-toggle" role="button" aria-haspopup="true" aria-expanded="false">首頁</a>
-								</li>
-								<li><a href="../pages/reservation.html" title="Reservation">線上預約</a></li>
-								<li><a href="../pages/partner.html" title="Partner">服務夥伴</a></li>
-								<li class="dropdown">
-                                        <a href="../pages/shop.html" title="Shop" class="dropdown-toggle" role="button" aria-haspopup="true" aria-expanded="false">購物商城 </a>
-                                        <i class="ddl-switch fa fa-angle-down"></i>
-                                        <ul class="dropdown-menu">
-                                            <li><a href="#" title="">商品類</a></li>
-                                            <li><a href="#" title="">商品類</a></li>
-                                            <li><a href="#" title="">商品類</a></li>
-                                        </ul>
-                                    </li>
-								<li class="dropdown">
-                                        <a href="../pages/room.html" title="Room" class="dropdown-toggle" role="button" aria-haspopup="true" aria-expanded="false">預約訂房</a>
-                                    </li>
-                                    <li class="dropdown">
-                                        <a href="../pages/course.html" title="Course" class="dropdown-toggle" role="button" aria-haspopup="true" aria-expanded="false">線上課程</a>
-                                        <i class="ddl-switch fa fa-angle-down"></i>
-                                        <ul class="dropdown-menu">
-                                            <li><a href="#" title="">教學類</a></li>
-                                            <li><a href="#" title="">教學類</a></li>
-                                        </ul>
-                                    </li>
-                                    <li class="dropdown">
-                                        <a href="<c:url value="/showByOrder.forum?order=date"/>" title="Forum" class="dropdown-toggle" role="button" aria-haspopup="true" aria-expanded="false">文章/討論</a>
-                                        <i class="ddl-switch fa fa-angle-down"></i>
-                                        <ul class="dropdown-menu">
-                                    		<li><a href="<c:url value="/showByOrder.forum?order=likes"/>">熱門文章</a></li>
-                                            <li><a href="<c:url value="/showAll.forum?category=懷孕討論"/>">懷孕討論</a></li>
-                                            <li><a href="<c:url value="/showAll.forum?category=育兒討論"/>">育兒討論</a></li>
-                                            <li><a href="<c:url value="/showAll.forum?category=心情分享"/>">心情分享</a></li>
-                                        </ul>
-                                    </li>
-								<li><a href="../pages/contact-us.html" title="Contact Us">聯絡資訊</a></li>
-							</ul>
-						</div><!--/.nav-collapse -->
-					</nav><!-- nav /- -->
-				</div><!-- Container /- -->
-			</div><!-- Menu Block /- -->
-		</header><!-- Header /- -->
+<%@ include file="header.jsp"%>
+
 <!--	內容開始	-->		
 		<main>
 			<!-- Page Banner -->
@@ -310,52 +209,8 @@
 			</div><!-- Container /- -->
 		</main>
 <!--	內容結束	-->		
-		<!-- Footer Main 1 -->
-		<footer id="footer-main" class="footer-main footer-main-1 services-section container-fluid">
-			<!-- Container -->
-                <div class="container">
-                    <div class="row">
-                        <div class="section-header">
-                            <h3>聯絡我們</h3>
-                            <p>Contact-us</p>
-                        </div>
-                        <!-- Widget About -->
-                        <aside class="col-md-6 col-sm-6 col-xs-12 ftr-widget widget_about">
 
-                            <a href="index.html" title="Max Shop">P<span >ostnatal</span> C<span>are</span> C<span>enter</span></a>
-                            <div class="info">
-                                <p><i class="icon icon-Pointer"></i>106台北市大安區復興南路一段390號 2樓</p>
-                                <p><i class="icon icon-Phone2"></i><a href="tel:(11)1234567890" title="Phone" class="phone">(02) 6631 6666</a></p>
-                                <p><i class="icon icon-Imbox"></i><a href="mailto:info@maxshop.com" title="info@maxshop.com">eeit98team05@outlook.com</a></p>
-                            </div>
-
-                        </aside>
-                        <!-- Widget About /- -->
-                        <!-- Widget Newsletter -->
-                        <form action="#" method="post" name="contact-form" class="col-md-6 col-sm-6 col-xs-12" id="main-contact-form ">
-                            <div class="form-group">
-                                <input type="email" required="" placeholder="Email" class="form-control" name="email">
-                            </div>
-                            <div class="form-group">
-                                <textarea required="" placeholder="Message" rows="8" class="form-control" name="message"></textarea>
-                            </div>
-                            <button class="btn btn-default form-control footer-send " type="button"><i class="fa fa-paper-plane-o"></i> 送出</button>
-                        </form>
-                        <div class="copyright-section">
-                            <div class="coyright-content">
-                                <p>© PCC. all rights reserved</p>
-                            </div>
-                            <ul>
-                                <li><a href="#" title="Facebook"><i class="fa fa-facebook"></i></a></li>
-                                <li><a href="#" title="Twitter"><i class="fa fa-twitter"></i></a></li>
-
-                            </ul>
-                        </div>
-                        <!-- Widget Newsletter /- -->
-                    </div>
-                </div>
-                <!-- Container /- -->
-		</footer><!-- Footer Main 1 -->
+<%@ include file="footer.jsp"%>
 
 	</div>
 	
