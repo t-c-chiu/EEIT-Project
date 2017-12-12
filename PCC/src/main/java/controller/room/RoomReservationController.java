@@ -23,7 +23,7 @@ import model.service.RoomReservationService;
 import model.service.ShowRoomService;
 
 @Controller
-@SessionAttributes({"roomReservation"})
+@SessionAttributes({"roomReservation","listOfRooms"})
 public class RoomReservationController {
 
 	@Autowired
@@ -54,6 +54,7 @@ public class RoomReservationController {
 		List<Room> listOfRooms;
 		listOfRooms = showRoomService.selectRoomByType(roomType);
 		model.addAttribute("listOfRooms", listOfRooms);
+		System.out.println(listOfRooms);
 		return "show.ok";
 	}
 	

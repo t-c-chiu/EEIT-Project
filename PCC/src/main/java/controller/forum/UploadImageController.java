@@ -21,7 +21,7 @@ public class UploadImageController {
 	@Autowired
 	private ServletContext application;
 
-	@RequestMapping("/forumjsp/imageUpload.forum")
+	@RequestMapping("/pages/imageUpload.forum")
 	public String imageUpload(MultipartFile upload, String CKEditorFuncNum, HttpServletResponse response)
 			throws IOException {
 		PrintWriter out = response.getWriter();
