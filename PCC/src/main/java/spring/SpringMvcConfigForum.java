@@ -16,7 +16,7 @@ import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatche
 import org.springframework.web.servlet.view.XmlViewResolver;
 
 @Configuration
-@ComponentScan(basePackages = { "controller" })
+@ComponentScan(basePackages = { "controller.forum" })
 @EnableWebMvc
 public class SpringMvcConfigForum extends AbstractAnnotationConfigDispatcherServletInitializer
 		implements WebMvcConfigurer {
@@ -52,5 +52,12 @@ public class SpringMvcConfigForum extends AbstractAnnotationConfigDispatcherServ
 	@Override
 	protected Class<?>[] getRootConfigClasses() {
 		return null;
+	}
+	
+	@Override
+	protected String getServletName() {
+		
+		
+		return "springMvcConfigForum";
 	}
 }
