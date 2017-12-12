@@ -53,10 +53,10 @@ public class ForumController {
 		return "articleDetail";
 	}
 
-	@RequestMapping(path = "/reply.forum", method = RequestMethod.POST)
-	public String replyArticle(@SessionAttribute("member") Member member, ReplyArticle replyArticle, Model model) {
-		model.addAttribute("detail", forumService.replyArticle(member, replyArticle));
-		return "articleDetail";
+	@RequestMapping(path = "/reply.forum", method = RequestMethod.POST, produces = { "application/json;charset=UTF-8" })
+	public @ResponseBody ReplyArticle replyArticle(@SessionAttribute("member") Member member, ReplyArticle replyArticle,
+			Model model) {
+		return forumService.replyArticle(member, replyArticle);
 	}
 
 	@RequestMapping(path = "/collect.forum", method = RequestMethod.GET, produces = { "text/plain;charset=UTF-8" })
