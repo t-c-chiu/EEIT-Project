@@ -28,4 +28,9 @@ public class ReportedArticleDAO {
 				.setParameter("messageId", messageId).list();
 	}
 
+	public boolean delete(ReportedArticle reportedArticle) {
+		getSession().delete(reportedArticle);
+		return true;
+	}
+
 }

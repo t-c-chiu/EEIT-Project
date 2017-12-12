@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
@@ -58,12 +59,11 @@ public class ForumController {
 		return "articleDetail";
 	}
 
-	@RequestMapping(path = "/collect.forum", method = RequestMethod.GET)
-	public String collectArticle(@SessionAttribute("member") Member member,
+	@RequestMapping(path = "/collect.forum", method = RequestMethod.GET, produces = { "text/plain;charset=UTF-8" })
+	public @ResponseBody String collectArticle(@SessionAttribute("member") Member member,
 			@SessionAttribute("detail") Map<String, Object> detail, Model model) {
 		PostArticle article = (PostArticle) detail.get("post");
-		model.addAttribute("detail", forumService.collectArticle(article.getMessageId(), member.getMemberId()));
-		return "articleDetail";
+		return forumService.collectArticle(article.getMessageId(), member.getMemberId());
 	}
 
 	@RequestMapping(path = "/modify.forum", method = RequestMethod.POST)
@@ -72,16 +72,16 @@ public class ForumController {
 		return "articleDetail";
 	}
 
-	@RequestMapping(path = "/delete.forum", method = RequestMethod.GET)
-	public String deleteArticle(@SessionAttribute("detail") Map<String, Object> detail, Model model) {
-		model.addAttribute("listOfPostArticles", forumService.deleteArticle((PostArticle) detail.get("post")));
-		return "showArticles";
+	@RequestMapping(path = "/delete.forum", method = RequestMethod.DELETE, produces = { "text/plain;charset=UTF-8" })
+	public @ResponseBody String deleteArticle(@SessionAttribute("detail") Map<String, Object> detail, Model model) {
+		forumService.deleteArticle((PostArticle) detail.get("post"));
+		return "刪除成功";
 	}
 
-	@RequestMapping(path = "/report.forum", method = RequestMethod.GET)
-	public String reportArticle(String reason, @SessionAttribute("member") Member member,
+	@RequestMapping(path = "/report.forum", method = RequestMethod.POST, produces = { "text/plain;charset=UTF-8" })
+	public @ResponseBody String reportArticle(String reason, @SessionAttribute("member") Member member,
 			@SessionAttribute("detail") Map<String, Object> detail, Model model) {
 		forumService.reportArticle(member, reason, (PostArticle) detail.get("post"));
-		return "articleDetail";
+		return "檢舉成功";
 	}
 }

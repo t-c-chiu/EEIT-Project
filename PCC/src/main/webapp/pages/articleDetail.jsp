@@ -79,21 +79,37 @@
 		$('#deleteButton').click(function(){
 			var isDelete = confirm('確定要刪除文章嗎?');
 			if(isDelete){
-				alert('刪除成功');
+				alert(123)
+				$.ajax('${pageContext.request.contextPath}/delete.forum',{
+					type:'DELETE',
+					success:function(data){
+						alert(data);
+						location.href = '${pageContext.request.contextPath}/showByOrder.forum?order=date';
+					}
+				});
 			}
 			return isDelete;
 		})
 		
 		$('#report').click(function(){
 			var reason = prompt('請輸入檢舉理由');
-			if(reason == null || reason.trim().length == 0){
-				return false;
+			if(reason.trim().length == 0){
+				alert('檢舉理由不可為空白');
+				return;
 			}
-			var href = $('#reportAnchor').attr('href');
-			href = href + reason;
-			$('#reportAnchor').attr('href', href);
-			alert('檢舉成功');
-			return true;
+			$.post('${pageContext.request.contextPath}/report.forum','reason=' + reason, function(data){
+				alert(data);
+			})
+		})
+		
+		$('#collect').click(function(){
+			$.get('${pageContext.request.contextPath}/collect.forum', function(data){
+				$('#collectMsg').empty().text(data);
+				if(data == '收藏成功'){
+					alert('123');
+					$('#likesNum').val();
+				}
+			})
 		})
 		
 		$('#postButton').click(function(){
@@ -230,8 +246,8 @@
 			<div class="content-area blog-section col-md-8 col-sm-8 col-xs-12">
 			<h1>${detail.post.topic}</h1>
 			<c:if test="${member.memberId eq detail.post.memberId}">
-				<a><button id="modifyButton">編輯內文</button></a>&nbsp;&nbsp;&nbsp;&nbsp;
-				<a id="deleteButton" href="<c:url value="/delete.forum"/>"><button value="">刪除文章</button></a>
+				<button id="modifyButton">編輯內文</button>&nbsp;&nbsp;&nbsp;&nbsp;
+				<button id="deleteButton">刪除文章</button>
 			</c:if>
 			<hr>
 			<h3>${detail.post.memberId}</h3>
@@ -249,15 +265,13 @@
 			<input id="cancelButton" type="button" value="取消"/>
 		</form>
 		<hr>
-		文章收藏數&nbsp;:&nbsp;${detail.post.likes}
+		文章收藏數&nbsp;:&nbsp;<span id="likesNum">${detail.post.likes}</span>
 		<c:if test="${!(member.memberId eq detail.post.memberId) && !empty member}">
 		<hr>
-			<a href="<c:url value="/collect.forum"/>">
-				<button id="collect">收藏本文</button>
-			</a>&nbsp;&nbsp;&nbsp;&nbsp;
-			<a id="reportAnchor" href="<c:url value="/report.forum?reason="/>">
-				<button id="report">檢舉本文</button>
-			</a><br>${detail.collectMsg}
+			<button id="collect">收藏本文</button>
+			&nbsp;&nbsp;&nbsp;&nbsp;
+			<button id="report">檢舉本文</button>
+			<br><span id="collectMsg"></span>
 		</c:if>
 	
 	<h2>留言區:</h2>
