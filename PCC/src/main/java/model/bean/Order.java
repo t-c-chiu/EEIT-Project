@@ -10,6 +10,12 @@ import javax.persistence.Id;
 @Entity
 public class Order {
 
+	@Override
+	public String toString() {
+		return "Order [orderId=" + orderId + ", memberId=" + memberId + ", totalPrice=" + totalPrice + ", date=" + date
+				+ ", status=" + status + ", location=" + location + ", discount=" + discount + "]";
+	}
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int orderId;
