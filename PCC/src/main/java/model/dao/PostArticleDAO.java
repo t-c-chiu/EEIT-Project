@@ -59,11 +59,12 @@ public class PostArticleDAO {
 		return true;
 	}
 
-	public PostArticle updateContents(PostArticle article) {
+	public String updateContents(PostArticle article) {
 		PostArticle updateBean = selectByMessageId(article.getMessageId());
 		if (updateBean != null) {
 			updateBean.setContents(article.getContents());
+			return article.getContents();
 		}
-		return updateBean;
+		return null;
 	}
 }

@@ -1,11 +1,14 @@
 package model.bean;
 
 import java.sql.Timestamp;
+import java.text.ParseException;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
 public class ReplyArticle {
@@ -51,7 +54,8 @@ public class ReplyArticle {
 		this.memberId = memberId;
 	}
 
-	public Timestamp getDate() {
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm", timezone = "GMT+8")
+	public Timestamp getDate() throws ParseException {
 		return date;
 	}
 
