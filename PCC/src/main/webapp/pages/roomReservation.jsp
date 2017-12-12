@@ -8,6 +8,10 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet"
+	href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" />
+<script src="http://code.jquery.com/jquery-1.8.3.js"></script>
+<script src="http://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <title>PCC - Room</title>
 <!-- Standard Favicon -->
 <link rel="icon" type="image/x-icon" href="../images/pcc/pcc.png" />
@@ -42,7 +46,76 @@
 
 <!-- fontawesome -->
 <link href="../revolution/fonts/fontawesome-all.css">
-</head>
+
+<style>
+.color {
+	border-style: double
+}
+</style>
+
+<script>
+	$(function() {
+		var price
+		var endDate
+		var beginDate
+		var totalPrice
+
+		function showPrice() {
+			totalPrice = ((endDate - beginDate) * price) / (86400000)
+			if (!isNaN(totalPrice)) {
+				$('#totalPrice').empty().val(totalPrice)
+			}
+		}
+
+		$('#beginDate').datepicker({
+			numberOfMonths : 2,
+			minDate : 0,
+			beforeShowDay : unavailable,
+			dateFormat : "yy/mm/dd",
+			onSelect : function(selected) {
+				$("#endDate").datepicker("option", "minDate", selected)
+				beginDate = $('#beginDate').datepicker('getDate');
+				showPrice()
+			}
+		});
+
+		$('#endDate').datepicker({
+			numberOfMonths : 2,
+			minDate : 0,
+
+			dateFormat : "yy/mm/dd",
+			onSelect : function(selected) {
+				$("#beginDate").datepicker("option", "maxDate", selected)
+				endDate = $(this).datepicker('getDate');
+				showPrice()
+			}
+		});
+
+		$(".image").click(function() {
+			$(".image").removeClass("color")
+			$(this).addClass("color")
+			// 			var self = $(this).children("td")
+			// 			$(this).children("td").not(self).removeClass("color")
+
+			$("#roomId").empty().val($(this).attr("id"))
+			price = $(this).attr("alt")
+			showPrice()
+		});
+
+		var unavailableDates = [ "2018/1/1", "2018/1/3" ]
+
+		function unavailable(date) {
+			dmy = date.getFullYear() + "/" + (date.getMonth() + 1) + "/"
+					+ date.getDate();
+			if ($.inArray(dmy, unavailableDates) == -1) {
+				return [ true, "" ];
+			} else {
+				return [ false, "", "Unavailable" ];
+			}
+		}
+
+	});
+</script>
 
 </head>
 
@@ -185,69 +258,109 @@
 			</div>
 			<!-- Container /- -->
 		</div>
-		<!-- Page Banner /- --> <!-- Clients -->
+		<!-- Page Banner /- --> <!-- Clients --> <!-- Container --> <c:forEach
+			var="room" items="${listOfRooms}">
+			<div class="container">
+				<!-- Content Area -->
+				<div class="content-area blog-section col-md-8 col-sm-8 col-xs-12">
+					<div class="type-post">
+						<div class="col-md-5 col-sm-12 col-xs-12 no-padding entry-cover">
 
 
-
-
-		<div>
-			<table width="400" border="0" align="center">
-				<tr>
-					<th>圖片</th>
-					<th>房間編號</th>
-					<th>房型</th>
-					<th>每晚房價</th>
-				</tr>
-
-				<c:forEach var="room" items="${listOfRooms}">
-
-					<tr class="image">
-						<td><img height="120" width="160"
-							src="<c:url value="/roomimage/${room.roomImage}.jpg"/>"></td>
-						<td>${room.roomId}</td>
-						<td>${room.roomType}</td>
-						<td>${room.price}</td>
-					</tr>
-
-				</c:forEach>
-			</table>
-		</div>
-
-		<!-- Container -->
-		<div class="container">
-			<!-- Content Area -->
-			<div class="content-area blog-section col-md-8 col-sm-8 col-xs-12">
-				<div class="type-post">
-					<div class="col-md-5 col-sm-12 col-xs-12 no-padding entry-cover">
-						<a href="blog-post.html"><img src="../images/blog-1.jpg"
-							alt="blog"></a> <span class="post-date"><a href="#"><i
-								class="fa fa-calendar-o"></i>July 16</a></span>
-					</div>
-					<div class="col-md-7 col-sm-12 col-xs-12 blog-content">
-						<h3 class="entry-title">
-							<a title="new Collectios are imported In Our shop."
-								href="blog-post.html">new Collectios are <span>imported</span>
-								In Our shop.
-							</a>
-						</h3>
-						<div class="entry-meta">
-							<span class="post-like"><a href="#" title="224 Likes"><i
-									class="fa fa-heart-o"></i>224 Likes</a></span> <span class="post-admin"><i
-								class="fa fa-user"></i>Posted By<a href="#" title="Max">Max</a></span>
+							<a><img
+								src="<c:url value="../images/room/${room.roomImage}.jpg"/>"
+								class="image" alt="${room.price}" id="${room.roomId}"></a> <span
+								class="post-date"><a href="#"><i
+									class="fa fa-calendar-o"></i>July 16</a></span>
 						</div>
-						<div class="entry-content">
-							<p>The weather started getting rough - the tiny ship was
-								tossed. If not for the courage of the fearless If not for the
-								courage of the Minnow would be lost.</p>
-							<a href="blog-post.html" title="Read More" class="read-more">Read
-								More<i class="fa fa-long-arrow-right"></i>
-							</a>
+						<div class="col-md-7 col-sm-12 col-xs-12 blog-content">
+							<h3 class="entry-title">
+								<a title="new Collectios are imported In Our shop."
+									href="blog-post.html">${room.roomId} </a>
+							</h3>
+							<div class="entry-meta">
+								<span class="post-like"><a href="#" title="224 Likes"><i
+										class="fa fa-heart-o"></i>${room.roomType}</a></span> <span
+									class="post-admin"><i class="fa fa-user"></i>${room.price}<a
+									href="#" title="Max">Max</a></span>
+							</div>
+							<div class="entry-content">
+								<p>The weather started getting rough - the tiny ship was
+									tossed. If not for the courage of the fearless If not for the
+									courage of the Minnow would be lost.</p>
+								<a href="blog-post.html" title="Read More" class="read-more">Read
+									More<i class="fa fa-long-arrow-right"></i>
+								</a>
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
+		</c:forEach>
+
+
+
+
+		<div
+			class="container-fluid no-left-padding no-right-padding woocommerce-checkout">
+			<!-- Container -->
+			<div class="container">
+
+				<!-- Billing -->
+				<div class="checkout-form">
+
+					<div class="col-md-12 col-sm-12 col-xs-12">
+						<h3>訂房填表</h3>
+						<form action="<c:url value="/reserve.room"/>" method="post">
+							<div class="billing-field">
+
+								<div class="col-md-4 form-group">
+									<label>入住人</label> <input class="form-control" type="text"
+										name="name" value="${member.name}">
+								</div>
+								<div class="col-md-4 form-group">
+									<label>email</label> <input class="form-control" type="text"
+										name="email" value="${member.email}">
+								</div>
+								<div class="col-md-4 form-group">
+									<label>電話</label> <input class="form-control" type="text"
+										name="phone" value="${member.phone}">
+								</div>
+
+								<div class="col-md-4 form-group">
+									<label>房間ID(暫)</label> <input class="form-control" type="text"
+										name="roomId" id="roomId" readonly="readonly">
+								</div>
+								<div class="col-md-4 form-group">
+									<label>入住日</label> <input class="form-control" type="text"
+										name="beginDate" id="beginDate">
+								</div>
+								<div class="col-md-4 form-group">
+									<label>退房日</label> <input class="form-control" type="text"
+										name="endDate" id="endDate">
+								</div>
+								<div class="col-md-5 form-group">
+									<label>總價</label> <input class="form-control" type="text"
+										name="totalPrice" id="totalPrice" readonly="readonly">
+								</div>
+								<div class="col-md-5 form-group">
+									<label>&#160;</label> <input class="form-control" type="submit"
+										name="RoomReservation" value="送出訂單">
+								</div>
+							</div>
+						</form>
+					</div>
+
+				</div>
+				<!-- Billing /- -->
+			</div>
+			<!-- Container /- -->
 		</div>
-		
+
+
+
+
+
 		<!-- Content Area /- --> <!-- Clients /- --> </main>
 		<!--	內容結束	-->
 		<!-- Footer Main 1 -->
