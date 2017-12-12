@@ -59,11 +59,11 @@ public class ForumService {
 		return postArticleDAO.selectByTopic(topic);
 	}
 
-	public Map<String, Object> replyArticle(Member member, ReplyArticle replyArticle) {
+	public ReplyArticle replyArticle(Member member, ReplyArticle replyArticle) {
 		replyArticle.setMemberId(member.getMemberId());
 		replyArticle.setStatus(0);
 		replyArticleDAO.insert(replyArticle);
-		return showArticleDetail(replyArticle.getMessageId());
+		return replyArticle;
 	}
 
 	public String collectArticle(int messageId, String memberId) {

@@ -70,10 +70,22 @@
 			var contents = prompt('請輸入留言');
 			if(contents.trim().length == 0){
 				alert('留言不得為空');
-			}else{
-				$('#contnets').val(contents);
-				$("#replyForm").submit();
+				return;
 			}
+			$('#replyContents').val(contents);
+			var formData = $("#replyForm").serialize();
+			$.post('${pageContext.request.contextPath}/reply.forum',formData,function(data){
+				console.log(data)
+				console.log(data.memberId);
+// 				var author = $('<span></span>').html('作者&nbsp;:&nbsp;'data.memberId);
+// 				<div id="repliesArea" style="height:300px;overflow:auto;">
+// 				<c:forEach var="replyArticle" items="${detail.reply}">
+// 					<span>作者&nbsp;:&nbsp;${replyArticle.memberId}</span>&nbsp;&nbsp;&nbsp;&nbsp;<span>留言時間&nbsp;:&nbsp;${replyArticle.date}</span>
+// 					<br>${replyArticle.contents}<hr>
+// 				</c:forEach>
+// 				</div>
+// 				$('#repliesArea').append(author);
+			})
 		})
 		
 		$('#deleteButton').click(function(){
@@ -88,7 +100,6 @@
 					}
 				});
 			}
-			return isDelete;
 		})
 		
 		$('#report').click(function(){
@@ -106,8 +117,8 @@
 			$.get('${pageContext.request.contextPath}/collect.forum', function(data){
 				$('#collectMsg').empty().text(data);
 				if(data == '收藏成功'){
-					alert('123');
-					$('#likesNum').val();
+					var likesNum = parseInt($('#likesNum').text());
+					$('#likesNum').empty().text(likesNum + 1);
 				}
 			})
 		})
@@ -275,7 +286,7 @@
 		</c:if>
 	
 	<h2>留言區:</h2>
-	<div style="height:300px;overflow:auto;">
+	<div id="repliesArea" style="height:300px;overflow:auto;">
 		<c:forEach var="replyArticle" items="${detail.reply}">
 			<span>作者&nbsp;:&nbsp;${replyArticle.memberId}</span>&nbsp;&nbsp;&nbsp;&nbsp;<span>留言時間&nbsp;:&nbsp;${replyArticle.date}</span>
 			<br>${replyArticle.contents}<hr>
@@ -284,7 +295,7 @@
 		<div>
 			<form id="replyForm" action="<c:url value="/reply.forum"/>" method="post">
 				<input type="hidden" name="messageId" value="${detail.post.messageId}"/>
-				<input id="contnets" type="hidden" name="contents"/><br>
+				<input id="replyContents" type="hidden" name="contents"/><br>
 				<input id="replyButton" type="button" value="我要留言"/>
 			</form>
 		</div>
