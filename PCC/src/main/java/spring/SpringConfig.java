@@ -27,6 +27,7 @@ import model.bean.OrderDetail;
 import model.bean.PostArticle;
 import model.bean.Product;
 import model.bean.ReplyArticle;
+import model.bean.ReportedArticle;
 import model.bean.Reservation;
 import model.bean.Room;
 import model.bean.RoomReservation;
@@ -57,7 +58,8 @@ public class SpringConfig extends AbstractContextLoaderInitializer {
 		builder.setProperty("hibernate.dialect", "org.hibernate.dialect.SQLServerDialect");
 		builder.addAnnotatedClasses(Clazz.class, CollectArticle.class, Conversation.class, Matching.class, Member.class,
 				Order.class, OrderDetail.class, PostArticle.class, Product.class, ReplyArticle.class, Reservation.class,
-				Room.class, RoomReservation.class, Servant.class, Student.class, SystemMessage.class);
+				Room.class, RoomReservation.class, Servant.class, Student.class, SystemMessage.class,
+				ReportedArticle.class);
 		return builder.buildSessionFactory();
 	}
 

@@ -12,14 +12,14 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.support.ByteArrayMultipartFileEditor;
 
 import model.bean.PostArticle;
-import model.service.PostArticleService;
+//import model.service.PostArticleService;
 
 @Controller
 @SessionAttributes(value = { "bean" })
 public class PostArticleController {
 
 	@Autowired
-	PostArticleService postArticleService;
+//	PostArticleService postArticleService;
 
 	@InitBinder
 	public void init(WebDataBinder binder) {
@@ -30,10 +30,10 @@ public class PostArticleController {
 	public String postArticle(PostArticle bean, Model model, MultipartFile photo) {
 		bean.setMemberId("Account");
 
-		int messageId = postArticleService.postArticle(bean, photo);
-		if (messageId == -1) {
-			return "post.err";
-		}
+//		int messageId = postArticleService.postArticle(bean, photo);
+//		if (messageId == -1) {
+//			return "post.err";
+//		}
 
 		model.addAttribute("bean", bean);
 		return "post.ok";

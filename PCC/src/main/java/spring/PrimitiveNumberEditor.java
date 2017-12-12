@@ -4,6 +4,7 @@ import java.text.NumberFormat;
 
 import org.springframework.beans.propertyeditors.CustomNumberEditor;
 
+
 public class PrimitiveNumberEditor  extends CustomNumberEditor{
 	
 	 private boolean allowEmpty;
@@ -33,5 +34,6 @@ public class PrimitiveNumberEditor  extends CustomNumberEditor{
 	}
 	
 	
+
 
 }
