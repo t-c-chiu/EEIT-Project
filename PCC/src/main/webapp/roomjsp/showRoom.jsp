@@ -27,8 +27,20 @@
 			</tr>
 
 		</table>
+	</form>
 
 
+	<form action="<c:url value="/showReservation.room"/>" method="get">
+		<table width="400" border="0" align="center">
+		
+			<tr>
+				<td><h3>查訂單系統</h3></td>
+			</tr>
+			
+			<tr>
+			    <td><input type="submit" name="ShowReservationList" value="查訂單"></td>
+			</tr>
+		</table>
 	</form>
 
 

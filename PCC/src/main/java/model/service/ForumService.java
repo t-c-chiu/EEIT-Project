@@ -59,20 +59,18 @@ public class ForumService {
 		return postArticleDAO.selectByTopic(topic);
 	}
 
-	public Map<String, Object> replyArticle(Member member, ReplyArticle replyArticle) {
+	public ReplyArticle replyArticle(Member member, ReplyArticle replyArticle) {
 		replyArticle.setMemberId(member.getMemberId());
 		replyArticle.setStatus(0);
 		replyArticleDAO.insert(replyArticle);
-		return showArticleDetail(replyArticle.getMessageId());
+		return replyArticle;
 	}
 
-	public Map<String, Object> collectArticle(int messageId, String memberId) {
+	public String collectArticle(int messageId, String memberId) {
 		List<CollectArticle> listOfCollectArticles = collectArticleDAO.selectByMemberId(memberId);
-		Map<String, Object> postAndReplyArticles = showArticleDetail(messageId);
 		for (CollectArticle article : listOfCollectArticles) {
 			if (article.getMessageId() == messageId) {
-				postAndReplyArticles.put("collectMsg", "您已收藏過此文章");
-				return postAndReplyArticles;
+				return "您已收藏過此文章";
 			}
 		}
 
@@ -82,8 +80,7 @@ public class ForumService {
 		collectArticle.setMessageId(messageId);
 		collectArticle.setMemberId(memberId);
 		collectArticleDAO.insert(collectArticle);
-		postAndReplyArticles.put("collectMsg", "收藏成功");
-		return postAndReplyArticles;
+		return "收藏成功";
 	}
 
 	public Map<String, Object> modifyArticle(PostArticle article, String contents) {
@@ -95,11 +92,15 @@ public class ForumService {
 	public List<PostArticle> deleteArticle(PostArticle article) {
 		List<ReplyArticle> replies = replyArticleDAO.selectByMessageId(article.getMessageId());
 		List<CollectArticle> collects = collectArticleDAO.selectByMessageId(article.getMessageId());
+		List<ReportedArticle> reports = reportedArticleDAO.selectByMessageId(article.getMessageId());
 		for (CollectArticle collect : collects) {
 			collectArticleDAO.delete(collect);
 		}
 		for (ReplyArticle reply : replies) {
 			replyArticleDAO.delete(reply);
+		}
+		for (ReportedArticle report : reports) {
+			reportedArticleDAO.delete(report);
 		}
 		postArticleDAO.delete(article);
 		return showArticleByOrder("date");

@@ -28,7 +28,8 @@ public class ReplyArticleDAO {
 	}
 
 	public List<ReplyArticle> selectByMessageId(Integer messageId) {
-		return getSession().createQuery("from ReplyArticle where messageId = " + messageId, ReplyArticle.class).list();
+		return getSession().createQuery("from ReplyArticle where messageId = :messageId", ReplyArticle.class)
+				.setParameter("messageId", messageId).list();
 	}
 
 	public boolean delete(ReplyArticle bean) {
