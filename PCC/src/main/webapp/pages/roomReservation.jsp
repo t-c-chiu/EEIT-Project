@@ -170,6 +170,7 @@
 		<!-- Header /- -->
 		<!--	內容開始	-->
 		<main> <!-- Page Banner -->
+
 		<div class="page-banner container-fluid no-padding">
 			<!-- Container -->
 			<div class="container">
@@ -185,13 +186,36 @@
 			<!-- Container /- -->
 		</div>
 		<!-- Page Banner /- --> <!-- Clients -->
-		
-		
-		
-		<c:forEach var="room" items="${listOfRooms}">
-		
-		<div class="clients container-fluid">
-			<!-- Container -->
+
+
+
+
+		<div>
+			<table width="400" border="0" align="center">
+				<tr>
+					<th>圖片</th>
+					<th>房間編號</th>
+					<th>房型</th>
+					<th>每晚房價</th>
+				</tr>
+
+				<c:forEach var="room" items="${listOfRooms}">
+
+					<tr class="image">
+						<td><img height="120" width="160"
+							src="<c:url value="/roomimage/${room.roomImage}.jpg"/>"></td>
+						<td>${room.roomId}</td>
+						<td>${room.roomType}</td>
+						<td>${room.price}</td>
+					</tr>
+
+				</c:forEach>
+			</table>
+		</div>
+
+		<!-- Container -->
+		<div class="container">
+			<!-- Content Area -->
 			<div class="content-area blog-section col-md-8 col-sm-8 col-xs-12">
 				<div class="type-post">
 					<div class="col-md-5 col-sm-12 col-xs-12 no-padding entry-cover">
@@ -202,34 +226,29 @@
 					<div class="col-md-7 col-sm-12 col-xs-12 blog-content">
 						<h3 class="entry-title">
 							<a title="new Collectios are imported In Our shop."
-								href="blog-post.html">
-								
+								href="blog-post.html">new Collectios are <span>imported</span>
+								In Our shop.
 							</a>
 						</h3>
 						<div class="entry-meta">
 							<span class="post-like"><a href="#" title="224 Likes"><i
-									class="fa fa-heart-o"></i>${room.roomId}</a></span> <span class="post-admin"><i
-								class="fa fa-user"></i>${room.price}<a href="#" title="Max">Max</a></span>
+									class="fa fa-heart-o"></i>224 Likes</a></span> <span class="post-admin"><i
+								class="fa fa-user"></i>Posted By<a href="#" title="Max">Max</a></span>
 						</div>
 						<div class="entry-content">
-							<p>簡約奢華套房</p>
+							<p>The weather started getting rough - the tiny ship was
+								tossed. If not for the courage of the fearless If not for the
+								courage of the Minnow would be lost.</p>
 							<a href="blog-post.html" title="Read More" class="read-more">Read
 								More<i class="fa fa-long-arrow-right"></i>
 							</a>
 						</div>
 					</div>
 				</div>
-			</div>			
-			<!-- Container /- -->
+			</div>
 		</div>
-			</c:forEach>
-		<!-- Clients /- --> </main>
 		
-		
-		
-		
-		
-		
+		<!-- Content Area /- --> <!-- Clients /- --> </main>
 		<!--	內容結束	-->
 		<!-- Footer Main 1 -->
 		<footer id="footer-main"

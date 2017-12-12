@@ -10,7 +10,7 @@
 		- Padding/Margin
 		
 	* Fonts Settings	
-		- font-family: 'Lato', sans-serif;
+		- font-family: '微軟正黑體','Lato', sans-serif;
 		- font-family: 'Crimson Text', serif;
 		- font-family: 'Montserrat', sans-serif;
 		- font-family: 'Arizonia', cursive;
@@ -604,7 +604,7 @@ a {
     border-radius: 0;
     background-color: #f8f8f8;
     box-shadow: none;
-    font-family: 'Open Sans', sans-serif;
+    font-family: '微軟正黑體','Open Sans', sans-serif;
     height: 40px;
     padding: 6px 20px;
     letter-spacing: 0.28px;

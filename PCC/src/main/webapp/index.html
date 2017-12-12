@@ -37,10 +37,12 @@
 
 <!-- fontawesome -->
 <link href="revolution/fonts/fontawesome-all.css">
+
+<!-- css -->
+<link rel="stylesheet" type="text/css" href="css/login.css">
+
+
 </head>
-
-
-
 <body data-offset="200" data-spy="scroll" data-target=".ow-navigation">
 	<div class="main-container">
 		<!-- Loader -->
@@ -101,9 +103,76 @@
 												Cart</a> <a href="#" title="Check Out">Check out</a></li>
 									</ul></li>
 								<li><a href="#" title="Like"><i class="icon icon-Heart"></i></a></li>
-								<li><a href="#" title="User"><i class="icon icon-User"></i></a></li>
+								<li><a href="#" id="member" title="User" data-toggle="modal"
+									data-target="#exampleModal"><i class="icon icon-User"></i></a></li>
 							</ul>
 						</div>
+
+						<!-- User Login Modal -->
+						<div class="modal fade" id="exampleModal" tabindex="-1"
+							role="dialog" aria-labelledby="exampleModalLabel"
+							aria-hidden="true">
+							<div class="modal-dialog" role="document">
+								<div class="modal-content">
+									<div class="modal-header">
+										<h5 class="modal-title" id="exampleModalLabel">登入</h5>
+										<button type="button" class="close" data-dismiss="modal"
+											aria-label="Close">
+											<span aria-hidden="true">&times;</span>
+										</button>
+									</div>
+									<div class="modal-body">
+										<form id="formid">
+											<div class="form-group">
+												<label for="memberId" class="col-form-label">帳號:</label> <input
+													type="text" class="login-pop" id="memberId" name="memberId">
+													<div id="memberId-error"></div>
+											</div>
+											<div class="form-group">
+												<label for="password" class="col-form-label">密碼:</label>
+												<input type="password" class="form-control"
+													id="password" name="password">
+													<div id="password-error"></div>
+												<!-- 												<textarea class="form-control" id="message-text"></textarea> -->
+											</div>
+										</form>
+									</div>
+									<div class="modal-footer">
+										<button type="button" class="btn btn-secondary"
+											data-dismiss="modal">取消</button>
+										<button type="button" id="sub" class="btn btn-primary">登入</button>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- 						<div class="modal fade" id="myModal" role="dialog"> -->
+						<!-- 							<div class="modal-dialog"> -->
+
+						<!-- 								Modal content -->
+						<!-- 								<div class="modal-content"> -->
+						<!-- 									<div class="modal-header"> -->
+						<!-- 										<button type="button" class="close" data-dismiss="modal">&times;</button> -->
+						<!-- 										<h4 class="modal-title">登入 PCC</h4> -->
+						<!-- 									</div> -->
+						<!-- 									<div class="modal-body"> -->
+						<!-- 										<p>Some text in the modal.</p> -->
+						<!-- 										<form> -->
+						<!-- 										<div class="col-md-6 form-group"> -->
+						<!-- 									<label>Email Address *</label> <input class="form-control" -->
+						<!-- 										type="text"> -->
+						<!-- 								</div> -->
+						<!-- 										</form> -->
+						<!-- 										<p>Some text in the modal.</p> -->
+						<!-- 									</div> -->
+						<!-- 									<div class="modal-footer"> -->
+						<!-- 										<button type="button" class="btn btn-default" -->
+						<!-- 											data-dismiss="modal">Close</button> -->
+						<!-- 									</div> -->
+						<!-- 								</div> -->
+
+						<!-- 							</div> -->
+						<!-- 						</div> -->
+
 						<!-- Menu Icon /- -->
 						<div class="navbar-collapse collapse navbar-right" id="navbar">
 							<ul class="nav navbar-nav">
@@ -145,6 +214,8 @@
 								<li><a href="pages/contact-us.html" title="Contact Us">聯絡資訊</a></li>
 							</ul>
 						</div>
+
+
 						<!--/.nav-collapse -->
 					</nav>
 					<!-- nav /- -->
@@ -740,8 +811,8 @@
 					<!-- Widget About -->
 					<aside class="col-md-6 col-sm-6 col-xs-12 ftr-widget widget_about">
 
-						<a href="index.html" title="Max Shop">P<span>ostnatal</span>
-							C<span>are</span> C<span>enter</span></a>
+						<a href="index.html" title="Max Shop">P<span>ostnatal</span> C<span>are</span>
+							C<span>enter</span></a>
 						<div class="info">
 							<p>
 								<i class="icon icon-Pointer"></i>106台北市大安區復興南路一段390號 2樓
@@ -819,6 +890,104 @@
 
 	<!-- Library - Theme JS -->
 	<script src="js/functions.js"></script>
+
+	<!-- 12/11 新增開始  -->
+	<script type="text/javascript">
+	
+		// 	Login Popup
+// 		$('#sub').click(function(){
+// 			$.post('login22.login',{memberId:$('#memberId').val(),password:$('#password').val()},function(data){
+// 				alert(data);
+// 			});
+// 		})
+
+
+//成功的
+$(document).ready(function(){
+    $('#sub').click(function(){
+        $.ajax({url: "/PCC/login.login",type:"POST",
+        	data:$('#formid').serialize(),
+        	success: function(data){
+			if(data=="會員" || data=="管理員"){
+				location.replace('http://localhost:8080/PCC/index.html');
+			}else if(data=="不是會員"){
+				alert("無此帳號");
+			}
+        }});
+    });
+});
+
+		
+		
+		
+		
+		
+// $.ajax({ 
+//     url:"/login22.login",    
+//     type:"POST", 
+//     contentType: "application/json; charset=utf-8",
+//     data: , //Stringified Json Object
+//     async: false,    //Cross-domain requests and dataType: "jsonp" requests do not support synchronous operation
+//     cache: false,    //This will force requested pages not to be cached by the browser          
+//     processData:false, //To avoid making query String instead of JSON
+//     success: function(resposeJsonObject){
+//         // Success Message Handler
+//         alert("ok");
+//     }
+// });
+
+
+
+// 		$('#sub').click(function(){
+// 			$.getJSON('login22.login',{'memberId':memberId,'password':password},funtion(data){
+// 				$.each(data, function(i, field){
+// 	                $("div").append(field + " ");
+// 	                alert(data);
+// 	            });
+				
+// 			});
+// 		})
+		
+		
+// 		$(document).ready(function(){
+// 		$('#memberId').blur(function(){
+// 			alert("123");
+// 		})
+			
+// 		});
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+// 		$(document).ready(function(){
+// 			$('#sub').on('click',function(){			
+// // 			var memberId =$('memberId').val();
+// // 				$.get('MemberService',{'memberId':memberId},function(data){
+// // 					$('#memberId-error').text(data);
+// // 					if(memberId!=''){
+// // 						//可以用
+// // // 						$('#memberId-error').addClass('');
+// // 					}else if(data==""){
+						
+// // 					}else{
+						
+// // 					}
+// // 				});
+// 			});
+// 		});
+		
+// // 		$(function() {
+
+// // 		})
+		
+		
+	</script>
 
 </body>
 
