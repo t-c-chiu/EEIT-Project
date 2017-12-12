@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -88,6 +89,14 @@
 			$('#forumClick').click(function(){
 				$('#postClick').removeClass();
 				$(this).addClass('active');
+				$('#postArea').css('display','none');
+				$('#articlesArea').css('display','block');
+				$('#forumTitle').text('文章/討論');
+			})
+			
+			$('#cancelPost').click(function(){
+				$('#postClick').removeClass();
+				$('#forumClick').addClass('active');
 				$('#postArea').css('display','none');
 				$('#articlesArea').css('display','block');
 				$('#forumTitle').text('文章/討論');
@@ -248,7 +257,7 @@
 				</form>
 						<input id="postButton" type="button" value="發文"/>
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-						<a href="<c:url value="/pages/article.jsp"/>"><input type="button" value="取消"/></a>
+						<input id="cancelPost" type="button" value="取消"/>
 			</div>
 			
 			<div id="articlesArea" style="height:500px;overflow:auto;">
@@ -256,7 +265,8 @@
 					<div class="type-post">
 						<div style="width:100%;" class="col-md-7 col-sm-12 col-xs-12 blog-content">
 							<h3 class="entry-title">${article.topic}</h3>
-							<span>主題分類&nbsp;:&nbsp;${article.category}</span><span style="float:right;">發文時間&nbsp;:&nbsp;${article.date}</span>
+							<span>主題分類&nbsp;:&nbsp;${article.category}</span>
+							<span style="float:right;">發文時間&nbsp;:&nbsp;<fmt:formatDate value="${article.date}" pattern="yyyy-MM-dd HH:mm" /></span>
 							<div class="entry-meta">
 								<span class="post-like"><i class="fa fa-heart-o"></i>${article.likes} Likes</span>
 								<span class="post-admin"><i class="fa fa-user"></i>${article.memberId}</span>
@@ -366,7 +376,7 @@
         <script type="text/javascript" src="../revolution/js/extensoins/revolution.extension.actions.min.js"></script>
 	
 	<!-- Library - Google Map API -->
-	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDW40y4kdsjsz714OVTvrw7woVCpD8EbLE"></script>
+		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDW40y4kdsjsz714OVTvrw7woVCpD8EbLE"></script>
 
         <!-- Library - Theme JS -->
         <script src="../js/functions.js"></script>

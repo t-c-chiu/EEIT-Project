@@ -7,6 +7,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 @Entity
 public class PostArticle {
 
@@ -69,6 +71,7 @@ public class PostArticle {
 		this.category = category;
 	}
 
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm", timezone = "GMT+8")
 	public Timestamp getDate() {
 		return date;
 	}

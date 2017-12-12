@@ -21,12 +21,10 @@ public class LoginMvcConfig extends AbstractAnnotationConfigDispatcherServletIni
 	private ServletContext application;
 
 	public void configureViewResolvers(ViewResolverRegistry registry) {
-		System.out.println("hiiiiiii");
 		Resource resource = new ServletContextResource(application, "/WEB-INF/loginViews.xml");
 		XmlViewResolver viewResolver = new XmlViewResolver();
 		viewResolver.setLocation(resource);
 		registry.viewResolver(viewResolver);
-		System.out.println("hoooooo");
 	}
 
 	@Override
@@ -36,7 +34,6 @@ public class LoginMvcConfig extends AbstractAnnotationConfigDispatcherServletIni
 
 	@Override
 	protected String[] getServletMappings() {
-		System.out.println("haaaaaaa");
 		return new String[] { "*.login" };
 	}
 
@@ -47,7 +44,6 @@ public class LoginMvcConfig extends AbstractAnnotationConfigDispatcherServletIni
 
 	@Override
 	protected String getServletName() {
-		System.out.println("h5555555");
 		return "loginMvcConfig";
 	}
 

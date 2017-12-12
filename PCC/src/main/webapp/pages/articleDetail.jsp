@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -46,6 +47,10 @@
 <script>
 	$(function(){
 		
+		$.get('${pageContext.request.contextPath}/testCollect.forum',function(data){
+			$('#collect').text(data);
+		})
+		
 		$('#modifyButton').click(function(){
 			$('#readyOnlyContents').css('display','none');
 			$('#postForm').css('display','block');
@@ -77,21 +82,15 @@
 			$.post('${pageContext.request.contextPath}/reply.forum',formData,function(data){
 				console.log(data)
 				console.log(data.memberId);
-// 				var author = $('<span></span>').html('作者&nbsp;:&nbsp;'data.memberId);
-// 				<div id="repliesArea" style="height:300px;overflow:auto;">
-// 				<c:forEach var="replyArticle" items="${detail.reply}">
-// 					<span>作者&nbsp;:&nbsp;${replyArticle.memberId}</span>&nbsp;&nbsp;&nbsp;&nbsp;<span>留言時間&nbsp;:&nbsp;${replyArticle.date}</span>
-// 					<br>${replyArticle.contents}<hr>
-// 				</c:forEach>
-// 				</div>
-// 				$('#repliesArea').append(author);
+				var author = $('<span></span>').html('作者&nbsp;:&nbsp;'+data.memberId+'&nbsp;&nbsp;&nbsp;&nbsp;');
+				var time = $('<span></span>').html('留言時間&nbsp;:&nbsp;'+data.date);
+				$('#repliesArea').append(author,time,'<br>',data.contents,'<hr>');
 			})
 		})
 		
 		$('#deleteButton').click(function(){
 			var isDelete = confirm('確定要刪除文章嗎?');
 			if(isDelete){
-				alert(123)
 				$.ajax('${pageContext.request.contextPath}/delete.forum',{
 					type:'DELETE',
 					success:function(data){
@@ -115,10 +114,14 @@
 		
 		$('#collect').click(function(){
 			$.get('${pageContext.request.contextPath}/collect.forum', function(data){
-				$('#collectMsg').empty().text(data);
 				if(data == '收藏成功'){
 					var likesNum = parseInt($('#likesNum').text());
 					$('#likesNum').empty().text(likesNum + 1);
+					$('#collect').text('取消收藏');
+				}else{
+					var likesNum = parseInt($('#likesNum').text());
+					$('#likesNum').empty().text(likesNum - 1);
+					$('#collect').text('收藏文章');
 				}
 			})
 		})
@@ -127,9 +130,14 @@
 			var contents = CKEDITOR.instances.contents.getData();
 			if(contents.length == 0){
 				$('#contentsSpan').text('請輸入內容');
-			}else{
-				$('#postForm').submit();
+				return;
 			}
+			var contents = CKEDITOR.instances.contents.getData();
+			$.post('${pageContext.request.contextPath}/modify.forum','contents=' + contents,function(data){
+				alert('編輯成功');
+				$('#readyOnlyContents').css('display','block').html(data);
+				$('#postForm').css('display','none');
+			})
 		})
 	})
 </script>
@@ -262,11 +270,13 @@
 			</c:if>
 			<hr>
 			<h3>${detail.post.memberId}</h3>
-			文章類型&nbsp;:&nbsp;${detail.post.category}&nbsp;&nbsp;&nbsp;&nbsp;發文日期&nbsp;:&nbsp;${detail.post.date}
+			文章類型&nbsp;:&nbsp;${detail.post.category}&nbsp;&nbsp;&nbsp;&nbsp;
+			發文日期&nbsp;:&nbsp;<fmt:formatDate value="${detail.post.date}" pattern="yyyy-MM-dd HH:mm" />
 		<hr>
 		<div id="readyOnlyContents">${detail.post.contents}</div>
 		<form id="postForm" style="display:none;" action="<c:url value="/modify.forum"/>" method="post" enctype="multipart/form-data">
-		內容:<textarea name="contents" id="contents">${detail.post.contents}</textarea><span id="contentsSpan"></span><br>
+		內容:<textarea name="contents" id="contents">${detail.post.contents}</textarea>
+		<span id="contentsSpan"></span><br>
 		<script>
 			CKEDITOR.replace("contents", {
 				width : 700
@@ -279,16 +289,16 @@
 		文章收藏數&nbsp;:&nbsp;<span id="likesNum">${detail.post.likes}</span>
 		<c:if test="${!(member.memberId eq detail.post.memberId) && !empty member}">
 		<hr>
-			<button id="collect">收藏本文</button>
+			<button id="collect"></button>
 			&nbsp;&nbsp;&nbsp;&nbsp;
 			<button id="report">檢舉本文</button>
-			<br><span id="collectMsg"></span>
 		</c:if>
 	
 	<h2>留言區:</h2>
 	<div id="repliesArea" style="height:300px;overflow:auto;">
 		<c:forEach var="replyArticle" items="${detail.reply}">
-			<span>作者&nbsp;:&nbsp;${replyArticle.memberId}</span>&nbsp;&nbsp;&nbsp;&nbsp;<span>留言時間&nbsp;:&nbsp;${replyArticle.date}</span>
+			<span>作者&nbsp;:&nbsp;${replyArticle.memberId}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+			<span>留言時間&nbsp;:&nbsp;<fmt:formatDate value="${replyArticle.date}" pattern="yyyy-MM-dd HH:mm" /></span>
 			<br>${replyArticle.contents}<hr>
 		</c:forEach>
 	</div>
@@ -404,19 +414,3 @@
     
 </body>
 </html>
-	
-pt type="text/javascript" src="../revolution/js/extensoins/revolution.extension.video.min.js"></script>
-        <script type="text/javascript" src="../revolution/js/extensoins/revolution.extension.slideanims.min.js"></script>
-        <script type="text/javascript" src="../revolution/js/extensoins/revolution.extension.layeranimation.min.js"></script>
-        <script type="text/javascript" src="../revolution/js/extensoins/revolution.extension.navigation.min.js"></script>
-        <script type="text/javascript" src="../revolution/js/extensoins/revolution.extension.actions.min.js"></script>
-	
-	<!-- Library - Google Map API -->
-	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDW40y4kdsjsz714OVTvrw7woVCpD8EbLE"></script>
-
-        <!-- Library - Theme JS -->
-        <script src="../js/functions.js"></script>
-    
-</body>
-</html>
-	

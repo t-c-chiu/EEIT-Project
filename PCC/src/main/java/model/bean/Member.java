@@ -1,5 +1,7 @@
 package model.bean;
 
+import java.util.Arrays;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
@@ -87,5 +89,12 @@ public class Member {
 
 	public void setPassword(byte[] password) {
 		this.password = password;
+	}
+
+	@Override
+	public String toString() {
+		return "Member [memberId=" + memberId + ", name=" + name + ", email=" + email + ", phone=" + phone + ", area="
+				+ area + ", address=" + address + ", role=" + role + ", status=" + status + ", password="
+				+ Arrays.toString(password) + "]";
 	}
 }

@@ -68,14 +68,18 @@ public class ForumService {
 
 	public String collectArticle(int messageId, String memberId) {
 		List<CollectArticle> listOfCollectArticles = collectArticleDAO.selectByMemberId(memberId);
-		for (CollectArticle article : listOfCollectArticles) {
-			if (article.getMessageId() == messageId) {
+
+		for (CollectArticle collectArticle : listOfCollectArticles) {
+			if (collectArticle.getMessageId() == messageId) {
+				PostArticle postArticle = postArticleDAO.selectByMessageId(messageId);
+				postArticle.setLikes(postArticle.getLikes() - 1);
+				collectArticleDAO.delete(collectArticle);
 				return "您已收藏過此文章";
 			}
 		}
 
-		PostArticle article = postArticleDAO.selectByMessageId(messageId);
-		article.setLikes(article.getLikes() + 1);
+		PostArticle postArticle = postArticleDAO.selectByMessageId(messageId);
+		postArticle.setLikes(postArticle.getLikes() + 1);
 		CollectArticle collectArticle = new CollectArticle();
 		collectArticle.setMessageId(messageId);
 		collectArticle.setMemberId(memberId);
@@ -83,10 +87,9 @@ public class ForumService {
 		return "收藏成功";
 	}
 
-	public Map<String, Object> modifyArticle(PostArticle article, String contents) {
+	public String modifyArticle(PostArticle article, String contents) {
 		article.setContents(contents);
-		postArticleDAO.updateContents(article);
-		return showArticleDetail(article.getMessageId());
+		return postArticleDAO.updateContents(article);
 	}
 
 	public List<PostArticle> deleteArticle(PostArticle article) {
@@ -113,5 +116,15 @@ public class ForumService {
 		reportedArticle.setMessageId(article.getMessageId());
 		reportedArticle.setStatus(0);
 		return reportedArticleDAO.insert(reportedArticle);
+	}
+
+	public String testCollectBeforeLoad(PostArticle article, Member member) {
+		List<CollectArticle> list = collectArticleDAO.selectByMemberId(member.getMemberId());
+		for (CollectArticle collectArticle : list) {
+			if (collectArticle.getMessageId() == article.getMessageId()) {
+				return "取消收藏";
+			}
+		}
+		return "收藏文章";
 	}
 }

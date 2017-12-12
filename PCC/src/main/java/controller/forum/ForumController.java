@@ -54,33 +54,38 @@ public class ForumController {
 	}
 
 	@RequestMapping(path = "/reply.forum", method = RequestMethod.POST, produces = { "application/json;charset=UTF-8" })
-	public @ResponseBody ReplyArticle replyArticle(@SessionAttribute("member") Member member, ReplyArticle replyArticle,
-			Model model) {
+	public @ResponseBody ReplyArticle replyArticle(@SessionAttribute("member") Member member,
+			ReplyArticle replyArticle) {
 		return forumService.replyArticle(member, replyArticle);
 	}
 
 	@RequestMapping(path = "/collect.forum", method = RequestMethod.GET, produces = { "text/plain;charset=UTF-8" })
 	public @ResponseBody String collectArticle(@SessionAttribute("member") Member member,
-			@SessionAttribute("detail") Map<String, Object> detail, Model model) {
+			@SessionAttribute("detail") Map<String, Object> detail) {
 		PostArticle article = (PostArticle) detail.get("post");
 		return forumService.collectArticle(article.getMessageId(), member.getMemberId());
 	}
 
-	@RequestMapping(path = "/modify.forum", method = RequestMethod.POST)
-	public String modifyArticle(@SessionAttribute("detail") Map<String, Object> detail, String contents, Model model) {
-		model.addAttribute("detail", forumService.modifyArticle((PostArticle) detail.get("post"), contents));
-		return "articleDetail";
+	@RequestMapping(path = "/testCollect.forum", method = RequestMethod.GET, produces = { "text/plain;charset=UTF-8" })
+	public @ResponseBody String testCollectBeforeLoad(@SessionAttribute("member") Member member,
+			@SessionAttribute("detail") Map<String, Object> detail) {
+		return forumService.testCollectBeforeLoad((PostArticle) detail.get("post"), member);
+	}
+
+	@RequestMapping(path = "/modify.forum", method = RequestMethod.POST, produces = { "text/plain;charset=UTF-8" })
+	public @ResponseBody String modifyArticle(@SessionAttribute("detail") Map<String, Object> detail, String contents) {
+		return forumService.modifyArticle((PostArticle) detail.get("post"), contents);
 	}
 
 	@RequestMapping(path = "/delete.forum", method = RequestMethod.DELETE, produces = { "text/plain;charset=UTF-8" })
-	public @ResponseBody String deleteArticle(@SessionAttribute("detail") Map<String, Object> detail, Model model) {
+	public @ResponseBody String deleteArticle(@SessionAttribute("detail") Map<String, Object> detail) {
 		forumService.deleteArticle((PostArticle) detail.get("post"));
 		return "刪除成功";
 	}
 
 	@RequestMapping(path = "/report.forum", method = RequestMethod.POST, produces = { "text/plain;charset=UTF-8" })
 	public @ResponseBody String reportArticle(String reason, @SessionAttribute("member") Member member,
-			@SessionAttribute("detail") Map<String, Object> detail, Model model) {
+			@SessionAttribute("detail") Map<String, Object> detail) {
 		forumService.reportArticle(member, reason, (PostArticle) detail.get("post"));
 		return "檢舉成功";
 	}
