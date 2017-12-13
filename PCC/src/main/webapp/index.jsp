@@ -653,9 +653,9 @@
 
 	<!-- Library - Theme JS -->
 	<script src="js/functions.js"></script>
-	<!-- login -->
-	<script src="js/login.js"></script>
 
+	<!-- login  -->
+	<script type="text/javascript" src="js/login.js"></script>
 </body>
 
 </html>

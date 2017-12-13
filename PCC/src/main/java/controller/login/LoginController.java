@@ -31,7 +31,6 @@ public class LoginController {
 		// 進行資料檢查
 //		String memberId=member.getMemberId();
 //		String password=member.getPassword().toString();
-		System.out.println(memberId+password);
 		Map<String, String> errors = new HashMap<String, String>();
 		model.addAttribute("errors", errors);
 //		Map<String, String> judgment = new HashMap<String, String>();
@@ -58,7 +57,6 @@ public class LoginController {
 		if (bean == null) {
 			errors.put("passwordError", "登入失敗");
 //			judgment.put("judPass", "可以使用此帳號");
-			System.out.println("bean1"+bean);
 //			System.out.println("judgment1"+judgment);
 			return "登入失敗";
 		} else {
@@ -73,17 +71,14 @@ public class LoginController {
 			//管理員
 			case 1:
 				model.addAttribute("admin", bean);
-				System.out.println("case1"+role);
 				return "管理員";
 			//一般會員
 			case 2:
 				model.addAttribute("member", bean);
-				System.out.println("case2"+role);
 				return "會員";
 			//不是會員	
 			default:
 				model.addAttribute("default", bean);
-				System.out.println("case3"+role);
 				return "不是會員";
 			}
 			
@@ -118,8 +113,8 @@ public class LoginController {
 	// PrimitiveNumberEditor(Integer.class, true));
 	// }
 
-	@RequestMapping(path = "/registy.login", method = { RequestMethod.POST })
-	public String method2(Member member, BindingResult bindingResult, Model model) {
+	@RequestMapping(path = "/registy.login", method = { RequestMethod.POST },produces= {"application/json;charset=utf-8"})
+	public @ResponseBody String method2(Member member, BindingResult bindingResult, Model model) {
 		Map<String, String> errors = new HashMap<>();
 		model.addAttribute("errors", errors);
 		// 讀取使用者輸入資料
@@ -153,19 +148,20 @@ public class LoginController {
 		}
 
 		// 帳號 blur 檢查
-		Member bean=memberService.login(memberId, null);
-		if(bean!=null) {
+		Member bean=memberService.login(memberId, password);
+		if(bean.getMemberId()!=null) {
 			errors.put("accountError", "此帳號已被使用");
+			return "不可使用的帳號";
 		}
 		// 註冊寄驗證信 time
 
 		// 進行商業服務
 		// 依照執行結果挑選適當的View元件
-		if (errors!=null && !errors.isEmpty()) {
-			System.out.println("gtgtgyg");
-			return "registy.error";
-		}		
-		return "registy.success";
+//		if (errors!=null && !errors.isEmpty()) {
+//			System.out.println("gtgtgyg");
+//			return "註冊失敗";
+//		}		
+		return "註冊成功";
 		
 	}
 

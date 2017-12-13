@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -44,7 +45,6 @@
 <!-- css -->
 <link rel="stylesheet" type="text/css" href="../css/login.css">
 </head>
-
 <body data-offset="200" data-spy="scroll" data-target=".ow-navigation">
 	<div class="main-container">
 		<!-- Loader -->
@@ -68,8 +68,8 @@
 					<p>Welcome to PCC company</p>
 				</div>
 				<ol class="breadcrumb">
-					<li><a href="../index.html" title="Home">首頁</a></li>
-					<li class="active"><a href="../pages/registy.html" title="Registy">會員註冊</a></li>
+					<li><a href="../index.jsp" title="Home">首頁</a></li>
+					<li class="active"><a href="../pages/registy.jsp" title="Registy">會員註冊</a></li>
 				</ol>
 			</div>
 			<!-- Container /- -->
@@ -82,7 +82,7 @@
 
 				<!-- Billing -->
 				<div class="checkout-form">
-					<form>
+					<form id="registy-form" method="POST">
 						<div class="col-md-6 col-sm-12 col-xs-12 col-md-push-3 ">
 							<h3>會員註冊</h3>
 							<div class="billing-field">
@@ -90,7 +90,7 @@
 									<label>姓名 *</label> <input class="form-control" type="text" />
 								</div>
 								<div class="col-md-12 form-group">
-									<label>帳號 *</label> <input id="account" class="form-control" type="text"
+									<label>帳號 *</label><span id="ac-icon"></span><input id="account" class="form-control" type="text"
 										placeholder="8~20個英文,數字" />
 								</div>
 								<div class="col-md-12 form-group">
@@ -110,7 +110,7 @@
 									<label>手機 *</label> <input id="phone" class="form-control" type="text" />
 								</div>
 								<div class="col-md-6 form-group">
-									<label>地址 *</label>
+									<label>縣市 *</label>
 									<div class="select">
 										<select class="form-control">
 											<option>台北市</option>
@@ -121,7 +121,7 @@
 									</div>
 								</div>
 								<div class="col-md-12 form-group">
-									<label>縣市 *</label> <input class="form-control" type="text" />
+									<label>地址 *</label> <input class="form-control" type="text" />
 								</div>
 							</div>
 						</div>
@@ -168,19 +168,8 @@
 
 	<!-- Library - Theme JS -->
 	<script src="../js/functions.js"></script>
-	<!-- login -->
-	<script src="js/login.js"></script>	
-	
-	<script type="text/javascript">
-	$(document).ready(function(){
-		$('#account').blur(function(){
-			$.ajax()
-		});
-		
-	});
-	
-	
-	</script>
 
+	<!-- login  -->
+	<script type="text/javascript" src="../js/login.js"></script>
 </body>
 </html>
