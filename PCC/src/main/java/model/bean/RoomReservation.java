@@ -7,6 +7,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 @Entity
 public class RoomReservation {
 
@@ -77,7 +79,7 @@ public class RoomReservation {
 	public void setMemberId(String memberId) {
 		this.memberId = memberId;
 	}
-
+    @JsonFormat(pattern="yyyy/MM/dd",timezone="GMT+8")
 	public Date getBeginDate() {
 		return beginDate;
 	}
@@ -85,7 +87,8 @@ public class RoomReservation {
 	public void setBeginDate(Date beginDate) {
 		this.beginDate = beginDate;
 	}
-
+	
+	@JsonFormat(pattern="yyyy/MM/dd",timezone="GMT+8")
 	public Date getEndDate() {
 		return endDate;
 	}
