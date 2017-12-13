@@ -56,9 +56,11 @@
 <script>
 	$(function() {
 		var price
+		var roomId
 		var endDate
 		var beginDate
 		var totalPrice
+		var unavailableDates
 
 		function showPrice() {
 			totalPrice = ((endDate - beginDate) * price) / (86400000)
@@ -82,7 +84,7 @@
 		$('#endDate').datepicker({
 			numberOfMonths : 2,
 			minDate : 0,
-
+			beforeShowDay : unavailable,
 			dateFormat : "yy/mm/dd",
 			onSelect : function(selected) {
 				$("#beginDate").datepicker("option", "maxDate", selected)
@@ -92,17 +94,28 @@
 		});
 
 		$(".image").click(function() {
-			$(".image").removeClass("color")
-			$(this).addClass("color")
-			// 			var self = $(this).children("td")
-			// 			$(this).children("td").not(self).removeClass("color")
-
-			$("#roomId").empty().val($(this).attr("id"))
-			price = $(this).attr("alt")
+			unavailableDates=[]
+// 			$(".image").removeClass("color")
+// 			$(this).addClass("color")
+            roomId=$(this).attr("id")
+            price = $(this).attr("alt")
+			$("#roomId").empty().val(roomId)
 			showPrice()
+			
+			$.get('${pageContext.request.contextPath}/showByRoomId.room','roomId='+roomId,function(data){
+				$.each(data,function(i,item){
+					console.log(data[i].beginDate)
+					console.log(data[i].endDate)
+	
+					unavailableDates.push(data[i].beginDate,data[i].endDate)
+					console.log(unavailableDates)
+				
+				})
+							
+			})					
 		});
 
-		var unavailableDates = [ "2018/1/1", "2018/1/3" ]
+	
 
 		function unavailable(date) {
 			dmy = date.getFullYear() + "/" + (date.getMonth() + 1) + "/"

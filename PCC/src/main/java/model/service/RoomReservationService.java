@@ -33,5 +33,9 @@ public class RoomReservationService {
 		roomReservationDAO.delete(roomReserverId);
 		return true;
 	}
+	
+	public List<RoomReservation> selectByRoomId(int roomId){
+		return roomReservationDAO.selectByRoomId(roomId);
+	}
 
 }

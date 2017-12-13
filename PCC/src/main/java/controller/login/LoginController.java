@@ -33,7 +33,7 @@ public class LoginController {
 //		String password=member.getPassword().toString();
 		System.out.println(memberId+password);
 		Map<String, String> errors = new HashMap<String, String>();
-//		model.addAttribute("errors", errors);
+		model.addAttribute("errors", errors);
 //		Map<String, String> judgment = new HashMap<String, String>();
 //		model.addAttribute("judgment", judgment);
 
@@ -65,21 +65,24 @@ public class LoginController {
 //			model.addAttribute("member", bean);
 //			judgment.put("judNo", "已有人使用此帳號");
 //			response.getWriter().println(judgment);
-			System.out.println("bean2"+bean);
+//			System.out.println("bean2"+bean);
 //			System.out.println("judgment2"+judgment);
 			//角色判斷
 			int role=bean.getRole();
 			switch(role) {
 			//管理員
 			case 1:
+				model.addAttribute("admin", bean);
 				System.out.println("case1"+role);
 				return "管理員";
 			//一般會員
 			case 2:
+				model.addAttribute("member", bean);
 				System.out.println("case2"+role);
 				return "會員";
 			//不是會員	
 			default:
+				model.addAttribute("default", bean);
 				System.out.println("case3"+role);
 				return "不是會員";
 			}
