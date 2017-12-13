@@ -80,11 +80,11 @@
 			$('#replyContents').val(contents);
 			var formData = $("#replyForm").serialize();
 			$.post('${pageContext.request.contextPath}/reply.forum',formData,function(data){
-				console.log(data)
-				console.log(data.memberId);
 				var author = $('<span></span>').html('作者&nbsp;:&nbsp;'+data.memberId+'&nbsp;&nbsp;&nbsp;&nbsp;');
 				var time = $('<span></span>').html('留言時間&nbsp;:&nbsp;'+data.date);
 				$('#repliesArea').append(author,time,'<br>',data.contents,'<hr>');
+				var repliesCount = parseInt($('#repliesCount').text());
+				$('#repliesCount').empty().text(repliesCount + 1);
 			})
 		})
 		
@@ -163,10 +163,6 @@
 				<!-- Content Area -->
 			<div class="content-area blog-section col-md-8 col-sm-8 col-xs-12">
 			<h1>${detail.post.topic}</h1>
-			<c:if test="${member.memberId eq detail.post.memberId}">
-				<button id="modifyButton">編輯內文</button>&nbsp;&nbsp;&nbsp;&nbsp;
-				<button id="deleteButton">刪除文章</button>
-			</c:if>
 			<hr>
 			<h3>${detail.post.memberId}</h3>
 			文章類型&nbsp;:&nbsp;${detail.post.category}&nbsp;&nbsp;&nbsp;&nbsp;
@@ -185,56 +181,46 @@
 			<input id="cancelButton" type="button" value="取消"/>
 		</form>
 		<hr>
-		文章收藏數&nbsp;:&nbsp;<span id="likesNum">${detail.post.likes}</span>
+		文章收藏數&nbsp;:&nbsp;<span id="likesNum">${detail.post.likes}</span>	<hr>
+		<c:if test="${member.memberId eq detail.post.memberId}">
+				<button id="modifyButton">編輯內文</button>&nbsp;&nbsp;&nbsp;&nbsp;
+				<button id="deleteButton">刪除文章</button>
+		</c:if>
 		<c:if test="${!(member.memberId eq detail.post.memberId) && !empty member}">
-		<hr>
 			<button id="collect"></button>
 			&nbsp;&nbsp;&nbsp;&nbsp;
 			<button id="report">檢舉本文</button>
 		</c:if>
 	
-	<h2>留言區:</h2>
-	<div id="repliesArea" style="height:300px;overflow:auto;">
-		<c:forEach var="replyArticle" items="${detail.reply}">
-			<span>作者&nbsp;:&nbsp;${replyArticle.memberId}</span>&nbsp;&nbsp;&nbsp;&nbsp;
-			<span>留言時間&nbsp;:&nbsp;<fmt:formatDate value="${replyArticle.date}" pattern="yyyy-MM-dd HH:mm" /></span>
-			<br>${replyArticle.contents}<hr>
-		</c:forEach>
-	</div>
-		<div>
-			<form id="replyForm" action="<c:url value="/reply.forum"/>" method="post">
-				<input type="hidden" name="messageId" value="${detail.post.messageId}"/>
-				<input id="replyContents" type="hidden" name="contents"/><br>
-				<input id="replyButton" type="button" value="我要留言"/>
-			</form>
-		</div>
-			
 				</div><!-- Content Area /- -->
-				
 				<!-- Widget Area -->
 				<div class="col-md-4 col-sm-4 col-xs-12 widget-area">
 					<!-- Widget Search -->
 					<aside class="widget widget_search">
-						<h3 class="widget-title">搜尋文章</h3>
-						<div class="input-group">
-						<form id="topicForm" action="<c:url value="/search.forum" />" method="get">
-							<input id="filter" name="topic" type="text" class="form-control" placeholder="輸入查詢">
-							<span class="input-group-btn">
-								<button id="topicButton" class="btn btn-search" title="Search" type="button"><i class="icon icon-Search"></i></button>
-							</span>
-							<span id="searchError"></span>
-						</form>
-						</div>
+						
+					<h2><span id="repliesCount">${detail.repliesCount}</span>筆留言</h2>
+				<div style="height:500px;overflow:hidden;">
+					<div id="repliesArea" style="height:100%;width:380px;overflow-y:auto;overflow-x:hidden;">
+						<c:forEach var="replyArticle" items="${detail.reply}">
+							<span>作者&nbsp;:&nbsp;${replyArticle.memberId}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+							<span>留言時間&nbsp;:&nbsp;<fmt:formatDate value="${replyArticle.date}" pattern="yyyy-MM-dd HH:mm" /></span>
+							<br>${replyArticle.contents}<hr>
+						</c:forEach>
+					</div>
+				</div>
+					<br><button id="replyButton">我要留言</button>
 					</aside><!-- Widget Search /- -->
 					<!-- Widget Categories -->
 					<aside class="widget widget_categories">
-						<h3 class="widget-title">主題分類</h3>
-						<ul>
-							<li><a href="<c:url value="/showByOrder.forum?order=likes"/>">熱門文章</a></li>
-							<li><a href="<c:url value="/showAll.forum?category=懷孕討論"/>">懷孕討論</a></li>
-							<li><a href="<c:url value="/showAll.forum?category=育兒討論"/>">育兒討論</a></li>
-							<li><a href="<c:url value="/showAll.forum?category=心情分享"/>">心情分享</a></li>
-						</ul>
+					
+					<div>
+						<form id="replyForm" action="<c:url value="/reply.forum"/>" method="post">
+							<input type="hidden" name="messageId" value="${detail.post.messageId}"/>
+							<input id="replyContents" type="hidden" name="contents"/><br>
+<!-- 							<input id="replyButton" type="button" value="我要留言"/> -->
+						</form>
+					</div>
+					
 					</aside><!-- Widget Categories /-  -->
 				</div><!-- Widget Area /- -->
 			</div><!-- Container /- -->
