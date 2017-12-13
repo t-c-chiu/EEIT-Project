@@ -56,9 +56,11 @@
 <script>
 	$(function() {
 		var price
+		var roomId
 		var endDate
 		var beginDate
 		var totalPrice
+		var unavailableDates
 
 		function showPrice() {
 			totalPrice = ((endDate - beginDate) * price) / (86400000)
@@ -82,7 +84,7 @@
 		$('#endDate').datepicker({
 			numberOfMonths : 2,
 			minDate : 0,
-
+			beforeShowDay : unavailable,
 			dateFormat : "yy/mm/dd",
 			onSelect : function(selected) {
 				$("#beginDate").datepicker("option", "maxDate", selected)
@@ -92,17 +94,57 @@
 		});
 
 		$(".image").click(function() {
-			$(".image").removeClass("color")
-			$(this).addClass("color")
-			// 			var self = $(this).children("td")
-			// 			$(this).children("td").not(self).removeClass("color")
-
-			$("#roomId").empty().val($(this).attr("id"))
-			price = $(this).attr("alt")
+			unavailableDates=[]
+// 			$(".image").removeClass("color")
+// 			$(this).addClass("color")
+            roomId=$(this).attr("id")
+            price = $(this).attr("alt")
+			$("#roomId").empty().val(roomId)
 			showPrice()
+			
+			$.get('${pageContext.request.contextPath}/showByRoomId.room','roomId='+roomId,function(data){
+				$.each(data,function(i,item){
+
+
+					var endDateTemp = data[i].endDate;
+					var beginDateTemp =data[i].beginDate;
+					
+					var dayDiff=(new Date(endDateTemp)-new Date(beginDateTemp))/86400000
+		
+					
+					
+					var arr = endDateTemp.split('/');
+					
+				    if(parseInt(arr[1])<10){
+					var month = arr[1].replace('0','');
+				    }else {var month = arr[1]}
+				    				    
+				    if(parseInt(arr[2])<10){
+					var day = arr[2].replace('0','');
+				    }else {var day = arr[2]}
+									    				 				    
+					endDateTemp = arr[0] + '/' + month + '/' + day;
+										
+					var arr2 =beginDateTemp.split('/')
+				    if(parseInt(arr2[1])<10){
+						var month2 = arr2[1].replace('0','');
+					    }else {var month2 = arr2[1]}
+					
+				    if(parseInt(arr2[2])<10){
+						var day2 = arr2[2].replace('0','');
+					    }else {var day2 = arr2[2]}
+				    
+				    beginDateTemp = arr2[0]+ '/' + month2 + '/' + day2;
+						    
+					unavailableDates.push(beginDateTemp);
+					unavailableDates.push(endDateTemp);
+				    				
+				})
+							
+			})					
 		});
 
-		var unavailableDates = [ "2018/1/1", "2018/1/3" ]
+	
 
 		function unavailable(date) {
 			dmy = date.getFullYear() + "/" + (date.getMonth() + 1) + "/"

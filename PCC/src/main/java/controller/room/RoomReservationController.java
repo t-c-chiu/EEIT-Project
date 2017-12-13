@@ -13,6 +13,7 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
@@ -65,6 +66,12 @@ public class RoomReservationController {
 		model.addAttribute("listOfReservation",listOfReservation);
 		return "showReservation.ok";		
 	}
+	
+	@RequestMapping(path="/showByRoomId.room",method=RequestMethod.GET,produces= {"application/json;charset=UTF-8"})
+	public @ResponseBody List<RoomReservation> selectByRoomId(int roomId){
+		return roomReservationService.selectByRoomId(roomId);				
+	}
+	
 	
 	@RequestMapping(path="/deleteReservation.room",method=RequestMethod.GET)
 	public String delete(int roomReserverId,Model model) {

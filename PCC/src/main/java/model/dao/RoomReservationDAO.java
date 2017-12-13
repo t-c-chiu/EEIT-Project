@@ -47,5 +47,10 @@ public class RoomReservationDAO {
 		return true;
 	}
 	
+	public List<RoomReservation> selectByRoomId(int roomId) {
+		Query<RoomReservation> query = getSession().createQuery("from RoomReservation where roomId=?",RoomReservation.class);
+		query.setParameter(0, roomId);
+		return query.list();		
+	}
 
 }

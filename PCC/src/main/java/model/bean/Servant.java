@@ -13,12 +13,10 @@ public class Servant {
 	private int serviceId;
 	private int experience;
 	private int status;
-	private int score;
 	private String memberId;
 	private String type;
-	private String certificate;
 	private String introduction;
-	private byte[] photo;
+
 
 	public int getServiceId() {
 		return serviceId;
@@ -44,14 +42,6 @@ public class Servant {
 		this.status = status;
 	}
 
-	public int getScore() {
-		return score;
-	}
-
-	public void setScore(int score) {
-		this.score = score;
-	}
-
 	public String getMemberId() {
 		return memberId;
 	}
@@ -68,14 +58,6 @@ public class Servant {
 		this.type = type;
 	}
 
-	public String getCertificate() {
-		return certificate;
-	}
-
-	public void setCertificate(String certificate) {
-		this.certificate = certificate;
-	}
-
 	public String getIntroduction() {
 		return introduction;
 	}
@@ -84,12 +66,11 @@ public class Servant {
 		this.introduction = introduction;
 	}
 
-	public byte[] getPhoto() {
-		return photo;
+	@Override
+	public String toString() {
+		return "Servant [serviceId=" + serviceId + ", experience=" + experience + ", status=" + status + ", memberId="
+				+ memberId + ", type=" + type + ", introduction=" + introduction + "]";
 	}
 
-	public void setPhoto(byte[] photo) {
-		this.photo = photo;
-	}
 
 }
