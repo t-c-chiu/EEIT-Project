@@ -104,12 +104,41 @@
 			
 			$.get('${pageContext.request.contextPath}/showByRoomId.room','roomId='+roomId,function(data){
 				$.each(data,function(i,item){
-					console.log(data[i].beginDate)
-					console.log(data[i].endDate)
-	
-					unavailableDates.push(data[i].beginDate,data[i].endDate)
-					console.log(unavailableDates)
-				
+
+
+					var endDateTemp = data[i].endDate;
+					var beginDateTemp =data[i].beginDate;
+					
+					var dayDiff=(new Date(endDateTemp)-new Date(beginDateTemp))/86400000
+		
+					
+					
+					var arr = endDateTemp.split('/');
+					
+				    if(parseInt(arr[1])<10){
+					var month = arr[1].replace('0','');
+				    }else {var month = arr[1]}
+				    				    
+				    if(parseInt(arr[2])<10){
+					var day = arr[2].replace('0','');
+				    }else {var day = arr[2]}
+									    				 				    
+					endDateTemp = arr[0] + '/' + month + '/' + day;
+										
+					var arr2 =beginDateTemp.split('/')
+				    if(parseInt(arr2[1])<10){
+						var month2 = arr2[1].replace('0','');
+					    }else {var month2 = arr2[1]}
+					
+				    if(parseInt(arr2[2])<10){
+						var day2 = arr2[2].replace('0','');
+					    }else {var day2 = arr2[2]}
+				    
+				    beginDateTemp = arr2[0]+ '/' + month2 + '/' + day2;
+						    
+					unavailableDates.push(beginDateTemp);
+					unavailableDates.push(endDateTemp);
+				    				
 				})
 							
 			})					
