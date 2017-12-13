@@ -13,8 +13,8 @@ $(document).ready(function(){
         	data:$('#formid').serialize(),
         	success: function(data){
 			if(data=="會員" || data=="管理員"){
-				location.replace('http://localhost:8080/PCC/index.jsp');
-			}else if(data=="不是會員"){
+				location.replace('/PCC/index.jsp');
+			}else if(data=="登入失敗"){
 				alert("無此帳號");
 			}
         }});
