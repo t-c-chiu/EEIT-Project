@@ -765,14 +765,14 @@ a {
 }
 
 .footer-main-1 {
-    background-image: url("images/babys/11.jpg");
+    background-image: url("../images/babys/11.jpg");
     background-size: cover;
     background-repeat: no-repeat;
     position: relative;
 }
 
 .footer-main-1::before {
-    background-color: rgba(50, 50, 50, 0.902);
+    background-color: rgba(50, 50, 50, 0.75);
     content: "";
     display: inline-block;
     position: absolute;
