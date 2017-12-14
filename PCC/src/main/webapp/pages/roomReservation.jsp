@@ -62,13 +62,25 @@
 		var totalPrice
 		var unavailableDates
 		var point
+		var newPoint
+		var usedPoint
 	
 
 		function showPrice() {
-			totalPrice = (((endDate - beginDate) * price) / (86400000)-(point*50))
+			totalPrice = (((endDate - beginDate) * price) / (86400000)-(usedPoint*50))
+			
+			newPoint=point-usedPoint+(totalPrice/500)
+			if(newPoint<0)
+				{newPoint=0}
+			
+			$('#newPoint').empty().val(newPoint)
+			
 			if (!isNaN(totalPrice)) {
-				$('#totalPrice').empty().val(totalPrice)
-			}
+				if(totalPrice<0)
+				{$('#totalPrice').empty().val(0)}
+				else
+				{$('#totalPrice').empty().val(totalPrice)}						
+			}						
 		}
 		
 				
@@ -118,18 +130,19 @@
 			})					
 		});
 		
-		$('#usePoint').change(function(){
-			point=$(this).val()
+		$('#usedPoint').change(function(){
+			usedPoint=$(this).val()
 			showPrice()
 		})
 		
 		$("button").click(function(){			
 			$.get('${pageContext.request.contextPath}/getMemberbyId.room',function(data){
 				point=data.point
+				usedPoint=data.point
 				$("#name").empty().val(data.name)
 				$("#email").empty().val(data.email)
 			    $("#phone").empty().val(data.phone)
-				$("#usePoint").empty().val(point)
+				$("#usedPoint").empty().val(point)
 				showPrice()
 			})
 	
@@ -271,7 +284,7 @@
 								
 								<div class="col-md-4 form-group">
 									<label>使用點數(一點折抵50)</label> <input class="form-control" type="text"
-										name="usePoint" id="usePoint">
+										name="usedPoint" id="usedPoint">
 								</div>
 																
 								<div class="col-md-4 form-group">
@@ -282,6 +295,9 @@
 									<label>&#160;</label> <input class="form-control" type="submit"
 										name="RoomReservation" value="送出訂單">
 								</div>
+								
+					            <input class="form-control" name="newPoint" id="newPoint" type="hidden">
+							
 								
 							</div>
 						</form>
