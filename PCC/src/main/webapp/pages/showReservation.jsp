@@ -42,6 +42,32 @@
 
 <!-- fontawesome -->
 <link href="../revolution/fonts/fontawesome-all.css">
+
+<style>
+table, th, td {
+	border: 1px solid black;
+	border-collapse: collapse;
+}
+
+th, td {
+	padding: 10px;
+}
+
+table#alter tr:nth-child(even) {
+	background-color: #eee;
+}
+
+table#alter tr:nth-child(odd) {
+	background-color: #fff;
+}
+
+table#alter th {
+	color: white;
+	background-color: gray;
+}
+</style>
+
+
 </head>
 
 </head>
@@ -59,7 +85,7 @@
 		<!-- Loader /- -->
 
 		<!-- Header -->
-		<%@ include file="header.jsp" %>
+			<%@ include file="header.jsp" %>
 		<!-- Header /- -->
 		<!--	內容開始	-->
 		<main> <!-- Page Banner -->
@@ -75,83 +101,53 @@
 					<li class="active">預約訂房</li>
 				</ol>
 			</div>
+
 			<div>
-				<form action="<c:url value="/show.room"/>" method="get">
-					<table width="400" border="0" align="center">
-
-						<tr>
-							<td><h3>請選擇房型</h3></td>
-						</tr>
-						<tr>
-							<td><select name="roomType">
-									<option value="normal">標準房</option>
-									<option value="good">貴賓房</option>
-							</select></td>
-							<td><input type="submit" name="Room" value="送出"></td>
-						</tr>
-
-					</table>
-				</form>
+				<h3 align="center">您已訂房成功！謝謝您！${member.name}</h3>
 
 			</div>
 
-			<!-- Container /- -->
-		</div>
-		<!-- Page Banner /- --> <!-- Clients -->
-		<div class="clients container-fluid">
-			<!-- Container -->
-			<div class="container">
-				<div class="clients-carousel">
-					<div class="col-md-12 item">
-						<a href="#" title="client"><img src="../images/room/1.jpg"
-							alt="client-1" /></a>
-					</div>
-					<div class="col-md-12 item">
-						<a href="#" title="client"><img src="../images/room/2.jpg"
-							alt="client-2" /></a>
-					</div>
-					<div class="col-md-12 item">
-						<a href="#" title="client"><img src="../images/room/3.jpg"
-							alt="client-3" /></a>
-					</div>
-					<div class="col-md-12 item">
-						<a href="#" title="client"><img src="../images/room/4.jpg"
-							alt="client-4" /></a>
-					</div>
-					<div class="col-md-12 item">
-						<a href="#" title="client"><img src="../images/room/5.jpg"
-							alt="client-5" /></a>
-					</div>
+			<table width="600" border="0" align="center" id="alter">
+				<tr>
+					<th>入住人</th>
+					<th>${roomReservation.name}</th>
 
-					<div class="col-md-12 item">
-						<a href="#" title="client"><img src="../images/room/6.jpg"
-							alt="client-1" /></a>
-					</div>
-					<div class="col-md-12 item">
-						<a href="#" title="client"><img src="../images/room/7.jpg"
-							alt="client-2" /></a>
-					</div>
-					<div class="col-md-12 item">
-						<a href="#" title="client"><img src="../images/room/8.jpg"
-							alt="client-3" /></a>
-					</div>
-					<div class="col-md-12 item">
-						<a href="#" title="client"><img src="../images/room/9.jpg"
-							alt="client-4" /></a>
-					</div>
-					<div class="col-md-12 item">
-						<a href="#" title="client"><img src="../images/room/10.jpg"
-							alt="client-5" /></a>
-					</div>
-				</div>
-			</div>
-			<!-- Container /- -->
+				</tr>
+				<tr>
+					<td>電話</td>
+					<td>0${roomReservation.phone}</td>
+
+				</tr>
+				<tr>
+					<td>email</td>
+					<td>${roomReservation.email}</td>
+
+				</tr>
+				<tr>
+					<td>訂房日</td>
+					<td>${roomReservation.beginDate}</td>
+
+				</tr>
+				<tr>
+					<td>退房日</td>
+					<td>${roomReservation.endDate}</td>
+
+				</tr>
+				<tr>
+					<td>總金額</td>
+					<td>${roomReservation.totalPrice}</td>
+				</tr>
+			</table>
 		</div>
-		<!-- Clients /- --> </main>
+
+
+
+
+
+		<!-- Container /- --> <!-- Clients /- --> </main>
 		<!--	內容結束	-->
 		<!-- Footer Main 1 -->
-		
-	<%@ include file="footer.jsp" %>
+<%@ include file="footer.jsp" %>
 		<!-- Footer Main 1 -->
 
 	</div>
