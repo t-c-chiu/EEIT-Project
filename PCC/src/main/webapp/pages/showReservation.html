@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>PCC - Shop</title>
+<title>PCC - Room</title>
 <!-- Standard Favicon -->
 <link rel="icon" type="image/x-icon" href="../images/pcc/pcc.png" />
 
@@ -21,6 +21,7 @@
 	href="../revolution/css/layers.css">
 <link rel="stylesheet" type="text/css"
 	href="../revolution/css/navigation.css">
+<link rel="stylesheet" type="text/css" href="../css/shortcode.css">
 
 <!-- Library - Bootstrap v3.3.5 -->
 <link rel="stylesheet" type="text/css" href="../libraies/lib.css">
@@ -38,10 +39,6 @@
 
 <!-- fontawesome -->
 <link href="../revolution/fonts/fontawesome-all.css">
-<!-- css -->
-<link rel="stylesheet" type="text/css" href="../css/login.css">
-<!-- 自己控制的jquery -->
-<
 </head>
 
 </head>
@@ -75,9 +72,9 @@
 					<div class="col-md-5 col-sm-6 col-xs-6 search-block">
 						<div class="input-group">
 							<input class="form-control"
-								placeholder="Search You Wants Here . . ." type="text" id="searchText"> <span
+								placeholder="Search You Wants Here . . ." type="text"> <span
 								class="input-group-btn">
-								<button class="btn btn-default" type="button" id="searchButton">
+								<button class="btn btn-default" type="button">
 									<i class="icon icon-Search"></i>
 								</button>
 							</span>
@@ -96,7 +93,7 @@
 										class="remove" href="#">&#215;</a> <a href="#"
 										class="shop-thumbnail"> <img alt="poster_2_up"
 											class="attachment-shop_thumbnail"
-											src="../images/product-wishlist-1.jpg">Flying Ninja
+											src="images/product-wishlist-1.jpg">Flying Ninja
 									</a> <span class="quantity">2 &#215; <span class="amount">Rs.12.00</span></span>
 									</li>
 									<li class="mini_cart_item"><a title="Remove this item"
@@ -178,166 +175,57 @@
 			<!-- Container -->
 			<div class="container">
 				<div class="banner-content">
-					<h3>購物商城</h3>
+					<h3>預約訂房</h3>
 					<p>our vision is to be Earth's most customer centric company</p>
 				</div>
 				<ol class="breadcrumb">
 					<li><a href="../index.html" title="Home">首頁</a></li>
-					<li class="active">購物商城</li>
+					<li class="active">預約訂房</li>
 				</ol>
 			</div>
 			<!-- Container /- -->
 		</div>
-		<!-- Page Banner /- --> <!-- Product Section -->
-		<div id="product-section"
-			class="product-section container-fluid no-padding">
+		<!-- Page Banner /- --> <!-- Clients -->
+
 			<!-- Container -->
-			<div class="container">
-				<div class="row">
-					<!-- Section Header -->
-					<div class="section-header">
-						<h3>Our Products</h3>
-						<p>our vision is to be Earth's most customer centric company</p>
-						<img src="../images/section-seprator.png" alt="section-seprator" />
-					</div>
-					<!-- Section Header /- -->
-					<ul id="filters" class="products-categories no-left-padding">
-						<li><a data-filter="*" class="active" href="#">All
-								Products</a></li>
-						<li><a data-filter=".design" href="#">jewellery</a></li>
-						<li><a data-filter=".video" href="#">books</a></li>
-						<li><a data-filter=".photography" href="#">watches</a></li>
-						<li><a data-filter=".web" href="#">shoes</a></li>
-						<li><a data-filter=".design" href="#">electronics</a></li>
-						<li><a data-filter=".photography" href="#">mobiles</a></li>
-						<li><a data-filter=".video" href="#">more<i
-								class="fa fa-angle-down"></i></a></li>
-					</ul>
-
-					<!-- Products -->
-					<ul class="products">
-						<!-- Product -->
-						<li class="product design"><a href="#"> <img
-								src="../images/product-1.jpg" alt="Product" />
-								<h5>Stylish Chair</h5> <span class="price"><del>$200</del>$139</span>
-						</a>
-							<div class="wishlist-box">
-								<a href="#"><i class="fa fa-arrows-alt"></i></a> <a href="#"><i
-									class="fa fa-heart-o"></i></a> <a href="#"><i
-									class="fa fa-search"></i></a>
-							</div> <a href="#" class="addto-cart" title="Add To Cart">Add To
-								Cart</a></li>
-						<!-- Product /- -->
-
-						<!-- Product -->
-						<li class="product video"><a href="#"> <img
-								src="../images/product-1.jpg" alt="Product" />
-								<h5>men's casual shoes</h5> <span class="price"><del>$150</del>$85</span>
-						</a>
-							<div class="wishlist-box">
-								<a href="#"><i class="fa fa-arrows-alt"></i></a> <a href="#"><i
-									class="fa fa-heart-o"></i></a> <a href="#"><i
-									class="fa fa-search"></i></a>
-							</div> <a href="#" class="addto-cart" title="Add To Cart">Add To
-								Cart</a></li>
-						<!-- Product /- -->
-
-						<!-- Product -->
-						<li class="product photography"><a href="#"> <img
-								src="../images/product-1.jpg" alt="Product" />
-								<h5>Sun glass</h5> <span class="price"><del>$100</del>$35</span>
-						</a>
-							<div class="wishlist-box">
-								<a href="#"><i class="fa fa-arrows-alt"></i></a> <a href="#"><i
-									class="fa fa-heart-o"></i></a> <a href="#"><i
-									class="fa fa-search"></i></a>
-							</div> <a href="#" class="addto-cart" title="Add To Cart">Add To
-								Cart</a></li>
-						<!-- Product /- -->
-
-						<!-- Product -->
-						<li class="product web"><a href="#"> <img
-								src="../images/product-1.jpg" alt="Product" />
-								<h5>tourist bags</h5> <span class="price"><del>$350</del>$279</span>
-						</a>
-							<div class="wishlist-box">
-								<a href="#"><i class="fa fa-arrows-alt"></i></a> <a href="#"><i
-									class="fa fa-heart-o"></i></a> <a href="#"><i
-									class="fa fa-search"></i></a>
-							</div> <a href="#" class="addto-cart" title="Add To Cart">Add To
-								Cart</a></li>
-						<!-- Product /- -->
-
-						<!-- Product -->
-						<li class="product design"><a href="#"> <img
-								src="../images/product-1.jpg" alt="Product" />
-								<h5>mobile phone</h5> <span class="price"><del>$450</del>$359</span>
-						</a>
-							<div class="wishlist-box">
-								<a href="#"><i class="fa fa-arrows-alt"></i></a> <a href="#"><i
-									class="fa fa-heart-o"></i></a> <a href="#"><i
-									class="fa fa-search"></i></a>
-							</div> <a href="#" class="addto-cart" title="Add To Cart">Add To
-								Cart</a></li>
-						<!-- Product /- -->
-
-						<!-- Product -->
-						<li class="product video"><a href="#"> <img
-								src="../images/product-1.jpg" alt="Product" />
-								<h5>men's winter coat</h5> <span class="price"><del>$220</del>$129</span>
-						</a>
-							<div class="wishlist-box">
-								<a href="#"><i class="fa fa-arrows-alt"></i></a> <a href="#"><i
-									class="fa fa-heart-o"></i></a> <a href="#"><i
-									class="fa fa-search"></i></a>
-							</div> <a href="#" class="addto-cart" title="Add To Cart">Add To
-								Cart</a></li>
-						<!-- Product /- -->
-
-						<!-- Product -->
-						<li class="product photography"><a href="#"> <img
-								src="../images/product-1.jpg" alt="Product" />
-								<h5>Model x12 computer</h5> <span class="price"><del>$850</del>$550</span>
-						</a>
-							<div class="wishlist-box">
-								<a href="#"><i class="fa fa-arrows-alt"></i></a> <a href="#"><i
-									class="fa fa-heart-o"></i></a> <a href="#"><i
-									class="fa fa-search"></i></a>
-							</div> <a href="#" class="addto-cart" title="Add To Cart">Add To
-								Cart</a></li>
-						<!-- Product /- -->
-
-						<!-- Product -->
-						<li class="product web"><a href="#"> <img
-								src="../images/product-1.jpg" alt="Product" />
-								<h5>Stylish headset</h5> <span class="price"><del>$50</del>$29</span>
-						</a>
-							<div class="wishlist-box">
-								<a href="#"><i class="fa fa-arrows-alt"></i></a> <a href="#"><i
-									class="fa fa-heart-o"></i></a> <a href="#"><i
-									class="fa fa-search"></i></a>
-							</div> <a href="#" class="addto-cart" title="Add To Cart">Add To
-								Cart</a></li>
-						<!-- Product /- -->
-					</ul>
-					<!-- Products /- -->
-				</div>
-				<!-- Row /- -->
-				<nav class="ow-pagination">
-					<ul class="pager">
-						<li class="number"><a href="#">4</a></li>
-						<li class="load-more"><a href="#">Load More</a></li>
-						<li class="previous"><a href="#"><i
-								class="fa fa-angle-right"></i></a></li>
-						<li class="next"><a href="#"><i class="fa fa-angle-left"></i></a></li>
-					</ul>
-				</nav>
+<div class="container">
+<div class="row">
+			<table class="table col-md-3">
+				<thead>
+					<tr>
+						<th scope="col">#</th>
+						<th scope="col">First Name</th>
+						<th scope="col">Last Name</th>
+						<th scope="col">Username</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<th scope="row">1</th>
+						<td col-md-5>Mark</td>
+						<td>Otto</td>
+						<td>@mdo</td>
+					</tr>
+					<tr>
+						<th scope="row">2</th>
+						<td>Jacob</td>
+						<td>Thornton</td>
+						<td>@fat</td>
+					</tr>
+					<tr>
+						<th scope="row">3</th>
+						<td>Larry</td>
+						<td>the Bird</td>
+						<td>@twitter</td>
+					</tr>
+				</tbody>
+			</table>
 			</div>
+</div>
 			<!-- Container /- -->
-		</div>
-		<!-- Product Section /- --> </main>
-		<!--	內容結束	-->
 
+		<!-- Clients /- --> </main>
+		<!--	內容結束	-->
 		<!-- Footer Main 1 -->
 		<footer id="footer-main"
 			class="footer-main footer-main-1 services-section container-fluid">
@@ -351,8 +239,8 @@
 					<!-- Widget About -->
 					<aside class="col-md-6 col-sm-6 col-xs-12 ftr-widget widget_about">
 
-						<a href="index.html" title="Max Shop">P<span>ostnatal</span>
-							C<span>are</span> C<span>enter</span></a>
+						<a href="index.html" title="Max Shop">P<span>ostnatal</span> C<span>are</span>
+							C<span>enter</span></a>
 						<div class="info">
 							<p>
 								<i class="icon icon-Pointer"></i>106台北市大安區復興南路一段390號 2樓
@@ -434,8 +322,7 @@
 
 	<!-- Library - Theme JS -->
 	<script src="../js/functions.js"></script>
-	<!-- login  -->
-	<script type="text/javascript" src="../js/login.js"></script>
+
 </body>
 </html>
 
