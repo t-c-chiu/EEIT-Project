@@ -116,13 +116,12 @@
 									aria-expanded="false">預約訂房</a></li>
 								<li class="dropdown"><a href="<c:url value="/pages/course.jsp"/>"
 									title="Course" class="dropdown-toggle" role="button"
-									aria-haspopup="true" aria-expanded="false">媽咪教室</a> <i
+									aria-haspopup="true" aria-expanded="false">產後教室</a> <i
 									class="ddl-switch fa fa-angle-down"></i>
 									<ul class="dropdown-menu">
-										<li><a href="<c:url value="/pages/startClass.jsp"/>">我要開課</a></li>
-										<li><a href="#">Baby課程</a></li>
 										<li><a href="#">親子課程</a></li>
-										<li><a href="#">產後課程</a></li>
+										<li><a href="#">媽寶瑜珈</a></li>
+										<li><a href="#">新手媽咪</a></li>
 									</ul></li>
 								<li class="dropdown">
                                         <a href="<c:url value="/showByOrder.forum?order=date"/>" title="Forum" class="dropdown-toggle" role="button" aria-haspopup="true" aria-expanded="false">文章/討論</a>

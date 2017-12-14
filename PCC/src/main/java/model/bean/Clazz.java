@@ -18,9 +18,10 @@ public class Clazz {
 	private Integer numberOfStudents;
 	private Integer price;
 	private Integer status;
-	private String memberId;
 	private String courseName;
-	private Date startDate;
+	private String location;
+	private String category;
+	private String introduction;
 	private Date endDate;
 
 	public Integer getClassId() {
@@ -55,29 +56,12 @@ public class Clazz {
 		this.status = status;
 	}
 
-	public String getMemberId() {
-		return memberId;
-	}
-
-	public void setMemberId(String memberId) {
-		this.memberId = memberId;
-	}
-
 	public String getCourseName() {
 		return courseName;
 	}
 
 	public void setCourseName(String courseName) {
 		this.courseName = courseName;
-	}
-
-	@JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
-	public Date getStartDate() {
-		return startDate;
-	}
-
-	public void setStartDate(Date startDate) {
-		this.startDate = startDate;
 	}
 
 	@JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
@@ -89,10 +73,35 @@ public class Clazz {
 		this.endDate = endDate;
 	}
 
+	public String getLocation() {
+		return location;
+	}
+
+	public void setLocation(String location) {
+		this.location = location;
+	}
+
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
+	}
+
+	public String getIntroduction() {
+		return introduction;
+	}
+
+	public void setIntroduction(String introduction) {
+		this.introduction = introduction;
+	}
+
 	@Override
 	public String toString() {
 		return "Clazz [classId=" + classId + ", numberOfStudents=" + numberOfStudents + ", price=" + price + ", status="
-				+ status + ", memberId=" + memberId + ", courseName=" + courseName + ", startDate=" + startDate
-				+ ", endDate=" + endDate + "]";
+				+ status + ", courseName=" + courseName + ", location=" + location + ", category=" + category
+				+ ", introduction=" + introduction + ", endDate=" + endDate + "]";
 	}
+
 }
