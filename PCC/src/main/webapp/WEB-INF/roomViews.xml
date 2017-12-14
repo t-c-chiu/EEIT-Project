@@ -17,7 +17,7 @@
 
 	<bean id="reserve.ok" class="org.springframework.web.servlet.view.RedirectView">
 		<property name="contextRelative" value="true"></property>
-		<property name="url" value="/roomjsp/showReservation.jsp"></property>
+		<property name="url" value="/pages/showReservation.jsp"></property>
 	</bean>
 	
 <!-- 	<bean id="reserve.ok" class="org.springframework.web.servlet.view.InternalResourceView"> -->
