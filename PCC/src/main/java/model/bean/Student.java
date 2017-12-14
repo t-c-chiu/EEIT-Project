@@ -10,9 +10,9 @@ public class Student {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int studentId;
-	private int classId;
-	private int status;
+	private Integer studentId;
+	private Integer classId;
+	private Integer status;
 	private String memberId;
 
 	public String getMemberId() {
@@ -23,28 +23,34 @@ public class Student {
 		this.memberId = memberId;
 	}
 
-	public int getStudentId() {
+	public Integer getStudentId() {
 		return studentId;
 	}
 
-	public void setStudentId(int studentId) {
+	public void setStudentId(Integer studentId) {
 		this.studentId = studentId;
 	}
 
-	public int getClassId() {
+	public Integer getClassId() {
 		return classId;
 	}
 
-	public void setClassId(int classId) {
+	public void setClassId(Integer classId) {
 		this.classId = classId;
 	}
 
-	public int getStatus() {
+	public Integer getStatus() {
 		return status;
 	}
 
-	public void setStatus(int status) {
+	public void setStatus(Integer status) {
 		this.status = status;
+	}
+
+	@Override
+	public String toString() {
+		return "Student [studentId=" + studentId + ", classId=" + classId + ", status=" + status + ", memberId="
+				+ memberId + "]";
 	}
 
 }

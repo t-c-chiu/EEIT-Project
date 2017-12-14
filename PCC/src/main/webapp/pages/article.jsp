@@ -42,6 +42,8 @@
 
 <!-- fontawesome -->
 <link href="../revolution/fonts/fontawesome-all.css">
+
+<link rel="stylesheet" type="text/css" href="../css/login.css">
 	
 	<script src="<c:url value="/ckeditor/ckeditor.js"/>"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -126,7 +128,7 @@
 					<div class="banner-content">
 						<h3 id="forumTitle">文章/討論</h3>
 					</div>
-					<ol class="breadcrumb">
+					<ol class="breadcrumb" style="cursor:pointer;">
 						<li><a href="../index.jsp" title="Home">首頁</a></li>							
 						<li id="forumClick" class="active">文章/討論</li>
 						<li id="postClick">發表文章</li>
@@ -158,8 +160,8 @@
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 						<input id="cancelPost" type="button" value="取消"/>
 			</div>
-			
-			<div id="articlesArea" style="height:500px;overflow:auto;">
+			<div style="height:700px;overflow:hidden">
+				<div id="articlesArea" style="height:100%;width:770px;overflow-y:auto;overflow-x:hidden;">
 				<c:forEach var="article" items="${listOfPostArticles}">
 					<div class="type-post">
 						<div style="width:100%;" class="col-md-7 col-sm-12 col-xs-12 blog-content">
@@ -177,7 +179,8 @@
 						</div>
 					</div>
 				</c:forEach>
-			</div>	
+				</div>
+			</div>
 				</div><!-- Content Area /- -->
 				
 				<!-- Widget Area -->

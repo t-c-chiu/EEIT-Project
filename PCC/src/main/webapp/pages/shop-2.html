@@ -38,6 +38,8 @@
 
 <!-- fontawesome -->
 <link href="../revolution/fonts/fontawesome-all.css">
+<!-- css -->
+<link rel="stylesheet" type="text/css" href="../css/login.css">
 </head>
 
 </head>
@@ -70,12 +72,12 @@
 					<div class="col-md-5 col-sm-6 col-xs-6 search-block">
 						<div class="input-group">
 							<input class="form-control"
-								placeholder="Search You Wants Here . . ." type="text"> <span
-								class="input-group-btn">
-								<button class="btn btn-default" type="button">
-									<i class="icon icon-Search"></i>
-								</button>
-							</span>
+								placeholder="Search You Wants Here . . ." type="text"> 
+								<span id="serch-btn" class="input-group-btn">
+									<button class="btn btn-default" type="button">
+										<i class="icon icon-Search"></i>
+									</button>
+								</span>
 						</div>
 					</div>
 					<!-- Search Block /- -->
@@ -525,7 +527,15 @@
 
 	<!-- Library - Theme JS -->
 	<script src="../js/functions.js"></script>
-
+	<!-- login  -->
+	<script type="text/javascript" src="../js/login.js"></script>
+	<script type="text/javascript">
+	$(document).ready(function(){
+		$('#serch-btn').click(function(){
+			console.log("hello");
+		});
+	});
+	</script>
 </body>
 </html>
 

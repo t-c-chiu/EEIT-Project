@@ -32,6 +32,13 @@ public class ReplyArticleDAO {
 				.setParameter("messageId", messageId).list();
 	}
 
+	public Integer selectCountByMessageId(Integer messageId) {
+		Number number = (Number) getSession()
+				.createQuery("select count(*) from ReplyArticle where messageId = :messageId")
+				.setParameter("messageId", messageId).getSingleResult();
+		return number.intValue();
+	}
+
 	public boolean delete(ReplyArticle bean) {
 		getSession().delete(bean);
 		return true;

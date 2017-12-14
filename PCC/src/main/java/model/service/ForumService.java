@@ -51,6 +51,7 @@ public class ForumService {
 		Map<String, Object> postAndReplyArticles = new HashMap<>();
 		postAndReplyArticles.put("post", postArticleDAO.selectByMessageId(messageId));
 		postAndReplyArticles.put("reply", replyArticleDAO.selectByMessageId(messageId));
+		postAndReplyArticles.put("repliesCount", replyArticleDAO.selectCountByMessageId(messageId));
 		return postAndReplyArticles;
 	}
 

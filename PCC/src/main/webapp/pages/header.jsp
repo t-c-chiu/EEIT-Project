@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	
+<script src="<c:url value="/js/login.js"/>"></script>
 <!-- Header -->
 		<header class="header-section container-fluid no-padding">
 			<!-- Menu Block -->
@@ -94,7 +96,8 @@
 						<!-- Menu Icon /- -->
 						<div class="navbar-collapse collapse navbar-right" id="navbar">
 							<ul class="nav navbar-nav">
-								<li class="active dropdown"><a href="index.html"
+							
+								<li><a href="<c:url value="/index.jsp"/>"
 									title="Home" class="dropdown-toggle" role="button"
 									aria-haspopup="true" aria-expanded="false">首頁</a></li>
 								<li><a href="pages/reservation.html" title="Reservation">線上預約</a></li>
@@ -111,13 +114,14 @@
 								<li class="dropdown"><a href="pages/room.html" title="Room"
 									class="dropdown-toggle" role="button" aria-haspopup="true"
 									aria-expanded="false">預約訂房</a></li>
-								<li class="dropdown"><a href="pages/course.html"
+								<li class="dropdown"><a href="<c:url value="/pages/course.jsp"/>"
 									title="Course" class="dropdown-toggle" role="button"
-									aria-haspopup="true" aria-expanded="false">線上課程</a> <i
+									aria-haspopup="true" aria-expanded="false">產後教室</a> <i
 									class="ddl-switch fa fa-angle-down"></i>
 									<ul class="dropdown-menu">
-										<li><a href="#" title="">教學類</a></li>
-										<li><a href="#" title="">教學類</a></li>
+										<li><a href="#">親子課程</a></li>
+										<li><a href="#">媽寶瑜珈</a></li>
+										<li><a href="#">新手媽咪</a></li>
 									</ul></li>
 								<li class="dropdown">
                                         <a href="<c:url value="/showByOrder.forum?order=date"/>" title="Forum" class="dropdown-toggle" role="button" aria-haspopup="true" aria-expanded="false">文章/討論</a>

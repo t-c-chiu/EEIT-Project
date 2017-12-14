@@ -7,58 +7,53 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 @Entity
 public class Clazz {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int classId;
-	private int numberOfStudents;
-	private int price;
-	private int status;
-	private String memberId;
+	private Integer classId;
+	private Integer numberOfStudents;
+	private Integer price;
+	private Integer status;
 	private String courseName;
-	private Date startDate;
+	private String location;
+	private String category;
+	private String introduction;
 	private Date endDate;
 
-	public int getClassId() {
+	public Integer getClassId() {
 		return classId;
 	}
 
-	public void setClassId(int classId) {
+	public void setClassId(Integer classId) {
 		this.classId = classId;
 	}
 
-	public int getNumberOfStudents() {
+	public Integer getNumberOfStudents() {
 		return numberOfStudents;
 	}
 
-	public void setNumberOfStudents(int numberOfStudents) {
+	public void setNumberOfStudents(Integer numberOfStudents) {
 		this.numberOfStudents = numberOfStudents;
 	}
 
-	public int getPrice() {
+	public Integer getPrice() {
 		return price;
 	}
 
-	public void setPrice(int price) {
+	public void setPrice(Integer price) {
 		this.price = price;
 	}
 
-	public int getStatus() {
+	public Integer getStatus() {
 		return status;
 	}
 
-	public void setStatus(int status) {
+	public void setStatus(Integer status) {
 		this.status = status;
-	}
-
-	public String getMemberId() {
-		return memberId;
-	}
-
-	public void setMemberId(String memberId) {
-		this.memberId = memberId;
 	}
 
 	public String getCourseName() {
@@ -69,14 +64,7 @@ public class Clazz {
 		this.courseName = courseName;
 	}
 
-	public Date getStartDate() {
-		return startDate;
-	}
-
-	public void setStartDate(Date startDate) {
-		this.startDate = startDate;
-	}
-
+	@JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
 	public Date getEndDate() {
 		return endDate;
 	}
@@ -84,4 +72,36 @@ public class Clazz {
 	public void setEndDate(Date endDate) {
 		this.endDate = endDate;
 	}
+
+	public String getLocation() {
+		return location;
+	}
+
+	public void setLocation(String location) {
+		this.location = location;
+	}
+
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
+	}
+
+	public String getIntroduction() {
+		return introduction;
+	}
+
+	public void setIntroduction(String introduction) {
+		this.introduction = introduction;
+	}
+
+	@Override
+	public String toString() {
+		return "Clazz [classId=" + classId + ", numberOfStudents=" + numberOfStudents + ", price=" + price + ", status="
+				+ status + ", courseName=" + courseName + ", location=" + location + ", category=" + category
+				+ ", introduction=" + introduction + ", endDate=" + endDate + "]";
+	}
+
 }

@@ -1,14 +1,14 @@
 ﻿<%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-
 <html>
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>PCC - Room</title>
+<title>PCC - Course</title>
 <!-- Standard Favicon -->
 <link rel="icon" type="image/x-icon" href="../images/pcc/pcc.png" />
 
@@ -42,8 +42,9 @@
 
 <!-- fontawesome -->
 <link href="../revolution/fonts/fontawesome-all.css">
-</head>
-
+<link rel="stylesheet" type="text/css" href="../css/login.css">
+<link rel="stylesheet" type="text/css" href="../css/course.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
 
 <body data-offset="200" data-spy="scroll" data-target=".ow-navigation">
@@ -59,99 +60,29 @@
 		<!-- Loader /- -->
 
 		<!-- Header -->
-		<%@ include file="header.jsp" %>
+<%@ include file="header.jsp"%>
 		<!-- Header /- -->
-		<!--	內容開始	-->
-		<main> <!-- Page Banner -->
-		<div class="page-banner container-fluid no-padding">
-			<!-- Container -->
-			<div class="container">
-				<div class="banner-content">
-					<h3>預約訂房</h3>
-					<p>our vision is to be Earth's most customer centric company</p>
-				</div>
-				<ol class="breadcrumb">
-					<li><a href="../index.html" title="Home">首頁</a></li>
-					<li class="active">預約訂房</li>
-				</ol>
-			</div>
-			<div>
-				<form action="<c:url value="/show.room"/>" method="get">
-					<table width="400" border="0" align="center">
-
-						<tr>
-							<td><h3>請選擇房型</h3></td>
-						</tr>
-						<tr>
-							<td><select name="roomType">
-									<option value="normal">標準房</option>
-									<option value="good">貴賓房</option>
-							</select></td>
-							<td><input type="submit" name="Room" value="送出"></td>
-						</tr>
-
-					</table>
-				</form>
-
-			</div>
-
-			<!-- Container /- -->
-		</div>
-		<!-- Page Banner /- --> <!-- Clients -->
-		<div class="clients container-fluid">
-			<!-- Container -->
-			<div class="container">
-				<div class="clients-carousel">
-					<div class="col-md-12 item">
-						<a href="#" title="client"><img src="../images/room/1.jpg"
-							alt="client-1" /></a>
-					</div>
-					<div class="col-md-12 item">
-						<a href="#" title="client"><img src="../images/room/2.jpg"
-							alt="client-2" /></a>
-					</div>
-					<div class="col-md-12 item">
-						<a href="#" title="client"><img src="../images/room/3.jpg"
-							alt="client-3" /></a>
-					</div>
-					<div class="col-md-12 item">
-						<a href="#" title="client"><img src="../images/room/4.jpg"
-							alt="client-4" /></a>
-					</div>
-					<div class="col-md-12 item">
-						<a href="#" title="client"><img src="../images/room/5.jpg"
-							alt="client-5" /></a>
-					</div>
-
-					<div class="col-md-12 item">
-						<a href="#" title="client"><img src="../images/room/6.jpg"
-							alt="client-1" /></a>
-					</div>
-					<div class="col-md-12 item">
-						<a href="#" title="client"><img src="../images/room/7.jpg"
-							alt="client-2" /></a>
-					</div>
-					<div class="col-md-12 item">
-						<a href="#" title="client"><img src="../images/room/8.jpg"
-							alt="client-3" /></a>
-					</div>
-					<div class="col-md-12 item">
-						<a href="#" title="client"><img src="../images/room/9.jpg"
-							alt="client-4" /></a>
-					</div>
-					<div class="col-md-12 item">
-						<a href="#" title="client"><img src="../images/room/10.jpg"
-							alt="client-5" /></a>
-					</div>
-				</div>
-			</div>
-			<!-- Container /- -->
-		</div>
-		<!-- Clients /- --> </main>
-		<!--	內容結束	-->
-		<!-- Footer Main 1 -->
 		
-	<%@ include file="footer.jsp" %>
+		<!--	內容開始	-->
+<main>
+<!-- <div class="page-banner container-fluid no-padding"> -->
+	<div class="mainDiv" style="border:1px solid black;height:750px;width:1200px;margin:auto;">
+	
+	<form style="margin:30px auto;width:600px;height:80%;border:1px solid red;">
+		<table>
+			<tr><td>課程名稱:</td><td><input type="text" name="courseName"></td></tr>
+			<tr><td></td><td></td></tr>
+			<tr><td></td></tr>
+			<tr><td></td></tr>
+		</table>
+	</form>
+	
+	</div>
+<!-- </div>	 -->
+</main>
+		<!--	內容結束	-->
+		
+<%@ include file="footer.jsp"%>
 		<!-- Footer Main 1 -->
 
 	</div>

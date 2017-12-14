@@ -85,6 +85,12 @@ public class RoomReservationController {
 		}
 		return null;
 	}
+	
+	@RequestMapping(path="/getMemberbyId.room",method=RequestMethod.GET,produces= {"application/json;charset=UTF-8"})
+	public @ResponseBody Member selectMemberById(@SessionAttribute("member") Member member) {
+		return roomReservationService.selectMemberById(member);
+			
+	}
 
 	
 }

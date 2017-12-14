@@ -6,22 +6,44 @@
 // 		})
 
 
-//成功的
+//成功的 登入
 $(document).ready(function(){
     $('#sub').click(function(){
         $.ajax({url: "/PCC/login.login",type:"POST",
         	data:$('#formid').serialize(),
         	success: function(data){
 			if(data=="會員" || data=="管理員"){
-				location.replace('http://localhost:8080/PCC/index.jsp');
-			}else if(data=="不是會員"){
+				location.replace('/PCC/index.jsp');
+			}else if(data=="登入失敗"){
 				alert("無此帳號");
 			}
         }});
     });
 });
+//註冊的
+$(document).ready(function(){
+	$('#account').blur(function(){
+		console.log("oooooo");
 
-		
+//		alert("離開了");
+		$.post("/PCC/registy.login",{"memberId":$('#account').val()},function(data){
+//			alert(data);
+//			console.log("kkkkkk");
+			if(data=="可以註冊"){
+//				alert("可以使用此帳號");
+				$('#ac-icon').text("可以使用此帳號");
+//				<i class="fa fa-times" aria-hidden="true"></i>
+			}else if(data=="不可空白"){
+				alert("不可空白");
+			}else if(data=="8~19個英文或數字"){
+				alert("輸入8~19個英文或數字");
+			}else if(data=="不可使用的帳號"){
+				alert("此帳號已被使用");
+			}
+		});
+	});
+	
+});
 		
 		
 		
