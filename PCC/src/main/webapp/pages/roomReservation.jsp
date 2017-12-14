@@ -61,14 +61,17 @@
 		var beginDate
 		var totalPrice
 		var unavailableDates
+		var point
+	
 
 		function showPrice() {
-			totalPrice = ((endDate - beginDate) * price) / (86400000)
+			totalPrice = (((endDate - beginDate) * price) / (86400000)-(point*50))
 			if (!isNaN(totalPrice)) {
 				$('#totalPrice').empty().val(totalPrice)
 			}
 		}
-
+		
+				
 		$('#beginDate').datepicker({
 			numberOfMonths : 2,
 			minDate : 0,
@@ -110,15 +113,29 @@
 							
 			        for (var d = new Date(beginDateTemp);d <= new Date(endDateTemp);d.setDate(d.getDate() + 1)) 
 			        {unavailableDates.push($.datepicker.formatDate('yy/m/d', d));                    
-			        }
-				    				
-				})
-							
+			        }				    				
+				})							
 			})					
 		});
-
+		
+		$('#usePoint').change(function(){
+			point=$(this).val()
+			showPrice()
+		})
+		
+		$("button").click(function(){			
+			$.get('${pageContext.request.contextPath}/getMemberbyId.room',function(data){
+				point=data.point
+				$("#name").empty().val(data.name)
+				$("#email").empty().val(data.email)
+			    $("#phone").empty().val(data.phone)
+				$("#usePoint").empty().val(point)
+				showPrice()
+			})
 	
-
+		
+		})
+		
 		function unavailable(date) {
 			dmy = date.getFullYear() + "/" + (date.getMonth() + 1) + "/"
 					+ date.getDate();
@@ -218,21 +235,25 @@
 				<div class="checkout-form">
 
 					<div class="col-md-12 col-sm-12 col-xs-12">
-						<h3>訂房填表</h3>
+					    <div>						
+							<h3>訂房填表</h3>						
+						</div>
+						
+					<button>一鍵帶入</button>
 						<form action="<c:url value="/reserve.room"/>" method="post">
 							<div class="billing-field">
-
+							
 								<div class="col-md-4 form-group">
 									<label>入住人</label> <input class="form-control" type="text"
-										name="name" value="${member.name}">
+										name="name" id="name" >
 								</div>
 								<div class="col-md-4 form-group">
 									<label>email</label> <input class="form-control" type="text"
-										name="email" value="${member.email}">
+										name="email" id="email">
 								</div>
 								<div class="col-md-4 form-group">
 									<label>電話</label> <input class="form-control" type="text"
-										name="phone" value="${member.phone}">
+										name="phone" id="phone">
 								</div>
 
 								<div class="col-md-4 form-group">
@@ -247,14 +268,21 @@
 									<label>退房日</label> <input class="form-control" type="text"
 										name="endDate" id="endDate">
 								</div>
-								<div class="col-md-5 form-group">
+								
+								<div class="col-md-4 form-group">
+									<label>使用點數(一點折抵50)</label> <input class="form-control" type="text"
+										name="usePoint" id="usePoint">
+								</div>
+																
+								<div class="col-md-4 form-group">
 									<label>總價</label> <input class="form-control" type="text"
 										name="totalPrice" id="totalPrice" readonly="readonly">
 								</div>
-								<div class="col-md-5 form-group">
+								<div class="col-md-4 form-group">
 									<label>&#160;</label> <input class="form-control" type="submit"
 										name="RoomReservation" value="送出訂單">
 								</div>
+								
 							</div>
 						</form>
 					</div>
