@@ -94,13 +94,13 @@
 										placeholder="8~20個英文,數字" />
 								</div>
 								<div class="col-md-12 form-group">
-									<label>密碼 *</label> <input id="password" class="form-control"
+									<label>密碼 *</label> <input id="password2" class="form-control"
 										type="password" autocomplete="off"
 										autofocus required />
 								</div>
 								<div class="col-md-12 form-group">
 									<label>重複密碼 *</label> <input id="passwordMatch"
-										match="Password" class="form-control" type="password"
+										match="Password" class="form-control" type="password2"
 										autocomplete="off" autofocus required />
 								</div>
 								<div class="col-md-6 form-group">

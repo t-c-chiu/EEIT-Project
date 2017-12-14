@@ -23,32 +23,27 @@ $(document).ready(function(){
 //註冊的
 $(document).ready(function(){
 	$('#account').blur(function(){
+		console.log("oooooo");
+
 //		alert("離開了");
-		$.post("/PCC/registy.login",{"memberId":"$('#account')","password":"$('#password')"},function(data){
-			if(data=="不可使用的帳號"){
-				alert("不可");
-//				$('#ac-icon').attr('i').addClass('fa fa-times');
+		$.post("/PCC/registy.login",{"memberId":$('#account').val()},function(data){
+//			alert(data);
+//			console.log("kkkkkk");
+			if(data=="可以註冊"){
+//				alert("可以使用此帳號");
+				$('#ac-icon').text("可以使用此帳號");
 //				<i class="fa fa-times" aria-hidden="true"></i>
-			}else{
-				alert("ok");
+			}else if(data=="不可空白"){
+				alert("不可空白");
+			}else if(data=="8~19個英文或數字"){
+				alert("輸入8~19個英文或數字");
+			}else if(data=="不可使用的帳號"){
+				alert("此帳號已被使用");
 			}
 		});
-//		$.ajax({
-//			url:"/PCC/registy.login",type="POST",
-//			data:{memberId:$('#account').val(),password:$('#password').val()},
-//			success: function(data){
-//				if(data=="不可使用的帳號"){
-//					alert("不可");
-////					$('#ac-icon').attr('i').addClass('fa fa-times');
-////					<i class="fa fa-times" aria-hidden="true"></i>
-//				}else{
-//					alert("ok");
-//				}
-//			}});
 	});
 	
 });
-		
 		
 		
 		
