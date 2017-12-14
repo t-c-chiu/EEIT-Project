@@ -41,7 +41,60 @@
 
 <!-- fontawesome -->
 <link href="../revolution/fonts/fontawesome-all.css">
-</head>
+
+<!-- 彈出視窗選擇服務員(jQuery-Dialog) -->
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
+    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+    <link rel="stylesheet" href="//jqueryui.com/resources/demos/style.css">
+
+    <script>
+        //How to resize jquery ui dialog with browser
+        //http://stackoverflow.com/questions/9879571/how-to-resize-jquery-ui-dialog-with-browser
+        $(
+            function () {
+                $('button[name="jump"]').click(function () {               	
+                	var test = $(this).parent('div').find('span').text();
+                	$('#dialog-confirm span:first-child').text(test);
+                
+                	
+                    $("#dialog-confirm").dialog({  
+                        resizable: true,
+                        height: $(window).height() * 0.6,//dialog視窗高度
+                        width: $(window).width() * 0.5,
+                        modal: true,
+                        dialogClass: "dlg-no-close",
+                        buttons: {
+                            //自訂button名稱
+                            "選擇服務員": function () {
+                                $(this).dialog("close");
+                            },
+                            Cancel: function () {
+                                $(this).dialog("close");
+                            }
+                        }                    
+                    });
+                })
+
+                $(window).resize(function () {
+                    var wWidth = $(window).width();
+                    var dWidth = wWidth * 0.9;
+                    var wHeight = $(window).height();
+                    var dHeight = wHeight * 0.9;
+                    $("#dialog-confirm").dialog("option", "width", dWidth);
+                    $("#dialog-confirm").dialog("option", "height", dHeight);
+                });
+            }
+        )
+    </script>
+
+
+<style type="text/css">
+ 	.latest-blog .col-sm-6:nth-child(4n+1){ 
+ 		   clear: none;
+ 	}
+ 	.dlg-no-close .ui-dialog-titlebar-close{display:none;}
+</style>
 
 </head>
 
@@ -75,6 +128,10 @@
 					<li class="active">文章/討論</li>
 				</ol>
 			</div>
+			<!-- 彈出視窗頁面 -->
+			<div id="dialog-confirm" title="服務員" style="display:none;background-color:activeborder;">
+                   <span></span>
+            </div>    
 			<!-- Container /- -->
 		</div>
 		<!-- Page Banner /- --> <!-- Latest Blog -->
@@ -113,6 +170,43 @@
 							<div class="entry-content">
 								<p><!-- 自我介紹 -->
 								   ${servant[5]}
+								   <span style="display:none">${servant[5]}</span>
+
+								</p>
+								    <!-- 彈出視窗按鈕-->
+									<button name="jump" style="background-color:black;color:orange;width:100px;">選擇</button>
+                                                                   
+							</div>
+						</div>
+					</div>
+				</div>
+				</c:forEach>
+				
+				
+				<!--測試用多複製的可以刪除-->
+				<c:forEach var="servant" items="${servantList}">
+				<div class="col-md-4 col-sm-6 col-xs-6">
+					<div class="type-post">
+						<div class="entry-cover">
+							<a href="blog-post.html"><img src="../images/match/${servant[0]}.jpg"
+								alt="blog"></a> <span class="post-date"><a href="#"><i
+									class="fa fa-calendar-o"></i>July 20</a></span>
+						</div>
+						<div class="blog-content">
+							<h3 class="entry-title">
+								<a href="blog-post.html"
+									title="new Collectios are imported In Our shop.">new
+									Collectios are<span>imported</span> In Our shop.
+								</a>
+							</h3>
+							<div class="entry-meta">
+								<span class="post-like"><a href="#" title="224 Likes"><i
+										class="fa fa-heart-o"></i>224 Likes</a></span> <span class="post-admin"><i
+									class="fa fa-user"></i>服務員: <a href="#" title="Max"><!-- 姓名 -->${servant[6]}</a></span>
+							</div>
+							<div class="entry-content">
+								<p><!-- 自我介紹 -->
+								   ${servant[5]}
 								</p>
 								<a href="blog-post.html" title="Read More" class="read-more">Read
 									More<i class="fa fa-long-arrow-right"></i>
@@ -122,6 +216,10 @@
 					</div>
 				</div>
 				</c:forEach>
+				
+				
+				
+				
 
 <!--
 				<div class="col-md-4 col-sm-6 col-xs-6">
