@@ -5,6 +5,7 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import model.bean.Clazz;
 import model.dao.ClazzDAO;
 import model.dao.StudentDAO;
 
@@ -13,7 +14,12 @@ import model.dao.StudentDAO;
 public class ClazzService {
 
 	@Autowired
-	ClazzDAO clazzDAO;
+	private ClazzDAO clazzDAO;
 	@Autowired
-	StudentDAO studentDAO;
+	private StudentDAO studentDAO;
+
+	public Integer addClass(Clazz clazz) {
+		clazz.setStatus(0);
+		return clazzDAO.insert(clazz);
+	}
 }

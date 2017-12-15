@@ -3,23 +3,24 @@
 
 <script src="<c:url value="/js/login.js"/>"></script>
 <!-- Header -->
-<header class="header-section container-fluid no-padding">
-	<!-- Menu Block -->
-	<div class="container-fluid no-padding menu-block">
-		<!-- Container -->
-		<div class="container">
-			<!-- nav -->
-			<nav class="navbar navbar-default ow-navigation">
-				<div class="navbar-header">
-					<button aria-controls="navbar" aria-expanded="false"
-						data-target="#navbar" data-toggle="collapse"
-						class="navbar-toggle collapsed" type="button">
-						<span class="sr-only">Toggle navigation</span> <span
-							class="icon-bar"></span> <span class="icon-bar"></span> <span
-							class="icon-bar"></span>
-					</button>
-					<a href="index.html" class="navbar-brand">PCC</a>
-				</div>
+
+		<header class="header-section container-fluid no-padding">
+			<!-- Menu Block -->
+			<div class="container-fluid no-padding menu-block">
+				<!-- Container -->
+				<div class="container">
+					<!-- nav -->
+					<nav class="navbar navbar-default ow-navigation">
+						<div class="navbar-header">
+							<button aria-controls="navbar" aria-expanded="false"
+								data-target="#navbar" data-toggle="collapse"
+								class="navbar-toggle collapsed" type="button">
+								<span class="sr-only">Toggle navigation</span> <span
+									class="icon-bar"></span> <span class="icon-bar"></span> <span
+									class="icon-bar"></span>
+							</button>
+							<a href="index.html" class="navbar-brand">PCC</a>
+						</div>
 				<!-- Menu Icon -->
 				<div class="menu-icon">
 					<div class="search">
