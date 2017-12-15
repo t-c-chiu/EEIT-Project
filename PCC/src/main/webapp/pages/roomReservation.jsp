@@ -69,7 +69,7 @@
 		function showPrice() {
 			totalPrice = (((endDate - beginDate) * price) / (86400000)-(usedPoint*50))
 			
-			newPoint=point-usedPoint+(totalPrice/500)
+			newPoint=Math.round(point-usedPoint+(totalPrice/500))
 			if(newPoint<0)
 				{newPoint=0}
 			

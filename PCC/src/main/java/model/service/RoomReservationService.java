@@ -22,11 +22,11 @@ public class RoomReservationService {
 	@Autowired
 	MemberDAO memberDAO;
 	
-	public RoomReservation insert(Member member, RoomReservation roomReservation,int newPoint) {	
+	public int insert(Member member, RoomReservation roomReservation,int newPoint) {	
 		roomReservation.setMemberId(member.getMemberId());
 		roomReservation = roomReservationDAO.insert(roomReservation);
 		memberDAO.updateMemberPoint(member, newPoint);
-		return roomReservation;
+		return newPoint;
 	};
 	
 	public List<RoomReservation> selectByMemberId(Member member) {						

@@ -111,32 +111,39 @@ table#alter th {
 				<tr>
 					<th>入住人</th>
 					<th>${roomReservation.name}</th>
-
 				</tr>
+				
 				<tr>
 					<td>電話</td>
 					<td>0${roomReservation.phone}</td>
-
 				</tr>
+				
 				<tr>
 					<td>email</td>
 					<td>${roomReservation.email}</td>
 
 				</tr>
+				
 				<tr>
 					<td>訂房日</td>
 					<td>${roomReservation.beginDate}</td>
-
 				</tr>
+				
 				<tr>
 					<td>退房日</td>
 					<td>${roomReservation.endDate}</td>
-
 				</tr>
+				
+				<tr>
+					<td>點數更新</td>
+					<td>${newPoint}</td>
+				</tr>
+								
 				<tr>
 					<td>總金額</td>
 					<td>${roomReservation.totalPrice}</td>
 				</tr>
+				
 			</table>
 		</div>
 
