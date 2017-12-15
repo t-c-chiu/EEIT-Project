@@ -64,22 +64,17 @@
 		<!-- Header /- -->
 		
 		<!--	內容開始	-->
-<main>
-<!-- <div class="page-banner container-fluid no-padding"> -->
-	<div class="mainDiv" style="border:1px solid black;height:750px;width:1200px;margin:auto;">
+		<main> <!-- Page Banner -->
+		<!-- Page Banner /- --> <!-- Clients -->
 	
-	<form style="margin:30px auto;width:600px;height:80%;border:1px solid red;">
-		<table>
-			<tr><td>課程名稱:</td><td><input type="text" name="courseName"></td></tr>
-			<tr><td></td><td></td></tr>
-			<tr><td></td></tr>
-			<tr><td></td></tr>
-		</table>
-	</form>
-	
-	</div>
-<!-- </div>	 -->
-</main>
+		<div class="clients container-fluid">
+			<!-- Container -->
+			<div class="container">
+				
+			</div>
+			<!-- Container /- -->
+		</div>
+		</main>
 		<!--	內容結束	-->
 		
 <%@ include file="footer.jsp"%>

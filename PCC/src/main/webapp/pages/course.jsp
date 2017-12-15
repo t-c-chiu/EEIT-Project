@@ -45,6 +45,53 @@
 <link rel="stylesheet" type="text/css" href="../css/login.css">
 <link rel="stylesheet" type="text/css" href="../css/course.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+	$(function(){
+		var startDates = [];
+		$('.endDate').each(function(){
+			startDates.push($(this).text());
+		})
+		
+		$('.days').each(function(index){
+			var today = new Date();
+			var courseDay = new Date(Date.parse(startDates[index]));
+			var diff = courseDay.getTime() - today.getTime();
+			$(this).text(Math.floor(diff/86400000));
+		})
+		
+		$('.courseImg').mouseover(function(){
+			$(this).css('height','180px');
+		}).mouseout(function(){
+			$(this).css('height','150px');
+		})
+		
+		$('#categoryOpt').change(function(){
+			var category =$(this).val();
+			if('default' == category)
+				return;
+			$.getJSON('/PCC/showByCategory.clazz','category='+category,function(clazzlist){
+				
+				console.log(clazzlist)
+				var h2 = $('<h2></h2>').text(category+'的課程有:');
+				$('#categoryClass').empty().append(h2);
+				$.each(clazzlist,function(i,clazz){
+					var div = $('<div></div>').css('display','inline-block').css({width:'234px',height:'225px'});
+					var strong = $('<strong></strong>').text(clazz.courseName);
+					var a = $('<a></a>').attr('href','/PCC/clazzDetail.clazz?detail='+clazz.classId);
+					var img = $('<img></img>').css('height','150px')
+					.attr('src','/PCC/images/clazz/' + clazz.classId + '.jpg').mouseover(function(){
+						$(this).css('border','1px solid red');
+					}).mouseout(function(){
+						$(this).css('border','');
+					});
+					a.append(img);
+					div.append(strong,'<br>',a);
+					$('#categoryClass').append(div);
+				})
+			})
+		})
+	})
+</script>
 </head>
 
 <body data-offset="200" data-spy="scroll" data-target=".ow-navigation">
@@ -65,69 +112,50 @@
 		
 		<!--	內容開始	-->
 		<main> <!-- Page Banner -->
-		<div class="page-banner container-fluid no-padding">
-			<!-- Container -->
-			<div class="container">
-				<div class="banner-content">
-					<ul class="courseChoices">
-						<li>線上課程</li>
-						<li>課程許願池</li>
-						<li>我要開課</li>
-					</ul>
-				</div>
-				<ol class="breadcrumb">
-					<li><a href="../index.html" title="Home">首頁</a></li>
-					<li class="active">媽咪課程</li>
-				</ol>
-			</div>
-			<!-- Container /- -->
-		</div>
 		<!-- Page Banner /- --> <!-- Clients -->
+	
 		<div class="clients container-fluid">
 			<!-- Container -->
 			<div class="container">
+				<div class="container-fluid no-padding" style="height:100px;">
+				<h4>依分類過濾</h4>
+					<div id="classCategory">
+					<select id="categoryOpt">
+							<option value="default">選擇分類</option>
+						<c:forEach var="category" items="${clazzInfo.listOfCategory}">
+							<option value="${category}">${category}</option>
+						</c:forEach>
+					</select>
+					</div>
+				</div>
+				<div id="categoryClass"></div>
+				<h2>最新上架課程:</h2>
 				<div class="clients-carousel">
-					<div class="col-md-12 item">
-						<a href="#" title="client"><img src="../images/client-1.png"
-							alt="client-1" /></a>
-					</div>
-					<div class="col-md-12 item">
-						<a href="#" title="client"><img src="../images/client-1.png"
-							alt="client-2" /></a>
-					</div>
-					<div class="col-md-12 item">
-						<a href="#" title="client"><img src="../images/client-1.png"
-							alt="client-3" /></a>
-					</div>
-					<div class="col-md-12 item">
-						<a href="#" title="client"><img src="../images/client-1.png"
-							alt="client-4" /></a>
-					</div>
-					<div class="col-md-12 item">
-						<a href="#" title="client"><img src="../images/client-1.png"
-							alt="client-5" /></a>
-					</div>
-
-					<div class="col-md-12 item">
-						<a href="#" title="client"><img src="../images/client-1.png"
-							alt="client-1" /></a>
-					</div>
-					<div class="col-md-12 item">
-						<a href="#" title="client"><img src="../images/client-1.png"
-							alt="client-2" /></a>
-					</div>
-					<div class="col-md-12 item">
-						<a href="#" title="client"><img src="../images/client-1.png"
-							alt="client-3" /></a>
-					</div>
-					<div class="col-md-12 item">
-						<a href="#" title="client"><img src="../images/client-1.png"
-							alt="client-4" /></a>
-					</div>
-					<div class="col-md-12 item">
-						<a href="#" title="client"><img src="../images/client-1.png"
-							alt="client-5" /></a>
-					</div>
+					<c:forEach var="clazz" items="${clazzInfo.listOfClazz}">
+						<div class="col-md-12 item">
+							<h5>${clazz.category}</h5>
+							<strong>${clazz.courseName}</strong>
+							<a href="<c:url value="/clazzDetail.clazz?detail=${clazz.classId}"/>">
+							<img class="courseImg" style="height:150px;" src="<c:url value="/images/clazz/${clazz.classId}.jpg"/>"/></a>
+							<span>上架日期:</span>&nbsp;&nbsp;<span><fmt:formatDate value="${clazz.startDate}" pattern="yyyy/MM/dd"/></span><br>
+							<span>開課日期:</span>&nbsp;&nbsp;<span class="endDate"><fmt:formatDate value="${clazz.endDate}" pattern="yyyy/MM/dd"/></span><br>
+							<span>距離開課還剩:</span>&nbsp;&nbsp;<span class="days"></span>天
+						</div>
+					</c:forEach>
+				</div>
+				<h2>即將開課:</h2>
+				<div class="clients-carousel">
+					<c:forEach var="clazz" items="${clazzInfo.listOfClosestCourse}">
+						<div class="col-md-12 item">
+							<h5>${clazz.category}</h5>
+							<strong>${clazz.courseName}</strong>
+							<a href="<c:url value="/clazzDetail.clazz?detail=${clazz.classId}"/>">
+							<img title="${clazz.courseName}" class="courseImg" style="height:150px;" src="<c:url value="/images/clazz/${clazz.classId}.jpg"/>"/></a>
+							<span>報名學員人數 :</span><span>&nbsp;&nbsp;${clazz.currentStudents}</span><br>
+							<span>開課所需人數:</span><span>&nbsp;&nbsp;${clazz.numberOfStudents}</span><br>
+							<span>達成百分比:</span>&nbsp;&nbsp;<span>${clazz.currentStudents / clazz.numberOfStudents * 100}</span>%
+						</div>
+					</c:forEach>
 				</div>
 			</div>
 			<!-- Container /- -->

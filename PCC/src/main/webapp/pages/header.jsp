@@ -114,15 +114,11 @@
 								<li class="dropdown"><a href="pages/room.html" title="Room"
 									class="dropdown-toggle" role="button" aria-haspopup="true"
 									aria-expanded="false">預約訂房</a></li>
-								<li class="dropdown"><a href="<c:url value="/pages/course.jsp"/>"
+								<li class="dropdown"><a href="<c:url value="/showAllClazz.clazz"/>"
 									title="Course" class="dropdown-toggle" role="button"
-									aria-haspopup="true" aria-expanded="false">產後教室</a> <i
+									aria-haspopup="true" aria-expanded="false">媽咪學苑</a> <i
 									class="ddl-switch fa fa-angle-down"></i>
-									<ul class="dropdown-menu">
-										<li><a href="#">親子課程</a></li>
-										<li><a href="#">媽寶瑜珈</a></li>
-										<li><a href="#">新手媽咪</a></li>
-									</ul></li>
+									</li>
 								<li class="dropdown">
                                         <a href="<c:url value="/showByOrder.forum?order=date"/>" title="Forum" class="dropdown-toggle" role="button" aria-haspopup="true" aria-expanded="false">文章/討論</a>
                                         <i class="ddl-switch fa fa-angle-down"></i>
