@@ -41,8 +41,8 @@ public class RoomReservationController {
 	}
 
 	@RequestMapping(path = "/reserve.room", method = RequestMethod.POST)
-	public String reserveRoom(@SessionAttribute("member") Member member, RoomReservation roomReservation, Model model) {
-		RoomReservation reservation = roomReservationService.insert(member,roomReservation);
+	public String reserveRoom(@SessionAttribute("member") Member member, RoomReservation roomReservation,Model model,int newPoint) {
+		RoomReservation reservation = roomReservationService.insert(member,roomReservation,newPoint);
 
 		if (reservation == null) {
 			return "reserve.error";
@@ -91,6 +91,5 @@ public class RoomReservationController {
 		return roomReservationService.selectMemberById(member);
 			
 	}
-
-	
+		
 }

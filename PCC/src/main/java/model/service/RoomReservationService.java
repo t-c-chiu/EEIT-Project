@@ -22,10 +22,10 @@ public class RoomReservationService {
 	@Autowired
 	MemberDAO memberDAO;
 	
-	public RoomReservation insert(Member member, RoomReservation roomReservation) {
+	public RoomReservation insert(Member member, RoomReservation roomReservation,int newPoint) {	
 		roomReservation.setMemberId(member.getMemberId());
 		roomReservation = roomReservationDAO.insert(roomReservation);
-
+		memberDAO.updateMemberPoint(member, newPoint);
 		return roomReservation;
 	};
 	
@@ -45,5 +45,5 @@ public class RoomReservationService {
 	public Member selectMemberById(Member member) {
 		return memberDAO.select(member.getMemberId());
 	}
-
+	
 }
