@@ -118,6 +118,7 @@ href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" />
             price = $(this).attr("alt")
 			$("#roomId").empty().val(roomId)
 			showPrice()
+			$(".post-date").text("選擇中")
 			
 			$.get('${pageContext.request.contextPath}/showByRoomId.room','roomId='+roomId,function(data){
 				$.each(data,function(i,item){
@@ -199,8 +200,7 @@ href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" />
 				$('#endSpan').text(" 退房日不可為空")
 				isSubmit = false;
 			}
-			
-			
+						
 			if(usedPoint>point){
 				$('#pointSpan').text(" 無效點數")
 				isSubmit = false;				
@@ -214,15 +214,12 @@ href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" />
 		     {selectedDates.push($.datepicker.formatDate('yy/m/d', d));	
 		       }
 			var diff = $(unavailableDates).not(selectedDates).get();
-			alert(diff)
+
 			if(diff.length<unavailableDates.length){
 				$('#beginSpan').text(" 無效日期")
 				$('#endSpan').text(" 無效日期")
 				isSubmit = false;	
-			}
-			
-			
-			
+			}									
 			return isSubmit;
 			
 		})
@@ -271,40 +268,34 @@ href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" />
 	
 		<div class="container">
 				<!-- Content Area -->
-			  <c:forEach var="room" items="${listOfRooms}">		
-				<div class="content-area blog-section col-md-8 col-sm-8 col-xs-12">
-					<div class="type-post">
+			            <c:forEach var="room" items="${listOfRooms}">		
+				        <div class="content-area blog-section col-md-8 col-sm-8 col-xs-12">
+				
+					    <div class="type-post">
 						<div class="col-md-5 col-sm-12 col-xs-12 no-padding entry-cover">
-							<a><img
-								src="<c:url value="../images/room/${room.roomImage}.jpg"/>"
-								class="image" alt="${room.price}" id="${room.roomId}"></a> <span
-								class="post-date"><a href="#"><i
-									class="fa fa-calendar-o"></i>July 16</a></span>
+						<img src="<c:url value="../images/room/${room.roomImage}.jpg"/>"
+							 class="image" alt="${room.price}" id="${room.roomId}">
+						<span class="post-date" style="color:red"></span>
 						</div>
+						
 						<div class="col-md-7 col-sm-12 col-xs-12 blog-content">
-							<h3 class="entry-title">
-								<a title="new Collectios are imported In Our shop."
-									href="blog-post.html">${room.roomId} </a>
-							</h3>
-							<div class="entry-meta">
-								<span class="post-like"><a href="#" title="224 Likes"><i
-										class="fa fa-heart-o"></i>${room.roomType}</a></span> <span
-									class="post-admin"><i class="fa fa-user"></i>${room.price}<a
-									href="#" title="Max">Max</a></span>
-							</div>
-							<div class="entry-content">
-								<p>The weather started getting rough - the tiny ship was
-									tossed. If not for the courage of the fearless If not for the
-									courage of the Minnow would be lost.</p>
-								<a href="blog-post.html" title="Read More" class="read-more">Read
-									More<i class="fa fa-long-arrow-right"></i>
-								</a>
-							</div>
+						<h3 class="entry-title">${room.roomId}</h3>
+						<div class="entry-meta">
+						<span class="post-like">房型 ${room.roomType}</span> 
+						<span class="post-admin">房價 ${room.price}</span>
 						</div>
-					</div>
-				</div>
-				</c:forEach>
-			</div>
+							
+						<div class="entry-content">
+						<p>The weather started getting rough - the tiny ship was
+						tossed. If not for the courage of the fearless If not for the
+						courage of the Minnow would be lost.</p>								
+						</div>
+						
+						</div>
+					    </div>
+				        </div>
+				        </c:forEach>
+		</div>
 			
 
 		
