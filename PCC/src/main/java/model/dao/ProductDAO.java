@@ -2,14 +2,14 @@ package model.dao;
 
 
 import java.io.InputStream;
+import java.sql.Clob;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
 
 import javax.sql.DataSource;
-import javax.sql.rowset.serial.SerialBlob;
+import javax.sql.rowset.serial.SerialClob;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -25,17 +25,13 @@ import model.bean.Product;
 public class ProductDAO {
 	
 
-	
-
-	
-
 
 	
 
 	@Autowired
 	private SessionFactory sessionFactory;
 	private final String  sqlInsert=
-			"INSERT INTO Product(productName,stock,price,category,picture,status)VALUES(?,?,?,?,?,?)";
+			"INSERT INTO Product(productName,stock,price,category,pictureascii,status)VALUES(?,?,?,?,?,?)";
 
 	private Session getSession() {
 		return sessionFactory.getCurrentSession();
@@ -69,8 +65,9 @@ public class ProductDAO {
 
 	// 根據商品名模糊搜尋
 	public List<Product> selectProductName(String productName) {
-		Query<Product> query = getSession().createQuery("from Product where productName = %?%", Product.class);
-		query.setParameter(0, productName);
+		Query<Product> query = getSession().createQuery("from Product where productName like '%"+productName+"%' ", Product.class);
+	
+		System.out.println("DAO back");
 		return query.list();
 
 	}
@@ -78,7 +75,7 @@ public class ProductDAO {
 	// 更新商品，一次一個
 
 	public boolean updateProduct(int productId, int stock, int price, String productName, String category,
-			byte[] picture) {
+			String pictureascii) {
 		Product selecteBean = this.selectId(productId);
 		if (selecteBean != null) {
 
@@ -87,7 +84,7 @@ public class ProductDAO {
 			selecteBean.setProductName(productName);
 			selecteBean.setCategory(category);
 			selecteBean.setCategory(category);
-			selecteBean.setPicture(picture);
+			selecteBean.setPictureAscii(pictureascii);
 
 			return true;
 		}
@@ -126,9 +123,12 @@ public class ProductDAO {
 		
 				stmt.setString(4, product.getCategory());
 			
-				InputStream is= new SerialBlob(product.getPicture()).getBinaryStream();
-				stmt.setBinaryStream(5, is);
-		
+//				InputStream is= new SerialBlob(product.getPictureAscii()).getBinaryStream();
+//				stmt.setBinaryStream(5, is);
+				stmt.setString(5, product.getPictureAscii());
+//				InputStream is = new SerialClob(product.getPictureAscii()).getAsciiStream();
+//				stmt.setAsciiStream(5, is);
+				
 				stmt.setInt(6,product.getStatus());
 				
 //				stmt.setDate(7, null);
