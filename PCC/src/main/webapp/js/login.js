@@ -16,6 +16,7 @@ $(document).ready(function(){
 				location.replace('/PCC/index.jsp');
 			}else if(data=="登入失敗"){
 				alert("無此帳號");
+				location.replace('/PCC/pages/registy.jsp');
 			}
         }});
     });

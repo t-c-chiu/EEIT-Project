@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import model.bean.Member;
 import model.bean.RoomReservation;
+import model.dao.MemberDAO;
 import model.dao.RoomReservationDAO;
 
 @Service
@@ -18,11 +19,14 @@ public class RoomReservationService {
 	@Autowired
 	RoomReservationDAO roomReservationDAO;
 	
-	public RoomReservation insert(Member member, RoomReservation roomReservation) {
+	@Autowired
+	MemberDAO memberDAO;
+	
+	public int insert(Member member, RoomReservation roomReservation,int newPoint) {	
 		roomReservation.setMemberId(member.getMemberId());
 		roomReservation = roomReservationDAO.insert(roomReservation);
-
-		return roomReservation;
+		memberDAO.updateMemberPoint(member, newPoint);
+		return newPoint;
 	};
 	
 	public List<RoomReservation> selectByMemberId(Member member) {						
@@ -37,5 +41,9 @@ public class RoomReservationService {
 	public List<RoomReservation> selectByRoomId(int roomId){
 		return roomReservationDAO.selectByRoomId(roomId);
 	}
-
+	
+	public Member selectMemberById(Member member) {
+		return memberDAO.select(member.getMemberId());
+	}
+	
 }

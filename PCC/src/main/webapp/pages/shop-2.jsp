@@ -1,11 +1,14 @@
-﻿
-<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>PCC - Room</title>
+<title>PCC - Shop</title>
 <!-- Standard Favicon -->
 <link rel="icon" type="image/x-icon" href="../images/pcc/pcc.png" />
 
@@ -21,7 +24,6 @@
 	href="../revolution/css/layers.css">
 <link rel="stylesheet" type="text/css"
 	href="../revolution/css/navigation.css">
-<link rel="stylesheet" type="text/css" href="../css/shortcode.css">
 
 <!-- Library - Bootstrap v3.3.5 -->
 <link rel="stylesheet" type="text/css" href="../libraies/lib.css">
@@ -39,10 +41,11 @@
 
 <!-- fontawesome -->
 <link href="../revolution/fonts/fontawesome-all.css">
+<!-- css -->
+<link rel="stylesheet" type="text/css" href="../css/login.css">
 </head>
 
 </head>
-
 <body data-offset="200" data-spy="scroll" data-target=".ow-navigation">
 	<div class="main-container">
 		<!-- Loader -->
@@ -71,13 +74,15 @@
 					<!-- Search Block -->
 					<div class="col-md-5 col-sm-6 col-xs-6 search-block">
 						<div class="input-group">
-							<input class="form-control"
-								placeholder="Search You Wants Here . . ." type="text"> <span
-								class="input-group-btn">
-								<button class="btn btn-default" type="button">
-									<i class="icon icon-Search"></i>
-								</button>
-							</span>
+						<form action="/PCC/searchProduct.shopping" method="get" id="searchForm">
+							<input class="form-control" id="searchText" name="searchText"
+								placeholder="Search You Wants Here . . ." type="text"> 
+								<span id="serch-btn" class="input-group-btn">
+									<button class="btn btn-default" type="button">
+										<i class="icon icon-Search"></i>
+									</button>
+								</span>
+						</form>
 						</div>
 					</div>
 					<!-- Search Block /- -->
@@ -93,7 +98,7 @@
 										class="remove" href="#">&#215;</a> <a href="#"
 										class="shop-thumbnail"> <img alt="poster_2_up"
 											class="attachment-shop_thumbnail"
-											src="images/product-wishlist-1.jpg">Flying Ninja
+											src="../images/product-wishlist-1.jpg">Flying Ninja
 									</a> <span class="quantity">2 &#215; <span class="amount">Rs.12.00</span></span>
 									</li>
 									<li class="mini_cart_item"><a title="Remove this item"
@@ -175,57 +180,180 @@
 			<!-- Container -->
 			<div class="container">
 				<div class="banner-content">
-					<h3>預約訂房</h3>
+					<h3>購物商城</h3>
 					<p>our vision is to be Earth's most customer centric company</p>
 				</div>
 				<ol class="breadcrumb">
 					<li><a href="../index.html" title="Home">首頁</a></li>
-					<li class="active">預約訂房</li>
+					<li class="active">購物商城</li>
 				</ol>
 			</div>
 			<!-- Container /- -->
 		</div>
-		<!-- Page Banner /- --> <!-- Clients -->
-
+		<!-- Page Banner /- --> <!-- Product Section2 -->
+		<div
+			class="product-section product-section1 product-section2 container-fluid no-padding">
 			<!-- Container -->
-<div class="container">
-<div class="row">
-			<table class="table col-md-3">
-				<thead>
-					<tr>
-						<th scope="col">#</th>
-						<th scope="col">First Name</th>
-						<th scope="col">Last Name</th>
-						<th scope="col">Username</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<th scope="row">1</th>
-						<td col-md-5>Mark</td>
-						<td>Otto</td>
-						<td>@mdo</td>
-					</tr>
-					<tr>
-						<th scope="row">2</th>
-						<td>Jacob</td>
-						<td>Thornton</td>
-						<td>@fat</td>
-					</tr>
-					<tr>
-						<th scope="row">3</th>
-						<td>Larry</td>
-						<td>the Bird</td>
-						<td>@twitter</td>
-					</tr>
-				</tbody>
-			</table>
-			</div>
-</div>
-			<!-- Container /- -->
+			<div class="container">
+				<div class="row">
+					<!-- Widget Area -->
+					<div
+						class="col-md-4 col-sm-4 col-xs-12 widget-area no-right-padding">
+						<!-- Widget Search -->
+						<aside class="widget widget_search">
+							<h3 class="widget-title">Search</h3>
+							<div class="input-group">
+								<input type="text" class="form-control"
+									placeholder="Search You Wants. . ."> <span
+									class="input-group-btn">
+									<button class="btn btn-search" title="Search" type="button">
+										<i class="icon icon-Search"></i>
+									</button>
+								</span>
+							</div>
+						</aside>
+						<!-- Widget Search /- -->
+						<!-- Widget Categories -->
+						<aside class="widget widget_categories">
+							<h3 class="widget-title">Categories</h3>
+							<ul>
+								<li><a href="#" title="Beautiful Chairs">Beautiful
+										Chairs <span>(5)</span>
+								</a></li>
+								<li><a href="#" title="Creative Designs">Creative
+										Designs <span>(6)</span>
+								</a></li>
+								<li><a href="#" title="Trendy Products">Trendy Products
+										<span>(4)</span>
+								</a></li>
+								<li><a href="#" title="Interior Products">Interior
+										Products <span>(2)</span>
+								</a></li>
+								<li><a href="#" title="Popular Products">Popular
+										Products <span>(8)</span>
+								</a></li>
+								<li><a href="#" title="Casual Shirts">Casual Shirts <span>(7)</span></a></li>
+							</ul>
+						</aside>
+						<!-- Widget Categories /-  -->
+						<!-- Widget Price -->
+						<aside class="widget widget_price_filter">
+							<h3 class="widget-title">filter by price</h3>
+							<div class="price-filter">
+								<div id="slider-range"></div>
+								<div class="price-input">
+									<span id="amount"></span> <span id="amount2"></span>
+								</div>
+								<a href="#" title="filter">Filter</a>
+							</div>
+						</aside>
+						<!-- Widget Price /- -->
+						<!-- Widget Latest Post -->
+						<aside class="widget widget_latest_post">
+							<h3 class="widget-title">recent posts</h3>
+							<div class="latest-box">
+								<div class="post-box">
+									<a href="#"><img src="../images/latest-post-1.jpg"
+										alt="Post"></a>
+									<h5>
+										<a href="#" title="need max shop.">I Phone 6s sales on</a>
+									</h5>
+									<div class="star-rating">
+										<i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
+											class="fa fa-star"></i> <i class="fa fa-star"></i> <i
+											class="fa fa-star-o"></i>
+									</div>
+									<span class="price"><del>$955</del>$789</span>
+								</div>
+							</div>
+							<div class="latest-box">
+								<div class="post-box">
+									<a href="#"><img src="../images/latest-post-2.jpg"
+										alt="Post"></a>
+									<h5>
+										<a href="#" title="need max shop.">mens casual footwear</a>
+									</h5>
+									<div class="star-rating">
+										<i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
+											class="fa fa-star"></i> <i class="fa fa-star"></i> <i
+											class="fa fa-star-o"></i>
+									</div>
+									<span class="price"><del>$185</del>$120</span>
+								</div>
+							</div>
+							<div class="latest-box">
+								<div class="post-box">
+									<a href="#"><img src="../images/latest-post-3.jpg"
+										alt="Post"></a>
+									<h5>
+										<a href="#" title="need max shop.">running shoes</a>
+									</h5>
+									<div class="star-rating">
+										<i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
+											class="fa fa-star"></i> <i class="fa fa-star"></i> <i
+											class="fa fa-star-o"></i>
+									</div>
+									<span class="price"><del>$150</del>$85</span>
+								</div>
+							</div>
+						</aside>
+						<!-- Widget Latest Post /- -->
+						<!-- Widget Tags -->
+						<aside class="widget widget_tags">
+							<h3 class="widget-title">popular tags</h3>
+							<div class="tags-box">
+								<a href="#" title="Chairs">Chairs</a> <a href="#"
+									title="Modern Designs">Modern Designs</a> <a href="#"
+									title="Watches">Watches</a> <a href="#" title="Future">Future</a>
+								<a href="#" title="Popular Products">Popular Products</a> <a
+									href="#" title="Trendy">Trendy</a> <a href="#" title="Interier">Interier</a>
+								<a href="#" title="Modern">Modern</a>
+							</div>
+						</aside>
+						<!-- Widget Tags -->
+					</div>
+					<!-- Widget Area /- -->
 
-		<!-- Clients /- --> </main>
+					<!-- Content Area -->
+					<div
+						class="col-md-8 col-sm-7 col-xs-12 content-area product-section2 no-left-padding">
+						<!-- Products -->
+						<ul class="products">
+							<!-- Product -->
+							<c:forEach var="products8" items="${products}">
+							
+							<li class="product"><a href="/PCC/pages/${products8.productId}.jsp"> <img
+									src="../images/product-10.jpg" alt="Product" />
+									<h5>${products8.productName}</h5> <span class="price"><del>${products8.price}</del>${products8.price}</span>
+							</a> <a href="#" class="add-to-cart1" title="Add To Cart">Add To
+									Cart</a>
+								<div class="wishlist-box">
+									<a href="#"><i class="fa fa-arrows-alt"></i></a> <a href="#"><i
+										class="fa fa-heart-o"></i></a> <a href="#"><i
+										class="fa fa-search"></i></a>
+								</div></li>
+								
+							</c:forEach>	
+
+					</div>
+					<!-- Content Area /- -->
+				</div>
+				<!-- Row /- -->
+				<nav class="ow-pagination">
+					<ul class="pager">
+						<li class="number"><a href="#">4</a></li>
+						<li class="load-more"><a href="#">Load More</a></li>
+						<li class="previous"><a href="#"><i
+								class="fa fa-angle-right"></i></a></li>
+						<li class="next"><a href="#"><i class="fa fa-angle-left"></i></a></li>
+					</ul>
+				</nav>
+			</div>
+			<!-- Container /- -->
+		</div>
+		<!-- Product Section2 /- --> </main>
 		<!--	內容結束	-->
+
 		<!-- Footer Main 1 -->
 		<footer id="footer-main"
 			class="footer-main footer-main-1 services-section container-fluid">
@@ -239,8 +367,8 @@
 					<!-- Widget About -->
 					<aside class="col-md-6 col-sm-6 col-xs-12 ftr-widget widget_about">
 
-						<a href="index.html" title="Max Shop">P<span>ostnatal</span> C<span>are</span>
-							C<span>enter</span></a>
+						<a href="index.html" title="Max Shop">P<span>ostnatal</span>
+							C<span>are</span> C<span>enter</span></a>
 						<div class="info">
 							<p>
 								<i class="icon icon-Pointer"></i>106台北市大安區復興南路一段390號 2樓
@@ -322,7 +450,27 @@
 
 	<!-- Library - Theme JS -->
 	<script src="../js/functions.js"></script>
-
+	<!-- login  -->
+<!-- 	<script type="text/javascript" src="../js/login.js"></script> -->
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$('#serch-btn').click(function(){
+				alert("已點");
+				var searchText = $('#searchText').val();
+				alert(searchText);
+				if(searchText.trim().length == 0){
+					alert('請輸入搜尋條件');
+					$('#filter').val('').focus();
+				}else{
+					$('#searchForm').submit();
+				}
+			})
+	
+			
+		})
+	</script>
 </body>
 </html>
+
+
 

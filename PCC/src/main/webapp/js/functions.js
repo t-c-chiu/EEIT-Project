@@ -352,7 +352,7 @@
                 margin: 0,
                 nav: false,
                 dots: true,
-                autoplay: false,
+                autoplay: true,
                 responsive: {
                     0: {
                         items: 1
@@ -364,7 +364,10 @@
                         items: 3
                     },
                     1000: {
-                        items: 5
+                        items: 4
+                    },
+					1920: {
+                        items: 4
                     }
                 }
             });

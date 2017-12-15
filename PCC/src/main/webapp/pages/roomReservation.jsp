@@ -8,10 +8,11 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet"
-	href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" />
+<link rel="stylesheet" 
+href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" />
 <script src="http://code.jquery.com/jquery-1.8.3.js"></script>
 <script src="http://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
 <title>PCC - Room</title>
 <!-- Standard Favicon -->
 <link rel="icon" type="image/x-icon" href="../images/pcc/pcc.png" />
@@ -61,21 +62,37 @@
 		var beginDate
 		var totalPrice
 		var unavailableDates
+		var selectedDates
+		var point
+		var newPoint
+		var usedPoint
+	
 
 		function showPrice() {
-			totalPrice = ((endDate - beginDate) * price) / (86400000)
+			totalPrice = (((endDate - beginDate) * price) / (86400000)-(usedPoint*50))
+			
+			newPoint=Math.round(point-usedPoint+(totalPrice/500))
+			if(newPoint<0)
+				{newPoint=0}
+			
+			$('#newPoint').empty().val(newPoint)
+			
 			if (!isNaN(totalPrice)) {
-				$('#totalPrice').empty().val(totalPrice)
-			}
+				if(totalPrice<0)
+				{$('#totalPrice').empty().val(0)}
+				else
+				{$('#totalPrice').empty().val(totalPrice)}						
+			}						
 		}
-
+		
+				
 		$('#beginDate').datepicker({
 			numberOfMonths : 2,
 			minDate : 0,
 			beforeShowDay : unavailable,
 			dateFormat : "yy/mm/dd",
 			onSelect : function(selected) {
-				$("#endDate").datepicker("option", "minDate", selected)
+// 				$("#endDate").datepicker("option", "minDate", selected)
 				beginDate = $('#beginDate').datepicker('getDate');
 				showPrice()
 			}
@@ -87,7 +104,7 @@
 			beforeShowDay : unavailable,
 			dateFormat : "yy/mm/dd",
 			onSelect : function(selected) {
-				$("#beginDate").datepicker("option", "maxDate", selected)
+// 				$("#beginDate").datepicker("option", "maxDate", selected)
 				endDate = $(this).datepicker('getDate');
 				showPrice()
 			}
@@ -109,16 +126,31 @@
 					var beginDateTemp =data[i].beginDate;
 							
 			        for (var d = new Date(beginDateTemp);d <= new Date(endDateTemp);d.setDate(d.getDate() + 1)) 
-			        {unavailableDates.push($.datepicker.formatDate('yy/m/d', d));                    
-			        }
-				    				
-				})
-							
+			        {unavailableDates.push($.datepicker.formatDate('yy/m/d', d));	
+			        }				    				
+				})							
 			})					
 		});
-
+		
+		$('#usedPoint').change(function(){
+			usedPoint=$(this).val()
+			showPrice()
+		})
+		
+		$("button").click(function(){			
+			$.get('${pageContext.request.contextPath}/getMemberbyId.room',function(data){
+				point=data.point
+				usedPoint=data.point
+				$("#name").empty().val(data.name)
+				$("#email").empty().val(data.email)
+			    $("#phone").empty().val(data.phone)
+				$("#usedPoint").empty().val(point)
+				showPrice()
+			})
 	
-
+		
+		})
+		
 		function unavailable(date) {
 			dmy = date.getFullYear() + "/" + (date.getMonth() + 1) + "/"
 					+ date.getDate();
@@ -128,7 +160,73 @@
 				return [ false, "", "Unavailable" ];
 			}
 		}
-
+		
+		$('#commit').click(function(){
+			$(".content").empty()
+			selectedDates=[]
+			
+			var isSubmit=true;
+			var name=$('#name').val();
+			var email=$('#email').val();
+			var phone=$('#phone').val();
+			var begin=$('#beginDate').val();
+			var end=$('#endDate').val();
+			var usedPoint=$('#usedPoint').val()
+			var Id=$('#roomId').val();
+			var Price=$('#totalPrice').val();
+												
+			if(name.length==0){				
+				$('#nameSpan').text(" 入住人不可為空")
+				isSubmit = false;
+			}
+			
+			if(email.length==0){
+				$('#emailSpan').text(" email不可為空")
+				isSubmit = false;
+			}
+			
+			if(phone.length==0){
+				$('#phoneSpan').text(" 電話不可為空")
+				isSubmit = false;
+			}
+			
+			if(begin.length==0){
+				$('#beginSpan').text(" 入住日不可為空")
+				isSubmit = false;
+			}
+			
+			if(end.length==0){
+				$('#endSpan').text(" 退房日不可為空")
+				isSubmit = false;
+			}
+			
+			
+			if(usedPoint>point){
+				$('#pointSpan').text(" 無效點數")
+				isSubmit = false;				
+			}
+			
+			if(Id.length==0||Price.length==0){
+				isSubmit = false;	
+			}
+			
+			for (var d = new Date(begin);d <= new Date(end);d.setDate(d.getDate() + 1)) 
+		     {selectedDates.push($.datepicker.formatDate('yy/m/d', d));	
+		       }
+			var diff = $(unavailableDates).not(selectedDates).get();
+			alert(diff)
+			if(diff.length<unavailableDates.length){
+				$('#beginSpan').text(" 無效日期")
+				$('#endSpan').text(" 無效日期")
+				isSubmit = false;	
+			}
+			
+			
+			
+			return isSubmit;
+			
+		})
+		
 	});
 </script>
 
@@ -218,21 +316,25 @@
 				<div class="checkout-form">
 
 					<div class="col-md-12 col-sm-12 col-xs-12">
-						<h3>訂房填表</h3>
-						<form action="<c:url value="/reserve.room"/>" method="post">
+					    <div>						
+							<h3>訂房填表</h3>						
+						</div>
+						
+					<button>一鍵帶入</button>
+						<form id="myform" action="<c:url value="/reserve.room"/>" method="post">
 							<div class="billing-field">
-
+							
 								<div class="col-md-4 form-group">
-									<label>入住人</label> <input class="form-control" type="text"
-										name="name" value="${member.name}">
+									<label>入住人<span style="color:red" class="content" id="nameSpan"></span></label> <input class="form-control" type="text"
+										name="name" id="name" >
 								</div>
 								<div class="col-md-4 form-group">
-									<label>email</label> <input class="form-control" type="text"
-										name="email" value="${member.email}">
+									<label>email<span style="color:red" class="content" id="emailSpan"></span></label> <input class="form-control" type="text"
+										name="email" id="email">
 								</div>
 								<div class="col-md-4 form-group">
-									<label>電話</label> <input class="form-control" type="text"
-										name="phone" value="${member.phone}">
+									<label>電話<span style="color:red" class="content" id="phoneSpan"></span></label> <input class="form-control" type="text"
+										name="phone" id="phone">
 								</div>
 
 								<div class="col-md-4 form-group">
@@ -240,21 +342,31 @@
 										name="roomId" id="roomId" readonly="readonly">
 								</div>
 								<div class="col-md-4 form-group">
-									<label>入住日</label> <input class="form-control" type="text"
+									<label>入住日<span style="color:red" class="content" id="beginSpan"></span></label> <input class="form-control" type="text"
 										name="beginDate" id="beginDate">
 								</div>
 								<div class="col-md-4 form-group">
-									<label>退房日</label> <input class="form-control" type="text"
+									<label>退房日<span style="color:red" class="content" id="endSpan"></span></label> <input class="form-control" type="text"
 										name="endDate" id="endDate">
 								</div>
-								<div class="col-md-5 form-group">
+								
+								<div class="col-md-4 form-group">
+									<label>使用點數(一點折抵50)<span style="color:red" class="content" id="pointSpan"></span></label> <input class="form-control" type="text"
+										name="usedPoint" id="usedPoint">
+								</div>
+																
+								<div class="col-md-4 form-group">
 									<label>總價</label> <input class="form-control" type="text"
 										name="totalPrice" id="totalPrice" readonly="readonly">
 								</div>
-								<div class="col-md-5 form-group">
+								<div class="col-md-4 form-group">
 									<label>&#160;</label> <input class="form-control" type="submit"
-										name="RoomReservation" value="送出訂單">
+										id="commit" name="RoomReservation" value="送出訂單">
 								</div>
+								
+					            <input class="form-control" name="newPoint" id="newPoint" type="hidden">
+							
+								
 							</div>
 						</form>
 					</div>

@@ -127,13 +127,21 @@ public class LoginController {
 		// }
 		// 進行資料檢查
 		// String password = member.getPassword().toString();
+		
 		String memberId = member.getMemberId();
 		String phone = member.getPhone();
 		String regEx = "[`~!@#$%^&*()+=|{}':;',\\[\\].<>/?~！@#￥%……&*（）——+|{}【】‘；：”“’。，、？]";
 		Pattern p = Pattern.compile(regEx);
 		// Matcher m = p.matcher(password);
 		Matcher m2 = p.matcher(memberId);
-		// 帳號 blur 檢查
+		
+		//檢查信箱
+		
+		//檢查手機
+		
+		
+		
+		// 帳號 blur 檢查memberId
 		// Member bean=memberService.login(memberId, password);
 		if (memberId == null || memberId.trim().length() == 0) {
 			System.out.println("memberId沒輸入阿");
