@@ -7,6 +7,7 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import model.bean.Clazz;
 import model.bean.Student;
 
 @Repository
@@ -21,7 +22,7 @@ public class StudentDAO {
 	public Integer insert(Student student) {
 		return (Integer) getSession().save(student);
 	}
-
+	
 	public Integer selectCountByClassId(Integer classId) {
 		Number number = (Number) getSession().createQuery("select count(*) from Student where classId = :classId")
 				.setParameter("classId", classId).getSingleResult();

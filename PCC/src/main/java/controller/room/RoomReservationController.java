@@ -24,7 +24,7 @@ import model.service.RoomReservationService;
 import model.service.ShowRoomService;
 
 @Controller
-@SessionAttributes({"roomReservation","listOfRooms"})
+@SessionAttributes({"roomReservation","listOfRooms","newPoint"})
 public class RoomReservationController {
 
 	@Autowired
@@ -41,12 +41,14 @@ public class RoomReservationController {
 	}
 
 	@RequestMapping(path = "/reserve.room", method = RequestMethod.POST)
-	public String reserveRoom(@SessionAttribute("member") Member member, RoomReservation roomReservation, Model model) {
-		RoomReservation reservation = roomReservationService.insert(member,roomReservation);
+	public String reserveRoom(@SessionAttribute("member") Member member, RoomReservation roomReservation,Model model,int newPoint) {
 
-		if (reservation == null) {
-			return "reserve.error";
-		}
+		roomReservationService.insert(member,roomReservation,newPoint);
+		model.addAttribute("newPoint",newPoint);
+
+		
+	   
+	
 		return "reserve.ok";
 	}
 
@@ -91,6 +93,5 @@ public class RoomReservationController {
 		return roomReservationService.selectMemberById(member);
 			
 	}
-
-	
+		
 }

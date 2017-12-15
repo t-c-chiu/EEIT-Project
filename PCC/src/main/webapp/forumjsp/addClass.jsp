@@ -62,8 +62,8 @@
 
 	<form id="formData" method="post" enctype="multipart/form-data" action="<c:url value="/startClass.clazz"/>">
 		<label>課程分類</label><select name="category">
-								<option value="親子課程">親子課程</option>
-								<option value="媽寶瑜珈">媽寶瑜珈</option>
+								<option value="產後瘦身">產後瘦身</option>
+								<option value="孕期調理">孕期調理</option>
 								<option value="新手媽咪">新手媽咪</option>
 							</select><br>
 		<label>課程名稱</label><input type="text" name="courseName"><br>

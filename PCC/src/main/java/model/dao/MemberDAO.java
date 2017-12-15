@@ -42,6 +42,16 @@ public class MemberDAO {
 		}
 		return null;
 	}
+	
+	
+	public boolean updateMemberPoint (Member member,int newPoint) {
+		Member result=select(member.getMemberId());
+		if(result!=null) {
+			result.setPoint(newPoint);
+			return true;
+		}
+		return false;
+	}
 
 
 }

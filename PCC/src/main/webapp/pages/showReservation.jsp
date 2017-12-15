@@ -109,34 +109,47 @@ table#alter th {
 
 			<table width="600" border="0" align="center" id="alter">
 				<tr>
-					<th>入住人</th>
-					<th>${roomReservation.name}</th>
-
+					<th>欄位</th>
+					<th>資料</th>
 				</tr>
+			
+			
+				<tr>
+					<td>入住人</td>
+					<td>${roomReservation.name}</td>
+				</tr>
+				
 				<tr>
 					<td>電話</td>
 					<td>0${roomReservation.phone}</td>
-
 				</tr>
+				
 				<tr>
 					<td>email</td>
 					<td>${roomReservation.email}</td>
 
 				</tr>
+				
 				<tr>
 					<td>訂房日</td>
 					<td>${roomReservation.beginDate}</td>
-
 				</tr>
+				
 				<tr>
 					<td>退房日</td>
 					<td>${roomReservation.endDate}</td>
-
 				</tr>
+				
+				<tr>
+					<td>點數更新</td>
+					<td>${newPoint}</td>
+				</tr>
+								
 				<tr>
 					<td>總金額</td>
 					<td>${roomReservation.totalPrice}</td>
 				</tr>
+				
 			</table>
 		</div>
 

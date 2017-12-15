@@ -8,10 +8,11 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet"
-	href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" />
+<link rel="stylesheet" 
+href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" />
 <script src="http://code.jquery.com/jquery-1.8.3.js"></script>
 <script src="http://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
 <title>PCC - Room</title>
 <!-- Standard Favicon -->
 <link rel="icon" type="image/x-icon" href="../images/pcc/pcc.png" />
@@ -61,14 +62,27 @@
 		var beginDate
 		var totalPrice
 		var unavailableDates
+		var selectedDates
 		var point
+		var newPoint
+		var usedPoint
 	
 
 		function showPrice() {
-			totalPrice = (((endDate - beginDate) * price) / (86400000)-(point*50))
+			totalPrice = (((endDate - beginDate) * price) / (86400000)-(usedPoint*50))
+			
+			newPoint=Math.round(point-usedPoint+(totalPrice/500))
+			if(newPoint<0)
+				{newPoint=0}
+			
+			$('#newPoint').empty().val(newPoint)
+			
 			if (!isNaN(totalPrice)) {
-				$('#totalPrice').empty().val(totalPrice)
-			}
+				if(totalPrice<0)
+				{$('#totalPrice').empty().val(0)}
+				else
+				{$('#totalPrice').empty().val(totalPrice)}						
+			}						
 		}
 		
 				
@@ -78,7 +92,7 @@
 			beforeShowDay : unavailable,
 			dateFormat : "yy/mm/dd",
 			onSelect : function(selected) {
-				$("#endDate").datepicker("option", "minDate", selected)
+// 				$("#endDate").datepicker("option", "minDate", selected)
 				beginDate = $('#beginDate').datepicker('getDate');
 				showPrice()
 			}
@@ -90,7 +104,7 @@
 			beforeShowDay : unavailable,
 			dateFormat : "yy/mm/dd",
 			onSelect : function(selected) {
-				$("#beginDate").datepicker("option", "maxDate", selected)
+// 				$("#beginDate").datepicker("option", "maxDate", selected)
 				endDate = $(this).datepicker('getDate');
 				showPrice()
 			}
@@ -104,6 +118,7 @@
             price = $(this).attr("alt")
 			$("#roomId").empty().val(roomId)
 			showPrice()
+			$(".post-date").text("選擇中")
 			
 			$.get('${pageContext.request.contextPath}/showByRoomId.room','roomId='+roomId,function(data){
 				$.each(data,function(i,item){
@@ -112,24 +127,25 @@
 					var beginDateTemp =data[i].beginDate;
 							
 			        for (var d = new Date(beginDateTemp);d <= new Date(endDateTemp);d.setDate(d.getDate() + 1)) 
-			        {unavailableDates.push($.datepicker.formatDate('yy/m/d', d));                    
+			        {unavailableDates.push($.datepicker.formatDate('yy/m/d', d));	
 			        }				    				
 				})							
 			})					
 		});
 		
-		$('#usePoint').change(function(){
-			point=$(this).val()
+		$('#usedPoint').change(function(){
+			usedPoint=$(this).val()
 			showPrice()
 		})
 		
 		$("button").click(function(){			
 			$.get('${pageContext.request.contextPath}/getMemberbyId.room',function(data){
 				point=data.point
+				usedPoint=data.point
 				$("#name").empty().val(data.name)
 				$("#email").empty().val(data.email)
 			    $("#phone").empty().val(data.phone)
-				$("#usePoint").empty().val(point)
+				$("#usedPoint").empty().val(point)
 				showPrice()
 			})
 	
@@ -145,7 +161,69 @@
 				return [ false, "", "Unavailable" ];
 			}
 		}
+		
+		$('#commit').click(function(){
+			$(".content").empty()
+			selectedDates=[]
+			
+			var isSubmit=true;
+			var name=$('#name').val();
+			var email=$('#email').val();
+			var phone=$('#phone').val();
+			var begin=$('#beginDate').val();
+			var end=$('#endDate').val();
+			var usedPoint=$('#usedPoint').val()
+			var Id=$('#roomId').val();
+			var Price=$('#totalPrice').val();
+												
+			if(name.length==0){				
+				$('#nameSpan').text(" 入住人不可為空")
+				isSubmit = false;
+			}
+			
+			if(email.length==0){
+				$('#emailSpan').text(" email不可為空")
+				isSubmit = false;
+			}
+			
+			if(phone.length==0){
+				$('#phoneSpan').text(" 電話不可為空")
+				isSubmit = false;
+			}
+			
+			if(begin.length==0){
+				$('#beginSpan').text(" 入住日不可為空")
+				isSubmit = false;
+			}
+			
+			if(end.length==0){
+				$('#endSpan').text(" 退房日不可為空")
+				isSubmit = false;
+			}
+						
+			if(usedPoint>point){
+				$('#pointSpan').text(" 無效點數")
+				isSubmit = false;				
+			}
+			
+			if(Id.length==0||Price.length==0){
+				isSubmit = false;	
+			}
+			
+			for (var d = new Date(begin);d <= new Date(end);d.setDate(d.getDate() + 1)) 
+		     {selectedDates.push($.datepicker.formatDate('yy/m/d', d));	
+		       }
+			var diff = $(unavailableDates).not(selectedDates).get();
 
+			if(diff.length<unavailableDates.length){
+				$('#beginSpan').text(" 無效日期")
+				$('#endSpan').text(" 無效日期")
+				isSubmit = false;	
+			}									
+			return isSubmit;
+			
+		})
+		
 	});
 </script>
 
@@ -190,40 +268,34 @@
 	
 		<div class="container">
 				<!-- Content Area -->
-			  <c:forEach var="room" items="${listOfRooms}">		
-				<div class="content-area blog-section col-md-8 col-sm-8 col-xs-12">
-					<div class="type-post">
+			            <c:forEach var="room" items="${listOfRooms}">		
+				        <div class="content-area blog-section col-md-8 col-sm-8 col-xs-12">
+				
+					    <div class="type-post">
 						<div class="col-md-5 col-sm-12 col-xs-12 no-padding entry-cover">
-							<a><img
-								src="<c:url value="../images/room/${room.roomImage}.jpg"/>"
-								class="image" alt="${room.price}" id="${room.roomId}"></a> <span
-								class="post-date"><a href="#"><i
-									class="fa fa-calendar-o"></i>July 16</a></span>
+						<img src="<c:url value="../images/room/${room.roomImage}.jpg"/>"
+							 class="image" alt="${room.price}" id="${room.roomId}">
+						<span class="post-date" style="color:red"></span>
 						</div>
+						
 						<div class="col-md-7 col-sm-12 col-xs-12 blog-content">
-							<h3 class="entry-title">
-								<a title="new Collectios are imported In Our shop."
-									href="blog-post.html">${room.roomId} </a>
-							</h3>
-							<div class="entry-meta">
-								<span class="post-like"><a href="#" title="224 Likes"><i
-										class="fa fa-heart-o"></i>${room.roomType}</a></span> <span
-									class="post-admin"><i class="fa fa-user"></i>${room.price}<a
-									href="#" title="Max">Max</a></span>
-							</div>
-							<div class="entry-content">
-								<p>The weather started getting rough - the tiny ship was
-									tossed. If not for the courage of the fearless If not for the
-									courage of the Minnow would be lost.</p>
-								<a href="blog-post.html" title="Read More" class="read-more">Read
-									More<i class="fa fa-long-arrow-right"></i>
-								</a>
-							</div>
+						<h3 class="entry-title">${room.roomId}</h3>
+						<div class="entry-meta">
+						<span class="post-like">房型 ${room.roomType}</span> 
+						<span class="post-admin">房價 ${room.price}</span>
 						</div>
-					</div>
-				</div>
-				</c:forEach>
-			</div>
+							
+						<div class="entry-content">
+						<p>The weather started getting rough - the tiny ship was
+						tossed. If not for the courage of the fearless If not for the
+						courage of the Minnow would be lost.</p>								
+						</div>
+						
+						</div>
+					    </div>
+				        </div>
+				        </c:forEach>
+		</div>
 			
 
 		
@@ -240,19 +312,19 @@
 						</div>
 						
 					<button>一鍵帶入</button>
-						<form action="<c:url value="/reserve.room"/>" method="post">
+						<form id="myform" action="<c:url value="/reserve.room"/>" method="post">
 							<div class="billing-field">
 							
 								<div class="col-md-4 form-group">
-									<label>入住人</label> <input class="form-control" type="text"
+									<label>入住人<span style="color:red" class="content" id="nameSpan"></span></label> <input class="form-control" type="text"
 										name="name" id="name" >
 								</div>
 								<div class="col-md-4 form-group">
-									<label>email</label> <input class="form-control" type="text"
+									<label>email<span style="color:red" class="content" id="emailSpan"></span></label> <input class="form-control" type="text"
 										name="email" id="email">
 								</div>
 								<div class="col-md-4 form-group">
-									<label>電話</label> <input class="form-control" type="text"
+									<label>電話<span style="color:red" class="content" id="phoneSpan"></span></label> <input class="form-control" type="text"
 										name="phone" id="phone">
 								</div>
 
@@ -261,17 +333,17 @@
 										name="roomId" id="roomId" readonly="readonly">
 								</div>
 								<div class="col-md-4 form-group">
-									<label>入住日</label> <input class="form-control" type="text"
+									<label>入住日<span style="color:red" class="content" id="beginSpan"></span></label> <input class="form-control" type="text"
 										name="beginDate" id="beginDate">
 								</div>
 								<div class="col-md-4 form-group">
-									<label>退房日</label> <input class="form-control" type="text"
+									<label>退房日<span style="color:red" class="content" id="endSpan"></span></label> <input class="form-control" type="text"
 										name="endDate" id="endDate">
 								</div>
 								
 								<div class="col-md-4 form-group">
-									<label>使用點數(一點折抵50)</label> <input class="form-control" type="text"
-										name="usePoint" id="usePoint">
+									<label>使用點數(一點折抵50)<span style="color:red" class="content" id="pointSpan"></span></label> <input class="form-control" type="text"
+										name="usedPoint" id="usedPoint">
 								</div>
 																
 								<div class="col-md-4 form-group">
@@ -280,8 +352,11 @@
 								</div>
 								<div class="col-md-4 form-group">
 									<label>&#160;</label> <input class="form-control" type="submit"
-										name="RoomReservation" value="送出訂單">
+										id="commit" name="RoomReservation" value="送出訂單">
 								</div>
+								
+					            <input class="form-control" name="newPoint" id="newPoint" type="hidden">
+							
 								
 							</div>
 						</form>
