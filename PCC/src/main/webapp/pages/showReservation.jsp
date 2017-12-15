@@ -109,8 +109,14 @@ table#alter th {
 
 			<table width="600" border="0" align="center" id="alter">
 				<tr>
-					<th>入住人</th>
-					<th>${roomReservation.name}</th>
+					<th>欄位</th>
+					<th>資料</th>
+				</tr>
+			
+			
+				<tr>
+					<td>入住人</td>
+					<td>${roomReservation.name}</td>
 				</tr>
 				
 				<tr>
