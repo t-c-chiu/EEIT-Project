@@ -1,7 +1,6 @@
 package model.bean;
 
-import java.sql.Date;
-import java.util.Arrays;
+import java.sql.Clob;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -18,7 +17,7 @@ public class Product {
 	private int price;
 	private String productName;
 	private String category;
-	private byte[] picture;
+	private String  pictureAscii;
 	private int status;
 //	private Date date;
 	public int getProductId() {
@@ -51,17 +50,21 @@ public class Product {
 	public void setCategory(String category) {
 		this.category = category;
 	}
-	public byte[] getPicture() {
-		return picture;
+	public String getPictureAscii() {
+		System.out.println("picture "+pictureAscii);
+		return pictureAscii;
 	}
-	public void setPicture(byte[] picture) {
-		this.picture = picture;
+	public void setPictureAscii(String pictureascii) {
+		this.pictureAscii = pictureascii;
+		System.out.println("picture "+pictureascii);
 	}
 	public int getStatus() {
+		
 		return status;
 	}
 	public void setStatus(int status) {
 		this.status = status;
+	
 	}
 //	public Date getDate() {
 //		return date;
@@ -72,9 +75,10 @@ public class Product {
 	@Override
 	public String toString() {
 		return "Product [productId=" + productId + ", stock=" + stock + ", price=" + price + ", productName="
-				+ productName + ", category=" + category + ", picture=" + Arrays.toString(picture) + ", status="
+				+ productName + ", category=" + category + ", pictureAscii=" + pictureAscii + ", status="
 				+ status + "]";
 	}
+
 
 	
 

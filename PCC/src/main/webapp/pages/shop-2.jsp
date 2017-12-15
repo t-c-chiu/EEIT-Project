@@ -1,5 +1,8 @@
-﻿
-<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta charset="utf-8">
@@ -72,7 +75,7 @@
 					<div class="col-md-5 col-sm-6 col-xs-6 search-block">
 						<div class="input-group">
 						<form action="/PCC/searchProduct.shopping" method="get" id="searchForm">
-							<input class="form-control" id="searchText"
+							<input class="form-control" id="searchText" name="searchText"
 								placeholder="Search You Wants Here . . ." type="text"> 
 								<span id="serch-btn" class="input-group-btn">
 									<button class="btn btn-default" type="button">
@@ -317,9 +320,11 @@
 						<!-- Products -->
 						<ul class="products">
 							<!-- Product -->
-							<li class="product"><a href="#"> <img
+							<c:forEach var="products8" items="${products}">
+							
+							<li class="product"><a href="/PCC/pages/${products8.productId}.jsp"> <img
 									src="../images/product-10.jpg" alt="Product" />
-									<h5>Stylish Chair</h5> <span class="price"><del>$200</del>$139</span>
+									<h5>${products8.productName}</h5> <span class="price"><del>${products8.price}</del>${products8.price}</span>
 							</a> <a href="#" class="add-to-cart1" title="Add To Cart">Add To
 									Cart</a>
 								<div class="wishlist-box">
@@ -327,93 +332,9 @@
 										class="fa fa-heart-o"></i></a> <a href="#"><i
 										class="fa fa-search"></i></a>
 								</div></li>
-							<!-- Product /- -->
-							<!-- Product -->
-							<li class="product"><a href="#"> <img
-									src="../images/product-11.jpg" alt="Product" />
-									<h5>men's casual shoes</h5> <span class="price"><del>$200</del>$119</span>
-							</a> <a href="#" class="add-to-cart1" title="Add To Cart">Add To
-									Cart</a>
-								<div class="wishlist-box">
-									<a href="#"><i class="fa fa-arrows-alt"></i></a> <a href="#"><i
-										class="fa fa-heart-o"></i></a> <a href="#"><i
-										class="fa fa-search"></i></a>
-								</div></li>
-							<!-- Product /- -->
-							<!-- Product -->
-							<li class="product"><a href="#"> <img
-									src="../images/product-11.jpg" alt="Product" />
-									<h5>sun glass</h5> <span class="price"><del>$150</del>$85</span>
-							</a> <a href="#" class="add-to-cart1" title="Add To Cart">Add To
-									Cart</a>
-								<div class="wishlist-box">
-									<a href="#"><i class="fa fa-arrows-alt"></i></a> <a href="#"><i
-										class="fa fa-heart-o"></i></a> <a href="#"><i
-										class="fa fa-search"></i></a>
-								</div></li>
-							<!-- Product /- -->
-							<!-- Product -->
-							<li class="product"><a href="#"> <img
-									src="../images/product-11.jpg" alt="Product" />
-									<h5>Stylish Chair</h5> <span class="price"><del>$380</del>$259</span>
-							</a> <a href="#" class="add-to-cart1" title="Add To Cart">Add To
-									Cart</a>
-								<div class="wishlist-box">
-									<a href="#"><i class="fa fa-arrows-alt"></i></a> <a href="#"><i
-										class="fa fa-heart-o"></i></a> <a href="#"><i
-										class="fa fa-search"></i></a>
-								</div></li>
-							<!-- Product /- -->
-							<!-- Product -->
-							<li class="product"><a href="#"> <img
-									src="../images/product-11.jpg" alt="Product" />
-									<h5>latest headphone</h5> <span class="price"><del>$900</del>$759</span>
-							</a> <a href="#" class="add-to-cart1" title="Add To Cart">Add To
-									Cart</a>
-								<div class="wishlist-box">
-									<a href="#"><i class="fa fa-arrows-alt"></i></a> <a href="#"><i
-										class="fa fa-heart-o"></i></a> <a href="#"><i
-										class="fa fa-search"></i></a>
-								</div></li>
-							<!-- Product /- -->
-							<!-- Product -->
-							<li class="product"><a href="#"> <img
-									src="../images/product-11.jpg" alt="Product" />
-									<h5>men's jackets</h5> <span class="price"><del>$350</del>$249</span>
-							</a> <a href="#" class="add-to-cart1" title="Add To Cart">Add To
-									Cart</a>
-								<div class="wishlist-box">
-									<a href="#"><i class="fa fa-arrows-alt"></i></a> <a href="#"><i
-										class="fa fa-heart-o"></i></a> <a href="#"><i
-										class="fa fa-search"></i></a>
-								</div></li>
-							<!-- Product /- -->
-							<!-- Product -->
-							<li class="product"><a href="#"> <img
-									src="../images/product-11.jpg" alt="Product" />
-									<h5>Model x12 computer</h5> <span class="price"><del>$255</del>$139</span>
-							</a> <a href="#" class="add-to-cart1" title="Add To Cart">Add To
-									Cart</a>
-								<div class="wishlist-box">
-									<a href="#"><i class="fa fa-arrows-alt"></i></a> <a href="#"><i
-										class="fa fa-heart-o"></i></a> <a href="#"><i
-										class="fa fa-search"></i></a>
-								</div></li>
-							<!-- Product /- -->
-							<!-- Product -->
-							<li class="product"><a href="#"> <img
-									src="../images/product-11.jpg" alt="Product" />
-									<h5>Stylish headset</h5> <span class="price"><del>$85</del>$39</span>
-							</a> <a href="#" class="add-to-cart1" title="Add To Cart">Add To
-									Cart</a>
-								<div class="wishlist-box">
-									<a href="#"><i class="fa fa-arrows-alt"></i></a> <a href="#"><i
-										class="fa fa-heart-o"></i></a> <a href="#"><i
-										class="fa fa-search"></i></a>
-								</div></li>
-							<!-- Product /- -->
-						</ul>
-						<!-- Products /- -->
+								
+							</c:forEach>	
+
 					</div>
 					<!-- Content Area /- -->
 				</div>
@@ -536,6 +457,7 @@
 			$('#serch-btn').click(function(){
 				alert("已點");
 				var searchText = $('#searchText').val();
+				alert(searchText);
 				if(searchText.trim().length == 0){
 					alert('請輸入搜尋條件');
 					$('#filter').val('').focus();
@@ -549,4 +471,6 @@
 	</script>
 </body>
 </html>
+
+
 
