@@ -111,7 +111,7 @@
 										<li><a href="#" title="">商品類</a></li>
 										<li><a href="#" title="">商品類</a></li>
 									</ul></li>
-								<li class="dropdown"><a href="pages/room.html" title="Room"
+								<li class="dropdown"><a href="<c:url value="/pages/showRoom.jsp"/>" title="Room"
 									class="dropdown-toggle" role="button" aria-haspopup="true"
 									aria-expanded="false">預約訂房</a></li>
 								<li class="dropdown"><a href="<c:url value="/showAllClazz.clazz"/>"

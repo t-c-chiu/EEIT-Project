@@ -49,10 +49,38 @@ href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" />
 <link href="../revolution/fonts/fontawesome-all.css">
 
 <style>
-.color {
-	border-style: double
+
+.zoom {
+    display: inline-block;
+    overflow: hidden;   
+    border: 1px solid gray;
 }
+
+.zoom img {
+    -webkit-transition: all .2s ease;
+    -ms-transition: all .2s ease;
+    transition: all .2s ease;    
+    vertical-align: middle;
+}
+
+.zoom img:hover {
+    -webkit-transform:scale(1.5); /* Safari and Chrome */
+    -ms-transform:scale(1.5); /* IE 9 */
+    transform:scale(1.5);
+    cursor:pointer
+}
+
+#allForm {
+display:none
+}
+
+
+
+
 </style>
+
+<link rel="stylesheet" type="text/css" href="../css/login.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
 <script>
 	$(function() {
@@ -112,13 +140,11 @@ href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" />
 
 		$(".image").click(function() {
 			unavailableDates=[]
-// 			$(".image").removeClass("color")
-// 			$(this).addClass("color")
             roomId=$(this).attr("id")
             price = $(this).attr("alt")
 			$("#roomId").empty().val(roomId)
 			showPrice()
-			$(".post-date").text("選擇中")
+			$("#allForm").css('display','block')
 			
 			$.get('${pageContext.request.contextPath}/showByRoomId.room','roomId='+roomId,function(data){
 				$.each(data,function(i,item){
@@ -175,6 +201,7 @@ href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" />
 			var usedPoint=$('#usedPoint').val()
 			var Id=$('#roomId').val();
 			var Price=$('#totalPrice').val();
+	
 												
 			if(name.length==0){				
 				$('#nameSpan').text(" 入住人不可為空")
@@ -207,6 +234,7 @@ href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" />
 			}
 			
 			if(Id.length==0||Price.length==0){
+
 				isSubmit = false;	
 			}
 			
@@ -219,14 +247,14 @@ href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" />
 				$('#beginSpan').text(" 無效日期")
 				$('#endSpan').text(" 無效日期")
 				isSubmit = false;	
-			}									
-			return isSubmit;
-			
+			}
+	
+			return isSubmit;			
 		})
+				
 		
 	});
 </script>
-
 </head>
 
 <body data-offset="200" data-spy="scroll" data-target=".ow-navigation">
@@ -273,9 +301,10 @@ href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" />
 				
 					    <div class="type-post">
 						<div class="col-md-5 col-sm-12 col-xs-12 no-padding entry-cover">
+						<div class="zoom">
 						<img src="<c:url value="../images/room/${room.roomImage}.jpg"/>"
 							 class="image" alt="${room.price}" id="${room.roomId}">
-						<span class="post-date" style="color:red"></span>
+						</div>
 						</div>
 						
 						<div class="col-md-7 col-sm-12 col-xs-12 blog-content">
@@ -299,13 +328,14 @@ href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" />
 			
 
 		
-		<div class="container-fluid no-left-padding no-right-padding woocommerce-checkout">
+		<div id="allForm" class="container-fluid no-left-padding no-right-padding woocommerce-checkout">
 			<!-- Container -->
 			<div class="container">
 
 				<!-- Billing -->
+				
 				<div class="checkout-form">
-
+         
 					<div class="col-md-12 col-sm-12 col-xs-12">
 					    <div>						
 							<h3>訂房填表</h3>						
@@ -314,7 +344,7 @@ href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" />
 					<button>一鍵帶入</button>
 						<form id="myform" action="<c:url value="/reserve.room"/>" method="post">
 							<div class="billing-field">
-							
+						
 								<div class="col-md-4 form-group">
 									<label>入住人<span style="color:red" class="content" id="nameSpan"></span></label> <input class="form-control" type="text"
 										name="name" id="name" >
@@ -350,17 +380,21 @@ href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" />
 									<label>總價</label> <input class="form-control" type="text"
 										name="totalPrice" id="totalPrice" readonly="readonly">
 								</div>
+								<c:if test="${!empty member}">							
 								<div class="col-md-4 form-group">
 									<label>&#160;</label> <input class="form-control" type="submit"
 										id="commit" name="RoomReservation" value="送出訂單">
 								</div>
-								
-					            <input class="form-control" name="newPoint" id="newPoint" type="hidden">
+								</c:if>
+					            <input name="newPoint" id="newPoint" type="hidden">
+					   
+	
 							
 								
 							</div>
 						</form>
 					</div>
+					
 
 				</div>
 				<!-- Billing /- -->		

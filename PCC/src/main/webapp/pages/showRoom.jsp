@@ -18,7 +18,6 @@
 <link rel="stylesheet" type="text/css"
 	href="../revolution/css/settings.css">
 
-
 <!-- RS5.0 Layers and Navigation Styles -->
 <link rel="stylesheet" type="text/css"
 	href="../revolution/css/layers.css">
@@ -42,8 +41,8 @@
 
 <!-- fontawesome -->
 <link href="../revolution/fonts/fontawesome-all.css">
-</head>
-
+<link rel="stylesheet" type="text/css" href="../css/login.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
 
 <body data-offset="200" data-spy="scroll" data-target=".ow-navigation">
