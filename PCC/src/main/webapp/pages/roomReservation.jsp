@@ -72,10 +72,9 @@ href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" />
 
 #allForm {
 display:none
+
+
 }
-
-
-
 
 </style>
 
@@ -174,7 +173,7 @@ display:none
 				$("#usedPoint").empty().val(point)
 				showPrice()
 			})
-	
+						
 		
 		})
 		
@@ -298,13 +297,15 @@ display:none
 				<!-- Content Area -->
 			            <c:forEach var="room" items="${listOfRooms}">		
 				        <div class="content-area blog-section col-md-8 col-sm-8 col-xs-12">
-				
+				        				
 					    <div class="type-post">
 						<div class="col-md-5 col-sm-12 col-xs-12 no-padding entry-cover">
+						
 						<div class="zoom">
 						<img src="<c:url value="../images/room/${room.roomImage}.jpg"/>"
 							 class="image" alt="${room.price}" id="${room.roomId}">
 						</div>
+						
 						</div>
 						
 						<div class="col-md-7 col-sm-12 col-xs-12 blog-content">
@@ -323,11 +324,11 @@ display:none
 						</div>
 					    </div>
 				        </div>
+				        
 				        </c:forEach>
 		</div>
-			
-
 		
+			
 		<div id="allForm" class="container-fluid no-left-padding no-right-padding woocommerce-checkout">
 			<!-- Container -->
 			<div class="container">

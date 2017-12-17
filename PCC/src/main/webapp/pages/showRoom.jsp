@@ -40,6 +40,10 @@
 <link rel="stylesheet" type="text/css" href="../css/style.css">
 
 <!-- fontawesome -->
+<style>
+
+</style>
+
 <link href="../revolution/fonts/fontawesome-all.css">
 <link rel="stylesheet" type="text/css" href="../css/login.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -101,9 +105,9 @@
 			<!-- Container -->
 			<div class="container">
 				<div class="clients-carousel">
-					<div class="col-md-12 item">
+					<div class="col-md-12 item">					
 						<a href="#" title="client"><img src="../images/room/1.jpg"
-							alt="client-1" /></a>
+							alt="client-1" /></a>				
 					</div>
 					<div class="col-md-12 item">
 						<a href="#" title="client"><img src="../images/room/2.jpg"
