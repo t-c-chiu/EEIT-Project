@@ -1,18 +1,14 @@
 package model.service;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
 import javax.transaction.Transactional;
 
-import org.hibernate.mapping.Collection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -54,6 +50,10 @@ public class ClazzService {
 		return clazzInfo;
 	}
 
+	public Clazz showClazzById(Integer classId) {
+		return clazzDAO.selectByClassId(classId);
+	}
+
 	public List<Clazz> showClazzByCategory(String category) {
 		return clazzDAO.selectByCategory(category);
 	}
@@ -62,6 +62,7 @@ public class ClazzService {
 		clazz.setStartDate(new Date());
 		clazz.setStatus(0);
 		clazz.setCurrentStudents(0);
+		clazz.setIntroduction(clazz.getIntroduction().substring(1));
 		return clazzDAO.insert(clazz);
 	}
 }

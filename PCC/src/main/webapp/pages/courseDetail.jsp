@@ -61,21 +61,32 @@
 
 		<!-- Header -->
 <%@ include file="header.jsp"%>
-		<!-- Header /- -->
 		
-		<!--	內容開始	-->
 		<main> <!-- Page Banner -->
-		<!-- Page Banner /- --> <!-- Clients -->
 	
 		<div class="clients container-fluid">
-			<!-- Container -->
 			<div class="container">
+				<table>
+					<tr><th style="font-size:28px;">${clazzDetail.courseName}</th></tr>
+					<tr><td>${clazzDetail.introduction}</td></tr>
+					<tr></tr>
+					<tr></tr>
+					<tr></tr>
+					<tr></tr>
+<!-- 					private Integer numberOfStudents; -->
+<!-- 	private Integer price; -->
+<!-- 	private Integer status; -->
+<!-- 	private Integer currentStudents; -->
+<!-- 	private String location; -->
+<!-- 	private String category; -->
+<!-- 	private String introduction; -->
+<!-- 	private Date startDate; -->
+<!-- 	private Date endDate; -->
 				
+				</table>
 			</div>
-			<!-- Container /- -->
 		</div>
 		</main>
-		<!--	內容結束	-->
 		
 <%@ include file="footer.jsp"%>
 		<!-- Footer Main 1 -->

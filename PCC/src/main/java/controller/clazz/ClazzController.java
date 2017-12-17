@@ -22,7 +22,7 @@ import model.bean.Clazz;
 import model.service.ClazzService;
 
 @Controller
-@SessionAttributes({ "clazzInfo" })
+@SessionAttributes({ "clazzInfo", "clazzDetail" })
 public class ClazzController {
 
 	@Autowired
@@ -41,10 +41,10 @@ public class ClazzController {
 	public @ResponseBody List<Clazz> showClazzByCategory(String category) {
 		return clazzService.showClazzByCategory(category);
 	}
-	
-	@RequestMapping(path="/clazzDetail.clazz")
-	public String showClazzDetail(Integer detail,Model model) {
-		
+
+	@RequestMapping(path = "/clazzDetail.clazz")
+	public String showClazzDetail(Integer detail, Model model) {
+		model.addAttribute("clazzDetail", clazzService.showClazzById(detail));
 		return "courseDetail";
 	}
 

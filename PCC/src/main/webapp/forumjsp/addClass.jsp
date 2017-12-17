@@ -34,7 +34,7 @@
 	        event.preventDefault();
 	        var form = $('#formData')[0];
 	        var data = new FormData(form);
-			data.append('introduction', CKEDITOR.instances.introduction.getData());
+			data.append('introduction',CKEDITOR.instances.introduction.getData());
 	        $("#btnSubmit").prop("disabled", true);
 	        $.ajax({
 	            type: "POST",
@@ -61,11 +61,7 @@
 <body>
 
 	<form id="formData" method="post" enctype="multipart/form-data" action="<c:url value="/startClass.clazz"/>">
-		<label>課程分類</label><select name="category">
-								<option value="產後瘦身">產後瘦身</option>
-								<option value="孕期調理">孕期調理</option>
-								<option value="新手媽咪">新手媽咪</option>
-							</select><br>
+		<label>課程分類</label><input type="text" name="category"><br>
 		<label>課程名稱</label><input type="text" name="courseName"><br>
 		<label>課程地點</label><input type="text" name="location"><br>
 	 	<label>課程價位</label><input type="number" name="price"><br>

@@ -73,19 +73,20 @@
 				
 				console.log(clazzlist)
 				var h2 = $('<h2></h2>').text(category+'的課程有:');
-				$('#categoryClass').empty().append(h2);
+				$('#categoryClass').empty().append('<br>',h2);
 				$.each(clazzlist,function(i,clazz){
-					var div = $('<div></div>').css('display','inline-block').css({width:'234px',height:'225px'});
+					var div = $('<div></div>').css('display','inline-block').css({width:'292.5px',height:'225px',textAlign:'center'});
 					var strong = $('<strong></strong>').text(clazz.courseName);
 					var a = $('<a></a>').attr('href','/PCC/clazzDetail.clazz?detail='+clazz.classId);
 					var img = $('<img></img>').css('height','150px')
 					.attr('src','/PCC/images/clazz/' + clazz.classId + '.jpg').mouseover(function(){
-						$(this).css('border','1px solid red');
+						$(this).css();
 					}).mouseout(function(){
-						$(this).css('border','');
+						$(this).css();
 					});
+					var price = $('<span></span>').text('價格:  '+clazz.price);
 					a.append(img);
-					div.append(strong,'<br>',a);
+					div.append(strong,'<br><br>',a,'<br><br>',price);
 					$('#categoryClass').append(div);
 				})
 			})
@@ -128,7 +129,7 @@
 					</select>
 					</div>
 				</div>
-				<div id="categoryClass"></div>
+				<div id="categoryClass"></div><br>
 				<h2>最新上架課程:</h2>
 				<div class="clients-carousel">
 					<c:forEach var="clazz" items="${clazzInfo.listOfClazz}">
