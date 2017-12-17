@@ -18,7 +18,6 @@
 <link rel="stylesheet" type="text/css"
 	href="../revolution/css/settings.css">
 
-
 <!-- RS5.0 Layers and Navigation Styles -->
 <link rel="stylesheet" type="text/css"
 	href="../revolution/css/layers.css">
@@ -41,9 +40,13 @@
 <link rel="stylesheet" type="text/css" href="../css/style.css">
 
 <!-- fontawesome -->
-<link href="../revolution/fonts/fontawesome-all.css">
-</head>
+<style>
 
+</style>
+
+<link href="../revolution/fonts/fontawesome-all.css">
+<link rel="stylesheet" type="text/css" href="../css/login.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
 
 <body data-offset="200" data-spy="scroll" data-target=".ow-navigation">
@@ -102,9 +105,9 @@
 			<!-- Container -->
 			<div class="container">
 				<div class="clients-carousel">
-					<div class="col-md-12 item">
+					<div class="col-md-12 item">					
 						<a href="#" title="client"><img src="../images/room/1.jpg"
-							alt="client-1" /></a>
+							alt="client-1" /></a>				
 					</div>
 					<div class="col-md-12 item">
 						<a href="#" title="client"><img src="../images/room/2.jpg"
