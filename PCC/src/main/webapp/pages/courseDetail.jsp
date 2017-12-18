@@ -51,7 +51,17 @@
 		$('#routeSelect').change(calcRoute);
 		
 		$('#beStudentBtn').click(function(){
-			$.post('${pageContext.request.contextPath}/beStudent.clazz')
+			$.post('${pageContext.request.contextPath}/beStudent.clazz',function(data){
+				$('#beStudentMsg').text(data);
+				if('報名成功' == data && $('#peopleLeft')){
+					var peopleLeft = parseInt($('#peopleLeft').text());
+					if(peopleLeft > 1){
+						$('#peopleLeft').empty().text(peopleLeft - 1);
+					}else{
+						$('#courseStatus').empty().text('即將開課');
+					}
+				}
+			})
 		})
 	})
 	
@@ -126,7 +136,7 @@
 						<tr>
 							<td><img style="height: 150px;"
 								src="<c:url value="/images/clazz/${clazzDetail.classId}.jpg"/>"></td>
-						</tr>
+						</tr>									
 						<tr>
 							<th style="font-size: 28px;">${clazzDetail.courseName}</th>
 						</tr>
@@ -136,7 +146,7 @@
 						<tr>
 						<c:choose>
 							<c:when test="${clazzDetail.status == 0}">
-							<td>課程狀態:&nbsp;&nbsp;還缺&nbsp;${clazzDetail.numberOfStudents - clazzDetail.currentStudents}&nbsp;人即可開課</td>
+							<td id="courseStatus">課程狀態:&nbsp;&nbsp;還缺&nbsp;<span id="peopleLeft">${clazzDetail.numberOfStudents - clazzDetail.currentStudents}</span>&nbsp;人即可開課</td>
 							</c:when>
 							<c:otherwise>
 							<td>課程狀態:&nbsp;&nbsp;即將開課</td>
@@ -145,13 +155,13 @@
 						</tr>
 						<tr>
 							<td>預計開課時間:&nbsp;&nbsp;<fmt:formatDate
-									value="${clazzDetail.endDate}" pattern="yyyy/MM/dd" /></td>
+									value="${clazzDetail.endDate}" pattern="yyyy/MM/dd hh:mm" /></td>
 						</tr>
 						<tr>
 							<td>課程價位:&nbsp;&nbsp;${clazzDetail.price}元</td>
 						</tr>
 					</table>
-					<button id="beStudentBtn">我要報名本課程</button>
+					<button id="beStudentBtn">我要報名本課程</button>&nbsp;&nbsp;<span id="beStudentMsg"></span>
 				</div>
 				<div style="float: right; width: 45%;">
 					<h3>

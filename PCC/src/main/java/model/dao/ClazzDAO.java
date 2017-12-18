@@ -28,7 +28,7 @@ public class ClazzDAO {
 	}
 
 	public List<Clazz> selectAllClazz() {
-		return getSession().createQuery("from Clazz order by classId desc", Clazz.class).list();
+		return getSession().createQuery("from Clazz order by startDate desc", Clazz.class).list();
 	}
 
 	public List<Clazz> selectByCategory(String category) {
