@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-    <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+	pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -69,7 +69,8 @@
 				</div>
 				<ol class="breadcrumb">
 					<li><a href="../index.jsp" title="Home">首頁</a></li>
-					<li class="active"><a href="../pages/registy.jsp" title="Registy">會員註冊</a></li>
+					<li class="active"><a href="../pages/registy.jsp"
+						title="Registy">會員註冊</a></li>
 				</ol>
 			</div>
 			<!-- Container /- -->
@@ -87,47 +88,80 @@
 							<h3>會員註冊</h3>
 							<div class="billing-field">
 								<div class="col-md-12 form-group">
-									<label>姓名 *</label> <input class="form-control" type="text" />
+									<label>姓名 *</label><span id="name-span"></span> <input
+										onblur="nameCheck();" id="name" name="name"
+										class="form-control" type="text" required />
 								</div>
 								<div class="col-md-12 form-group">
-									<label>帳號 *</label><span id="ac-icon"></span><input id="account" class="form-control" type="text"
-										placeholder="8~20個英文,數字" />
+									<label>帳號 *</label><span id="ac-span" style="color: red"></span><input
+										id="account" name="account" class="form-control" type="text"
+										placeholder="8~20個英文,數字" maxlength="19" required />
 								</div>
 								<div class="col-md-12 form-group">
-									<label>密碼 *</label> <input id="password2" class="form-control"
-										type="password" autocomplete="off"
-										autofocus required />
+									<label>密碼 *</label><span id="ps-span"></span> <input
+										onblur="psw();" id="r-password" name="password"
+										class="form-control" type="password" autocomplete="off"
+										maxlength="20" required />
 								</div>
 								<div class="col-md-12 form-group">
-									<label>重複密碼 *</label> <input id="passwordMatch"
-										match="Password" class="form-control" type="password2"
-										autocomplete="off" autofocus required />
+									<label>重複密碼 *</label><span id="ps2-span"></span> <input
+										onblur="match();" id="passwordMatch" class="form-control"
+										type="password" autocomplete="off" maxlength="20"
+										maxlength="20" required />
 								</div>
 								<div class="col-md-6 form-group">
-									<label>Email *</label> <input id="email" class="form-control" type="text" />
+									<label>Email *</label> <input id="email" name="email"
+										class="form-control" type="text" required />
 								</div>
 								<div class="col-md-6 form-group">
-									<label>手機 *</label> <input id="phone" class="form-control" type="text" />
+									<label>手機 *</label><span id="phone-span"></span> <input
+										onblur="phoneCheck();" id="phone" name="phone"
+										class="form-control" type="text" maxlength="10" required />
 								</div>
 								<div class="col-md-6 form-group">
 									<label>縣市 *</label>
 									<div class="select">
-										<select class="form-control">
-											<option>台北市</option>
-											<option>新北市</option>
-											<option>台中市</option>
-											<option>新竹市</option>
+										<select name="area" class="form-control">
+												<option value="基隆市">基隆市</option>
+												<option value="臺北市">臺北市</option>
+												<option value="新北市">新北市</option>
+												<option value="宜蘭縣">宜蘭縣</option>
+												<option value="新竹市">新竹市</option>
+												<option value="新竹縣">新竹縣</option>
+												<option value="桃園市">桃園市</option>
+												<option value="苗栗縣">苗栗縣</option>
+												<option value="臺中市">臺中市</option>
+												<option value="彰化縣">彰化縣</option>
+												<option value="南投縣">南投縣</option>
+												<option value="嘉義市">嘉義市</option>
+												<option value="嘉義縣">嘉義縣</option>
+												<option value="雲林縣">雲林縣</option>
+												<option value="臺南市">臺南市</option>
+												<option value="高雄市">高雄市</option>
+												<option value="屏東縣">屏東縣</option>
+												<option value="臺東縣">臺東縣</option>
+												<option value="花蓮縣">花蓮縣</option>
+												<option value="金門縣">金門縣</option>
+												<option value="連江縣">連江縣</option>
+												<option value="澎湖縣">澎湖縣</option>
 										</select>
 									</div>
 								</div>
 								<div class="col-md-12 form-group">
-									<label>地址 *</label> <input class="form-control" type="text" />
+									<label>地址 *</label><span id="address-span"></span> <input
+										onblur="addressCheck();" id="address" name="address"
+										class="form-control" type="text" required />
 								</div>
+<!-- 								<div style="display:none;"> -->
+<!-- 									<input name="role" value="1" type="text" hidden="true"/> -->
+<!-- 									<input name="status" value="0" type="text" hidden="true"/> -->
+<!-- 								</div>	 -->
 							</div>
 						</div>
+						<button id="registy-btn" class="btn btn-default form-control footer-send "
+							type="button submit">註冊</button>
 					</form>
-					<button class="btn btn-default form-control footer-send "
-						type="button">註冊</button>
+
 				</div>
 				<!-- Billing /- -->
 			</div>
@@ -135,7 +169,7 @@
 		</div>
 		<!-- Checkout /- --> </main>
 		<!--	內容結束	-->
-<%@ include file="footer.jsp"%>
+		<%@ include file="footer.jsp"%>
 
 	</div>
 
