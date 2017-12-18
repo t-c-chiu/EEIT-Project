@@ -44,7 +44,62 @@
 <link href="../revolution/fonts/fontawesome-all.css">
 <link rel="stylesheet" type="text/css" href="../css/login.css">
 <link rel="stylesheet" type="text/css" href="../css/course.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+	$(function(){
+		$('#routeSelect').change(calcRoute);
+		
+		$('#beStudentBtn').click(function(){
+			$.post('${pageContext.request.contextPath}/beStudent.clazz')
+		})
+	})
+	
+	var directionsDisplay;
+	function initMap() {
+		directionsDisplay = new google.maps.DirectionsRenderer();
+		var geocoder = new google.maps.Geocoder();
+		geocoder.geocode({
+			address : $('#loc').text()
+		}, function(results, status) {
+			if (status == 'OK') {
+				var dest = {
+					lat : results[0].geometry.location.lat(),
+					lng : results[0].geometry.location.lng()
+				};
+				var map = new google.maps.Map(document.getElementById('map'), {
+					zoom : 16,
+					center : dest
+				});
+				directionsDisplay.setMap(map);
+				var marker = new google.maps.Marker({
+					position : dest,
+					map : map
+				});
+			}
+		})
+	}
+	
+	function calcRoute(){
+		var mode = $(this).val();
+		if(mode == 'default')
+			return;
+		var directionsService = new google.maps.DirectionsService();
+		var start = '${member.address}';
+		var request = {
+			    origin: start,
+			    destination: $('#loc').text(),
+			    travelMode: mode
+		};
+		directionsService.route(request, function(result, status) {
+		    if (status == 'OK') {
+		      	directionsDisplay.setDirections(result);
+		      	$('#routeMsg').text('從您的住家' + $('#routeSelect').find(":selected").text() + '到上課地點需時約 '
+		      						+ result.routes[0].legs[0].duration.text);
+		    }
+		});
+	}
+</script>
 </head>
 
 <body data-offset="200" data-spy="scroll" data-target=".ow-navigation">
@@ -60,35 +115,67 @@
 		<!-- Loader /- -->
 
 		<!-- Header -->
-<%@ include file="header.jsp"%>
-		
+		<%@ include file="header.jsp"%>
+
 		<main> <!-- Page Banner -->
-	
+
 		<div class="clients container-fluid">
 			<div class="container">
-				<table>
-					<tr><th style="font-size:28px;">${clazzDetail.courseName}</th></tr>
-					<tr><td>${clazzDetail.introduction}</td></tr>
-					<tr></tr>
-					<tr></tr>
-					<tr></tr>
-					<tr></tr>
-<!-- 					private Integer numberOfStudents; -->
-<!-- 	private Integer price; -->
-<!-- 	private Integer status; -->
-<!-- 	private Integer currentStudents; -->
-<!-- 	private String location; -->
-<!-- 	private String category; -->
-<!-- 	private String introduction; -->
-<!-- 	private Date startDate; -->
-<!-- 	private Date endDate; -->
-				
-				</table>
+				<div style="float: left; width: 50%;">
+					<table class="clazzDetail">
+						<tr>
+							<td><img style="height: 150px;"
+								src="<c:url value="/images/clazz/${clazzDetail.classId}.jpg"/>"></td>
+						</tr>
+						<tr>
+							<th style="font-size: 28px;">${clazzDetail.courseName}</th>
+						</tr>
+						<tr>
+							<td>${clazzDetail.introduction}</td>
+						</tr>
+						<tr>
+						<c:choose>
+							<c:when test="${clazzDetail.status == 0}">
+							<td>課程狀態:&nbsp;&nbsp;還缺&nbsp;${clazzDetail.numberOfStudents - clazzDetail.currentStudents}&nbsp;人即可開課</td>
+							</c:when>
+							<c:otherwise>
+							<td>課程狀態:&nbsp;&nbsp;即將開課</td>
+							</c:otherwise>
+						</c:choose>
+						</tr>
+						<tr>
+							<td>預計開課時間:&nbsp;&nbsp;<fmt:formatDate
+									value="${clazzDetail.endDate}" pattern="yyyy/MM/dd" /></td>
+						</tr>
+						<tr>
+							<td>課程價位:&nbsp;&nbsp;${clazzDetail.price}元</td>
+						</tr>
+					</table>
+					<button id="beStudentBtn">我要報名本課程</button>
+				</div>
+				<div style="float: right; width: 45%;">
+					<h3>
+						上課地點:&nbsp;&nbsp;<span id="loc">${clazzDetail.location}</span>
+					</h3>
+					<br>
+					<div id="map" style="height: 450px; width: 600px;"></div>
+					<script async defer
+						src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB6xPewLqeX388Ecohy3LHWMWN5GtxjNZ4&callback=initMap">
+					</script>
+					<br>
+					<select id="routeSelect">
+						<option value="default">選擇抵達方式</option>
+						<option value="DRIVING">開車</option>
+						<option value="WALKING">走路</option>
+						<option value="TRANSIT">搭乘大眾運輸</option>
+					</select><br><br>
+					<span id="routeMsg" style="font-size:18px;"></span>
+				</div>
 			</div>
 		</div>
 		</main>
-		
-<%@ include file="footer.jsp"%>
+
+		<%@ include file="footer.jsp"%>
 		<!-- Footer Main 1 -->
 
 	</div>
@@ -117,8 +204,8 @@
 		src="../revolution/js/extensoins/revolution.extension.actions.min.js"></script>
 
 	<!-- Library - Google Map API -->
-	<script
-		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDW40y4kdsjsz714OVTvrw7woVCpD8EbLE"></script>
+	<!-- 	<script -->
+	<!-- 		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDW40y4kdsjsz714OVTvrw7woVCpD8EbLE"></script> -->
 
 	<!-- Library - Theme JS -->
 	<script src="../js/functions.js"></script>

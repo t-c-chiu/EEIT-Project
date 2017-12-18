@@ -46,18 +46,26 @@
 <link rel="stylesheet" type="text/css" href="../css/course.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script>
+	var startDates = [];
+	
+	function showTime(){
+		$('.days').each(function(index){
+			var today = new Date();
+			var courseDay = new Date(Date.parse(startDates[index]));
+			var diff = (courseDay.getTime() - today.getTime()) / 1000;
+			$(this).text(Math.floor(diff / (24 * 3600)) + ' 天 '
+						+ Math.floor((diff % (24 * 3600)) / 3600) + ' 小時 '
+						+ Math.floor((diff % 3600) / (60)) + ' 分 '
+						+ Math.floor(diff % 60) + ' 秒');
+		})
+	}
+
 	$(function(){
-		var startDates = [];
 		$('.endDate').each(function(){
 			startDates.push($(this).text());
 		})
 		
-		$('.days').each(function(index){
-			var today = new Date();
-			var courseDay = new Date(Date.parse(startDates[index]));
-			var diff = courseDay.getTime() - today.getTime();
-			$(this).text(Math.floor(diff/86400000));
-		})
+		setInterval(showTime,1000);
 		
 		$('.courseImg').mouseover(function(){
 			$(this).css('height','180px');
@@ -70,21 +78,14 @@
 			if('default' == category)
 				return;
 			$.getJSON('/PCC/showByCategory.clazz','category='+category,function(clazzlist){
-				
-				console.log(clazzlist)
 				var h2 = $('<h2></h2>').text(category+'的課程有:');
 				$('#categoryClass').empty().append('<br>',h2);
 				$.each(clazzlist,function(i,clazz){
 					var div = $('<div></div>').css('display','inline-block').css({width:'292.5px',height:'225px',textAlign:'center'});
 					var strong = $('<strong></strong>').text(clazz.courseName);
 					var a = $('<a></a>').attr('href','/PCC/clazzDetail.clazz?detail='+clazz.classId);
-					var img = $('<img></img>').css('height','150px')
-					.attr('src','/PCC/images/clazz/' + clazz.classId + '.jpg').mouseover(function(){
-						$(this).css();
-					}).mouseout(function(){
-						$(this).css();
-					});
-					var price = $('<span></span>').text('價格:  '+clazz.price);
+					var img = $('<img></img>').css('height','150px').attr('src','/PCC/images/clazz/' + clazz.classId + '.jpg');
+					var price = $('<span></span>').text('價格:  '+clazz.price+'元');
 					a.append(img);
 					div.append(strong,'<br><br>',a,'<br><br>',price);
 					$('#categoryClass').append(div);
@@ -140,7 +141,7 @@
 							<img class="courseImg" style="height:150px;" src="<c:url value="/images/clazz/${clazz.classId}.jpg"/>"/></a>
 							<span>上架日期:</span>&nbsp;&nbsp;<span><fmt:formatDate value="${clazz.startDate}" pattern="yyyy/MM/dd"/></span><br>
 							<span>開課日期:</span>&nbsp;&nbsp;<span class="endDate"><fmt:formatDate value="${clazz.endDate}" pattern="yyyy/MM/dd"/></span><br>
-							<span>距離開課還剩:</span>&nbsp;&nbsp;<span class="days"></span>天
+							<span>距離開課還剩:</span>&nbsp;&nbsp;<span class="days"></span>
 						</div>
 					</c:forEach>
 				</div>
@@ -154,7 +155,7 @@
 							<img title="${clazz.courseName}" class="courseImg" style="height:150px;" src="<c:url value="/images/clazz/${clazz.classId}.jpg"/>"/></a>
 							<span>報名學員人數 :</span><span>&nbsp;&nbsp;${clazz.currentStudents}</span><br>
 							<span>開課所需人數:</span><span>&nbsp;&nbsp;${clazz.numberOfStudents}</span><br>
-							<span>達成百分比:</span>&nbsp;&nbsp;<span>${clazz.currentStudents / clazz.numberOfStudents * 100}</span>%
+							<span>達成百分比:</span>&nbsp;&nbsp;<span><fmt:formatNumber type = "percent" maxFractionDigits = "2" value = "${clazz.currentStudents / clazz.numberOfStudents}"/></span>
 						</div>
 					</c:forEach>
 				</div>

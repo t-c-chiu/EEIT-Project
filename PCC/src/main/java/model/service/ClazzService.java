@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import model.bean.Clazz;
+import model.bean.Student;
 import model.dao.ClazzDAO;
 import model.dao.StudentDAO;
 
@@ -64,5 +65,13 @@ public class ClazzService {
 		clazz.setCurrentStudents(0);
 		clazz.setIntroduction(clazz.getIntroduction().substring(1));
 		return clazzDAO.insert(clazz);
+	}
+
+	public Integer beStudent(String memberId, Integer classId) {
+		Student student =new Student();
+		student.setMemberId(memberId);
+		student.setClassId(classId);
+		student.setStatus(0);
+		return studentDAO.insert(student);
 	}
 }
