@@ -26,5 +26,10 @@ public class RoomDAO {
 		return query.list();		
 	}
 	
+	public List<Room> selectByOrder(String order){
+		Query<Room> query=getSession().createQuery("from Room order by "+order,Room.class);
+		return query.list();	
+	}
+	
 
 }

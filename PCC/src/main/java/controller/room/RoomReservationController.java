@@ -21,7 +21,7 @@ import model.bean.Member;
 import model.bean.Room;
 import model.bean.RoomReservation;
 import model.service.RoomReservationService;
-import model.service.ShowRoomService;
+
 
 @Controller
 @SessionAttributes({"roomReservation","listOfRooms","newPoint"})
@@ -30,8 +30,6 @@ public class RoomReservationController {
 	@Autowired
 	private RoomReservationService roomReservationService;
 
-	@Autowired
-	private ShowRoomService showRoomService;
 
 	@InitBinder
 	public void intialize(WebDataBinder webDataBinder) {
@@ -45,21 +43,23 @@ public class RoomReservationController {
 
 		roomReservationService.insert(member,roomReservation,newPoint);
 		model.addAttribute("newPoint",newPoint);
-
-		
-	   
-	
 		return "reserve.ok";
 	}
 
 	@RequestMapping(path = "/show.room", method = RequestMethod.GET)
 	public String showRoom(String roomType, Model model) {
 		List<Room> listOfRooms;
-		listOfRooms = showRoomService.selectRoomByType(roomType);
+		listOfRooms = roomReservationService.selectRoomByType(roomType);
 		model.addAttribute("listOfRooms", listOfRooms);
 		System.out.println(listOfRooms);
 		return "show.ok";
 	}
+	
+	@RequestMapping(path="/showroomJson.room",method=RequestMethod.GET,produces= {"application/json;charset=UTF-8"})
+	public @ResponseBody List<Room> showRoomJson(String order,Model model){
+		return roomReservationService.selectByOrder(order);
+	}
+	
 	
 	@RequestMapping(path="/showReservation.room",method=RequestMethod.GET)
 	public String selectByMemberId(@SessionAttribute("member") Member member,Model model) {

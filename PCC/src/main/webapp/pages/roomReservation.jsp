@@ -112,6 +112,8 @@ display:none
 			}						
 		}
 		
+		
+		
 				
 		$('#beginDate').datepicker({
 			numberOfMonths : 2,
@@ -137,7 +139,7 @@ display:none
 			}
 		});
 
-		$(".image").click(function() {
+		$(".image").click(function clickImage() {
 			unavailableDates=[]
             roomId=$(this).attr("id")
             price = $(this).attr("alt")
@@ -163,7 +165,7 @@ display:none
 			showPrice()
 		})
 		
-		$("button").click(function(){			
+		$("#formButton").click(function(){			
 			$.get('${pageContext.request.contextPath}/getMemberbyId.room',function(data){
 				point=data.point
 				usedPoint=data.point
@@ -173,9 +175,53 @@ display:none
 				$("#usedPoint").empty().val(point)
 				showPrice()
 			})
-						
-		
+											
 		})
+		
+		$("#orderByP").click(function(){
+			var order=$('#order').val()
+			alert(order)
+			
+			$.get('${pageContext.request.contextPath}/showroomJson.room','order='+order,function(data){
+				
+				var div1=$('<div></div>').addClass("container")
+				$('#test').empty().append(div1)
+				$.each(data,function(i,room){
+						
+				var div2=$('<div></div>').addClass("content-area blog-section col-md-8 col-sm-8 col-xs-12")
+				var div3=$('<div></div>').addClass("type-post")
+				var div4=$('<div></div>').addClass("col-md-5 col-sm-12 col-xs-12 no-padding entry-cover")
+				var div5=$('<div></div>').addClass("zoom")
+				var img=$('<img></img>').attr('src','/PCC/images/room/'+room.roomImage+'.jpg')
+				                        .addClass("image")
+				                        .attr('id',room.roomId)
+				                        .attr('alt',room.price)
+						
+				var div6=$('<div></div>').addClass("col-md-7 col-sm-12 col-xs-12 blog-content")
+				var h3=$('<h3></h3>').addClass("entry-title").text(room.roomId)
+				
+				var div7=$('<div></div>').addClass("entry-meta")
+				var span1=$('<span></span>').addClass("post-like").text('房型 '+room.roomType)
+				var span2=$('<span></span>').addClass("post-admin").text('房價 '+room.price)
+				
+				var div8=$('<div></div>').addClass("entry-content")
+				var p1=$('<p></p>').text('QQ')
+						
+				div5.append(img)
+				div4.append(div5)		
+				div7.append([span1,span2])
+				div8.append(p1)				
+				div6.append([h3,div7,div8])		
+				div3.append([div4,div6])						
+				div2.append(div3)
+				div1.append(div2)	
+				
+				})
+				
+						
+			})												
+		})
+		
 		
 		function unavailable(date) {
 			dmy = date.getFullYear() + "/" + (date.getMonth() + 1) + "/"
@@ -328,6 +374,11 @@ display:none
 				        </c:forEach>
 		</div>
 		
+		<button id="orderByP">調順序</button>
+		<input type="text" id="order">
+		<div  id="test" class="container">
+						
+		</div>
 			
 		<div id="allForm" class="container-fluid no-left-padding no-right-padding woocommerce-checkout">
 			<!-- Container -->
@@ -342,7 +393,7 @@ display:none
 							<h3>訂房填表</h3>						
 						</div>
 						
-					<button>一鍵帶入</button>
+					<button id="formButton">一鍵帶入</button>
 						<form id="myform" action="<c:url value="/reserve.room"/>" method="post">
 							<div class="billing-field">
 						
