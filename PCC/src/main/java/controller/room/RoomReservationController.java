@@ -47,9 +47,9 @@ public class RoomReservationController {
 	}
 
 	@RequestMapping(path = "/show.room", method = RequestMethod.GET)
-	public String showRoom(String roomType, Model model) {
+	public String showRoom(String roomType,String area,Model model) {
 		List<Room> listOfRooms;
-		listOfRooms = roomReservationService.selectRoomByType(roomType);
+		listOfRooms = roomReservationService.selectRoomByType(roomType,area);
 		model.addAttribute("listOfRooms", listOfRooms);
 		System.out.println(listOfRooms);
 		return "show.ok";

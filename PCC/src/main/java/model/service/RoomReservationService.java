@@ -52,8 +52,8 @@ public class RoomReservationService {
 	}
 	
 	
-	public List<Room> selectRoomByType(String roomType){
-		return roomDAO.selectByType(roomType);
+	public List<Room> selectRoomByType(String roomType,String area){
+		return roomDAO.selectByType(roomType,area);
 	}
 	
 	public List<Room> selectByOrder(String order){

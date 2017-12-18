@@ -81,6 +81,13 @@
 			<div>
 				<form action="<c:url value="/show.room"/>" method="get">
 					<table width="400" border="0" align="center">
+						<tr>
+							<td><h3>請輸入地區</h3></td>
+						</tr>
+						
+						<tr>
+						<td><input id="area" name="area" type="text"></td>					
+						</tr>
 
 						<tr>
 							<td><h3>請選擇房型</h3></td>
