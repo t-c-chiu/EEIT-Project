@@ -12,18 +12,22 @@ import model.dao.MemberDAO;
 public class RegistyService {
 	@Autowired
 	private MemberDAO memberDao;
-	
-	public Member registy(Member bean) {
-		Member resulte=null;
-		if(bean!=null) {
-			resulte = memberDao.insertRegisty(bean);
+
+	public Member registy(Member member) {
+		Member resulte = null;
+		if (member != null) {
+			member.setRole(1);
+			member.setStatus(0);
+			member.setPoint(0);
+			resulte = memberDao.insertRegisty(member);
+			System.out.println("Service=" + member);
 		}
 		return resulte;
 	}
-	
+
 	public Member checkMemberId(String memberId) {
-		Member check=memberDao.select(memberId);
-		if(check!=null) {
+		Member check = memberDao.select(memberId);
+		if (check != null) {
 			return check;
 		}
 		return null;

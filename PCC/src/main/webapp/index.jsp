@@ -9,7 +9,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- google login -->
-<meta name =“google- AIzaSyAvKEKkluLo31_D7v-civI6skhGGAisRyA -client_id”content =“AIzaSyAvKEKkluLo31_D7v-civI6skhGGAisRyA”>
+<!-- <meta name =“google- AIzaSyAvKEKkluLo31_D7v-civI6skhGGAisRyA -client_id”content =“AIzaSyAvKEKkluLo31_D7v-civI6skhGGAisRyA”> -->
 <title>PCC - Home</title>
 <!-- Standard Favicon -->
 <link rel="icon" type="image/x-icon" href="images/pcc/pcc.png" />
@@ -658,8 +658,8 @@
 
 	<!-- login  -->
 	<script type="text/javascript" src="js/login.js"></script>
-	<!-- google login -->
-	<script src="https://apis.google.com/js/platform.js" async defer></script>
+<!-- 	<!-- google login --> -->
+<!-- 	<script src="https://apis.google.com/js/platform.js" async defer></script> -->
 </body>
 
 </html>
