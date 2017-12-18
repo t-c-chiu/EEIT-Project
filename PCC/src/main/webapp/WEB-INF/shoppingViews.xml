@@ -9,7 +9,7 @@
 <!-- 	</bean> -->
 
 
-	<bean id="page.productsearch"
+	<bean id="page.productsearchtest"
 		class="org.springframework.web.servlet.view.InternalResourceView">
 		<property name="url" value="/ProductTest.jsp"></property>
 	</bean>
@@ -18,4 +18,12 @@
 		<property name="contextRelative" value="true"></property>
 		<property name="url" value="/shoppingMall/productBackstage.jsp"></property>
 	</bean>
+	
+	<bean id="page.productsearch"
+		class="org.springframework.web.servlet.view.RedirectView">
+		<property name="contextRelative" value="true"></property>
+		<property name="url" value="/pages/shop-2.jsp"></property>
+	</bean>
+	
+	
 </beans>

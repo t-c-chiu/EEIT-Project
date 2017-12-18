@@ -17,7 +17,7 @@ public class MatchController {
     @Autowired
     public ServantService service;
 
-    @RequestMapping(path="/test.match", method = RequestMethod.GET)   
+    @RequestMapping(path="/servantList.match", method = RequestMethod.GET)   
     public String method(Model model) {
     	
     	List<List> servantList = service.showServantList();

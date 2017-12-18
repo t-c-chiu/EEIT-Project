@@ -18,6 +18,15 @@ public class Member {
 	private Integer role;
 	private Integer status;
 	private byte[] password;
+	private Integer point;
+
+	public Integer getPoint() {
+		return point;
+	}
+
+	public void setPoint(Integer point) {
+		this.point = point;
+	}
 
 	public String getMemberId() {
 		return memberId;
@@ -95,6 +104,8 @@ public class Member {
 	public String toString() {
 		return "Member [memberId=" + memberId + ", name=" + name + ", email=" + email + ", phone=" + phone + ", area="
 				+ area + ", address=" + address + ", role=" + role + ", status=" + status + ", password="
-				+ Arrays.toString(password) + "]";
+				+ Arrays.toString(password) + ", point=" + point + "]";
 	}
+
+
 }

@@ -8,10 +8,11 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet"
-	href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" />
+<link rel="stylesheet" 
+href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" />
 <script src="http://code.jquery.com/jquery-1.8.3.js"></script>
 <script src="http://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
 <title>PCC - Room</title>
 <!-- Standard Favicon -->
 <link rel="icon" type="image/x-icon" href="../images/pcc/pcc.png" />
@@ -48,10 +49,37 @@
 <link href="../revolution/fonts/fontawesome-all.css">
 
 <style>
-.color {
-	border-style: double
+
+.zoom {
+    display: inline-block;
+    overflow: hidden;   
+    border: 1px solid gray;
 }
+
+.zoom img {
+    -webkit-transition: all .2s ease;
+    -ms-transition: all .2s ease;
+    transition: all .2s ease;    
+    vertical-align: middle;
+}
+
+.zoom img:hover {
+    -webkit-transform:scale(1.5); /* Safari and Chrome */
+    -ms-transform:scale(1.5); /* IE 9 */
+    transform:scale(1.5);
+    cursor:pointer
+}
+
+#allForm {
+display:none
+
+
+}
+
 </style>
+
+<link rel="stylesheet" type="text/css" href="../css/login.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
 <script>
 	$(function() {
@@ -61,21 +89,37 @@
 		var beginDate
 		var totalPrice
 		var unavailableDates
+		var selectedDates
+		var point
+		var newPoint
+		var usedPoint
+	
 
 		function showPrice() {
-			totalPrice = ((endDate - beginDate) * price) / (86400000)
+			totalPrice = (((endDate - beginDate) * price) / (86400000)-(usedPoint*50))
+			
+			newPoint=Math.round(point-usedPoint+(totalPrice/500))
+			if(newPoint<0)
+				{newPoint=0}
+			
+			$('#newPoint').empty().val(newPoint)
+			
 			if (!isNaN(totalPrice)) {
-				$('#totalPrice').empty().val(totalPrice)
-			}
+				if(totalPrice<0)
+				{$('#totalPrice').empty().val(0)}
+				else
+				{$('#totalPrice').empty().val(totalPrice)}						
+			}						
 		}
-
+		
+				
 		$('#beginDate').datepicker({
 			numberOfMonths : 2,
 			minDate : 0,
 			beforeShowDay : unavailable,
 			dateFormat : "yy/mm/dd",
 			onSelect : function(selected) {
-				$("#endDate").datepicker("option", "minDate", selected)
+// 				$("#endDate").datepicker("option", "minDate", selected)
 				beginDate = $('#beginDate').datepicker('getDate');
 				showPrice()
 			}
@@ -87,7 +131,7 @@
 			beforeShowDay : unavailable,
 			dateFormat : "yy/mm/dd",
 			onSelect : function(selected) {
-				$("#beginDate").datepicker("option", "maxDate", selected)
+// 				$("#beginDate").datepicker("option", "maxDate", selected)
 				endDate = $(this).datepicker('getDate');
 				showPrice()
 			}
@@ -95,61 +139,44 @@
 
 		$(".image").click(function() {
 			unavailableDates=[]
-// 			$(".image").removeClass("color")
-// 			$(this).addClass("color")
             roomId=$(this).attr("id")
             price = $(this).attr("alt")
 			$("#roomId").empty().val(roomId)
 			showPrice()
+			$("#allForm").css('display','block')
 			
 			$.get('${pageContext.request.contextPath}/showByRoomId.room','roomId='+roomId,function(data){
 				$.each(data,function(i,item){
 					
-
 					var endDateTemp = data[i].endDate;
 					var beginDateTemp =data[i].beginDate;
-					
-// 					var dayDiff=(new Date(endDateTemp)-new Date(beginDateTemp))/86400000
-// 					console.log(beginDateTemp.set(new Date(beginDateTemp).getDate()+1))
-		
-			        for (var d = new Date(beginDateTemp);d <= new Date(endDateTemp);d.setDate(d.getDate() + 1)) 
-			        {
-			        	unavailableDates.push($.datepicker.formatDate('yy/m/d', d));                    
-			        }
-			        console.log(d)			
-// 					var arr = endDateTemp.split('/');
-					
-// 				    if(parseInt(arr[1])<10){
-// 					var month = arr[1].replace('0','');
-// 				    }else {var month = arr[1]}
-				    				    
-// 				    if(parseInt(arr[2])<10){
-// 					var day = arr[2].replace('0','');
-// 				    }else {var day = arr[2]}
-									    				 				    
-// 					endDateTemp = arr[0] + '/' + month + '/' + day;
-										
-// 					var arr2 =beginDateTemp.split('/')
-// 				    if(parseInt(arr2[1])<10){
-// 						var month2 = arr2[1].replace('0','');
-// 					    }else {var month2 = arr2[1]}
-					
-// 				    if(parseInt(arr2[2])<10){
-// 						var day2 = arr2[2].replace('0','');
-// 					    }else {var day2 = arr2[2]}
-				    
-// 				    beginDateTemp = arr2[0]+ '/' + month2 + '/' + day2;
-						    
-// 					unavailableDates.push(beginDateTemp);
-// 					unavailableDates.push(endDateTemp);
-				    				
-				})
 							
+			        for (var d = new Date(beginDateTemp);d <= new Date(endDateTemp);d.setDate(d.getDate() + 1)) 
+			        {unavailableDates.push($.datepicker.formatDate('yy/m/d', d));	
+			        }				    				
+				})							
 			})					
 		});
-
-	
-
+		
+		$('#usedPoint').change(function(){
+			usedPoint=$(this).val()
+			showPrice()
+		})
+		
+		$("button").click(function(){			
+			$.get('${pageContext.request.contextPath}/getMemberbyId.room',function(data){
+				point=data.point
+				usedPoint=data.point
+				$("#name").empty().val(data.name)
+				$("#email").empty().val(data.email)
+			    $("#phone").empty().val(data.phone)
+				$("#usedPoint").empty().val(point)
+				showPrice()
+			})
+						
+		
+		})
+		
 		function unavailable(date) {
 			dmy = date.getFullYear() + "/" + (date.getMonth() + 1) + "/"
 					+ date.getDate();
@@ -159,10 +186,74 @@
 				return [ false, "", "Unavailable" ];
 			}
 		}
+		
+		$('#commit').click(function(){
+			$(".content").empty()
+			selectedDates=[]
+			
+			var isSubmit=true;
+			var name=$('#name').val();
+			var email=$('#email').val();
+			var phone=$('#phone').val();
+			var begin=$('#beginDate').val();
+			var end=$('#endDate').val();
+			var usedPoint=$('#usedPoint').val()
+			var Id=$('#roomId').val();
+			var Price=$('#totalPrice').val();
+	
+												
+			if(name.length==0){				
+				$('#nameSpan').text(" 入住人不可為空")
+				isSubmit = false;
+			}
+			
+			if(email.length==0){
+				$('#emailSpan').text(" email不可為空")
+				isSubmit = false;
+			}
+			
+			if(phone.length==0){
+				$('#phoneSpan').text(" 電話不可為空")
+				isSubmit = false;
+			}
+			
+			if(begin.length==0){
+				$('#beginSpan').text(" 入住日不可為空")
+				isSubmit = false;
+			}
+			
+			if(end.length==0){
+				$('#endSpan').text(" 退房日不可為空")
+				isSubmit = false;
+			}
+						
+			if(usedPoint>point){
+				$('#pointSpan').text(" 無效點數")
+				isSubmit = false;				
+			}
+			
+			if(Id.length==0||Price.length==0){
 
+				isSubmit = false;	
+			}
+			
+			for (var d = new Date(begin);d <= new Date(end);d.setDate(d.getDate() + 1)) 
+		     {selectedDates.push($.datepicker.formatDate('yy/m/d', d));	
+		       }
+			var diff = $(unavailableDates).not(selectedDates).get();
+
+			if(diff.length<unavailableDates.length){
+				$('#beginSpan').text(" 無效日期")
+				$('#endSpan').text(" 無效日期")
+				isSubmit = false;	
+			}
+	
+			return isSubmit;			
+		})
+				
+		
 	});
 </script>
-
 </head>
 
 <body data-offset="200" data-spy="scroll" data-target=".ow-navigation">
@@ -178,114 +269,7 @@
 		<!-- Loader /- -->
 
 		<!-- Header -->
-		<header
-			class="header-section header-section-1 container-fluid no-padding">
-
-		<!-- Middel Header -->
-		<div class="middel-header">
-			<!-- Container -->
-			<div class="container">
-				<!-- Logo Block -->
-				<div class="col-md-4 col-sm-6 col-xs-12 logo-block">
-					<a href="index.html" class="navbar-brand">PCC <span>logo</span></a>
-				</div>
-				<!-- Logo Block /- -->
-				<!-- Search Block -->
-				<div class="col-md-5 col-sm-6 col-xs-6 search-block">
-					<div class="input-group">
-						<input class="form-control"
-							placeholder="Search You Wants Here . . ." type="text"> <span
-							class="input-group-btn">
-							<button class="btn btn-default" type="button">
-								<i class="icon icon-Search"></i>
-							</button>
-						</span>
-					</div>
-				</div>
-				<!-- Search Block /- -->
-				<!-- Menu Icon -->
-				<div class="col-md-3 col-sm-6 col-xs-6 menu-icon">
-					<ul class="cart">
-						<li><a aria-expanded="true" aria-haspopup="true"
-							data-toggle="dropdown" id="cart" class="btn dropdown-toggle"
-							title="Add To Cart" href="#"><i
-								class="icon icon-ShoppingCart"></i></a>
-							<ul class="dropdown-menu no-padding">
-								<li class="mini_cart_item"><a title="Remove this item"
-									class="remove" href="#">&#215;</a> <a href="#"
-									class="shop-thumbnail"> <img alt="poster_2_up"
-										class="attachment-shop_thumbnail"
-										src="images/product-wishlist-1.jpg">Flying Ninja
-								</a> <span class="quantity">2 &#215; <span class="amount">Rs.12.00</span></span>
-								</li>
-								<li class="mini_cart_item"><a title="Remove this item"
-									class="remove" href="#">&#215;</a> <a href="#"
-									class="shop-thumbnail"> <img alt="poster_2_up"
-										class="attachment-shop_thumbnail"
-										src="../images/product-wishlist-2.jpg">Flying Ninja
-								</a> <span class="quantity">2 &#215; <span class="amount">Rs.12.00</span></span>
-								</li>
-								<li class="button"><a href="#" title="View Cart">View
-										Cart</a> <a href="#" title="Check Out">Check out</a></li>
-							</ul></li>
-						<li><a href="#" title="Like"><i class="icon icon-Heart"></i></a></li>
-						<li><a href="#" title="User"><i class="icon icon-User"></i></a></li>
-					</ul>
-				</div>
-				<!-- Menu Icon /- -->
-			</div>
-			<!-- Container /- -->
-		</div>
-		<!-- Middel Header /- --> <!-- Menu Block -->
-		<div class="container-fluid no-padding menu-block">
-			<!-- Container -->
-			<div class="container">
-				<!-- nav -->
-				<nav class="navbar navbar-default ow-navigation">
-				<div class="navbar-collapse collapse" id="navbar">
-					<ul class="nav navbar-nav">
-						<li class="dropdown"><a href="../index.html" title="Home"
-							class="dropdown-toggle" role="button" aria-haspopup="true"
-							aria-expanded="false">首頁</a></li>
-						<li><a href="../pages/reservation.html" title="Reservation">線上預約</a></li>
-						<li><a href="../pages/partner.html" title="Partner">服務夥伴</a></li>
-						<li class="dropdown"><a href="../pages/shop.html"
-							title="Shop" class="dropdown-toggle" role="button"
-							aria-haspopup="true" aria-expanded="false">購物商城 </a> <i
-							class="ddl-switch fa fa-angle-down"></i>
-							<ul class="dropdown-menu">
-								<li><a href="#" title="">商品類</a></li>
-								<li><a href="#" title="">商品類</a></li>
-								<li><a href="#" title="">商品類</a></li>
-							</ul></li>
-						<li class="dropdown"><a href="../pages/room.html"
-							title="Room" class="dropdown-toggle" role="button"
-							aria-haspopup="true" aria-expanded="false">預約訂房</a></li>
-						<li class="dropdown"><a href="../pages/course.html"
-							title="Course" class="dropdown-toggle" role="button"
-							aria-haspopup="true" aria-expanded="false">線上課程</a> <i
-							class="ddl-switch fa fa-angle-down"></i>
-							<ul class="dropdown-menu">
-								<li><a href="#" title="">教學類</a></li>
-								<li><a href="#" title="">教學類</a></li>
-							</ul></li>
-						<li class="dropdown"><a href="../pages/article.html"
-							title="Forum" class="dropdown-toggle" role="button"
-							aria-haspopup="true" aria-expanded="false">文章/討論</a> <i
-							class="ddl-switch fa fa-angle-down"></i>
-							<ul class="dropdown-menu">
-								<li><a href="#" title="">討論區</a></li>
-								<li><a href="#" title="">討論區</a></li>
-							</ul></li>
-						<li><a href="../pages/contact-us.html" title="Contact Us">聯絡資訊</a></li>
-					</ul>
-				</div>
-				<!--/.nav-collapse --> </nav>
-				<!-- nav /- -->
-			</div>
-			<!-- Container /- -->
-		</div>
-		<!-- Menu Block /- --> </header>
+			<%@ include file="header.jsp" %>
 		<!-- Header /- -->
 		<!--	內容開始	-->
 		<main> <!-- Page Banner -->
@@ -303,74 +287,76 @@
 				</ol>
 			</div>
 			<!-- Container /- -->
+			
+
 		</div>
-		<!-- Page Banner /- --> <!-- Clients --> <!-- Container --> <c:forEach
-			var="room" items="${listOfRooms}">
-			<div class="container">
+		<!-- Page Banner /- --> <!-- Clients --> <!-- Container --> 
+		
+	
+		<div class="container">
 				<!-- Content Area -->
-				<div class="content-area blog-section col-md-8 col-sm-8 col-xs-12">
-					<div class="type-post">
+			            <c:forEach var="room" items="${listOfRooms}">		
+				        <div class="content-area blog-section col-md-8 col-sm-8 col-xs-12">
+				        				
+					    <div class="type-post">
 						<div class="col-md-5 col-sm-12 col-xs-12 no-padding entry-cover">
-
-
-							<a><img
-								src="<c:url value="../images/room/${room.roomImage}.jpg"/>"
-								class="image" alt="${room.price}" id="${room.roomId}"></a> <span
-								class="post-date"><a href="#"><i
-									class="fa fa-calendar-o"></i>July 16</a></span>
+						
+						<div class="zoom">
+						<img src="<c:url value="../images/room/${room.roomImage}.jpg"/>"
+							 class="image" alt="${room.price}" id="${room.roomId}">
 						</div>
+						
+						</div>
+						
 						<div class="col-md-7 col-sm-12 col-xs-12 blog-content">
-							<h3 class="entry-title">
-								<a title="new Collectios are imported In Our shop."
-									href="blog-post.html">${room.roomId} </a>
-							</h3>
-							<div class="entry-meta">
-								<span class="post-like"><a href="#" title="224 Likes"><i
-										class="fa fa-heart-o"></i>${room.roomType}</a></span> <span
-									class="post-admin"><i class="fa fa-user"></i>${room.price}<a
-									href="#" title="Max">Max</a></span>
-							</div>
-							<div class="entry-content">
-								<p>The weather started getting rough - the tiny ship was
-									tossed. If not for the courage of the fearless If not for the
-									courage of the Minnow would be lost.</p>
-								<a href="blog-post.html" title="Read More" class="read-more">Read
-									More<i class="fa fa-long-arrow-right"></i>
-								</a>
-							</div>
+						<h3 class="entry-title">${room.roomId}</h3>
+						<div class="entry-meta">
+						<span class="post-like">房型 ${room.roomType}</span> 
+						<span class="post-admin">房價 ${room.price}</span>
 						</div>
-					</div>
-				</div>
-			</div>
-		</c:forEach>
-
-
-
-
-		<div
-			class="container-fluid no-left-padding no-right-padding woocommerce-checkout">
+							
+						<div class="entry-content">
+						<p>The weather started getting rough - the tiny ship was
+						tossed. If not for the courage of the fearless If not for the
+						courage of the Minnow would be lost.</p>								
+						</div>
+						
+						</div>
+					    </div>
+				        </div>
+				        
+				        </c:forEach>
+		</div>
+		
+			
+		<div id="allForm" class="container-fluid no-left-padding no-right-padding woocommerce-checkout">
 			<!-- Container -->
 			<div class="container">
 
 				<!-- Billing -->
+				
 				<div class="checkout-form">
-
+         
 					<div class="col-md-12 col-sm-12 col-xs-12">
-						<h3>訂房填表</h3>
-						<form action="<c:url value="/reserve.room"/>" method="post">
+					    <div>						
+							<h3>訂房填表</h3>						
+						</div>
+						
+					<button>一鍵帶入</button>
+						<form id="myform" action="<c:url value="/reserve.room"/>" method="post">
 							<div class="billing-field">
-
+						
 								<div class="col-md-4 form-group">
-									<label>入住人</label> <input class="form-control" type="text"
-										name="name" value="${member.name}">
+									<label>入住人<span style="color:red" class="content" id="nameSpan"></span></label> <input class="form-control" type="text"
+										name="name" id="name" >
 								</div>
 								<div class="col-md-4 form-group">
-									<label>email</label> <input class="form-control" type="text"
-										name="email" value="${member.email}">
+									<label>email<span style="color:red" class="content" id="emailSpan"></span></label> <input class="form-control" type="text"
+										name="email" id="email">
 								</div>
 								<div class="col-md-4 form-group">
-									<label>電話</label> <input class="form-control" type="text"
-										name="phone" value="${member.phone}">
+									<label>電話<span style="color:red" class="content" id="phoneSpan"></span></label> <input class="form-control" type="text"
+										name="phone" id="phone">
 								</div>
 
 								<div class="col-md-4 form-group">
@@ -378,99 +364,50 @@
 										name="roomId" id="roomId" readonly="readonly">
 								</div>
 								<div class="col-md-4 form-group">
-									<label>入住日</label> <input class="form-control" type="text"
+									<label>入住日<span style="color:red" class="content" id="beginSpan"></span></label> <input class="form-control" type="text"
 										name="beginDate" id="beginDate">
 								</div>
 								<div class="col-md-4 form-group">
-									<label>退房日</label> <input class="form-control" type="text"
+									<label>退房日<span style="color:red" class="content" id="endSpan"></span></label> <input class="form-control" type="text"
 										name="endDate" id="endDate">
 								</div>
-								<div class="col-md-5 form-group">
+								
+								<div class="col-md-4 form-group">
+									<label>使用點數(一點折抵50)<span style="color:red" class="content" id="pointSpan"></span></label> <input class="form-control" type="text"
+										name="usedPoint" id="usedPoint">
+								</div>
+																
+								<div class="col-md-4 form-group">
 									<label>總價</label> <input class="form-control" type="text"
 										name="totalPrice" id="totalPrice" readonly="readonly">
 								</div>
-								<div class="col-md-5 form-group">
+								<c:if test="${!empty member}">							
+								<div class="col-md-4 form-group">
 									<label>&#160;</label> <input class="form-control" type="submit"
-										name="RoomReservation" value="送出訂單">
+										id="commit" name="RoomReservation" value="送出訂單">
 								</div>
+								</c:if>
+					            <input name="newPoint" id="newPoint" type="hidden">
+					   
+	
+							
+								
 							</div>
 						</form>
 					</div>
+					
 
 				</div>
-				<!-- Billing /- -->
+				<!-- Billing /- -->		
 			</div>
+			
+									
 			<!-- Container /- -->
 		</div>
-
-
-
-
-
 		<!-- Content Area /- --> <!-- Clients /- --> </main>
 		<!--	內容結束	-->
 		<!-- Footer Main 1 -->
-		<footer id="footer-main"
-			class="footer-main footer-main-1 services-section container-fluid">
-		<!-- Container -->
-		<div class="container">
-			<div class="row">
-				<div class="section-header">
-					<h3>聯絡我們</h3>
-					<p>Contact-us</p>
-				</div>
-				<!-- Widget About -->
-				<aside class="col-md-6 col-sm-6 col-xs-12 ftr-widget widget_about">
-
-				<a href="index.html" title="Max Shop">P<span>ostnatal</span> C<span>are</span>
-					C<span>enter</span></a>
-				<div class="info">
-					<p>
-						<i class="icon icon-Pointer"></i>106台北市大安區復興南路一段390號 2樓
-					</p>
-					<p>
-						<i class="icon icon-Phone2"></i><a href="tel:(11)1234567890"
-							title="Phone" class="phone">(02) 6631 6666</a>
-					</p>
-					<p>
-						<i class="icon icon-Imbox"></i><a href="mailto:info@maxshop.com"
-							title="info@maxshop.com">eeit98team05@outlook.com</a>
-					</p>
-				</div>
-
-				</aside>
-				<!-- Widget About /- -->
-				<!-- Widget Newsletter -->
-				<form action="#" method="post" name="contact-form"
-					class="col-md-6 col-sm-6 col-xs-12" id="main-contact-form ">
-					<div class="form-group">
-						<input type="email" required="" placeholder="Email"
-							class="form-control" name="email">
-					</div>
-					<div class="form-group">
-						<textarea required="" placeholder="Message" rows="8"
-							class="form-control" name="message"></textarea>
-					</div>
-					<button class="btn btn-default form-control footer-send "
-						type="button">
-						<i class="fa fa-paper-plane-o"></i> 送出
-					</button>
-				</form>
-				<div class="copyright-section">
-					<div class="coyright-content">
-						<p>© PCC. all rights reserved</p>
-					</div>
-					<ul>
-						<li><a href="#" title="Facebook"><i
-								class="fa fa-facebook"></i></a></li>
-						<li><a href="#" title="Twitter"><i class="fa fa-twitter"></i></a></li>
-
-					</ul>
-				</div>
-				<!-- Widget Newsletter /- -->
-			</div>
-		</div>
-		<!-- Container /- --> </footer>
+		<%@ include file="footer.jsp" %>
 		<!-- Footer Main 1 -->
 
 	</div>

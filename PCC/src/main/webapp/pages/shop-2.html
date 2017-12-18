@@ -71,13 +71,15 @@
 					<!-- Search Block -->
 					<div class="col-md-5 col-sm-6 col-xs-6 search-block">
 						<div class="input-group">
-							<input class="form-control"
+						<form action="/PCC/searchProduct.shopping" method="get" id="searchForm">
+							<input class="form-control" id="searchText"
 								placeholder="Search You Wants Here . . ." type="text"> 
 								<span id="serch-btn" class="input-group-btn">
 									<button class="btn btn-default" type="button">
 										<i class="icon icon-Search"></i>
 									</button>
 								</span>
+						</form>
 						</div>
 					</div>
 					<!-- Search Block /- -->
@@ -528,13 +530,22 @@
 	<!-- Library - Theme JS -->
 	<script src="../js/functions.js"></script>
 	<!-- login  -->
-	<script type="text/javascript" src="../js/login.js"></script>
+<!-- 	<script type="text/javascript" src="../js/login.js"></script> -->
 	<script type="text/javascript">
-	$(document).ready(function(){
-		$('#serch-btn').click(function(){
-			console.log("hello");
-		});
-	});
+		$(document).ready(function(){
+			$('#serch-btn').click(function(){
+				alert("已點");
+				var searchText = $('#searchText').val();
+				if(searchText.trim().length == 0){
+					alert('請輸入搜尋條件');
+					$('#filter').val('').focus();
+				}else{
+					$('#searchForm').submit();
+				}
+			})
+	
+			
+		})
 	</script>
 </body>
 </html>
