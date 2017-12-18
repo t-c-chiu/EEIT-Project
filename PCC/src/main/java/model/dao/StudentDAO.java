@@ -7,7 +7,6 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import model.bean.Clazz;
 import model.bean.Student;
 
 @Repository
@@ -22,15 +21,21 @@ public class StudentDAO {
 	public Integer insert(Student student) {
 		return (Integer) getSession().save(student);
 	}
-	
+
 	public Integer selectCountByClassId(Integer classId) {
 		Number number = (Number) getSession().createQuery("select count(*) from Student where classId = :classId")
 				.setParameter("classId", classId).getSingleResult();
 		return number.intValue();
 	}
 
-	public List<Integer> selectClassIdByMemberId(String memeberId) {
-		return getSession().createQuery("select classId from Student where memeberId = :memeberId", Integer.class)
-				.list();
+	public List<Integer> selectClassIdByMemberId(String memberId) {
+		return getSession().createQuery("select classId from Student where memberId = :memberId", Integer.class)
+				.setParameter("memberId", memberId).list();
 	}
+
+	public List<String> selectMemberIdByClassId(Integer classId) {
+		return getSession().createQuery("select memberId from Student where classId = :classId", String.class)
+				.setParameter("classId", classId).list();
+	}
+
 }

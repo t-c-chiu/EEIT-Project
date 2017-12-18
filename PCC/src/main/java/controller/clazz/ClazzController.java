@@ -50,11 +50,10 @@ public class ClazzController {
 		return "courseDetail";
 	}
 
-	@RequestMapping(path = "/beStudent.clazz", method = RequestMethod.POST)
-	public void beStudent(@SessionAttribute("member") Member member, @SessionAttribute("clazzDetail") Clazz clazz) {
-		String memberId=member.getMemberId();
-		Integer classId=clazz.getClassId();
-		clazzService.beStudent(memberId,classId);
+	@RequestMapping(path = "/beStudent.clazz", method = RequestMethod.POST, produces = { "text/plain;charset=UTF-8" })
+	public @ResponseBody String beStudent(@SessionAttribute("member") Member member,
+			@SessionAttribute("clazzDetail") Clazz clazz) {
+		return clazzService.beStudent(member.getMemberId(), clazz.getClassId());
 	}
 
 	@RequestMapping(path = "/startClass.clazz", method = RequestMethod.POST, produces = { "text/plain;charset=UTF-8" })

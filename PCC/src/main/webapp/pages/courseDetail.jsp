@@ -44,6 +44,18 @@
 <link href="../revolution/fonts/fontawesome-all.css">
 <link rel="stylesheet" type="text/css" href="../css/login.css">
 <link rel="stylesheet" type="text/css" href="../css/course.css">
+<style>
+	table{
+		width: 100%;
+		margin: auto;
+		text-align: center;
+	}
+	
+	td{
+		padding: 10px;
+	}
+	
+</style>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script>
@@ -51,7 +63,17 @@
 		$('#routeSelect').change(calcRoute);
 		
 		$('#beStudentBtn').click(function(){
-			$.post('${pageContext.request.contextPath}/beStudent.clazz')
+			$.post('${pageContext.request.contextPath}/beStudent.clazz',function(data){
+				alert(data);
+				if('報名成功' == data && $('#peopleLeft')){
+					var peopleLeft = parseInt($('#peopleLeft').text());
+					if(peopleLeft > 1){
+						$('#peopleLeft').empty().text(peopleLeft - 1);
+					}else{
+						$('#courseStatus').empty().text('即將開課');
+					}
+				}
+			})
 		})
 	})
 	
@@ -124,11 +146,11 @@
 				<div style="float: left; width: 50%;">
 					<table class="clazzDetail">
 						<tr>
-							<td><img style="height: 150px;"
+							<td><img style="height: 200px;"
 								src="<c:url value="/images/clazz/${clazzDetail.classId}.jpg"/>"></td>
-						</tr>
+						</tr>									
 						<tr>
-							<th style="font-size: 28px;">${clazzDetail.courseName}</th>
+							<td style="font-size: 28px;">${clazzDetail.courseName}</td>
 						</tr>
 						<tr>
 							<td>${clazzDetail.introduction}</td>
@@ -136,7 +158,7 @@
 						<tr>
 						<c:choose>
 							<c:when test="${clazzDetail.status == 0}">
-							<td>課程狀態:&nbsp;&nbsp;還缺&nbsp;${clazzDetail.numberOfStudents - clazzDetail.currentStudents}&nbsp;人即可開課</td>
+							<td id="courseStatus">課程狀態:&nbsp;&nbsp;還缺&nbsp;<span id="peopleLeft">${clazzDetail.numberOfStudents - clazzDetail.currentStudents}</span>&nbsp;人即可開課</td>
 							</c:when>
 							<c:otherwise>
 							<td>課程狀態:&nbsp;&nbsp;即將開課</td>
@@ -145,13 +167,16 @@
 						</tr>
 						<tr>
 							<td>預計開課時間:&nbsp;&nbsp;<fmt:formatDate
-									value="${clazzDetail.endDate}" pattern="yyyy/MM/dd" /></td>
+									value="${clazzDetail.endDate}" pattern="yyyy/MM/dd hh:mm" /></td>
 						</tr>
 						<tr>
-							<td>課程價位:&nbsp;&nbsp;${clazzDetail.price}元</td>
+							<td>課程價位:&nbsp;&nbsp;${clazzDetail.price}&nbsp;元</td>
+						</tr>
+						<tr>
+							<td><button id="beStudentBtn">我要報名本課程</button></td>
 						</tr>
 					</table>
-					<button id="beStudentBtn">我要報名本課程</button>
+					
 				</div>
 				<div style="float: right; width: 45%;">
 					<h3>

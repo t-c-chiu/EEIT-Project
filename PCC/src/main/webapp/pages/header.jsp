@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<script src="<c:url value="/js/login.js"/>"></script>
 <!-- Header -->
 <header class="header-section container-fluid no-padding">
 	<!-- Menu Block -->
@@ -122,29 +123,21 @@
 						<li class="dropdown"><a href="pages/room.html" title="Room"
 							class="dropdown-toggle" role="button" aria-haspopup="true"
 							aria-expanded="false">預約訂房</a></li>
-						<li class="dropdown"><a
-							href="<c:url value="/pages/course.jsp"/>" title="Course"
-							class="dropdown-toggle" role="button" aria-haspopup="true"
-							aria-expanded="false">媽咪教室</a> <i
-							class="ddl-switch fa fa-angle-down"></i>
-							<ul class="dropdown-menu">
-								<li><a href="<c:url value="/pages/startClass.jsp"/>">我要開課</a></li>
-								<li><a href="#">Baby課程</a></li>
-								<li><a href="#">親子課程</a></li>
-								<li><a href="#">產後課程</a></li>
-							</ul></li>
-						<li class="dropdown"><a
-							href="<c:url value="/showByOrder.forum?order=date"/>"
-							title="Forum" class="dropdown-toggle" role="button"
-							aria-haspopup="true" aria-expanded="false">文章/討論</a> <i
-							class="ddl-switch fa fa-angle-down"></i>
-							<ul class="dropdown-menu">
-								<li><a
-									href="<c:url value="/showByOrder.forum?order=likes"/>">熱門文章</a></li>
-								<li><a href="<c:url value="/showAll.forum?category=懷孕討論"/>">懷孕討論</a></li>
-								<li><a href="<c:url value="/showAll.forum?category=育兒討論"/>">育兒討論</a></li>
-								<li><a href="<c:url value="/showAll.forum?category=心情分享"/>">心情分享</a></li>
-							</ul></li>
+						<li class="dropdown"><a href="<c:url value="/showAllClazz.clazz"/>"
+									title="Course" class="dropdown-toggle" role="button"
+									aria-haspopup="true" aria-expanded="false">媽咪學苑</a> <i
+									class="ddl-switch fa fa-angle-down"></i>
+									</li>
+						<li class="dropdown">
+                           <a href="<c:url value="/showByOrder.forum?order=date"/>" title="Forum" class="dropdown-toggle" role="button" aria-haspopup="true" aria-expanded="false">文章/討論</a>
+                           <i class="ddl-switch fa fa-angle-down"></i>
+                           <ul class="dropdown-menu">
+                           	<li><a href="<c:url value="/showByOrder.forum?order=likes"/>">熱門文章</a></li>
+                               <li><a href="<c:url value="/showAll.forum?category=懷孕討論"/>">懷孕討論</a></li>
+                               <li><a href="<c:url value="/showAll.forum?category=育兒討論"/>">育兒討論</a></li>
+                               <li><a href="<c:url value="/showAll.forum?category=心情分享"/>">心情分享</a></li>
+                           </ul>
+                     	 </li>
 						<li><a href="pages/contact-us.html" title="Contact Us">聯絡資訊</a></li>
 					</ul>
 				</div>

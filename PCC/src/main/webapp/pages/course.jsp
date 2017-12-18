@@ -140,7 +140,7 @@
 							<a href="<c:url value="/clazzDetail.clazz?detail=${clazz.classId}"/>">
 							<img class="courseImg" style="height:150px;" src="<c:url value="/images/clazz/${clazz.classId}.jpg"/>"/></a>
 							<span>上架日期:</span>&nbsp;&nbsp;<span><fmt:formatDate value="${clazz.startDate}" pattern="yyyy/MM/dd"/></span><br>
-							<span>開課日期:</span>&nbsp;&nbsp;<span class="endDate"><fmt:formatDate value="${clazz.endDate}" pattern="yyyy/MM/dd"/></span><br>
+							<span>開課日期:</span>&nbsp;&nbsp;<span class="endDate"><fmt:formatDate value="${clazz.endDate}" pattern="yyyy/MM/dd hh:mm"/></span><br>
 							<span>距離開課還剩:</span>&nbsp;&nbsp;<span class="days"></span>
 						</div>
 					</c:forEach>
