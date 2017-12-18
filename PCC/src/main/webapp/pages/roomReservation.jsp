@@ -139,7 +139,7 @@ display:none
 			}
 		});
 
-		$(".image").click(function clickImage() {
+		$("body").on('click','.image',function clickImage() {
 			unavailableDates=[]
             roomId=$(this).attr("id")
             price = $(this).attr("alt")
@@ -185,7 +185,7 @@ display:none
 			$.get('${pageContext.request.contextPath}/showroomJson.room','order='+order,function(data){
 				
 				var div1=$('<div></div>').addClass("container")
-				$('#test').empty().append(div1)
+				$('#main').empty().append(div1)
 				$.each(data,function(i,room){
 						
 				var div2=$('<div></div>').addClass("content-area blog-section col-md-8 col-sm-8 col-xs-12")
@@ -198,14 +198,14 @@ display:none
 				                        .attr('alt',room.price)
 						
 				var div6=$('<div></div>').addClass("col-md-7 col-sm-12 col-xs-12 blog-content")
-				var h3=$('<h3></h3>').addClass("entry-title").text(room.roomId)
+				var h3=$('<h3></h3>').addClass("entry-title").text(room.roomName)
 				
 				var div7=$('<div></div>').addClass("entry-meta")
 				var span1=$('<span></span>').addClass("post-like").text('房型 '+room.roomType)
 				var span2=$('<span></span>').addClass("post-admin").text('房價 '+room.price)
 				
 				var div8=$('<div></div>').addClass("entry-content")
-				var p1=$('<p></p>').text('QQ')
+				var p1=$('<p></p>').text(room.info)
 						
 				div5.append(img)
 				div4.append(div5)		
@@ -221,8 +221,7 @@ display:none
 						
 			})												
 		})
-		
-		
+				
 		function unavailable(date) {
 			dmy = date.getFullYear() + "/" + (date.getMonth() + 1) + "/"
 					+ date.getDate();
@@ -339,7 +338,7 @@ display:none
 		<!-- Page Banner /- --> <!-- Clients --> <!-- Container --> 
 		
 	
-		<div class="container">
+		<div id="main" class="container">
 				<!-- Content Area -->
 			            <c:forEach var="room" items="${listOfRooms}">		
 				        <div class="content-area blog-section col-md-8 col-sm-8 col-xs-12">
@@ -355,16 +354,14 @@ display:none
 						</div>
 						
 						<div class="col-md-7 col-sm-12 col-xs-12 blog-content">
-						<h3 class="entry-title">${room.roomId}</h3>
+						<h3 class="entry-title">${room.roomName}</h3>
 						<div class="entry-meta">
 						<span class="post-like">房型 ${room.roomType}</span> 
 						<span class="post-admin">房價 ${room.price}</span>
 						</div>
 							
 						<div class="entry-content">
-						<p>The weather started getting rough - the tiny ship was
-						tossed. If not for the courage of the fearless If not for the
-						courage of the Minnow would be lost.</p>								
+						<p>${room.info}</p>								
 						</div>
 						
 						</div>
@@ -376,7 +373,7 @@ display:none
 		
 		<button id="orderByP">調順序</button>
 		<input type="text" id="order">
-		<div  id="test" class="container">
+<!-- 		<div  id="test" class="container"> -->
 						
 		</div>
 			
