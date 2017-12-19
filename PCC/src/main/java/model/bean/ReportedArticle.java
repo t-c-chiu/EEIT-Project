@@ -14,6 +14,7 @@ public class ReportedArticle {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer reportId;
 	private Integer messageId;
+	//0剛被檢舉,1管理員看過檢舉
 	private Integer status;
 	private String memberId;
 	private String reason;

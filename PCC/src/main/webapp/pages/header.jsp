@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	<script src="<c:url value="/js/login.js"/>"></script>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>    
+<script src="<c:url value="/js/login.js"/>"></script>
 <!-- Header -->
 <header class="header-section container-fluid no-padding">
 	<!-- Menu Block -->

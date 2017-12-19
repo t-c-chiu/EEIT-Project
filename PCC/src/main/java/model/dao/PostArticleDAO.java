@@ -24,7 +24,9 @@ public class PostArticleDAO {
 	}
 
 	public List<PostArticle> selectOrderBy(String order) {
-		return getSession().createQuery("from PostArticle order by " + order + " desc", PostArticle.class).list();
+		return getSession()
+				.createQuery("from PostArticle where status != 2 order by " + order + " desc", PostArticle.class)
+				.list();
 	}
 
 	public PostArticle selectByMessageId(Integer messageId) {
@@ -33,14 +35,20 @@ public class PostArticleDAO {
 
 	public List<PostArticle> selectByCategory(String category) {
 		return getSession()
-				.createQuery("from PostArticle where category = :category order by messageId desc", PostArticle.class)
+				.createQuery("from PostArticle where category = :category and status != 2 order by messageId desc",
+						PostArticle.class)
 				.setParameter("category", category).list();
 	}
 
 	public List<PostArticle> selectByTopic(String topic) {
 		return getSession()
-				.createQuery("from PostArticle where topic like :topic order by messageId desc", PostArticle.class)
+				.createQuery("from PostArticle where topic like :topic and status != 2 order by messageId desc", PostArticle.class)
 				.setParameter("topic", topic).list();
+	}
+
+	public List<PostArticle> selectByStatus(Integer status) {
+		return getSession().createQuery("from PostArticle where status = :status", PostArticle.class)
+				.setParameter("status", status).list();
 	}
 
 	public boolean update(PostArticle bean) {
