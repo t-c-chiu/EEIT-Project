@@ -8,6 +8,10 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" 
+href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" />
+<script src="http://code.jquery.com/jquery-1.8.3.js"></script>
+<script src="http://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <title>PCC - Room</title>
 <!-- Standard Favicon -->
 <link rel="icon" type="image/x-icon" href="../images/pcc/pcc.png" />
@@ -47,6 +51,31 @@
 <link href="../revolution/fonts/fontawesome-all.css">
 <link rel="stylesheet" type="text/css" href="../css/login.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+
+<script>
+$(function() {
+	keywords=[]
+	
+	$('#area').autocomplete({
+		source:keywords		
+	})
+	
+	
+$('#area').keyup(function(){
+	var area=$('#area').val();
+	keywords.length = 0
+	
+	$.get('${pageContext.request.contextPath}/getRoombyArea.room','area='+area,function(data){		
+		$.each(data,function(i,area){
+			console.log(area)
+			keywords.push(area)	
+		})			
+	  })		
+	})
+})
+
+</script>
 </head>
 
 <body data-offset="200" data-spy="scroll" data-target=".ow-navigation">

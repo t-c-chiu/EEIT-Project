@@ -60,4 +60,8 @@ public class RoomReservationService {
 		return roomDAO.selectByOrder(order);
 	}
 	
+	public List<String> selectByArea(String area){
+		return roomDAO.selectByArea(area);
+	}
+	
 }

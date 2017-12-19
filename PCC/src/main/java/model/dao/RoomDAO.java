@@ -32,10 +32,12 @@ public class RoomDAO {
 		return query.list();	
 	}
 	
-	public String selectArea(String area) {
-		getSession().createQuery("select area from Romm where area like"+area+"%",Room.class);
-	    return null;
+	public List<String> selectByArea(String area) {
+		Query<String> query=getSession().createQuery("select distinct area from Room where area like :area",String.class);
+		query.setParameter("area", ""+area+"%");
+		return query.list();
+		
+
 	}
 	
-
 }

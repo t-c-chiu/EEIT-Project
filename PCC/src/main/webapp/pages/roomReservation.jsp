@@ -139,7 +139,7 @@ display:none
 			}
 		});
 
-		$("body").on('click','.image',function clickImage() {
+		$("body").on('click','.image',function() {
 			unavailableDates=[]
             roomId=$(this).attr("id")
             price = $(this).attr("alt")
@@ -182,7 +182,7 @@ display:none
 			var order=$('#order').val()
 			alert(order)
 			
-			$.get('${pageContext.request.contextPath}/showroomJson.room','order='+order,function(data){
+			$.get('${pageContext.request.contextPath}/getRoombyOrder.room','order='+order,function(data){
 				
 				var div1=$('<div></div>').addClass("container")
 				$('#main').empty().append(div1)
