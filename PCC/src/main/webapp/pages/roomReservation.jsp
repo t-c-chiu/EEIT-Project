@@ -355,7 +355,7 @@ display:none
 						    <li>房型：${roomType}</li>
 					
 						    <li><input id="range" type="range" min="500" max="4000" step="500"></li>						
-						    <li id="rangeValue"></li>
+						    <li><input id="rangeValue" type="text"></li>
 						    						    
 							<li><input type="text" id="order">&#160;&#160;<button id="orderByP">調順序</button></li>
 							
