@@ -24,7 +24,7 @@ import model.service.RoomReservationService;
 
 
 @Controller
-@SessionAttributes({"roomReservation","listOfRooms","newPoint"})
+@SessionAttributes({"roomReservation","listOfRooms","newPoint","area","roomType"})
 public class RoomReservationController {
 
 	@Autowired
@@ -51,7 +51,8 @@ public class RoomReservationController {
 		List<Room> listOfRooms;
 		listOfRooms = roomReservationService.selectRoomByType(roomType,area);
 		model.addAttribute("listOfRooms", listOfRooms);
-		System.out.println(listOfRooms);
+		model.addAttribute("roomType",roomType);
+		model.addAttribute("area",area);
 		return "show.ok";
 	}
 	
@@ -90,13 +91,17 @@ public class RoomReservationController {
 	
 	@RequestMapping(path="/getMemberbyId.room",method=RequestMethod.GET,produces= {"application/json;charset=UTF-8"})
 	public @ResponseBody Member selectMemberById(@SessionAttribute("member") Member member) {
-		return roomReservationService.selectMemberById(member);
-			
+		return roomReservationService.selectMemberById(member);			
 	}
 	
 	@RequestMapping(path="/getRoombyArea.room",method=RequestMethod.GET,produces= {"application/json;charset=UTF-8"})
 	public @ResponseBody List<String> selectByArea(String area){
 		return roomReservationService.selectByArea(area);
+	}
+	
+	@RequestMapping(path="/getRoombyPrice.room",method=RequestMethod.GET,produces= {"application/json;charset=UTF-8"})
+	public @ResponseBody List<Room> selectByPrice(int price){
+		return roomReservationService.selectByPrice(price);
 	}
 	
 		

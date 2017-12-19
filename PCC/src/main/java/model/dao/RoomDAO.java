@@ -35,9 +35,15 @@ public class RoomDAO {
 	public List<String> selectByArea(String area) {
 		Query<String> query=getSession().createQuery("select distinct area from Room where area like :area",String.class);
 		query.setParameter("area", ""+area+"%");
-		return query.list();
-		
-
+		return query.list();		
 	}
+	
+	public List<Room> selectByPrice(int price){
+		Query<Room> query=getSession().createQuery("from Room where price >=:price",Room.class);
+		query.setParameter("price",price);
+		return query.list();	
+	}
+	
+
 	
 }

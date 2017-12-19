@@ -94,7 +94,6 @@ display:none
 		var newPoint
 		var usedPoint
 	
-
 		function showPrice() {
 			totalPrice = (((endDate - beginDate) * price) / (86400000)-(usedPoint*50))
 			
@@ -111,10 +110,7 @@ display:none
 				{$('#totalPrice').empty().val(totalPrice)}						
 			}						
 		}
-		
-		
-		
-				
+						
 		$('#beginDate').datepicker({
 			numberOfMonths : 2,
 			minDate : 0,
@@ -182,45 +178,45 @@ display:none
 			var order=$('#order').val()
 			alert(order)
 			
-			$.get('${pageContext.request.contextPath}/getRoombyOrder.room','order='+order,function(data){
-				
-				var div1=$('<div></div>').addClass("container")
-				$('#main').empty().append(div1)
-				$.each(data,function(i,room){
-						
-				var div2=$('<div></div>').addClass("content-area blog-section col-md-8 col-sm-8 col-xs-12")
-				var div3=$('<div></div>').addClass("type-post")
-				var div4=$('<div></div>').addClass("col-md-5 col-sm-12 col-xs-12 no-padding entry-cover")
-				var div5=$('<div></div>').addClass("zoom")
-				var img=$('<img></img>').attr('src','/PCC/images/room/'+room.roomImage+'.jpg')
-				                        .addClass("image")
-				                        .attr('id',room.roomId)
-				                        .attr('alt',room.price)
-						
-				var div6=$('<div></div>').addClass("col-md-7 col-sm-12 col-xs-12 blog-content")
-				var h3=$('<h3></h3>').addClass("entry-title").text(room.roomName)
-				
-				var div7=$('<div></div>').addClass("entry-meta")
-				var span1=$('<span></span>').addClass("post-like").text('房型 '+room.roomType)
-				var span2=$('<span></span>').addClass("post-admin").text('房價 '+room.price)
-				
-				var div8=$('<div></div>').addClass("entry-content")
-				var p1=$('<p></p>').text(room.info)
-						
-				div5.append(img)
-				div4.append(div5)		
-				div7.append([span1,span2])
-				div8.append(p1)				
-				div6.append([h3,div7,div8])		
-				div3.append([div4,div6])						
-				div2.append(div3)
-				div1.append(div2)	
-				
-				})
-				
-						
+			$.get('${pageContext.request.contextPath}/getRoombyOrder.room','order='+order,function(data){				
+				create(data)									
 			})												
 		})
+		
+		function create(data){
+			var div1=$('<div></div>').addClass("container")
+			$('#main').empty().append(div1)
+			$.each(data,function(i,room){
+					
+			var div2=$('<div></div>').addClass("content-area blog-section col-md-8 col-sm-8 col-xs-12")
+			var div3=$('<div></div>').addClass("type-post")
+			var div4=$('<div></div>').addClass("col-md-5 col-sm-12 col-xs-12 no-padding entry-cover")
+			var div5=$('<div></div>').addClass("zoom")
+			var img=$('<img></img>').attr('src','/PCC/images/room/'+room.roomImage+'.jpg')
+			                        .addClass("image")
+			                        .attr('id',room.roomId)
+			                        .attr('alt',room.price)
+					
+			var div6=$('<div></div>').addClass("col-md-7 col-sm-12 col-xs-12 blog-content")
+			var h3=$('<h3></h3>').addClass("entry-title").text(room.roomName)
+			
+			var div7=$('<div></div>').addClass("entry-meta")
+			var span1=$('<span></span>').addClass("post-like").text('房型 '+room.roomType)
+			var span2=$('<span></span>').addClass("post-admin").text('房價 '+room.price)
+			
+			var div8=$('<div></div>').addClass("entry-content")
+			var p1=$('<p></p>').text(room.info)
+					
+			div5.append(img)
+			div4.append(div5)		
+			div7.append([span1,span2])
+			div8.append(p1)				
+			div6.append([h3,div7,div8])		
+			div3.append([div4,div6])						
+			div2.append(div3)
+			div1.append(div2)
+			})	
+		}
 				
 		function unavailable(date) {
 			dmy = date.getFullYear() + "/" + (date.getMonth() + 1) + "/"
@@ -245,8 +241,7 @@ display:none
 			var usedPoint=$('#usedPoint').val()
 			var Id=$('#roomId').val();
 			var Price=$('#totalPrice').val();
-	
-												
+													
 			if(name.length==0){				
 				$('#nameSpan').text(" 入住人不可為空")
 				isSubmit = false;
@@ -296,6 +291,17 @@ display:none
 			return isSubmit;			
 		})
 				
+		$('#range').change(function(){
+			var price=$('#rangeValue').empty().val($(this).val()).val()
+				
+			$.get('${pageContext.request.contextPath}/getRoombyPrice.room','price='+price,function(data){
+				create(data)
+			})
+			
+		})
+		
+
+		
 		
 	});
 </script>
@@ -338,7 +344,28 @@ display:none
 		<!-- Page Banner /- --> <!-- Clients --> <!-- Container --> 
 		
 	
-		<div id="main" class="container">
+		<div class="container">
+				<div class="col-md-4 col-sm-4 col-xs-12 widget-area">
+					<!-- Widget Search -->
+						<aside class="widget widget_categories">
+						
+							<h3 class="widget-title">您的搜尋條件</h3>
+							<ul>
+							<li>地區：${area}</li>
+						    <li>房型：${roomType}</li>
+					
+						    <li><input id="range" type="range" min="500" max="4000" step="500"></li>						
+						    <li id="rangeValue"></li>
+						    						    
+							<li><input type="text" id="order">&#160;&#160;<button id="orderByP">調順序</button></li>
+							
+								
+							</ul>
+						</aside><!-- Widget Categories /-  -->
+				</div><!-- Widget Area /- -->
+		
+		<div id="main" class="col-md-8">
+		<div class="container">
 				<!-- Content Area -->
 			            <c:forEach var="room" items="${listOfRooms}">		
 				        <div class="content-area blog-section col-md-8 col-sm-8 col-xs-12">
@@ -369,11 +396,10 @@ display:none
 				        </div>
 				        
 				        </c:forEach>
+	    </div>			        			        			        
 		</div>
-		
-		<button id="orderByP">調順序</button>
-		<input type="text" id="order">
-<!-- 		<div  id="test" class="container"> -->
+						
+		</div>
 						
 		</div>
 			
