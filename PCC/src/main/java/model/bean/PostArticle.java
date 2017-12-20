@@ -15,6 +15,7 @@ public class PostArticle {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer messageId;
+	//0沒被檢舉 1被檢舉過觀察中 2已封鎖文章並將作者黑名單
 	private Integer status;
 	private Integer likes;
 	private String memberId;

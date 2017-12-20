@@ -68,7 +68,8 @@ table#alter th {
 </style>
 
 
-</head>
+<link rel="stylesheet" type="text/css" href="../css/login.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
 </head>
 
@@ -109,8 +110,14 @@ table#alter th {
 
 			<table width="600" border="0" align="center" id="alter">
 				<tr>
-					<th>入住人</th>
-					<th>${roomReservation.name}</th>
+					<th>欄位</th>
+					<th>資料</th>
+				</tr>
+			
+			
+				<tr>
+					<td>入住人</td>
+					<td>${roomReservation.name}</td>
 				</tr>
 				
 				<tr>

@@ -8,10 +8,11 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet"
-	href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" />
+<link rel="stylesheet" 
+href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" />
 <script src="http://code.jquery.com/jquery-1.8.3.js"></script>
 <script src="http://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
 <title>PCC - Room</title>
 <!-- Standard Favicon -->
 <link rel="icon" type="image/x-icon" href="../images/pcc/pcc.png" />
@@ -48,10 +49,37 @@
 <link href="../revolution/fonts/fontawesome-all.css">
 
 <style>
-.color {
-	border-style: double
+
+.zoom {
+    display: inline-block;
+    overflow: hidden;   
+    border: 1px solid gray;
 }
+
+.zoom img {
+    -webkit-transition: all .2s ease;
+    -ms-transition: all .2s ease;
+    transition: all .2s ease;    
+    vertical-align: middle;
+}
+
+.zoom img:hover {
+    -webkit-transform:scale(1.5); /* Safari and Chrome */
+    -ms-transform:scale(1.5); /* IE 9 */
+    transform:scale(1.5);
+    cursor:pointer
+}
+
+#allForm {
+display:none
+
+
+}
+
 </style>
+
+<link rel="stylesheet" type="text/css" href="../css/login.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
 <script>
 	$(function() {
@@ -61,11 +89,11 @@
 		var beginDate
 		var totalPrice
 		var unavailableDates
+		var selectedDates
 		var point
 		var newPoint
 		var usedPoint
 	
-
 		function showPrice() {
 			totalPrice = (((endDate - beginDate) * price) / (86400000)-(usedPoint*50))
 			
@@ -82,15 +110,14 @@
 				{$('#totalPrice').empty().val(totalPrice)}						
 			}						
 		}
-		
-				
+						
 		$('#beginDate').datepicker({
 			numberOfMonths : 2,
 			minDate : 0,
 			beforeShowDay : unavailable,
 			dateFormat : "yy/mm/dd",
 			onSelect : function(selected) {
-				$("#endDate").datepicker("option", "minDate", selected)
+// 				$("#endDate").datepicker("option", "minDate", selected)
 				beginDate = $('#beginDate').datepicker('getDate');
 				showPrice()
 			}
@@ -102,20 +129,19 @@
 			beforeShowDay : unavailable,
 			dateFormat : "yy/mm/dd",
 			onSelect : function(selected) {
-				$("#beginDate").datepicker("option", "maxDate", selected)
+// 				$("#beginDate").datepicker("option", "maxDate", selected)
 				endDate = $(this).datepicker('getDate');
 				showPrice()
 			}
 		});
 
-		$(".image").click(function() {
+		$("body").on('click','.image',function() {
 			unavailableDates=[]
-// 			$(".image").removeClass("color")
-// 			$(this).addClass("color")
             roomId=$(this).attr("id")
             price = $(this).attr("alt")
 			$("#roomId").empty().val(roomId)
 			showPrice()
+			$("#allForm").css('display','block')
 			
 			$.get('${pageContext.request.contextPath}/showByRoomId.room','roomId='+roomId,function(data){
 				$.each(data,function(i,item){
@@ -124,7 +150,7 @@
 					var beginDateTemp =data[i].beginDate;
 							
 			        for (var d = new Date(beginDateTemp);d <= new Date(endDateTemp);d.setDate(d.getDate() + 1)) 
-			        {unavailableDates.push($.datepicker.formatDate('yy/m/d', d));                    
+			        {unavailableDates.push($.datepicker.formatDate('yy/m/d', d));	
 			        }				    				
 				})							
 			})					
@@ -135,7 +161,7 @@
 			showPrice()
 		})
 		
-		$("button").click(function(){			
+		$("#formButton").click(function(){			
 			$.get('${pageContext.request.contextPath}/getMemberbyId.room',function(data){
 				point=data.point
 				usedPoint=data.point
@@ -145,10 +171,53 @@
 				$("#usedPoint").empty().val(point)
 				showPrice()
 			})
-	
-		
+											
 		})
 		
+		$("#orderByP").click(function(){
+			var order=$('#order').val()
+			alert(order)
+			
+			$.get('${pageContext.request.contextPath}/getRoombyOrder.room','order='+order,function(data){				
+				create(data)									
+			})												
+		})
+		
+		function create(data){
+			var div1=$('<div></div>').addClass("container")
+			$('#main').empty().append(div1)
+			$.each(data,function(i,room){
+					
+			var div2=$('<div></div>').addClass("content-area blog-section col-md-8 col-sm-8 col-xs-12")
+			var div3=$('<div></div>').addClass("type-post")
+			var div4=$('<div></div>').addClass("col-md-5 col-sm-12 col-xs-12 no-padding entry-cover")
+			var div5=$('<div></div>').addClass("zoom")
+			var img=$('<img></img>').attr('src','/PCC/images/room/'+room.roomImage+'.jpg')
+			                        .addClass("image")
+			                        .attr('id',room.roomId)
+			                        .attr('alt',room.price)
+					
+			var div6=$('<div></div>').addClass("col-md-7 col-sm-12 col-xs-12 blog-content")
+			var h3=$('<h3></h3>').addClass("entry-title").text(room.roomName)
+			
+			var div7=$('<div></div>').addClass("entry-meta")
+			var span1=$('<span></span>').addClass("post-like").text('房型 '+room.roomType)
+			var span2=$('<span></span>').addClass("post-admin").text('房價 '+room.price)
+			
+			var div8=$('<div></div>').addClass("entry-content")
+			var p1=$('<p></p>').text(room.info)
+					
+			div5.append(img)
+			div4.append(div5)		
+			div7.append([span1,span2])
+			div8.append(p1)				
+			div6.append([h3,div7,div8])		
+			div3.append([div4,div6])						
+			div2.append(div3)
+			div1.append(div2)
+			})	
+		}
+				
 		function unavailable(date) {
 			dmy = date.getFullYear() + "/" + (date.getMonth() + 1) + "/"
 					+ date.getDate();
@@ -158,10 +227,84 @@
 				return [ false, "", "Unavailable" ];
 			}
 		}
+		
+		$('#commit').click(function(){
+			$(".content").empty()
+			selectedDates=[]
+			
+			var isSubmit=true;
+			var name=$('#name').val();
+			var email=$('#email').val();
+			var phone=$('#phone').val();
+			var begin=$('#beginDate').val();
+			var end=$('#endDate').val();
+			var usedPoint=$('#usedPoint').val()
+			var Id=$('#roomId').val();
+			var Price=$('#totalPrice').val();
+													
+			if(name.length==0){				
+				$('#nameSpan').text(" 入住人不可為空")
+				isSubmit = false;
+			}
+			
+			if(email.length==0){
+				$('#emailSpan').text(" email不可為空")
+				isSubmit = false;
+			}
+			
+			if(phone.length==0){
+				$('#phoneSpan').text(" 電話不可為空")
+				isSubmit = false;
+			}
+			
+			if(begin.length==0){
+				$('#beginSpan').text(" 入住日不可為空")
+				isSubmit = false;
+			}
+			
+			if(end.length==0){
+				$('#endSpan').text(" 退房日不可為空")
+				isSubmit = false;
+			}
+						
+			if(usedPoint>point){
+				$('#pointSpan').text(" 無效點數")
+				isSubmit = false;				
+			}
+			
+			if(Id.length==0||Price.length==0){
 
+				isSubmit = false;	
+			}
+			
+			for (var d = new Date(begin);d <= new Date(end);d.setDate(d.getDate() + 1)) 
+		     {selectedDates.push($.datepicker.formatDate('yy/m/d', d));	
+		       }
+			var diff = $(unavailableDates).not(selectedDates).get();
+
+			if(diff.length<unavailableDates.length){
+				$('#beginSpan').text(" 無效日期")
+				$('#endSpan').text(" 無效日期")
+				isSubmit = false;	
+			}
+	
+			return isSubmit;			
+		})
+				
+		$('#range').change(function(){
+			var price=$('#rangeValue').empty().val($(this).val()).val()
+				
+			$.get('${pageContext.request.contextPath}/getRoombyPrice.room','price='+price,function(data){
+				create(data)
+			})
+			
+		})
+		
+
+		
+		
 	});
 </script>
-
 </head>
 
 <body data-offset="200" data-spy="scroll" data-target=".ow-navigation">
@@ -202,70 +345,91 @@
 		
 	
 		<div class="container">
-				<!-- Content Area -->
-			  <c:forEach var="room" items="${listOfRooms}">		
-				<div class="content-area blog-section col-md-8 col-sm-8 col-xs-12">
-					<div class="type-post">
-						<div class="col-md-5 col-sm-12 col-xs-12 no-padding entry-cover">
-							<a><img
-								src="<c:url value="../images/room/${room.roomImage}.jpg"/>"
-								class="image" alt="${room.price}" id="${room.roomId}"></a> <span
-								class="post-date"><a href="#"><i
-									class="fa fa-calendar-o"></i>July 16</a></span>
-						</div>
-						<div class="col-md-7 col-sm-12 col-xs-12 blog-content">
-							<h3 class="entry-title">
-								<a title="new Collectios are imported In Our shop."
-									href="blog-post.html">${room.roomId} </a>
-							</h3>
-							<div class="entry-meta">
-								<span class="post-like"><a href="#" title="224 Likes"><i
-										class="fa fa-heart-o"></i>${room.roomType}</a></span> <span
-									class="post-admin"><i class="fa fa-user"></i>${room.price}<a
-									href="#" title="Max">Max</a></span>
-							</div>
-							<div class="entry-content">
-								<p>The weather started getting rough - the tiny ship was
-									tossed. If not for the courage of the fearless If not for the
-									courage of the Minnow would be lost.</p>
-								<a href="blog-post.html" title="Read More" class="read-more">Read
-									More<i class="fa fa-long-arrow-right"></i>
-								</a>
-							</div>
-						</div>
-					</div>
-				</div>
-				</c:forEach>
-			</div>
-			
-
+				<div class="col-md-4 col-sm-4 col-xs-12 widget-area">
+					<!-- Widget Search -->
+						<aside class="widget widget_categories">
+						
+							<h3 class="widget-title">您的搜尋條件</h3>
+							<ul>
+							<li>地區：${area}</li>
+						    <li>房型：${roomType}</li>
+					
+						    <li><input id="range" type="range" min="500" max="4000" step="500"></li>						
+						    <li><input id="rangeValue" type="text"></li>
+						    						    
+							<li><input type="text" id="order">&#160;&#160;<button id="orderByP">調順序</button></li>
+							
+								
+							</ul>
+						</aside><!-- Widget Categories /-  -->
+				</div><!-- Widget Area /- -->
 		
-		<div class="container-fluid no-left-padding no-right-padding woocommerce-checkout">
+		<div id="main" class="col-md-8">
+		<div class="container">
+				<!-- Content Area -->
+			            <c:forEach var="room" items="${listOfRooms}">		
+				        <div class="content-area blog-section col-md-8 col-sm-8 col-xs-12">
+				        				
+					    <div class="type-post">
+						<div class="col-md-5 col-sm-12 col-xs-12 no-padding entry-cover">
+						
+						<div class="zoom">
+						<img src="<c:url value="../images/room/${room.roomImage}.jpg"/>"
+							 class="image" alt="${room.price}" id="${room.roomId}">
+						</div>
+						
+						</div>
+						
+						<div class="col-md-7 col-sm-12 col-xs-12 blog-content">
+						<h3 class="entry-title">${room.roomName}</h3>
+						<div class="entry-meta">
+						<span class="post-like">房型 ${room.roomType}</span> 
+						<span class="post-admin">房價 ${room.price}</span>
+						</div>
+							
+						<div class="entry-content">
+						<p>${room.info}</p>								
+						</div>
+						
+						</div>
+					    </div>
+				        </div>
+				        
+				        </c:forEach>
+	    </div>			        			        			        
+		</div>
+						
+		</div>
+						
+		</div>
+			
+		<div id="allForm" class="container-fluid no-left-padding no-right-padding woocommerce-checkout">
 			<!-- Container -->
 			<div class="container">
 
 				<!-- Billing -->
+				
 				<div class="checkout-form">
-
+         
 					<div class="col-md-12 col-sm-12 col-xs-12">
 					    <div>						
 							<h3>訂房填表</h3>						
 						</div>
 						
-					<button>一鍵帶入</button>
-						<form action="<c:url value="/reserve.room"/>" method="post">
+					<button id="formButton">一鍵帶入</button>
+						<form id="myform" action="<c:url value="/reserve.room"/>" method="post">
 							<div class="billing-field">
-							
+						
 								<div class="col-md-4 form-group">
-									<label>入住人</label> <input class="form-control" type="text"
+									<label>入住人<span style="color:red" class="content" id="nameSpan"></span></label> <input class="form-control" type="text"
 										name="name" id="name" >
 								</div>
 								<div class="col-md-4 form-group">
-									<label>email</label> <input class="form-control" type="text"
+									<label>email<span style="color:red" class="content" id="emailSpan"></span></label> <input class="form-control" type="text"
 										name="email" id="email">
 								</div>
 								<div class="col-md-4 form-group">
-									<label>電話</label> <input class="form-control" type="text"
+									<label>電話<span style="color:red" class="content" id="phoneSpan"></span></label> <input class="form-control" type="text"
 										name="phone" id="phone">
 								</div>
 
@@ -274,16 +438,16 @@
 										name="roomId" id="roomId" readonly="readonly">
 								</div>
 								<div class="col-md-4 form-group">
-									<label>入住日</label> <input class="form-control" type="text"
+									<label>入住日<span style="color:red" class="content" id="beginSpan"></span></label> <input class="form-control" type="text"
 										name="beginDate" id="beginDate">
 								</div>
 								<div class="col-md-4 form-group">
-									<label>退房日</label> <input class="form-control" type="text"
+									<label>退房日<span style="color:red" class="content" id="endSpan"></span></label> <input class="form-control" type="text"
 										name="endDate" id="endDate">
 								</div>
 								
 								<div class="col-md-4 form-group">
-									<label>使用點數(一點折抵50)</label> <input class="form-control" type="text"
+									<label>使用點數(一點折抵50)<span style="color:red" class="content" id="pointSpan"></span></label> <input class="form-control" type="text"
 										name="usedPoint" id="usedPoint">
 								</div>
 																
@@ -291,17 +455,21 @@
 									<label>總價</label> <input class="form-control" type="text"
 										name="totalPrice" id="totalPrice" readonly="readonly">
 								</div>
+								<c:if test="${!empty member}">							
 								<div class="col-md-4 form-group">
 									<label>&#160;</label> <input class="form-control" type="submit"
-										name="RoomReservation" value="送出訂單">
+										id="commit" name="RoomReservation" value="送出訂單">
 								</div>
-								
-					            <input class="form-control" name="newPoint" id="newPoint" type="hidden">
+								</c:if>
+					            <input name="newPoint" id="newPoint" type="hidden">
+					   
+	
 							
 								
 							</div>
 						</form>
 					</div>
+					
 
 				</div>
 				<!-- Billing /- -->		

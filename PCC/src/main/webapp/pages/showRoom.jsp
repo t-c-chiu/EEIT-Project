@@ -8,6 +8,10 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" 
+href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" />
+<script src="http://code.jquery.com/jquery-1.8.3.js"></script>
+<script src="http://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <title>PCC - Room</title>
 <!-- Standard Favicon -->
 <link rel="icon" type="image/x-icon" href="../images/pcc/pcc.png" />
@@ -17,7 +21,6 @@
 	rel="stylesheet">
 <link rel="stylesheet" type="text/css"
 	href="../revolution/css/settings.css">
-
 
 <!-- RS5.0 Layers and Navigation Styles -->
 <link rel="stylesheet" type="text/css"
@@ -41,9 +44,37 @@
 <link rel="stylesheet" type="text/css" href="../css/style.css">
 
 <!-- fontawesome -->
-<link href="../revolution/fonts/fontawesome-all.css">
-</head>
+<style>
 
+</style>
+
+<link href="../revolution/fonts/fontawesome-all.css">
+<link rel="stylesheet" type="text/css" href="../css/login.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+
+<script>
+$(function() {
+	keywords=[]	
+	$('#area').autocomplete({
+		source:keywords		
+	})
+	
+	
+$('#area').keyup(function(){
+	var area=$('#area').val();
+	keywords.length = 0
+	
+	$.get('${pageContext.request.contextPath}/getRoombyArea.room','area='+area,function(data){		
+		$.each(data,function(i,area){
+			console.log(area)
+			keywords.push(area)	
+		})			
+	  })		
+	})
+})
+
+</script>
 </head>
 
 <body data-offset="200" data-spy="scroll" data-target=".ow-navigation">
@@ -78,6 +109,13 @@
 			<div>
 				<form action="<c:url value="/show.room"/>" method="get">
 					<table width="400" border="0" align="center">
+						<tr>
+							<td><h3>請輸入地區</h3></td>
+						</tr>
+						
+						<tr>
+						<td><input id="area" name="area" type="text"></td>					
+						</tr>
 
 						<tr>
 							<td><h3>請選擇房型</h3></td>
@@ -102,9 +140,9 @@
 			<!-- Container -->
 			<div class="container">
 				<div class="clients-carousel">
-					<div class="col-md-12 item">
+					<div class="col-md-12 item">					
 						<a href="#" title="client"><img src="../images/room/1.jpg"
-							alt="client-1" /></a>
+							alt="client-1" /></a>				
 					</div>
 					<div class="col-md-12 item">
 						<a href="#" title="client"><img src="../images/room/2.jpg"

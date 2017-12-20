@@ -42,6 +42,7 @@
 
 <!-- fontawesome -->
 <link href="../revolution/fonts/fontawesome-all.css">
+<link rel="stylesheet" type="text/css" href="../css/login.css">
 <script src="<c:url value="/ckeditor/ckeditor.js"/>"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script>

@@ -170,7 +170,7 @@
 							<div class="entry-content">
 								<p><!-- 自我介紹 -->
 								   ${servant[5]}
-								   <span style="display:none">${servant[5]}</span>
+								   <span style="display:none">${servant[0]}</span>
 
 								</p>
 								    <!-- 彈出視窗按鈕-->

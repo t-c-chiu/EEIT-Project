@@ -18,10 +18,12 @@ public class Clazz {
 	private Integer numberOfStudents;
 	private Integer price;
 	private Integer status;
+	private Integer currentStudents;
 	private String courseName;
 	private String location;
 	private String category;
 	private String introduction;
+	private Date startDate;
 	private Date endDate;
 
 	public Integer getClassId() {
@@ -64,7 +66,7 @@ public class Clazz {
 		this.courseName = courseName;
 	}
 
-	@JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
+	@JsonFormat(pattern = "yyyy/MM/dd hh:mm", timezone = "GMT+8")
 	public Date getEndDate() {
 		return endDate;
 	}
@@ -97,11 +99,29 @@ public class Clazz {
 		this.introduction = introduction;
 	}
 
+	public Integer getCurrentStudents() {
+		return currentStudents;
+	}
+
+	public void setCurrentStudents(Integer currentStudents) {
+		this.currentStudents = currentStudents;
+	}
+
+	@JsonFormat(pattern = "yyyy/MM/dd", timezone = "GMT+8")
+	public Date getStartDate() {
+		return startDate;
+	}
+
+	public void setStartDate(Date startDate) {
+		this.startDate = startDate;
+	}
+
 	@Override
 	public String toString() {
 		return "Clazz [classId=" + classId + ", numberOfStudents=" + numberOfStudents + ", price=" + price + ", status="
-				+ status + ", courseName=" + courseName + ", location=" + location + ", category=" + category
-				+ ", introduction=" + introduction + ", endDate=" + endDate + "]";
+				+ status + ", currentStudents=" + currentStudents + ", courseName=" + courseName + ", location="
+				+ location + ", category=" + category + ", introduction=" + introduction + ", startDate=" + startDate
+				+ ", endDate=" + endDate + "]";
 	}
 
 }

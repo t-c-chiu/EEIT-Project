@@ -8,16 +8,22 @@
 <title>新增課程測試</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" />
+<link rel="stylesheet" href="<c:url value="/jQuery-Timepicker-Addon-master/src/jquery-ui-timepicker-addon.css"/>" />
 <script src="http://code.jquery.com/jquery-1.8.3.js"></script>
 <script src="http://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="<c:url value="/jQuery-Timepicker-Addon-master/src/jquery-ui-sliderAccess.js"/>"></script>
+<script src="<c:url value="/jQuery-Timepicker-Addon-master/src/jquery-ui-timepicker-addon.js"/>"></script>
 <script src="<c:url value="/ckeditorbasic/ckeditor.js"/>"></script>
 <script>
 	$(function(){
-		
-		$('#endDate').datepicker({
+		$('#endDate').datetimepicker({
 			numberOfMonths : 2,
 			minDate : 0,
-			dateFormat : "yy/mm/dd"
+			dateFormat : "yy/mm/dd",
+			showSecond: false,
+            timeFormat: 'HH:mm',
+            controlType: 'select',
+            stepMinute: 30 
 		});
 		
 		$('#photo').change(function(){
@@ -34,7 +40,7 @@
 	        event.preventDefault();
 	        var form = $('#formData')[0];
 	        var data = new FormData(form);
-			data.append('introduction', CKEDITOR.instances.introduction.getData());
+			data.append('introduction',CKEDITOR.instances.introduction.getData());
 	        $("#btnSubmit").prop("disabled", true);
 	        $.ajax({
 	            type: "POST",
@@ -61,11 +67,7 @@
 <body>
 
 	<form id="formData" method="post" enctype="multipart/form-data" action="<c:url value="/startClass.clazz"/>">
-		<label>課程分類</label><select name="category">
-								<option value="親子課程">親子課程</option>
-								<option value="媽寶瑜珈">媽寶瑜珈</option>
-								<option value="新手媽咪">新手媽咪</option>
-							</select><br>
+		<label>課程分類</label><input type="text" name="category"><br>
 		<label>課程名稱</label><input type="text" name="courseName"><br>
 		<label>課程地點</label><input type="text" name="location"><br>
 	 	<label>課程價位</label><input type="number" name="price"><br>

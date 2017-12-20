@@ -5,26 +5,56 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.List;
 
 import javax.servlet.ServletContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
 import model.bean.Clazz;
+import model.bean.Member;
 import model.service.ClazzService;
 
 @Controller
+@SessionAttributes({ "clazzInfo", "clazzDetail" })
 public class ClazzController {
 
 	@Autowired
 	private ServletContext application;
 	@Autowired
 	private ClazzService clazzService;
+
+	@RequestMapping(path = "/showAllClazz.clazz", method = RequestMethod.GET)
+	public String showAllClazz(Model model) {
+		model.addAttribute("clazzInfo", clazzService.showAllClazz());
+		return "course";
+	}
+
+	@RequestMapping(path = "/showByCategory.clazz", method = RequestMethod.GET, produces = {
+			"application/json;charset=UTF-8" })
+	public @ResponseBody List<Clazz> showClazzByCategory(String category) {
+		return clazzService.showClazzByCategory(category);
+	}
+
+	@RequestMapping(path = "/clazzDetail.clazz", method = RequestMethod.GET)
+	public String showClazzDetail(Integer detail, Model model) {
+		model.addAttribute("clazzDetail", clazzService.showClazzById(detail));
+		return "courseDetail";
+	}
+
+	@RequestMapping(path = "/beStudent.clazz", method = RequestMethod.POST, produces = { "text/plain;charset=UTF-8" })
+	public @ResponseBody String beStudent(@SessionAttribute("member") Member member,
+			@SessionAttribute("clazzDetail") Clazz clazz) {
+		return clazzService.beStudent(member.getMemberId(), clazz.getClassId());
+	}
 
 	@RequestMapping(path = "/startClass.clazz", method = RequestMethod.POST, produces = { "text/plain;charset=UTF-8" })
 	public @ResponseBody String addClass(Clazz clazz, MultipartFile photo) {

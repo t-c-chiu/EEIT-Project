@@ -28,8 +28,14 @@ public class StudentDAO {
 		return number.intValue();
 	}
 
-	public List<Integer> selectClassIdByMemberId(String memeberId) {
-		return getSession().createQuery("select classId from Student where memeberId = :memeberId", Integer.class)
-				.list();
+	public List<Integer> selectClassIdByMemberId(String memberId) {
+		return getSession().createQuery("select classId from Student where memberId = :memberId", Integer.class)
+				.setParameter("memberId", memberId).list();
 	}
+
+	public List<String> selectMemberIdByClassId(Integer classId) {
+		return getSession().createQuery("select memberId from Student where classId = :classId", String.class)
+				.setParameter("classId", classId).list();
+	}
+
 }

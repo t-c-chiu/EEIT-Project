@@ -12,11 +12,11 @@
                         <!-- Widget About -->
                         <aside class="col-md-6 col-sm-6 col-xs-12 ftr-widget widget_about">
 
-                            <a href="index.html" title="Max Shop">P<span >ostnatal</span> C<span>are</span> C<span>enter</span></a>
+                            <a href="index.jsp" title="Postnatal Care Center">P<span >ostnatal</span> C<span>are</span> C<span>enter</span></a>
                             <div class="info">
                                 <p><i class="icon icon-Pointer"></i>106台北市大安區復興南路一段390號 2樓</p>
-                                <p><i class="icon icon-Phone2"></i><a href="tel:(11)1234567890" title="Phone" class="phone">(02) 6631 6666</a></p>
-                                <p><i class="icon icon-Imbox"></i><a href="mailto:info@maxshop.com" title="info@maxshop.com">eeit98team05@outlook.com</a></p>
+                                <p class="phone"><i class="icon icon-Phone2"></i>(02) 6631 6666</p>
+                                <p><i class="icon icon-Imbox"></i>eeit98team05@outlook.com</p>
                             </div>
 
                         </aside>
@@ -33,7 +33,7 @@
                         </form>
                         <div class="copyright-section">
                             <div class="coyright-content">
-                                <p>© PCC. all rights reserved</p>
+                                <p>© Postnatal Care Center. all rights reserved</p>
                             </div>
                             <ul>
                                 <li><a href="#" title="Facebook"><i class="fa fa-facebook"></i></a></li>

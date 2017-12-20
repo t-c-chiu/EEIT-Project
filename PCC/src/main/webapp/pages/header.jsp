@@ -1,13 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>    
 
 <script src="<c:url value="/js/login.js"/>"></script>
+
 <!-- jquery -->
 <script src="../js/jquery.min.js"></script>
 <!-- Header -->
-
 <header class="header-section container-fluid no-padding">
 	<!-- Menu Block -->
 	<div class="container-fluid no-padding menu-block">
@@ -25,6 +24,7 @@
 					</button>
 					<a href="index.html" class="navbar-brand">PCC</a>
 				</div>
+
 				<!-- Menu Icon -->
 				<div class="menu-icon">
 					<div class="search">
@@ -35,7 +35,7 @@
 					<ul class="cart">
 
 
-						<!-- 購物車開始 -->
+						<!-- 購物車開始 12/20 完成-->
 						<li>
 							<!-- 購物車的圖 --> <a aria-expanded="true" aria-haspopup="true"
 							data-toggle="dropdown" id="cart" class="btn dropdown-toggle"
@@ -142,9 +142,10 @@
 									</div>
 								</form>
 							</div>
+
 							<!-- google -->
 							<div class="g-signin2" data-onsuccess="onSignIn"></div>
-							<div class="modal-footer">
+						<div class="modal-footer">
 								<button type="button" class="btn btn-secondary"
 									data-dismiss="modal">取消</button>
 								<button type="button" id="sub" class="btn btn-primary">登入</button>
@@ -176,29 +177,21 @@
 						<li class="dropdown"><a href="pages/room.html" title="Room"
 							class="dropdown-toggle" role="button" aria-haspopup="true"
 							aria-expanded="false">預約訂房</a></li>
-						<li class="dropdown"><a
-							href="<c:url value="/pages/course.jsp"/>" title="Course"
-							class="dropdown-toggle" role="button" aria-haspopup="true"
-							aria-expanded="false">媽咪教室</a> <i
-							class="ddl-switch fa fa-angle-down"></i>
-							<ul class="dropdown-menu">
-								<li><a href="<c:url value="/pages/startClass.jsp"/>">我要開課</a></li>
-								<li><a href="#">Baby課程</a></li>
-								<li><a href="#">親子課程</a></li>
-								<li><a href="#">產後課程</a></li>
-							</ul></li>
-						<li class="dropdown"><a
-							href="<c:url value="/showByOrder.forum?order=date"/>"
-							title="Forum" class="dropdown-toggle" role="button"
-							aria-haspopup="true" aria-expanded="false">文章/討論</a> <i
-							class="ddl-switch fa fa-angle-down"></i>
-							<ul class="dropdown-menu">
-								<li><a
-									href="<c:url value="/showByOrder.forum?order=likes"/>">熱門文章</a></li>
-								<li><a href="<c:url value="/showAll.forum?category=懷孕討論"/>">懷孕討論</a></li>
-								<li><a href="<c:url value="/showAll.forum?category=育兒討論"/>">育兒討論</a></li>
-								<li><a href="<c:url value="/showAll.forum?category=心情分享"/>">心情分享</a></li>
-							</ul></li>
+						<li class="dropdown"><a href="<c:url value="/showAllClazz.clazz"/>"
+									title="Course" class="dropdown-toggle" role="button"
+									aria-haspopup="true" aria-expanded="false">媽咪學苑</a> <i
+									class="ddl-switch fa fa-angle-down"></i>
+									</li>
+						<li class="dropdown">
+                           <a href="<c:url value="/showByOrder.forum?order=date"/>" title="Forum" class="dropdown-toggle" role="button" aria-haspopup="true" aria-expanded="false">文章/討論</a>
+                           <i class="ddl-switch fa fa-angle-down"></i>
+                           <ul class="dropdown-menu">
+                           	<li><a href="<c:url value="/showByOrder.forum?order=likes"/>">熱門文章</a></li>
+                               <li><a href="<c:url value="/showAll.forum?category=懷孕討論"/>">懷孕討論</a></li>
+                               <li><a href="<c:url value="/showAll.forum?category=育兒討論"/>">育兒討論</a></li>
+                               <li><a href="<c:url value="/showAll.forum?category=心情分享"/>">心情分享</a></li>
+                           </ul>
+                     	 </li>
 						<li><a href="pages/contact-us.html" title="Contact Us">聯絡資訊</a></li>
 					</ul>
 				</div>

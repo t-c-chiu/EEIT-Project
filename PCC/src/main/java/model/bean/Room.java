@@ -15,12 +15,39 @@ public class Room {
 	private String roomType;
 	private byte[] roomPhoto;
 	private String roomImage;
+	private String roomName;
+	private String info;
+	private String area;
 	
-
 	@Override
 	public String toString() {
 		return "Room [roomId=" + roomId + ", price=" + price + ", status=" + status + ", roomType=" + roomType
-				+ ", roomPhoto=" + Arrays.toString(roomPhoto) + ", roomImage=" + roomImage + "]";
+				+ ", roomPhoto=" + Arrays.toString(roomPhoto) + ", roomImage=" + roomImage + ", roomName=" + roomName
+				+ ", info=" + info + ", area=" + area + "]";
+	}
+
+	public String getRoomName() {
+		return roomName;
+	}
+
+	public void setRoomName(String roomName) {
+		this.roomName = roomName;
+	}
+
+	public String getInfo() {
+		return info;
+	}
+
+	public void setInfo(String info) {
+		this.info = info;
+	}
+
+	public String getArea() {
+		return area;
+	}
+
+	public void setArea(String area) {
+		this.area = area;
 	}
 
 	public String getRoomImage() {
