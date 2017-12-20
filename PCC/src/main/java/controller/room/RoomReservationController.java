@@ -100,8 +100,8 @@ public class RoomReservationController {
 	}
 	
 	@RequestMapping(path="/getRoombyPrice.room",method=RequestMethod.GET,produces= {"application/json;charset=UTF-8"})
-	public @ResponseBody List<Room> selectByPrice(int price){
-		return roomReservationService.selectByPrice(price);
+	public @ResponseBody List<Room> selectByPrice(int price,@SessionAttribute("roomType") String roomType,@SessionAttribute("area") String area){
+		return roomReservationService.selectByPrice(price,roomType,area);
 	}
 	
 		

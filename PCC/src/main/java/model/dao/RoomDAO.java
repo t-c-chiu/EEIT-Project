@@ -38,8 +38,10 @@ public class RoomDAO {
 		return query.list();		
 	}
 	
-	public List<Room> selectByPrice(int price){
-		Query<Room> query=getSession().createQuery("from Room where price >=:price",Room.class);
+	public List<Room> selectByPrice(int price,String roomType,String area){
+		Query<Room> query=getSession().createQuery("from Room where area= :area and roomType= :roomType and price >=:price",Room.class);
+		query.setParameter("area",area);
+		query.setParameter("roomType",roomType);
 		query.setParameter("price",price);
 		return query.list();	
 	}
