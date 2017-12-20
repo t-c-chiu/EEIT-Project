@@ -38,6 +38,11 @@ public class RoomReservationService {
 		return roomReservationDAO.selectByMemberId(member.getMemberId());		
 	}
 	
+	public List<RoomReservation> selectAllReservation(){
+		return roomReservationDAO.selectAllReservation();
+	}
+	
+	
 	public boolean delete(int roomReserverId) {
 		roomReservationDAO.delete(roomReserverId);
 		return true;

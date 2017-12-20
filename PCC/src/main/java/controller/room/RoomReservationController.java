@@ -70,12 +70,19 @@ public class RoomReservationController {
 		return "showReservation.ok";		
 	}
 	
+		
 	@RequestMapping(path="/showByRoomId.room",method=RequestMethod.GET,produces= {"application/json;charset=UTF-8"})
 	public @ResponseBody List<RoomReservation> selectByRoomId(int roomId){
 		return roomReservationService.selectByRoomId(roomId);				
 	}
 	
 	
+	@RequestMapping(path="/selectAllReservation.room",method=RequestMethod.GET,produces= {"application/json;charset=UTF-8"})
+	public @ResponseBody List<RoomReservation> selectAllReservation(){
+		return roomReservationService.selectAllReservation();		
+	}
+	
+						
 	@RequestMapping(path="/deleteReservation.room",method=RequestMethod.GET)
 	public String delete(int roomReserverId,Model model) {
 		boolean deleteResult=roomReservationService.delete(roomReserverId);
