@@ -8,7 +8,7 @@
 </head>
 <body>
 
-<a href="http://localhost:8080/PCC/test.match">servantList</a>
+<a href="http://localhost:8080/PCC/servantList.match">servantList</a>
 
 </body>
 </html>
