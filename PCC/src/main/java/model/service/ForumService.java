@@ -116,6 +116,8 @@ public class ForumService {
 		reportedArticle.setReason(reason);
 		reportedArticle.setMessageId(article.getMessageId());
 		reportedArticle.setStatus(0);
+		PostArticle postArticle = postArticleDAO.selectByMessageId(article.getMessageId());
+		postArticle.setStatus(1);
 		return reportedArticleDAO.insert(reportedArticle);
 	}
 

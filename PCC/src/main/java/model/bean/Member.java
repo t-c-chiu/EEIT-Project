@@ -16,6 +16,7 @@ public class Member {
 	private String area;
 	private String address;
 	private Integer role;
+	//0正常 1不能發廢文
 	private Integer status;
 	private byte[] password;
 	private Integer point;

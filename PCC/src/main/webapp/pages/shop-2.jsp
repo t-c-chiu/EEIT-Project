@@ -45,7 +45,7 @@
 <link rel="stylesheet" type="text/css" href="../css/login.css">
 </head>
 
-</head>
+
 <body data-offset="200" data-spy="scroll" data-target=".ow-navigation">
 	<div class="main-container">
 		<!-- Loader -->
@@ -57,123 +57,9 @@
 			</div>
 		</div>
 		<!-- Loader /- -->
-
+		<%@ include file="header.jsp"%>
 		<!-- Header -->
-		<header
-			class="header-section header-section-1 container-fluid no-padding">
 
-			<!-- Middel Header -->
-			<div class="middel-header">
-				<!-- Container -->
-				<div class="container">
-					<!-- Logo Block -->
-					<div class="col-md-4 col-sm-6 col-xs-12 logo-block">
-						<a href="index.html" class="navbar-brand">PCC <span>logo</span></a>
-					</div>
-					<!-- Logo Block /- -->
-					<!-- Search Block -->
-					<div class="col-md-5 col-sm-6 col-xs-6 search-block">
-						<div class="input-group">
-						<form action="/PCC/searchProduct.shopping" method="get" id="searchForm">
-							<input class="form-control" id="searchText" name="searchText"
-								placeholder="Search You Wants Here . . ." type="text"> 
-								<span id="serch-btn" class="input-group-btn">
-									<button class="btn btn-default" type="button">
-										<i class="icon icon-Search"></i>
-									</button>
-								</span>
-						</form>
-						</div>
-					</div>
-					<!-- Search Block /- -->
-					<!-- Menu Icon -->
-					<div class="col-md-3 col-sm-6 col-xs-6 menu-icon">
-						<ul class="cart">
-							<li><a aria-expanded="true" aria-haspopup="true"
-								data-toggle="dropdown" id="cart" class="btn dropdown-toggle"
-								title="Add To Cart" href="#"><i
-									class="icon icon-ShoppingCart"></i></a>
-								<ul class="dropdown-menu no-padding">
-									<li class="mini_cart_item"><a title="Remove this item"
-										class="remove" href="#">&#215;</a> <a href="#"
-										class="shop-thumbnail"> <img alt="poster_2_up"
-											class="attachment-shop_thumbnail"
-											src="../images/product-wishlist-1.jpg">Flying Ninja
-									</a> <span class="quantity">2 &#215; <span class="amount">Rs.12.00</span></span>
-									</li>
-									<li class="mini_cart_item"><a title="Remove this item"
-										class="remove" href="#">&#215;</a> <a href="#"
-										class="shop-thumbnail"> <img alt="poster_2_up"
-											class="attachment-shop_thumbnail"
-											src="../images/product-wishlist-2.jpg">Flying Ninja
-									</a> <span class="quantity">2 &#215; <span class="amount">Rs.12.00</span></span>
-									</li>
-									<li class="button"><a href="#" title="View Cart">View
-											Cart</a> <a href="#" title="Check Out">Check out</a></li>
-								</ul></li>
-							<li><a href="#" title="Like"><i class="icon icon-Heart"></i></a></li>
-							<li><a href="#" title="User"><i class="icon icon-User"></i></a></li>
-						</ul>
-					</div>
-					<!-- Menu Icon /- -->
-				</div>
-				<!-- Container /- -->
-			</div>
-			<!-- Middel Header /- -->
-
-			<!-- Menu Block -->
-			<div class="container-fluid no-padding menu-block">
-				<!-- Container -->
-				<div class="container">
-					<!-- nav -->
-					<nav class="navbar navbar-default ow-navigation">
-						<div class="navbar-collapse collapse" id="navbar">
-							<ul class="nav navbar-nav">
-								<li class="dropdown"><a href="../index.html" title="Home"
-									class="dropdown-toggle" role="button" aria-haspopup="true"
-									aria-expanded="false">首頁</a></li>
-								<li><a href="../pages/reservation.html" title="Reservation">線上預約</a></li>
-								<li><a href="../pages/partner.html" title="Partner">服務夥伴</a></li>
-								<li class="dropdown"><a href="../pages/shop.html"
-									title="Shop" class="dropdown-toggle" role="button"
-									aria-haspopup="true" aria-expanded="false">購物商城 </a> <i
-									class="ddl-switch fa fa-angle-down"></i>
-									<ul class="dropdown-menu">
-										<li><a href="#" title="">商品類</a></li>
-										<li><a href="#" title="">商品類</a></li>
-										<li><a href="#" title="">商品類</a></li>
-									</ul></li>
-								<li class="dropdown"><a href="../pages/room.html"
-									title="Room" class="dropdown-toggle" role="button"
-									aria-haspopup="true" aria-expanded="false">預約訂房</a></li>
-								<li class="dropdown"><a href="../pages/course.html"
-									title="Course" class="dropdown-toggle" role="button"
-									aria-haspopup="true" aria-expanded="false">線上課程</a> <i
-									class="ddl-switch fa fa-angle-down"></i>
-									<ul class="dropdown-menu">
-										<li><a href="#" title="">教學類</a></li>
-										<li><a href="#" title="">教學類</a></li>
-									</ul></li>
-								<li class="dropdown"><a href="../pages/article.html"
-									title="Forum" class="dropdown-toggle" role="button"
-									aria-haspopup="true" aria-expanded="false">文章/討論</a> <i
-									class="ddl-switch fa fa-angle-down"></i>
-									<ul class="dropdown-menu">
-										<li><a href="#" title="">討論區</a></li>
-										<li><a href="#" title="">討論區</a></li>
-									</ul></li>
-								<li><a href="../pages/contact-us.html" title="Contact Us">聯絡資訊</a></li>
-							</ul>
-						</div>
-						<!--/.nav-collapse -->
-					</nav>
-					<!-- nav /- -->
-				</div>
-				<!-- Container /- -->
-			</div>
-			<!-- Menu Block /- -->
-		</header>
-		<!-- Header /- -->
 		<!--	內容開始	-->
 		<main> <!-- Page Banner -->
 		<div class="page-banner container-fluid no-padding">
@@ -185,7 +71,10 @@
 				</div>
 				<ol class="breadcrumb">
 					<li><a href="../index.html" title="Home">首頁</a></li>
-					<li class="active">購物商城</li>
+
+					<!-- 須回到購物商城的首頁 也就是 熱賣商品中心 -->
+					<li class="active"><a href="#">購物商城</a></li>
+					<!-- 須回到購物商城的首頁 也就是 熱賣商品中心 -->
 				</ol>
 			</div>
 			<!-- Container /- -->
@@ -201,114 +90,95 @@
 						class="col-md-4 col-sm-4 col-xs-12 widget-area no-right-padding">
 						<!-- Widget Search -->
 						<aside class="widget widget_search">
-							<h3 class="widget-title">Search</h3>
-							<div class="input-group">
-								<input type="text" class="form-control"
-									placeholder="Search You Wants. . ."> <span
-									class="input-group-btn">
-									<button class="btn btn-search" title="Search" type="button">
+						<h3 class="widget-title">Search</h3>
+						<div class="input-group">
+							<form action="/PCC/searchProduct.shopping" method="get"
+								id="searchForm">
+								<input class="form-control" id="searchText" name="searchText"
+									placeholder="Search You Wants Here . . ." type="text">
+								<span id="serch-btn" class="input-group-btn">
+									<button class="btn btn-default" type="button">
 										<i class="icon icon-Search"></i>
 									</button>
 								</span>
-							</div>
+							</form>
+						</div>
 						</aside>
 						<!-- Widget Search /- -->
 						<!-- Widget Categories -->
 						<aside class="widget widget_categories">
-							<h3 class="widget-title">Categories</h3>
-							<ul>
-								<li><a href="#" title="Beautiful Chairs">Beautiful
-										Chairs <span>(5)</span>
-								</a></li>
-								<li><a href="#" title="Creative Designs">Creative
-										Designs <span>(6)</span>
-								</a></li>
-								<li><a href="#" title="Trendy Products">Trendy Products
-										<span>(4)</span>
-								</a></li>
-								<li><a href="#" title="Interior Products">Interior
-										Products <span>(2)</span>
-								</a></li>
-								<li><a href="#" title="Popular Products">Popular
-										Products <span>(8)</span>
-								</a></li>
-								<li><a href="#" title="Casual Shirts">Casual Shirts <span>(7)</span></a></li>
-							</ul>
+						<h3 class="widget-title">Categories</h3>
+
+						<ul>
+							<c:forEach var="category" items="${categorys}">
+
+								<li class="categoryli">
+									<form action="<c:url value="/searchCatagory.shopping"/>"
+										method="get">
+										<a href="#">${category.categoryName}<span>(${category.sumCategory})
+										</span>
+										</a> <input type="text" name="category"
+											value="${category.categoryName}" hidden />
+									</form>
+								</li>
+
+							</c:forEach>
+						</ul>
+
 						</aside>
 						<!-- Widget Categories /-  -->
 						<!-- Widget Price -->
 						<aside class="widget widget_price_filter">
-							<h3 class="widget-title">filter by price</h3>
-							<div class="price-filter">
-								<div id="slider-range"></div>
-								<div class="price-input">
-									<span id="amount"></span> <span id="amount2"></span>
-								</div>
-								<a href="#" title="filter">Filter</a>
+						<h3 class="widget-title">filter by price</h3>
+						<div class="price-filter">
+							<div id="slider-range"></div>
+							<div class="price-input">
+								<span id="amount"></span> <span id="amount2"></span>
 							</div>
+							<a href="#" title="filter">Filter</a>
+						</div>
 						</aside>
 						<!-- Widget Price /- -->
 						<!-- Widget Latest Post -->
 						<aside class="widget widget_latest_post">
-							<h3 class="widget-title">recent posts</h3>
+						<h3 class="widget-title">recent posts</h3>
+
+						<c:forEach var="asideProducts" items="${asideProducts}">
 							<div class="latest-box">
 								<div class="post-box">
+									<!-- 思考一下 少 點圖跳到相關頁面 -->
 									<a href="#"><img src="../images/latest-post-1.jpg"
 										alt="Post"></a>
 									<h5>
-										<a href="#" title="need max shop.">I Phone 6s sales on</a>
+										<a href="#" title="need max shop.">${asideProducts.productName}</a>
 									</h5>
 									<div class="star-rating">
 										<i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
 											class="fa fa-star"></i> <i class="fa fa-star"></i> <i
 											class="fa fa-star-o"></i>
 									</div>
-									<span class="price"><del>$955</del>$789</span>
+									<span class="price"><del>${asideProducts.price}</del>${asideProducts.price}</span>
+									<!-- /思考一下 -->
+
 								</div>
 							</div>
-							<div class="latest-box">
-								<div class="post-box">
-									<a href="#"><img src="../images/latest-post-2.jpg"
-										alt="Post"></a>
-									<h5>
-										<a href="#" title="need max shop.">mens casual footwear</a>
-									</h5>
-									<div class="star-rating">
-										<i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
-											class="fa fa-star"></i> <i class="fa fa-star"></i> <i
-											class="fa fa-star-o"></i>
-									</div>
-									<span class="price"><del>$185</del>$120</span>
-								</div>
-							</div>
-							<div class="latest-box">
-								<div class="post-box">
-									<a href="#"><img src="../images/latest-post-3.jpg"
-										alt="Post"></a>
-									<h5>
-										<a href="#" title="need max shop.">running shoes</a>
-									</h5>
-									<div class="star-rating">
-										<i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
-											class="fa fa-star"></i> <i class="fa fa-star"></i> <i
-											class="fa fa-star-o"></i>
-									</div>
-									<span class="price"><del>$150</del>$85</span>
-								</div>
-							</div>
-						</aside>
+						</c:forEach> </aside>
 						<!-- Widget Latest Post /- -->
 						<!-- Widget Tags -->
 						<aside class="widget widget_tags">
-							<h3 class="widget-title">popular tags</h3>
-							<div class="tags-box">
-								<a href="#" title="Chairs">Chairs</a> <a href="#"
-									title="Modern Designs">Modern Designs</a> <a href="#"
-									title="Watches">Watches</a> <a href="#" title="Future">Future</a>
-								<a href="#" title="Popular Products">Popular Products</a> <a
-									href="#" title="Trendy">Trendy</a> <a href="#" title="Interier">Interier</a>
-								<a href="#" title="Modern">Modern</a>
-							</div>
+						<h3 class="widget-title">popular tags</h3>
+						<div class="tags-box">
+							<c:forEach var="category" items="${categorys}">
+
+								<a href="#" class="categoryli">${category.categoryName}
+									<form action="<c:url value="/searchCatagory.shopping"/>"
+										method="get">
+										<input type="text" name="category"
+											value="${category.categoryName}" hidden />
+									</form>
+								</a>
+							</c:forEach>
+						</div>
 						</aside>
 						<!-- Widget Tags -->
 					</div>
@@ -319,34 +189,39 @@
 						class="col-md-8 col-sm-7 col-xs-12 content-area product-section2 no-left-padding">
 						<!-- Products -->
 						<ul class="products">
-							<!-- Product -->
+							<!-- 商品點選區  Product -->
 							<c:forEach var="products8" items="${products}">
-							
-							<li class="product"><a href="/PCC/pages/${products8.productId}.jsp"> <img
-									src="../images/product-10.jpg" alt="Product" />
-									<h5>${products8.productName}</h5> <span class="price"><del>${products8.price}</del>${products8.price}</span>
-							</a> <a href="#" class="add-to-cart1" title="Add To Cart">Add To
-									Cart</a>
-								<div class="wishlist-box">
-									<a href="#"><i class="fa fa-arrows-alt"></i></a> <a href="#"><i
-										class="fa fa-heart-o"></i></a> <a href="#"><i
-										class="fa fa-search"></i></a>
-								</div></li>
-								
-							</c:forEach>	
 
+								<li class="product"><a
+									href="/PCC/pages/${products8.productId}.jsp"> <img
+										src="../images/product-10.jpg" alt="Product" />
+										<h5>${products8.productName}</h5> <span class="price">
+											<del>${products8.price}</del> ${products8.price}
+									</span>
+								</a> <a href="#" class="add-to-cart1" title="Add To Cart"> Add
+										To Cart
+										<p hidden>${products8.productId}</p>
+								</a> <!-- 圖案旁邊的icon -->
+									<div class="wishlist-box">
+										<a href="#"> <i class="fa fa-arrows-alt"></i>
+										</a> <a href="#"> <i class="fa fa-heart-o"></i>
+										</a> <a href="#"> <i class="fa fa-search"></i>
+										</a>
+									</div> <!-- /圖案旁邊的icon --></li>
+
+							</c:forEach>
 					</div>
 					<!-- Content Area /- -->
 				</div>
 				<!-- Row /- -->
 				<nav class="ow-pagination">
-					<ul class="pager">
-						<li class="number"><a href="#">4</a></li>
-						<li class="load-more"><a href="#">Load More</a></li>
-						<li class="previous"><a href="#"><i
-								class="fa fa-angle-right"></i></a></li>
-						<li class="next"><a href="#"><i class="fa fa-angle-left"></i></a></li>
-					</ul>
+				<ul class="pager">
+					<li class="number"><a href="#">1</a></li>
+					<li class="load-more"><a href="#">Load More</a></li>
+					<li class="previous"><a href="#"><i
+							class="fa fa-angle-right"></i></a></li>
+					<li class="next"><a href="#"><i class="fa fa-angle-left"></i></a></li>
+				</ul>
 				</nav>
 			</div>
 			<!-- Container /- -->
@@ -357,69 +232,71 @@
 		<!-- Footer Main 1 -->
 		<footer id="footer-main"
 			class="footer-main footer-main-1 services-section container-fluid">
-			<!-- Container -->
-			<div class="container">
-				<div class="row">
-					<div class="section-header">
-						<h3>聯絡我們</h3>
-						<p>Contact-us</p>
-					</div>
-					<!-- Widget About -->
-					<aside class="col-md-6 col-sm-6 col-xs-12 ftr-widget widget_about">
-
-						<a href="index.html" title="Max Shop">P<span>ostnatal</span>
-							C<span>are</span> C<span>enter</span></a>
-						<div class="info">
-							<p>
-								<i class="icon icon-Pointer"></i>106台北市大安區復興南路一段390號 2樓
-							</p>
-							<p>
-								<i class="icon icon-Phone2"></i><a href="tel:(11)1234567890"
-									title="Phone" class="phone">(02) 6631 6666</a>
-							</p>
-							<p>
-								<i class="icon icon-Imbox"></i><a href="mailto:info@maxshop.com"
-									title="info@maxshop.com">eeit98team05@outlook.com</a>
-							</p>
-						</div>
-
-					</aside>
-					<!-- Widget About /- -->
-					<!-- Widget Newsletter -->
-					<form action="#" method="post" name="contact-form"
-						class="col-md-6 col-sm-6 col-xs-12" id="main-contact-form ">
-						<div class="form-group">
-							<input type="email" required="" placeholder="Email"
-								class="form-control" name="email">
-						</div>
-						<div class="form-group">
-							<textarea required="" placeholder="Message" rows="8"
-								class="form-control" name="message"></textarea>
-						</div>
-						<button class="btn btn-default form-control footer-send "
-							type="button">
-							<i class="fa fa-paper-plane-o"></i> 送出
-						</button>
-					</form>
-					<div class="copyright-section">
-						<div class="coyright-content">
-							<p>© PCC. all rights reserved</p>
-						</div>
-						<ul>
-							<li><a href="#" title="Facebook"><i
-									class="fa fa-facebook"></i></a></li>
-							<li><a href="#" title="Twitter"><i class="fa fa-twitter"></i></a></li>
-
-						</ul>
-					</div>
-					<!-- Widget Newsletter /- -->
+		<!-- Container -->
+		<div class="container">
+			<div class="row">
+				<div class="section-header">
+					<h3>聯絡我們</h3>
+					<p>Contact-us</p>
 				</div>
+				<!-- Widget About -->
+				<aside class="col-md-6 col-sm-6 col-xs-12 ftr-widget widget_about">
+
+				<a href="index.html" title="Max Shop">P<span>ostnatal</span> C<span>are</span>
+					C<span>enter</span></a>
+				<div class="info">
+					<p>
+						<i class="icon icon-Pointer"></i>106台北市大安區復興南路一段390號 2樓
+					</p>
+					<p>
+						<i class="icon icon-Phone2"></i><a href="tel:(11)1234567890"
+							title="Phone" class="phone">(02) 6631 6666</a>
+					</p>
+					<p>
+						<i class="icon icon-Imbox"></i><a href="mailto:info@maxshop.com"
+							title="info@maxshop.com">eeit98team05@outlook.com</a>
+					</p>
+				</div>
+
+				</aside>
+				<!-- Widget About /- -->
+				<!-- Widget Newsletter -->
+				<form action="#" method="post" name="contact-form"
+					class="col-md-6 col-sm-6 col-xs-12" id="main-contact-form ">
+					<div class="form-group">
+						<input type="email" required="" placeholder="Email"
+							class="form-control" name="email">
+					</div>
+					<div class="form-group">
+						<textarea required="" placeholder="Message" rows="8"
+							class="form-control" name="message"></textarea>
+					</div>
+					<button class="btn btn-default form-control footer-send "
+						type="button">
+						<i class="fa fa-paper-plane-o"></i> 送出
+					</button>
+				</form>
+				<div class="copyright-section">
+					<div class="coyright-content">
+						<p>© PCC. all rights reserved</p>
+					</div>
+					<ul>
+						<li><a href="#" title="Facebook"><i
+								class="fa fa-facebook"></i></a></li>
+						<li><a href="#" title="Twitter"><i class="fa fa-twitter"></i></a></li>
+
+					</ul>
+				</div>
+				<!-- Widget Newsletter /- -->
 			</div>
-			<!-- Container /- -->
-		</footer>
+		</div>
+		<!-- Container /- --> </footer>
 		<!-- Footer Main 1 -->
 
 	</div>
+	<form id="startForm" action="/PCC/star.shopping" method="post">
+		<input id=startInput type="text" value="${start}" hidden />
+	</form>
 
 	<!-- JQuery v1.12.4 -->
 	<script src="../js/jquery.min.js"></script>
@@ -451,23 +328,106 @@
 	<!-- Library - Theme JS -->
 	<script src="../js/functions.js"></script>
 	<!-- login  -->
-<!-- 	<script type="text/javascript" src="../js/login.js"></script> -->
+	<!-- 	<script type="text/javascript" src="../js/login.js"></script> -->
 	<script type="text/javascript">
-		$(document).ready(function(){
-			$('#serch-btn').click(function(){
-				alert("已點");
+		$(document).ready(function() {
+			var starInput = $('#startInput').val();
+			ViewCart();
+			if (starInput == "") {
+				$('#startForm').submit();
+			}
+			//搜尋欄搜尋商品名
+			$('#serch-btn').click(function() {
+				// 				alert("已點");
 				var searchText = $('#searchText').val();
-				alert(searchText);
-				if(searchText.trim().length == 0){
+				//				alert(searchText);
+				if (searchText.trim().length == 0) {
 					alert('請輸入搜尋條件');
 					$('#filter').val('').focus();
-				}else{
+				} else {
 					$('#searchForm').submit();
 				}
 			})
-	
+			//分類欄點選分類
+			$(".categoryli").click(function() {
+				// 				alert(".categoryli被點選");
+				var formid = $(this).find("input").val();
+
+				// 				alert(formid);
+				if (formid != '') {
+					$(this).find("form").submit();
+				}
+
+			});
+
+			//加入購物車
+
+			$(".add-to-cart1").click(function() {
+				var productId = $(this).find("p").text();
+				var producIdCartLi = $("#" + productId+"SS");
 			
-		})
+				$.ajax({
+					url : "/PCC/addCart.shopping",
+					type : "POST",
+					data : {"productId" : productId},
+					success : function(data) {
+						if (producIdCartLi.text() =="") {
+							var item = $("#" + data.productId);
+							item.css("display", "");
+						}
+						//抓數量的數字
+						$("#" + data.productId + "span").text(data.quantity);
+						//只要購物車內有東西，就打開View Cart 和Check Out
+						$("#cartButtonLi").css("display","");
+					}
+				});
+
+			});
+			
+			//只要購物車內有東西，就打開View Cart 和Check Out
+			function ViewCart(){
+				var sum=0;
+				$(".cartSpan").each(function(){
+					var number =parseInt($(this).text());
+					sum=sum+number;
+				});
+				if(sum==0){
+					$("#cartButtonLi").css("display","");
+
+				}else{
+					$("#cartButtonLi").css("display","none");
+				}
+
+			}	
+
+			//按下X除去購物車物件
+			
+// 				$(".remove").click(function(){
+// 					var parent=$(this).parent(".mini_cart_item");
+// 								parent.css("display","none");
+// 				ViewCart();		
+//  					$.ajax({
+// 						url : "/PCC/addCart.shopping",
+// 						type : "POST",
+// 						data : {"productId" : productId},
+// 						success : function(data) {
+// 							if (producIdCartLi.text() =="") {
+// 								var item = $("#" + data.productId);
+// 								item.css("display", "");
+// 							}
+// 							//抓數量的數字
+// 							$("#" + data.productId + "span").text(data.quantity);
+// 							//只要購物車內有東西，就打開View Cart 和Check Out
+// 							$("#cartButtonLi").css("display","");
+// 						}
+// 					});
+					
+// 				});
+		
+			
+			
+
+		});
 	</script>
 </body>
 </html>

@@ -8,7 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import model.bean.CategoryType;
 import model.bean.Product;
+import model.dao.CategoryDAO;
 import model.dao.ProductDAO;
 
 @Service
@@ -16,7 +18,9 @@ import model.dao.ProductDAO;
 public class ProductService {
 	
 	@Autowired
-	private ProductDAO productDAO; 
+	private ProductDAO productDAO;
+	@Autowired
+	private CategoryDAO categoryDAO;
 
 	//根據ID搜尋
 	public Product search(int productId){
@@ -35,17 +39,28 @@ public class ProductService {
 
 		return listProduct;
 	}
-	
+	//搜索模糊商品名
 	public List<Product> searchText(String productName){
 		System.out.println("service start");
 		if(productName!=null && productName.trim().length()!=0) {
 			
 			List<Product> listProduct=productDAO.selectProductName(productName);
-			System.out.println("service start"+productName);	
+//			System.out.println("service start"+productName);	
 			return listProduct;
 		}		
 		return null;
 	}
+	
+	//搜索分類
+	public List<Product> searchByCategory(String category){
+		if(category!=null) {
+			List<Product> products= productDAO.selectCategory(category);
+			return products;
+		}		
+		return null;
+	}
+	
+	
 	
 	//新增產品for後台(希望能做到批次新增)
 	public int insertProducts(Product Product) throws SQLException{
@@ -54,7 +69,7 @@ public class ProductService {
 		List<Product> listProduct= new ArrayList<Product>();	
 		listProduct.add(Product);
 		int saveOK=productDAO.insertProducts(listProduct);
-		System.out.println("Service ok :"+saveOK);
+//		System.out.println("Service ok :"+saveOK);
 		return saveOK;
 		}
 		return 0;
@@ -68,5 +83,20 @@ public class ProductService {
 		}
 		return false;
 	}
+	
+	//產品剛開始就搜尋資料庫有哪些類別
+	public List<CategoryType> categoryFilter(){
+		
+		return categoryDAO.selectTypeOfCategory();
+		
+	}
+	
+	//產品搜尋用狀態 0是下架 1是普通 2是熱銷 3是新上市	
+	public List<Product> hotProduct(int status){
+		
+		return productDAO.selectProductStatus(status);
+		
+	} 
+	
 	
 }
