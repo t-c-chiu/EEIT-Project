@@ -123,7 +123,7 @@ $('#area').keyup(function(){
 						<tr>
 							<td><select name="roomType">
 									<option value="normal">標準房</option>
-									<option value="good">貴賓房</option>
+									<option value="good">貴賓房</option>									
 							</select></td>
 							<td><input type="submit" name="Room" value="送出"></td>
 						</tr>

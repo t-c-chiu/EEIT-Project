@@ -1,15 +1,12 @@
 package model.dao;
 
 
-import java.io.InputStream;
-import java.sql.Clob;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
 
 import javax.sql.DataSource;
-import javax.sql.rowset.serial.SerialClob;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -18,15 +15,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate5.SessionFactoryUtils;
 import org.springframework.stereotype.Repository;
 
+import model.bean.CategoryType;
 import model.bean.Product;
 
 
 @Repository
 public class ProductDAO {
-	
-
-
-	
 
 	@Autowired
 	private SessionFactory sessionFactory;
@@ -45,10 +39,10 @@ public class ProductDAO {
 
 	}
 
-	// 搜尋全部上架商品
+	// 搜尋全部上架商品(for後台)
 	public List<Product> selectAll() {
 
-		List<Product> listProduct = getSession().createQuery("select * form PRODUCT", Product.class).list();
+		List<Product> listProduct = getSession().createQuery("form PRODUCT", Product.class).list();
 
 		return listProduct;
 	}
@@ -56,21 +50,41 @@ public class ProductDAO {
 	// 根據分類搜尋
 	public List<Product> selectCategory(String category) {
 
-		Query<Product> query = getSession().createQuery("from Product where category = ?", Product.class);
+		Query<Product> query = getSession().createQuery("from Product where status !=0 and category = ? order by status desc", Product.class);
 		query.setParameter(0, category);
 
 		return query.list();
 
 	}
 
+	
+
 	// 根據商品名模糊搜尋
 	public List<Product> selectProductName(String productName) {
 		Query<Product> query = getSession().createQuery("from Product where productName like '%"+productName+"%' ", Product.class);
-	
-		System.out.println("DAO back");
+		
+//		System.out.println("DAO back");
 		return query.list();
 
 	}
+	
+	
+	//根据商品狀態來搜尋
+	public List<Product> selectProductStatus(int status) {
+		Query<Product> query = getSession().createQuery("from Product where status = ?", Product.class);
+		query.setParameter(0, status);
+//		System.out.println("DAO back"+status);
+		return query.list();
+
+	}
+	
+	
+	
+	
+	
+	
+
+	
 
 	// 更新商品，一次一個
 

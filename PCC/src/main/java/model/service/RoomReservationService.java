@@ -64,8 +64,9 @@ public class RoomReservationService {
 		return roomDAO.selectByArea(area);
 	}
 	
-	public List<Room> selectByPrice(int price){
-		return roomDAO.selectByPrice(price);
+	public List<Room> selectByPrice(int price,String roomType,String area){
+		return roomDAO.selectByPrice(price,roomType,area);
+		
 	}
 	
 }
