@@ -88,8 +88,9 @@ public class ClazzService {
 			clazz.setStatus(1);
 			List<String> memberIds = studentDAO.selectMemberIdByClassId(classId);
 			for (String mId : memberIds) {
-				systemMessageDAO.insert(mId, clazz.getCourseName() + "即將開課!!",
-						"您報名的課程" + clazz.getCourseName() + "將於" + clazz.getEndDate() + "開課，請準時報到。");
+				String courseName = clazz.getCourseName();
+				systemMessageDAO.insert(mId, courseName + "即將開課!!",
+						"您報名的課程" + courseName + "將於" + clazz.getEndDate() + "開課，請準時報到。");
 			}
 		}
 		return "報名成功";

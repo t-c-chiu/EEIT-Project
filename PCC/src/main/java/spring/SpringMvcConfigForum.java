@@ -56,7 +56,6 @@ public class SpringMvcConfigForum extends AbstractAnnotationConfigDispatcherServ
 
 	@Override
 	protected String getServletName() {
-
 		return "springMvcConfigForum";
 	}
 }

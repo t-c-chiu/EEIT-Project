@@ -81,11 +81,20 @@
 			})
 			
 			$('#postClick').click(function(){
-				$('#forumClick').removeClass();
-				$(this).addClass('active');
-				$('#articlesArea').css('display','none');
-				$('#postArea').css('display','block');
-				$('#forumTitle').text('發表文章');
+
+				$.get('${pageContext.request.contextPath}/isOKtoPost.forum',function(data){
+					
+					if('OK' != data){
+						alert(data);
+						return;
+					}
+					
+					$('#forumClick').removeClass();
+					$('#postClick').addClass('active');
+					$('#articlesArea').css('display','none');
+					$('#postArea').css('display','block');
+					$('#forumTitle').text('發表文章');
+				})
 			})
 			
 			$('#forumClick').click(function(){

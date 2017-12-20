@@ -1,8 +1,9 @@
 package model.dao;
 
+import java.util.List;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -53,6 +54,11 @@ public class MemberDAO {
 			return true;
 		}
 		return false;
+	}
+
+	public List<Member> selectMemberByStatus(Integer status) {
+		return getSession().createQuery("from Member where status = :status", Member.class)
+				.setParameter("status", status).list();
 	}
 
 }

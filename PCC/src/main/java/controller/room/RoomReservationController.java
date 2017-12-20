@@ -24,7 +24,7 @@ import model.service.RoomReservationService;
 
 
 @Controller
-@SessionAttributes({"roomReservation","listOfRooms","newPoint"})
+@SessionAttributes({"roomReservation","listOfRooms","newPoint","area","roomType"})
 public class RoomReservationController {
 
 	@Autowired
@@ -47,15 +47,16 @@ public class RoomReservationController {
 	}
 
 	@RequestMapping(path = "/show.room", method = RequestMethod.GET)
-	public String showRoom(String roomType, Model model) {
+	public String showRoom(String roomType,String area,Model model) {
 		List<Room> listOfRooms;
-		listOfRooms = roomReservationService.selectRoomByType(roomType);
+		listOfRooms = roomReservationService.selectRoomByType(roomType,area);
 		model.addAttribute("listOfRooms", listOfRooms);
-		System.out.println(listOfRooms);
+		model.addAttribute("roomType",roomType);
+		model.addAttribute("area",area);
 		return "show.ok";
 	}
 	
-	@RequestMapping(path="/showroomJson.room",method=RequestMethod.GET,produces= {"application/json;charset=UTF-8"})
+	@RequestMapping(path="/getRoombyOrder.room",method=RequestMethod.GET,produces= {"application/json;charset=UTF-8"})
 	public @ResponseBody List<Room> showRoomJson(String order,Model model){
 		return roomReservationService.selectByOrder(order);
 	}
@@ -90,8 +91,18 @@ public class RoomReservationController {
 	
 	@RequestMapping(path="/getMemberbyId.room",method=RequestMethod.GET,produces= {"application/json;charset=UTF-8"})
 	public @ResponseBody Member selectMemberById(@SessionAttribute("member") Member member) {
-		return roomReservationService.selectMemberById(member);
-			
+		return roomReservationService.selectMemberById(member);			
 	}
+	
+	@RequestMapping(path="/getRoombyArea.room",method=RequestMethod.GET,produces= {"application/json;charset=UTF-8"})
+	public @ResponseBody List<String> selectByArea(String area){
+		return roomReservationService.selectByArea(area);
+	}
+	
+	@RequestMapping(path="/getRoombyPrice.room",method=RequestMethod.GET,produces= {"application/json;charset=UTF-8"})
+	public @ResponseBody List<Room> selectByPrice(int price,@SessionAttribute("roomType") String roomType,@SessionAttribute("area") String area){
+		return roomReservationService.selectByPrice(price,roomType,area);
+	}
+	
 		
 }

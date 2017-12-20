@@ -2,6 +2,8 @@ package controller.forum;
 
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -89,4 +91,17 @@ public class ForumController {
 		forumService.reportArticle(member, reason, (PostArticle) detail.get("post"));
 		return "檢舉成功";
 	}
+
+	@RequestMapping(path = "/isOKtoPost.forum", method = RequestMethod.GET, produces = { "text/plain;charset=UTF-8" })
+	public @ResponseBody String isOKtoPost(HttpSession session) {
+		Member member = (Member) session.getAttribute("member");
+		if (member == null) {
+			return "請先登入";
+		}
+		if (member.getStatus() == 1) {
+			return "您已被禁止發文";
+		}
+		return "OK";
+	}
+
 }

@@ -52,12 +52,21 @@ public class RoomReservationService {
 	}
 	
 	
-	public List<Room> selectRoomByType(String roomType){
-		return roomDAO.selectByType(roomType);
+	public List<Room> selectRoomByType(String roomType,String area){
+		return roomDAO.selectByType(roomType,area);
 	}
 	
 	public List<Room> selectByOrder(String order){
 		return roomDAO.selectByOrder(order);
+	}
+	
+	public List<String> selectByArea(String area){
+		return roomDAO.selectByArea(area);
+	}
+	
+	public List<Room> selectByPrice(int price,String roomType,String area){
+		return roomDAO.selectByPrice(price,roomType,area);
+		
 	}
 	
 }
