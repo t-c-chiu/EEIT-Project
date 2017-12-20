@@ -65,7 +65,6 @@
 			var messageId = $(this).val();
 
 			$.getJSON('${pageContext.request.contextPath}/showReasons.admin','messageId='+messageId,function(data){
-				console.log(data);
 				var h1 = $('<h1></h1>').text(data.postArticle.topic);
 				var h2 = $('<h2></h2>').text(data.postArticle.memberId + '　　發文日期: ' + data.postArticle.date);
 				var span1 = $('<span></span>').html(data.postArticle.contents);
@@ -78,14 +77,43 @@
 			})
 		})
 		
-		$('.blackBtn').click(function(){
+		$('body').on('click','.showReasonsBtn2',function(){
 			var messageId = $(this).val();
-			var isBlack = confirm('是否將此文章作者加入黑名單');
-			$.post('${pageContext.request.contextPath}/blackMember.admin',
-					'messageId='+messageId+'&isBlack='+isBlack,function(data){
+
+			$.getJSON('${pageContext.request.contextPath}/showReasons.admin','messageId='+messageId,function(data){
+				var h1 = $('<h1></h1>').text(data.postArticle.topic);
+				var h2 = $('<h2></h2>').text(data.postArticle.memberId + '　　發文日期: ' + data.postArticle.date);
+				var span1 = $('<span></span>').html(data.postArticle.contents);
+				var span2 = $('<span></span>').html('<h3>檢舉原因:</h3>');
+				$.each(data.reasons, function(i,v){
+					span2.append((i+1) + ' : '+ v,'<br>'); 
+				})
+				
+				$('#reportedArticleDetails2').empty().append(h1,h2,span1,'<hr>',span2);
+			})
+		})
+		
+		$('.blackArticleBtn').click(function(){
+			var messageId = $(this).val();
+			var memberId =$(this).parents('tr').children('td:eq(0)').text();
+			var topic =$(this).parents('tr').children('td:eq(1)').text();
+			
+			$.post('${pageContext.request.contextPath}/blackArticle.admin',
+					'messageId='+messageId,function(data){
 				alert(data);
+				if(data.indexOf('已被加入黑名單') != -1){
+					var span = $('<span></span>').text(memberId + '　');
+					$('#blackTable').append(span);
+				}
 			})
 			$(this).parents('tr').remove();
+			var td1 = $('<td></td>').text(memberId);
+			var td2 = $('<td></td>').text(topic);
+			var btn = $('<button></button>').addClass('showReasonsBtn2').val(messageId).text('查看文章與檢舉歷史');
+			var td3 = $('<td></td>').append(btn);
+			var tr = $('<tr></tr>').append(td1,td2,td3);
+			$('#blackArticles').append(tr);
+			
 		})
 		
 	})
@@ -104,16 +132,6 @@
             <div class="page-title">
               <div class="title_left">
                 <h3>討論區管理系統</h3>
-              </div>
-              <div class="title_right">
-                <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
-                  <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Search for...">
-                    <span class="input-group-btn">
-                      <button class="btn btn-default" type="button">Go!</button>
-                    </span>
-                  </div>
-                </div>
               </div>
             </div>
 
@@ -184,7 +202,7 @@
 								<td>${article[0].topic}</td>
 								<td>${article[1]}</td>
 								<td><button class="showReasonsBtn" value="${article[0].messageId}">查看文章與檢舉歷史</button></td>
-								<td><button class="blackBtn" value="${article[0].messageId}">屏蔽本文章</button></td>
+								<td><button class="blackArticleBtn" value="${article[0].messageId}">封鎖本文章</button></td>
 							</tr>
 						</c:forEach>
 						</table>
@@ -193,6 +211,38 @@
               </div>
               <div id="reportedArticleDetails" style="width: 50%;float: right;"></div> 
               <div class="clearfix"></div>
+
+			  <div class="col-md-6 col-sm-6 col-xs-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2>已封鎖文章</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      </li>
+                      <li><a class="close-link"><i class="fa fa-close"></i></a>
+                      </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+					<table id="blackArticles">
+						<tr>
+							<th>作者</th>
+							<th>標題</th>
+						</tr>
+						<c:forEach var="article" items="${all.listOfBlackArticles}">
+							<tr>
+								<td>${article.memberId}</td>
+								<td>${article.topic}</td>
+								<td><button class="showReasonsBtn2" value="${article.messageId}">查看文章與檢舉歷史</button></td>
+							</tr>
+						</c:forEach>
+						</table>
+	                  </div>
+	                </div>
+	              </div>
+				 <div id="reportedArticleDetails2" style="width: 50%;float: right;"></div> 
+				<div class="clearfix"></div>
 
             <div class="col-md-6 col-sm-6 col-xs-12">
               <div class="x_panel">
@@ -207,21 +257,11 @@
                   <div class="clearfix"></div>
                 </div>
                 <div class="x_content">
-                	<table id="blackTable">
-						<tr>
-							<th>帳號</th>
-							<th>姓名</th>
-						</tr>
+                  <div id="blackTable">
 					<c:forEach var="blackMember" items="${all.listOfBlackMembers}">
-							<tr>
-								<td>${blackMember.memberId}</td>
-								<td>${blackMember.name}</td>
-								<td><button>解鎖</button></td>
-								<td><button>查看歷史紀錄</button></td>
-							</tr>
+						<span>${blackMember.memberId}&nbsp;</span>
 					</c:forEach>
-					</table>
-                </div>
+               	 </div>
               </div>
             </div>
 

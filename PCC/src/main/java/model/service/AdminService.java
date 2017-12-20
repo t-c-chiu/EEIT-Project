@@ -15,6 +15,7 @@ import model.bean.ReportedArticle;
 import model.dao.MemberDAO;
 import model.dao.PostArticleDAO;
 import model.dao.ReportedArticleDAO;
+import model.dao.SystemMessageDAO;
 
 @Service
 @Transactional
@@ -26,6 +27,8 @@ public class AdminService {
 	private ReportedArticleDAO reportedArticleDAO;
 	@Autowired
 	private MemberDAO memberDAO;
+	@Autowired
+	private SystemMessageDAO systemMessageDAO;
 
 	public Map<String, Object> showArticleAdmin() {
 		List<ReportedArticle> listOfReportedArticlesDetail = reportedArticleDAO.selectMessageIdByStatus(0);
@@ -40,10 +43,12 @@ public class AdminService {
 			Object[] misc = { pArticle, reportedArticleDAO.selectCountByMessageId(pArticle.getMessageId()) };
 			listOfReportedInfo.add(misc);
 		}
+		List<PostArticle> listOfBlackArticles = postArticleDAO.selectByStatus(2);
 		List<Member> listOfBlackMembers = memberDAO.selectMemberByStatus(1);
 		Map<String, Object> all = new HashMap<>();
 		all.put("listOfDetail", listOfDetail);
 		all.put("listOfReportedInfo", listOfReportedInfo);
+		all.put("listOfBlackArticles", listOfBlackArticles);
 		all.put("listOfBlackMembers", listOfBlackMembers);
 		return all;
 	}
@@ -70,16 +75,16 @@ public class AdminService {
 		return map;
 	}
 
-	public Member blackMember(Integer messageId, boolean isBlack) {
-		Member member = memberDAO.select(postArticleDAO.selectByMessageId(messageId).getMemberId());
-		postArticleDAO.selectByMessageId(messageId).setStatus(2);
-		if (isBlack) {
-			if (member.getStatus() == 1) {
-				return null;
-			}
-			member.setStatus(1);
-			return member;
+	public String blackArticle(Integer messageId) {
+		PostArticle postArticle = postArticleDAO.selectByMessageId(messageId);
+		String memberId = postArticle.getMemberId();
+		postArticle.setStatus(2);
+		Integer countOfStatus2 = postArticleDAO.selectCountOfStatus2(memberId);
+		if (countOfStatus2 == 2) {
+			memberDAO.select(memberId).setStatus(1);
+			systemMessageDAO.insert(memberId, "你已被加入討論區黑名單", "由於你的文章經常被檢舉且經審核後已被封鎖兩篇，系統將限制你在討論區的發文。");
+			return "已將" + postArticle.getTopic() + "封鎖, " + memberId + "被封鎖文章到達兩篇, 已被加入黑名單";
 		}
-		return null;
+		return "已將" + postArticle.getTopic() + "封鎖";
 	}
 }
