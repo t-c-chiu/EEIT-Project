@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>    
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <script src="<c:url value="/js/login.js"/>"></script>
 
@@ -22,8 +22,10 @@
 							class="icon-bar"></span> <span class="icon-bar"></span> <span
 							class="icon-bar"></span>
 					</button>
-					<a href="index.html" class="navbar-brand">PCC</a>
+
+					<a href="/PCC/index.jsp" class="navbar-brand">PCC</a>
 				</div>
+
 
 				<!-- Menu Icon -->
 				<div class="menu-icon">
@@ -39,7 +41,7 @@
 						<li>
 							<!-- 購物車的圖 --> <a aria-expanded="true" aria-haspopup="true"
 							data-toggle="dropdown" id="cart" class="btn dropdown-toggle"
-							title="Add To Cart" href="#"> <i
+							title="Add To Cart" href="/PCC/pages/cart.jsp"> <i
 								class="icon icon-ShoppingCart"></i></a> <!-- /購物車的圖 --> <!-- 拉下選單的部分 -->
 							<ul class="dropdown-menu no-padding" id="dropdownCart">
 								<c:forEach var="cart" items="${addToCart}">
@@ -77,16 +79,15 @@
 								<!-- 前往購物車或結帳 -->
 
 								<li class="button" style="display: none" id="cartButtonLi">
-							
-										<a id="toCartA" title="View Cart" href="/PCC/pages/cart.jsp">View Cart</a>
-				
-										<a title="Check Out">Check out</a>
-								
-									
+
+									<a id="toCartA" title="View Cart" href="/PCC/pages/cart.jsp">View
+										Cart</a> <a title="Check Out">Check out</a>
+
+
 								</li>
 								<!--/ 前往購物車或結帳 -->
-							</ul> <!-- /拉下選單的部分 --> 
-							
+							</ul> <!-- /拉下選單的部分 -->
+
 
 						</li>
 						<!-- 購物車底部 -->
@@ -145,7 +146,7 @@
 
 							<!-- google -->
 							<div class="g-signin2" data-onsuccess="onSignIn"></div>
-						<div class="modal-footer">
+							<div class="modal-footer">
 								<button type="button" class="btn btn-secondary"
 									data-dismiss="modal">取消</button>
 								<button type="button" id="sub" class="btn btn-primary">登入</button>
@@ -163,35 +164,46 @@
 							aria-expanded="false">首頁</a></li>
 						<li><a href="pages/reservation.html" title="Reservation">線上預約</a></li>
 						<li><a href="pages/partner.html" title="Partner">服務夥伴</a></li>
-						<li class="dropdown"><a href="pages/shop-2.jsp" title="Shop"
+						<li class="dropdown"><a href="/PCC/pages/shop-2.jsp" title="Shop"
 							class="dropdown-toggle" role="button" aria-haspopup="true"
 							aria-expanded="false">購物商城 </a> <i
 							class="ddl-switch fa fa-angle-down"></i>
 							<ul class="dropdown-menu">
 								<!-- 12/18 修改成功..>0< -->
 								<c:forEach var="category" items="${categorys}">
-									<li class="categoryli"><a href="#" title="">${category.categoryName}</a></li>
+								
+									<li class="categoryli">
+																		
+									<a href="#" title="">${category.categoryName}</a>
+									<form action='<c:url value="/searchCatagory.shopping"/>' method="get">
+									<input type="text" name="category" value="${category.categoryName}" hidden />
+									</form>
+			
+									</li>
+								
 								</c:forEach>
 								<!-- /12/18 修改成功..>0< -->
 							</ul></li>
 						<li class="dropdown"><a href="pages/room.html" title="Room"
 							class="dropdown-toggle" role="button" aria-haspopup="true"
 							aria-expanded="false">預約訂房</a></li>
-						<li class="dropdown"><a href="<c:url value="/showAllClazz.clazz"/>"
-									title="Course" class="dropdown-toggle" role="button"
-									aria-haspopup="true" aria-expanded="false">媽咪學苑</a> <i
-									class="ddl-switch fa fa-angle-down"></i>
-									</li>
-						<li class="dropdown">
-                           <a href="<c:url value="/showByOrder.forum?order=date"/>" title="Forum" class="dropdown-toggle" role="button" aria-haspopup="true" aria-expanded="false">文章/討論</a>
-                           <i class="ddl-switch fa fa-angle-down"></i>
-                           <ul class="dropdown-menu">
-                           	<li><a href="<c:url value="/showByOrder.forum?order=likes"/>">熱門文章</a></li>
-                               <li><a href="<c:url value="/showAll.forum?category=懷孕討論"/>">懷孕討論</a></li>
-                               <li><a href="<c:url value="/showAll.forum?category=育兒討論"/>">育兒討論</a></li>
-                               <li><a href="<c:url value="/showAll.forum?category=心情分享"/>">心情分享</a></li>
-                           </ul>
-                     	 </li>
+						<li class="dropdown"><a
+							href="<c:url value="/showAllClazz.clazz"/>" title="Course"
+							class="dropdown-toggle" role="button" aria-haspopup="true"
+							aria-expanded="false">媽咪學苑</a> <i
+							class="ddl-switch fa fa-angle-down"></i></li>
+						<li class="dropdown"><a
+							href="<c:url value="/showByOrder.forum?order=date"/>"
+							title="Forum" class="dropdown-toggle" role="button"
+							aria-haspopup="true" aria-expanded="false">文章/討論</a> <i
+							class="ddl-switch fa fa-angle-down"></i>
+							<ul class="dropdown-menu">
+								<li><a
+									href="<c:url value="/showByOrder.forum?order=likes"/>">熱門文章</a></li>
+								<li><a href="<c:url value="/showAll.forum?category=懷孕討論"/>">懷孕討論</a></li>
+								<li><a href="<c:url value="/showAll.forum?category=育兒討論"/>">育兒討論</a></li>
+								<li><a href="<c:url value="/showAll.forum?category=心情分享"/>">心情分享</a></li>
+							</ul></li>
 						<li><a href="pages/contact-us.html" title="Contact Us">聯絡資訊</a></li>
 					</ul>
 				</div>
@@ -214,3 +226,49 @@
 	<!-- Menu Block /- -->
 </header>
 <!-- Header /- -->
+
+
+<script type="text/javascript">
+	$(document).ready(function() {
+
+		// 按下X除去購物車物件
+		$(".remove").click(function() {
+			var parent = $(this).parent(".mini_cart_item");
+			var parentId = parent.attr("id").split("SS")[0];
+			console.log("點到啦"+parentId);
+
+		
+			$.ajax({
+				url : "/PCC/eliminate.shopping",
+				type : "POST",
+				data : {"productId":parentId} ,
+				success : function(data) {
+					$("#"+parentId+"span").text("0");
+					console.log($("#"+parentId+"span").text());
+					ViewCart();
+					parent.css("display", "none");
+			
+				}
+			});
+		
+		});
+
+	});
+
+	function ViewCart() {
+		var sum = 0;
+		$(".cartSpan").each(function() {
+			var number = parseInt($(this).text());
+			console.log(number);
+			sum = sum + number;
+		});
+		if (sum == 0) {
+			$("#cartButtonLi").css("display", "none");
+
+		} else {
+			$("#cartButtonLi").css("display", "");
+		}
+
+	}
+</script>
+

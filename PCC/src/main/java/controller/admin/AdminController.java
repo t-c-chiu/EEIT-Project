@@ -40,9 +40,4 @@ public class AdminController {
 		return adminService.blackArticle(messageId);
 	}
 
-	@RequestMapping(path = "/course.admin", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
-	public @ResponseBody String showCourseAdmin(Model model) {
-		return "87";
-	}
-
 }
