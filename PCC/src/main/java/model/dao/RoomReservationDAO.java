@@ -36,6 +36,13 @@ public class RoomReservationDAO {
 		return query.list();				
 	} 
 	
+	
+	public List<RoomReservation> selectAllReservation(){
+		Query<RoomReservation> query=getSession().createQuery("from RoomReservation",RoomReservation.class);
+		return query.list();	
+	}
+	
+	
 	public boolean delete(int roomReserverId) {
 //		Query query=getSession().createQuery("delete RoomReservation from where roomReserverId=?");
 //		query.setParameter(0, roomReserverId);

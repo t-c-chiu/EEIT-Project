@@ -35,6 +35,9 @@
           </li>
           <li><a href="order.jsp"><i class="fa fa-desktop"></i> 訂單管理 </a>
           </li>
+          <li><a href="room.jsp"><i class="fa fa-desktop"></i> 房間管理 </a>
+          </li>
+          
           <li><a href="<c:url value="/article.admin"/>"><i class="fa fa-edit"></i> 討論區管理 </a>
           </li>
           <li><a href="course.jsp"><i class="fa fa-edit"></i> 課程管理 </a>
