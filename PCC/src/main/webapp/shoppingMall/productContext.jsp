@@ -57,7 +57,7 @@
 			</div>
 		</div>
 		<!-- Loader /- -->
-		<%@ include file="header.jsp"%>
+		<%@ include file="../pages/header.jsp"%>
 
 		<!-- Header -->
 
@@ -69,8 +69,6 @@
 				<div class="banner-content">
 					<h3>購物商城</h3>
 					<p>our vision is to be Earth's most customer centric company</p>
-
-					
 				</div>
 				<ol class="breadcrumb">
 					<li><a href="../index.html" title="Home">首頁</a></li>
@@ -191,71 +189,141 @@
 					<div
 						class="col-md-8 col-sm-7 col-xs-12 content-area product-section2 no-left-padding">
 						<!-- Products -->
-						<ul class="products">
-							<!-- 商品點選區  Product -->
-							<c:forEach var="products8" items="${products}">
-							
-							<form id="${products8.productId}ProductForm" action="/PCC/productId.shopping" method="get">
-								<input type="text" name="productId" value="${products8.productId}" hidden/>
-							</form>
+						<div>
+							<h1>
+								<span itemprop="name">${productPage.productName}</span>商品編號： <span id="Id${productPage.productId}">${productPage.productId}</span>
+							</h1>
+							<p>
+								<span itemprop="description">1024
+									短版設計坑條針織搭配窄管寧褲化身韓妞STYLE~ </span>
+							</p>
 
-								<li class="product">
-									
-									<a id="${products8.productId}" class="productItem" href="#"> 
-									<img src="../images/product-10.jpg" alt="Product" />
-								
-									
-									<h5>${products8.productName}</h5> 
-									<span class="price">
-											<del>${products8.price}</del> 
-											${products8.price}
-									</span>
-									</a> 
-									<a href="#" class="add-to-cart1" title="Add To Cart"> 
-										Add	To Cart
-										<p hidden>${products8.productId}</p>
-									</a> 
-									<!-- 圖案旁邊的icon -->
-<!-- 									<div class="wishlist-box"> -->
-<!-- 										<a href="#"> <i class="fa fa-arrows-alt"></i> -->
-<!-- 										</a> <a href="#"> <i class="fa fa-heart-o"></i> -->
-<!-- 										</a> <a href="#"> <i class="fa fa-search"></i> -->
-<!-- 										</a> -->
-<!-- 									</div> /圖案旁邊的icon</li> -->
+						</div>
+						<table class="infolist">
+							<colgroup>
+								<col width="19%"></col>
+								<col width="81%"></col>
+							</colgroup>
 
-							</c:forEach>
+							<tr class="webprice">
+								<th scope="row">原價</th>
+								<td><span class="price">${productPage.price}元</span></td>
+							</tr>
+							<tr class="cp_promo">
+								<th scope="row">特價</th>
+								<td><span class="price">${productPage.price}元</span></td>
+							</tr>
+
+							<tr class="js-cccart">
+								<th scope="row">付款方式</th>
+								<td>
+									<ul class="list paytypes clearfix">
+										<li>
+											<div class="paytype">
+												信用卡 <img
+													src="https://s.yimg.com/f/i/tw/mall/yps/ico_credi_201008.png"
+													alt="接受信用卡刷卡">
+											</div>
+										</li>
+										<li>
+											<div class="paytype">
+												ATM轉帳 <img
+													src="https://s.yimg.com/f/i/tw/mall/yps/ico_atm_0109.gif"
+													alt="接受ATM轉帳付款">
+											</div>
+										</li>
+										<li class="familymart">
+											<div class="paytype">
+												全家付款取貨 <img
+													src="https://s.yimg.com/qs/mall/yps/ico_famimart.gif"
+													alt="全家付款取貨">
+											</div>
+										</li>
+										<li class="sevenmart">
+											<div class="paytype">
+												7-11付款取貨 <img
+													src="https://s.yimg.com/f/i/tw/mall/yps/ico_711.gif"
+													alt="接受超商付款取貨">
+											</div>
+										</li>
+									</ul>
+								</td>
+							</tr>
+							<tr>
+
+								<th scope="row">交貨方式</th>
+								<td>
+									<ul>
+										<li><a href="#" title="貨運 / 宅配" class="trans"
+											hpp="r_shipfee">貨運 / 宅配 (購物滿599元免運費) </a>、 <a href="#"
+											title="7-11取貨付款" class="trans" hpp="r_shipfee">7-11取貨付款
+												(購物滿599元免運費) </a>、 <a href="#" title="全家取貨付款" class="trans"
+											hpp="r_shipfee">全家取貨付款 (購物滿599元免運費) </a></li>
+									</ul>
+								</td>
+							</tr>
+
+							<tr>
+								<th scope="row">尺寸與規格</th>
+								<td><select name="spec_id">
+										<option selected>請選擇</option>
+								</select></td>
+							</tr>
+
+						</table>
+
+
+						<div>
+							<button class="button button-default"
+								data-ylk="sec:buyinfo;slk:立即購買;" id="e2e-item-checkout-top"
+								hpp="add_cart_top" OnClick="ywaAddToCart('p0000145205549');"
+								type="submit" value="我要購買">立即購買</button>
+							<button class="button button-white"
+								data-ylk="sec:buyinfo;slk:加入購物車;" id="e2e-item-add2cart-top"
+								type="button">
+								<span class="sprite sprite-cart-default"></span> <span>加入購物車</span>
+							</button>
+						</div>
+
+
+						<!-- [WD] inc/ps_item_tab.html//-->
+						<div id="ypsitb" class="ypsmodule ypstab">
+							<div class="hd"></div>
+							<div class="bd clearfix">
+								<ul>
+									<li class="on"><span>商品詳細說明</span> <em></em></li>
+								</ul>
+							</div>
+							<div class="ft"></div>
+						</div>
+
+									<!-- 之後商品內容在這邊 -->
+
+									<!-- /之後商品內容在這邊 -->
+
+
+
 					</div>
-					<!-- Content Area /- -->
 				</div>
-				<!-- Row /- -->
-				<nav class="ow-pagination">
-				<ul class="pager">
-					<li class="number"><a href="#">1</a></li>
-					<li class="load-more"><a href="#">Load More</a></li>
-					<li class="previous"><a href="#"><i
-							class="fa fa-angle-right"></i></a></li>
-					<li class="next"><a href="#"><i class="fa fa-angle-left"></i></a></li>
-				</ul>
-				</nav>
-			</div>
-
-		</div>
-		<!-- Product Section2 /- --> </main>
+		</main>
 		<!--	內容結束	-->
 
 		<!-- Footer Main 1 -->
-		<%@ include file="footer.jsp"%>
+		<%@ include file="../pages/footer.jsp"%>
 		<!-- Footer Main 1 -->
 		<!-- Container /- -->
 	</div>
 	<form id="startForm" action="/PCC/star.shopping" method="post">
-		<input name="pageName" type="text" value="searchPage" hidden/>
-		<input id="startInput" type="text" value="${start}" hidden />
+		<input name=pageName type="text" value="prodcutPage" hidden/> 
+		<input
+			id=startInput type="text" value="${start}" hidden />
 
 	</form>
+		<input id="productId" type="text" value="${productPage.productId}" hidden/>
+			
 
 	<!-- JQuery v1.12.4 -->
-	<script src="../js/jquery.min.js"></script>
+	<!-- 	<script src="../js/jquery.min.js"></script> -->
 
 	<!-- Library - Js -->
 	<script src="../libraies/lib.js"></script>
@@ -284,94 +352,100 @@
 	<!-- Library - Theme JS -->
 	<script src="../js/functions.js"></script>
 	<!-- login  -->
-	<!-- 	<script type="text/javascript" src="../js/login.js"></script> -->
+	<script type="text/javascript" src="../js/login.js"></script>
 	<script type="text/javascript">
-	$(document).ready(function() {
-		var starInput = $('#startInput').val();
+		$(document)	.ready(function() {
+							var starInput = $('#startInput').val();
+							
+							console.log(productId);
+							ViewCart();
+							//為了初始化的載入
+							if (starInput == "") {
+								$('#startForm').submit();
+							}
 
-		ViewCart();
 
-		if (starInput == "") {
-			$('#startForm').submit();
-		}
-		// 搜尋欄搜尋商品名
-		$('#serch-btn').click(function() {
-			// alert("已點");
-			var searchText = $('#searchText').val();
-			// alert(searchText);
-			if (searchText.trim().length == 0) {
-				alert('請輸入搜尋條件');
-				$('#filter').val('').focus();
-			} else {
-				$('#searchForm').submit();
-			}
-		})
-		// 分類欄點選分類
-		$(".categoryli").click(function() {
-			// alert(".categoryli被點選");
-			var formid = $(this).find("input").val();
+							// 搜尋欄搜尋商品名
+							$('#serch-btn').click(function() {
+								// alert("已點");
+								var searchText = $('#searchText').val();
+								// alert(searchText);
+								if (searchText.trim().length == 0) {
+									alert('請輸入搜尋條件');
+									$('#filter').val('').focus();
+								} else {
+									$('#searchForm').submit();
+								}
+							})
+							// 分類欄點選分類
+							$(".categoryli").click(function() {
+								// alert(".categoryli被點選");
+								var formid = $(this).find("input").val();
 
-			// alert(formid);
-			if (formid != '') {
-				$(this).find("form").submit();
-			}
+								// alert(formid);
+								if (formid != '') {
+									$(this).find("form").submit();
+								}
 
-		});
+							});
 
-		// 加入購物車
+							// 加入購物車
 
-		$(".add-to-cart1").click(function() {
-			var productId = $(this).find("p").text();
-			var producIdCartLi = $("#" + productId + "SS");
+							$("#e2e-item-add2cart-top").click(function() {
+								var productId = $("#productId").val();
+								var producIdCartLi = $("#" + productId + "SS");
+								$.ajax({url : "/PCC/addCart.shopping",
+										type : "POST",
+										data : {
+												"productId" : productId
+												},
+										success : function(data) {
+											if (producIdCartLi.text() == "") {
+												var item = $("#"+ data.productId);
+													item.css("display","");
+											}
+											// 抓數量的數字
+											$("#"+ data.productId+ "span").text(data.quantity);
+											// 只要購物車內有東西，就打開View Cart 和Check Out
+											ViewCart();
+										}
+								});
 
-			$.ajax({
-				url : "/PCC/addCart.shopping",
-				type : "POST",
-				data : {
-					"productId" : productId
-				},
-				success : function(data) {
-					if (producIdCartLi.text() == "") {
-						var item = $("#" + data.productId);
-						item.css("display", "");
-					}
-					// 抓數量的數字
-					$("#" + data.productId + "span").text(data.quantity);
-					// 只要購物車內有東西，就打開View Cart 和Check Out
-					ViewCart();
-				}
-			});
+							});
 
-		});
+			//點圖轉跳頁面
 
-	//點圖轉跳頁面
-		
-		$(".productItem").click(function(){
-			var id=$(this).attr("id")+"ProductForm";
-			alert(id);
-			$("#"+id).submit();	
-		
-			
-			
-		});
+							$(".productItem").click(function() {
+								var id = $(this).attr("id");
+								$.ajax({url : "/PCC/controller.shopping",
+										type : "GET",
+										data : {
+												"productId" : id
+												},
+										success : function(data) {
+										location.replace("/PCC/shoppingMall/productContext.jsp");
+										}
+								});
+
+							});
 
 	});
-	// 是否打開 ViweCart和Check out
-	function ViewCart() {
-		var sum = 0;
-		$(".cartSpan").each(function() {
-			var number = parseInt($(this).text());
-		
-			sum = sum + number;
-		});
-		if (sum == 0) {
-			$("#cartButtonLi").css("display", "none");
+		// 是否打開 ViweCart和Check out
+		function ViewCart() {
+			var sum = 0;
+			$(".cartSpan").each(function() {
+				var number = parseInt($(this).text());
 
-		} else {
-			$("#cartButtonLi").css("display", "");
+				sum = sum + number;
+			});
+			if (sum == 0) {
+				$("#cartButtonLi").css("display", "none");
+
+			} else {
+				$("#cartButtonLi").css("display", "");
+			}
+
 		}
-
-	}
 	</script>
 </body>
 </html>
