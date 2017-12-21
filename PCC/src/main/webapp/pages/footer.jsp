@@ -12,7 +12,7 @@
                         <!-- Widget About -->
                         <aside class="col-md-6 col-sm-6 col-xs-12 ftr-widget widget_about">
 
-                            <a href="index.jsp" title="Postnatal Care Center">P<span >ostnatal</span> C<span>are</span> C<span>enter</span></a>
+                            <a href="/PCC/index.jsp" title="Postnatal Care Center">P<span >ostnatal</span> C<span>are</span> C<span>enter</span></a>
                             <div class="info">
                                 <p><i class="icon icon-Pointer"></i>106台北市大安區復興南路一段390號 2樓</p>
                                 <p class="phone"><i class="icon icon-Phone2"></i>(02) 6631 6666</p>

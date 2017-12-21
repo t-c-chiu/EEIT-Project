@@ -87,4 +87,10 @@ public class ClazzController {
 		}
 		return "新增成功";
 	}
+
+	@RequestMapping(path = "/showAllClazzSimple.clazz", method = RequestMethod.GET, produces = {
+			"application/json;charset=UTF-8" })
+	public @ResponseBody List<Clazz> showAllClazzSimple() {
+		return clazzService.showAllClazzSimple();
+	}
 }
