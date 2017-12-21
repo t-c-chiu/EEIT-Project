@@ -56,6 +56,13 @@ public class RoomReservationController {
 		return "show.ok";
 	}
 	
+	@RequestMapping(path="/insertRoom.room",method=RequestMethod.POST)
+	public String insertRoom(Room room) {
+		roomReservationService.insertRoom(room);
+		return "insertRoom.ok";
+	}
+	
+	
 	@RequestMapping(path="/getRoombyOrder.room",method=RequestMethod.GET,produces= {"application/json;charset=UTF-8"})
 	public @ResponseBody List<Room> showRoomJson(String order,Model model){
 		return roomReservationService.selectByOrder(order);

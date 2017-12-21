@@ -51,6 +51,11 @@ public class RoomDAO {
 		return query.list();	
 	}
 	
+	public boolean insertRoom(Room room) {
+		getSession().save(room);
+		return true;
+	}
+	
 
 	
 }

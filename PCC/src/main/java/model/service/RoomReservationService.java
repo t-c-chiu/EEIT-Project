@@ -70,12 +70,15 @@ public class RoomReservationService {
 	}
 	
 	public List<Room> selectByPrice(int price,String roomType,String area){
-		return roomDAO.selectByPrice(price,roomType,area);
-		
+		return roomDAO.selectByPrice(price,roomType,area);		
 	}
 	
 	public List<Room> selectAllRoom(){
 		return roomDAO.selectAllRoom();
+	}
+	
+	public boolean insertRoom(Room room) {
+		return roomDAO.insertRoom(room);		
 	}
 	
 }
