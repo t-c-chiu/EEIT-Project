@@ -82,19 +82,30 @@ public class RoomReservationController {
 		return roomReservationService.selectAllReservation();		
 	}
 	
-						
-	@RequestMapping(path="/deleteReservation.room",method=RequestMethod.GET)
-	public String delete(int roomReserverId,Model model) {
-		boolean deleteResult=roomReservationService.delete(roomReserverId);
-		Map<String,String> messages=new HashMap<>();
-		model.addAttribute("messages", messages);
-		model.addAttribute("deleteResult",deleteResult);
-		if(deleteResult==true) {
-			messages.put("m1", "刪除成功");
-			return"delete.ok";		
-		}
-		return null;
+	@RequestMapping(path="/selectAllRoom.room",method=RequestMethod.GET,produces= {"application/json;charset=UTF-8"})
+	public @ResponseBody List<Room> selectAllRoom(){
+		return roomReservationService.selectAllRoom();
 	}
+							
+//	@RequestMapping(path="/deleteReservation.room",method=RequestMethod.GET)
+//	public String delete(int roomReserverId,Model model) {
+//		boolean deleteResult=roomReservationService.delete(roomReserverId);
+//		Map<String,String> messages=new HashMap<>();
+//		model.addAttribute("messages", messages);
+//		model.addAttribute("deleteResult",deleteResult);
+//		if(deleteResult==true) {
+//			messages.put("m1", "刪除成功");
+//			return"delete.ok";		
+//		}
+//		return null;
+//	}
+	
+	@RequestMapping(path="/deleteReservation.room",method=RequestMethod.POST,produces= {"text/plain;charset=UTF-8"})
+    public @ResponseBody String delete(int roomReserverId) {
+		roomReservationService.delete(roomReserverId);		
+		return "刪除成功";
+	}
+	
 	
 	@RequestMapping(path="/getMemberbyId.room",method=RequestMethod.GET,produces= {"application/json;charset=UTF-8"})
 	public @ResponseBody Member selectMemberById(@SessionAttribute("member") Member member) {

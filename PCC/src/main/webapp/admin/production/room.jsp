@@ -41,19 +41,25 @@
     
     <script>
     $(function() {
+    	init()
     	
-//     	function initReservation
-    	
-    	$('#test').click(function(){
-	
-    		alert("QQ")
-    		$.get('${pageContext.request.contextPath}/selectAllReservation.room',function(data){
-    			console.log(data)
-    		    var tbody=$('<tbody></tbody>')
+    	$("body").on('click','.delete',function(){
+    			var roomReserverId=$(this).attr("id")
     			
-    			$('#datatable-responsive').append(tbody)
+    			$.post('${pageContext.request.contextPath}/deleteReservation.room','roomReserverId='+roomReserverId,function(data){
+    				alert(data)   				   			
+    			})
+   			   	
+    			$(this).parents('tr').remove()
+    	})
+  	
+    	function init(){ 	   	   		
+    		$.get('${pageContext.request.contextPath}/selectAllReservation.room',function(data){    	 
+    		var tbody=$('<tbody></tbody>')
+    			
+    		$('#datatable-responsive').append(tbody)
     		
-    			$.each(data,function(i,roomReservation){
+    		$.each(data,function(i,roomReservation){
     			   var tr1=$('<tr></tr>').addClass("odd")
 				                         .attr('role',"row") 
     				   		
@@ -69,17 +75,46 @@
     			   var td7=$('<td></td>').text(roomReservation.beginDate)
     			   var td8=$('<td></td>').text(roomReservation.endDate)
     			   var td9=$('<td></td>').text(roomReservation.totalPrice)
+    			   var td10=$('<td></td>') 
+    			   var button=$('<button>刪除</button>').addClass("delete")
+    			                                       .attr("id",roomReservation.roomReserverId)
+    			   td10.html(button)                                
     			       			       	       			   
-    			   tr1.append([td1,td2,td3,td4,td5,td6,td7,td8,td9])
+    			   tr1.append([td1,td2,td3,td4,td5,td6,td7,td8,td9,td10])
     			   tbody.append(tr1)                     
-    			})	    		    						
+    			})	
+    			
     		})
     		
     		
-    	})
-    	
-    });            
-    </script>
+    		$.get('${pageContext.request.contextPath}/selectAllRoom.room',function(data){
+        		console.log(data)
+        			var tbody=$('<tbody></tbody>')
+        			$('#datatable-responsive2').append(tbody)
+        			
+        			$.each(data,function(i,room){
+        			var tr1=$('<tr></tr>').addClass("odd")
+                                          .attr('role',"row") 
+    	   		
+     				var td1=$('<td></td>').attr('tabindex',"0")
+     						 			  .addClass('tabindex',"sorting_1")
+     						 			  .text(room.roomId)  
+     						 
+     				var td2=$('<td></td>').text(room.roomName)
+     				var td3=$('<td></td>').text(room.area)
+     				var td4=$('<td></td>').text(room.roomType)
+     				var td5=$('<td></td>').text(room.price)
+     				var td6=$('<td></td>').text(room.info)
+     			    tr1.append([td1,td2,td3,td4,td5,td6])
+    			    tbody.append(tr1)  
+     				
+        			})
+        			   			
+        		}) 		
+    	 }
+   		
+    }); 	  		   	    	             
+  </script>
   </head>
 
   <body class="nav-md">
@@ -89,22 +124,19 @@
          <%@ include file="leftAndTop.jsp"%>
          
         <!-- page content -->
-        <div class="right_col" role="main">        
+        <div class="right_col" role="main"> 
+        
+               
           <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>Responsive example<small>Users</small></h2>
+                    <h2>訂單一覽</h2>
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                       </li>
                       <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                        <ul class="dropdown-menu" role="menu">
-                          <li><a href="#">Settings 1</a>
-                          </li>
-                          <li><a href="#">Settings 2</a>
-                          </li>
-                        </ul>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                        </a>                     
                       </li>
                       <li><a class="close-link"><i class="fa fa-close"></i></a>
                       </li>
@@ -112,37 +144,74 @@
                     <div class="clearfix"></div>
                   </div>
                   <div class="x_content">
-                    <p class="text-muted font-13 m-b-30">
-                      Responsive is an extension for DataTables that resolves that problem by optimising the table's layout for different screen sizes through the dynamic insertion and removal of columns from the table.
-                    </p>
-					  <button id="test">QQ</button> 
-                    <div id="datatable-responsive_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer"><div class="row"><div class="col-sm-6"><div class="dataTables_length" id="datatable-responsive_length"><label>Show <select name="datatable-responsive_length" aria-controls="datatable-responsive" class="form-control input-sm"><option value="10">10</option><option value="25">25</option><option value="50">50</option><option value="100">100</option></select> entries</label></div></div><div class="col-sm-6"><div id="datatable-responsive_filter" class="dataTables_filter"><label>Search:<input type="search" class="form-control input-sm" placeholder="" aria-controls="datatable-responsive"></label></div></div></div><div class="row"><div class="col-sm-12">
+                    <p class="text-muted font-13 m-b-30"></p>
+			
+                 
                     <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap dataTable no-footer dtr-inline collapsed" cellspacing="0" width="100%" role="grid" aria-describedby="datatable-responsive_info" style="width: 100%;">
               
-                      <thead>
-                      
+                      <thead>                     
                         <tr role="row">
-                        <th class="sorting_asc" tabindex="0" aria-controls="datatable-responsive" rowspan="1" colspan="1" style="width: 50px;" aria-sort="ascending" aria-label="First name: activate to sort column descending">訂單編號</th>
-                        <th class="sorting" tabindex="0" aria-controls="datatable-responsive" rowspan="1" colspan="1" style="width: 50px;" aria-label="Last name: activate to sort column ascending">會員編號</th>
-                        <th class="sorting" tabindex="0" aria-controls="datatable-responsive" rowspan="1" colspan="1" style="width: 50px;" aria-label="Position: activate to sort column ascending">入住人</th>
-                        <th class="sorting" tabindex="0" aria-controls="datatable-responsive" rowspan="1" colspan="1" style="width: 60px;" aria-label="Office: activate to sort column ascending">連絡電話</th>
-                        <th class="sorting" tabindex="0" aria-controls="datatable-responsive" rowspan="1" colspan="1" style="width: 60px;" aria-label="Age: activate to sort column ascending">EMAIL</th>
-                        <th class="sorting" tabindex="0" aria-controls="datatable-responsive" rowspan="1" colspan="1" style="width: 50px;" aria-label="Start date: activate to sort column ascending">房間編號</th>
-                        <th class="sorting" tabindex="0" aria-controls="datatable-responsive" rowspan="1" colspan="1" style="width: 50px; " aria-label="Salary: activate to sort column ascending">入住日</th>
-                        <th class="sorting" tabindex="0" aria-controls="datatable-responsive" rowspan="1" colspan="1" style="width: 50px; " aria-label="Extn.: activate to sort column ascending">退房日</th>
-                        <th class="sorting" tabindex="0" aria-controls="datatable-responsive" rowspan="1" colspan="1" style="width: 50px; " aria-label="E-mail: activate to sort column ascending">總價</th>
-                        
+                        <th class="sorting_asc" tabindex="0" aria-controls="datatable-responsive" rowspan="1" colspan="1" style="width: 50px;">訂單編號</th>
+                        <th class="sorting" tabindex="0" aria-controls="datatable-responsive" rowspan="1" colspan="1" style="width: 50px;" >會員編號</th>
+                        <th class="sorting" tabindex="0" aria-controls="datatable-responsive" rowspan="1" colspan="1" style="width: 50px;" >入住人</th>
+                        <th class="sorting" tabindex="0" aria-controls="datatable-responsive" rowspan="1" colspan="1" style="width: 60px;" >連絡電話</th>
+                        <th class="sorting" tabindex="0" aria-controls="datatable-responsive" rowspan="1" colspan="1" style="width: 60px;" >EMAIL</th>
+                        <th class="sorting" tabindex="0" aria-controls="datatable-responsive" rowspan="1" colspan="1" style="width: 50px;" >房間編號</th>
+                        <th class="sorting" tabindex="0" aria-controls="datatable-responsive" rowspan="1" colspan="1" style="width: 50px; " >入住日</th>
+                        <th class="sorting" tabindex="0" aria-controls="datatable-responsive" rowspan="1" colspan="1" style="width: 50px; " >退房日</th>
+                        <th class="sorting" tabindex="0" aria-controls="datatable-responsive" rowspan="1" colspan="1" style="width: 50px; " >總價</th>
+                        <th class="sorting" tabindex="0" aria-controls="datatable-responsive" rowspan="1" colspan="1" style="width: 20px; " >刪除訂單</th>                       
                         </tr>
                       </thead>
                  
                     </table>
-                      
-                    </div></div><div class="row"><div class="col-sm-5"><div class="dataTables_info" id="datatable-responsive_info" role="status" aria-live="polite">Showing 1 to 10 of 57 entries</div></div><div class="col-sm-7"><div class="dataTables_paginate paging_simple_numbers" id="datatable-responsive_paginate"><ul class="pagination"><li class="paginate_button previous disabled" id="datatable-responsive_previous"><a href="#" aria-controls="datatable-responsive" data-dt-idx="0" tabindex="0">Previous</a></li><li class="paginate_button active"><a href="#" aria-controls="datatable-responsive" data-dt-idx="1" tabindex="0">1</a></li><li class="paginate_button "><a href="#" aria-controls="datatable-responsive" data-dt-idx="2" tabindex="0">2</a></li><li class="paginate_button "><a href="#" aria-controls="datatable-responsive" data-dt-idx="3" tabindex="0">3</a></li><li class="paginate_button "><a href="#" aria-controls="datatable-responsive" data-dt-idx="4" tabindex="0">4</a></li><li class="paginate_button "><a href="#" aria-controls="datatable-responsive" data-dt-idx="5" tabindex="0">5</a></li><li class="paginate_button "><a href="#" aria-controls="datatable-responsive" data-dt-idx="6" tabindex="0">6</a></li><li class="paginate_button next" id="datatable-responsive_next"><a href="#" aria-controls="datatable-responsive" data-dt-idx="7" tabindex="0">Next</a></li></ul></div></div></div></div>
 										
                   </div>
                 </div>
               </div>
-        </div>
+      
+      
+      
+            <div class="col-md-8 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2>房間一覽</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      </li>
+                      <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"></a>
+                       
+                      </li>
+                      <li><a class="close-link"><i class="fa fa-close"></i></a>
+                      </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+                    <p class="text-muted font-13 m-b-30"></p>
+			
+                 
+                    <table id="datatable-responsive2" class="table table-striped table-bordered dt-responsive nowrap dataTable no-footer dtr-inline collapsed" cellspacing="0" width="100%" role="grid" aria-describedby="datatable-responsive_info" style="width: 100%;">
+              
+                      <thead>                      
+                        <tr role="row">
+                        <th class="sorting_asc" tabindex="0" aria-controls="datatable-responsive" rowspan="1" colspan="1" style="width: 50px;">房間編號</th>
+                        <th class="sorting" tabindex="0" aria-controls="datatable-responsive" rowspan="1" colspan="1" style="width: 50px;" >房間名稱</th>
+                        <th class="sorting" tabindex="0" aria-controls="datatable-responsive" rowspan="1" colspan="1" style="width: 50px;" >地區</th>
+                        <th class="sorting" tabindex="0" aria-controls="datatable-responsive" rowspan="1" colspan="1" style="width: 60px;" >房型</th>
+                        <th class="sorting" tabindex="0" aria-controls="datatable-responsive" rowspan="1" colspan="1" style="width: 60px;" >每晚房價</th>
+                        <th class="sorting" tabindex="0" aria-controls="datatable-responsive" rowspan="1" colspan="1" style="width: 50px;" >介紹</th>                     
+                        </tr>
+                      </thead>
+                 
+                    </table>
+										
+                  </div>
+                </div>
+              </div>
+              
+      </div>
         <!-- /page content -->
 
         <!-- footer content -->

@@ -74,4 +74,8 @@ public class RoomReservationService {
 		
 	}
 	
+	public List<Room> selectAllRoom(){
+		return roomDAO.selectAllRoom();
+	}
+	
 }
