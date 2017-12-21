@@ -93,21 +93,30 @@ display:none
 		var point
 		var newPoint
 		var usedPoint
+		var plusPoint
 	
 		function showPrice() {
 			totalPrice = (((endDate - beginDate) * price) / (86400000)-(usedPoint*50))
+			plusPoint =Math.round(totalPrice/500)
 			
-			newPoint=Math.round(point-usedPoint+(totalPrice/500))
+			newPoint=(point-usedPoint+plusPoint)
 			if(newPoint<0)
 				{newPoint=0}
 			
 			$('#newPoint').empty().val(newPoint)
-			
-			if (!isNaN(totalPrice)) {
+							
+			if (!isNaN(totalPrice)&&!isNaN(newPoint)) {
 				if(totalPrice<0)
-				{$('#totalPrice').empty().val(0)}
+				{$('#totalPrice').empty().val(0)
+				 $('#showPlus').empty().val(0)
+				 $('#showNew').empty().val(0)
+				 }
+				 
 				else
-				{$('#totalPrice').empty().val(totalPrice)}						
+				{$('#totalPrice').empty().val(totalPrice)
+				 $('#showPlus').empty().val(plusPoint)
+				 $('#showNew').empty().val(newPoint)
+				}						
 			}						
 		}
 						
@@ -159,6 +168,8 @@ display:none
 		$('#usedPoint').change(function(){
 			usedPoint=$(this).val()
 			showPrice()
+			
+			$('#showUse').empty().val(usedPoint)
 		})
 		
 		$("#formButton").click(function(){			
@@ -169,7 +180,9 @@ display:none
 				$("#email").empty().val(data.email)
 			    $("#phone").empty().val(data.phone)
 				$("#usedPoint").empty().val(point)
+				$('#showUse').empty().val(point)
 				showPrice()
+	
 			})
 											
 		})
@@ -354,14 +367,26 @@ display:none
 							<li>地區：${area}</li>
 						    <li>房型：${roomType}</li>
 					
-						    <li><input id="range" type="range" min="500" max="4000" step="500"></li>						
-						    <li><input id="rangeValue" type="text"></li>
-						    						    
-							<li><input type="text" id="order">&#160;&#160;<button id="orderByP">調順序</button></li>
-							
-								
+						    <li>每晚最低價格：<input id="range" type="range" min="500" max="4000" step="500">
+						        NTD：<input id="rangeValue" type="text" readonly="readonly" style="border:none" placeholder="2500" ></li>																	    						    
+<!-- 							<li><input type="text" id="order">&#160;&#160;<button id="orderByP">調順序</button></li> -->				
 							</ul>
 						</aside><!-- Widget Categories /-  -->
+						
+						<aside class="widget widget_categories">
+						
+							<h3 class="widget-title">點數資訊</h3>
+							<ul>
+							<li>持有點數：${member.point}</li>
+						    <li>使用點數：<input id="showUse" type="text" readonly="readonly"  style="border:none"></li>						
+						    <li>增加點數：<input id="showPlus" type="text" readonly="readonly"  style="border:none"></li>
+						    <li>合計點數：<input id="showNew" type="text" readonly="readonly"  style="border:none"></li>	
+				
+							</ul>
+										
+						</aside><!-- Widget Categories /-  -->
+						
+						
 				</div><!-- Widget Area /- -->
 		
 		<div id="main" class="col-md-8">
@@ -452,7 +477,7 @@ display:none
 								</div>
 																
 								<div class="col-md-4 form-group">
-									<label>總價</label> <input class="form-control" type="text"
+									<label>總價(折扣後每500得一點)</label> <input class="form-control" type="text"
 										name="totalPrice" id="totalPrice" readonly="readonly">
 								</div>
 								<c:if test="${!empty member}">							

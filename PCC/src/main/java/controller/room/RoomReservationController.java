@@ -70,24 +70,42 @@ public class RoomReservationController {
 		return "showReservation.ok";		
 	}
 	
+		
 	@RequestMapping(path="/showByRoomId.room",method=RequestMethod.GET,produces= {"application/json;charset=UTF-8"})
 	public @ResponseBody List<RoomReservation> selectByRoomId(int roomId){
 		return roomReservationService.selectByRoomId(roomId);				
 	}
 	
 	
-	@RequestMapping(path="/deleteReservation.room",method=RequestMethod.GET)
-	public String delete(int roomReserverId,Model model) {
-		boolean deleteResult=roomReservationService.delete(roomReserverId);
-		Map<String,String> messages=new HashMap<>();
-		model.addAttribute("messages", messages);
-		model.addAttribute("deleteResult",deleteResult);
-		if(deleteResult==true) {
-			messages.put("m1", "刪除成功");
-			return"delete.ok";		
-		}
-		return null;
+	@RequestMapping(path="/selectAllReservation.room",method=RequestMethod.GET,produces= {"application/json;charset=UTF-8"})
+	public @ResponseBody List<RoomReservation> selectAllReservation(){
+		return roomReservationService.selectAllReservation();		
 	}
+	
+	@RequestMapping(path="/selectAllRoom.room",method=RequestMethod.GET,produces= {"application/json;charset=UTF-8"})
+	public @ResponseBody List<Room> selectAllRoom(){
+		return roomReservationService.selectAllRoom();
+	}
+							
+//	@RequestMapping(path="/deleteReservation.room",method=RequestMethod.GET)
+//	public String delete(int roomReserverId,Model model) {
+//		boolean deleteResult=roomReservationService.delete(roomReserverId);
+//		Map<String,String> messages=new HashMap<>();
+//		model.addAttribute("messages", messages);
+//		model.addAttribute("deleteResult",deleteResult);
+//		if(deleteResult==true) {
+//			messages.put("m1", "刪除成功");
+//			return"delete.ok";		
+//		}
+//		return null;
+//	}
+	
+	@RequestMapping(path="/deleteReservation.room",method=RequestMethod.POST,produces= {"text/plain;charset=UTF-8"})
+    public @ResponseBody String delete(int roomReserverId) {
+		roomReservationService.delete(roomReserverId);		
+		return "刪除成功";
+	}
+	
 	
 	@RequestMapping(path="/getMemberbyId.room",method=RequestMethod.GET,produces= {"application/json;charset=UTF-8"})
 	public @ResponseBody Member selectMemberById(@SessionAttribute("member") Member member) {
@@ -100,8 +118,8 @@ public class RoomReservationController {
 	}
 	
 	@RequestMapping(path="/getRoombyPrice.room",method=RequestMethod.GET,produces= {"application/json;charset=UTF-8"})
-	public @ResponseBody List<Room> selectByPrice(int price){
-		return roomReservationService.selectByPrice(price);
+	public @ResponseBody List<Room> selectByPrice(int price,@SessionAttribute("roomType") String roomType,@SessionAttribute("area") String area){
+		return roomReservationService.selectByPrice(price,roomType,area);
 	}
 	
 		

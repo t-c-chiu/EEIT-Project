@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
-import model.bean.Member;
 import model.service.AdminService;
 
 @Controller
@@ -36,9 +35,9 @@ public class AdminController {
 		return adminService.showReasons(messageId);
 	}
 
-	@RequestMapping(path = "/blackMember.admin", method = RequestMethod.POST, produces = "text/plain;charset=UTF-8")
-	public @ResponseBody Member blackMember(Integer messageId, boolean isBlack) {
-		return adminService.blackMember(messageId, isBlack);
+	@RequestMapping(path = "/blackArticle.admin", method = RequestMethod.POST, produces = "text/plain;charset=UTF-8")
+	public @ResponseBody String blackArticle(Integer messageId) {
+		return adminService.blackArticle(messageId);
 	}
 
 }

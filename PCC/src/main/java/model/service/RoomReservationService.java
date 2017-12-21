@@ -38,6 +38,11 @@ public class RoomReservationService {
 		return roomReservationDAO.selectByMemberId(member.getMemberId());		
 	}
 	
+	public List<RoomReservation> selectAllReservation(){
+		return roomReservationDAO.selectAllReservation();
+	}
+	
+	
 	public boolean delete(int roomReserverId) {
 		roomReservationDAO.delete(roomReserverId);
 		return true;
@@ -64,8 +69,13 @@ public class RoomReservationService {
 		return roomDAO.selectByArea(area);
 	}
 	
-	public List<Room> selectByPrice(int price){
-		return roomDAO.selectByPrice(price);
+	public List<Room> selectByPrice(int price,String roomType,String area){
+		return roomDAO.selectByPrice(price,roomType,area);
+		
+	}
+	
+	public List<Room> selectAllRoom(){
+		return roomDAO.selectAllRoom();
 	}
 	
 }

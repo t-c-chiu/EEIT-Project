@@ -4,7 +4,7 @@
 <div class="col-md-3 left_col">
         <div class="left_col scroll-view">
           <div class="navbar nav_title" style="border: 0;">
-      <a href="index.html" class="site_title"><img class="logo-xs" src="images/pcc/pcc.png" /> <span> PCC Admin </span></a>
+      <a href="admin.jsp" class="site_title"><img class="logo-xs" src="images/pcc/pcc.png" /> <span> PCC Admin </span></a>
     </div>
 
     <div class="clearfix"></div>
@@ -35,7 +35,12 @@
           </li>
           <li><a href="order.jsp"><i class="fa fa-desktop"></i> 訂單管理 </a>
           </li>
+          <li><a href="room.jsp"><i class="fa fa-desktop"></i> 房間管理 </a>
+          </li>
+          
           <li><a href="<c:url value="/article.admin"/>"><i class="fa fa-edit"></i> 討論區管理 </a>
+          </li>
+          <li><a href="course.jsp"><i class="fa fa-edit"></i> 課程管理 </a>
           </li>
           <li><a><i class="fa fa-bar-chart-o"></i> 報表查詢 <span class="fa fa-chevron-down"></span></a>
             <ul class="nav child_menu">

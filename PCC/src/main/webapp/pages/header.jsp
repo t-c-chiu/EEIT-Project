@@ -22,8 +22,10 @@
 							class="icon-bar"></span> <span class="icon-bar"></span> <span
 							class="icon-bar"></span>
 					</button>
-					<a href="index.html" class="navbar-brand">PCC</a>
+
+					<a href="/PCC/index.jsp" class="navbar-brand">PCC</a>
 				</div>
+
 
 				<!-- Menu Icon -->
 				<div class="menu-icon">

@@ -54,6 +54,10 @@ public class ClazzService {
 		return clazzInfo;
 	}
 
+	public List<Clazz> showAllClazzSimple(){
+		return clazzDAO.selectAllClazz();
+	}
+	
 	public Clazz showClazzById(Integer classId) {
 		return clazzDAO.selectByClassId(classId);
 	}

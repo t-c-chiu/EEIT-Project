@@ -33,6 +33,13 @@ public class PostArticleDAO {
 		return getSession().get(PostArticle.class, messageId);
 	}
 
+	public Integer selectCountOfStatus2(String memberId) {
+		Number number = (Number) getSession()
+				.createQuery("select count(*) from PostArticle where memberId = :memberId and status = 2")
+				.setParameter("memberId", memberId).getSingleResult();
+		return number.intValue();
+	}
+
 	public List<PostArticle> selectByCategory(String category) {
 		return getSession()
 				.createQuery("from PostArticle where category = :category and status != 2 order by messageId desc",
@@ -42,7 +49,8 @@ public class PostArticleDAO {
 
 	public List<PostArticle> selectByTopic(String topic) {
 		return getSession()
-				.createQuery("from PostArticle where topic like :topic and status != 2 order by messageId desc", PostArticle.class)
+				.createQuery("from PostArticle where topic like :topic and status != 2 order by messageId desc",
+						PostArticle.class)
 				.setParameter("topic", topic).list();
 	}
 
