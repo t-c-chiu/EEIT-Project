@@ -1,5 +1,6 @@
 package model.service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -129,5 +130,28 @@ public class ForumService {
 			}
 		}
 		return "收藏文章";
+	}
+
+	public Map<String, Object> showMyArticles(String memberId) {
+		List<PostArticle> listOfMyPost = postArticleDAO.selectByMemberId(memberId);
+		List<PostArticle> listOfMyReply = new ArrayList<>();
+		for (ReplyArticle rArticle : replyArticleDAO.selectByMemberId(memberId)) {
+			listOfMyReply.add(postArticleDAO.selectByMessageId(rArticle.getMessageId()));
+		}
+		List<PostArticle> listOfMyCollect = new ArrayList<>();
+		for (CollectArticle cArticle : collectArticleDAO.selectByMemberId(memberId)) {
+			listOfMyCollect.add(postArticleDAO.selectByMessageId(cArticle.getMessageId()));
+		}
+		List<Object[]> listOfMyReported = new ArrayList<>();
+		for (ReportedArticle rArticle : reportedArticleDAO.selectByMemberId(memberId)) {
+			Object[] misc = new Object[] { postArticleDAO.selectByMessageId(rArticle.getMessageId()), rArticle };
+			listOfMyReported.add(misc);
+		}
+		Map<String, Object> map = new HashMap<>();
+		map.put("listOfMyPost", listOfMyPost);
+		map.put("listOfMyReply", listOfMyReply);
+		map.put("listOfMyCollect", listOfMyCollect);
+		map.put("listOfMyReported", listOfMyReported);
+		return map;
 	}
 }

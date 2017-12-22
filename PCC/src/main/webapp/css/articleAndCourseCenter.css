@@ -1,0 +1,5 @@
+@charset "UTF-8";
+
+.forumTable th, .forumTable td{
+	padding: 10px;
+}

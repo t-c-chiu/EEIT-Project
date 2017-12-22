@@ -45,6 +45,7 @@
 <!-- css -->
 <link rel="stylesheet" type="text/css" href="../css/login.css">
 <link rel="stylesheet" type="text/css" href="../css/center.css">
+<link rel="stylesheet" type="text/css" href="../css/articleAndCourseCenter.css">
 </head>
 <body data-offset="200" data-spy="scroll" data-target=".ow-navigation">
 	<div class="main-container">
@@ -108,8 +109,10 @@
 						<aside class="widget widget_categories">
 							<h3 class="widget-title">文章管理</h3>
 							<ul>
-								<li><a id="my-article" class="center-li">我的文章<span>(4)</span></a></li>
-								<li><a id="favorite-article" class="center-li">文章收藏<span>(5)</span></a></li>
+								<li><a id="my-article" class="center-li">我的文章<span>(x)</span></a></li>
+								<li><a id="favorite-article" class="center-li">我的收藏<span>(x)</span></a></li>
+								<li><a id="reply-article" class="center-li">參與的討論<span>(x)</span></a></li>
+								<li><a id="reported-article" class="center-li">檢舉的文章<span>(x)</span></a></li>
 							</ul>
 						</aside>
 						<!-- Widget article /-  -->
@@ -308,10 +311,45 @@
 					<!-- 我的文章 -->
 					<div id="center-change-8" class="col-md-8 col-sm-7 col-xs-12 content-area product-section2 no-left-padding">
 					<h3 class="center-title">我的文章</h3>
+					<table id="postArticleTable" class="forumTable" style="margin:auto;">
+						<tr>
+							<th>分類</th>
+							<th>主題</th>
+							<th>發文日期</th>
+							<th>收藏數</th>
+							<th>狀態</th>
+						</tr>
+					</table>
 					</div>
 					<!-- 文章收藏 -->
 					<div id="center-change-9" class="col-md-8 col-sm-7 col-xs-12 content-area product-section2 no-left-padding">
-					<h3 class="center-title">文章收藏</h3>
+					<h3 class="center-title">我的收藏</h3>
+					<table id="collectArticleTable" class="forumTable" style="margin:auto;">
+						<tr>
+							<th>作者</th>
+							<th>分類</th>
+							<th>主題</th>
+							<th>發文日期</th>
+							<th>狀態</th>
+						</tr>
+					</table>
+					</div>
+					
+					<div id="center-change-10" class="col-md-8 col-sm-7 col-xs-12 content-area product-section2 no-left-padding">
+					<h3 class="center-title">參與的討論</h3>
+					<table id="replyArticleTable" class="forumTable" style="margin:auto;">
+						<tr>
+							<th>作者</th>
+							<th>分類</th>
+							<th>主題</th>
+							<th>發文日期</th>
+							<th>狀態</th>
+						</tr>
+					</table>
+					</div>
+					
+					<div id="center-change-11" class="col-md-8 col-sm-7 col-xs-12 content-area product-section2 no-left-padding">
+					<h3 class="center-title">檢舉的文章</h3>
 					</div>
 					
 				</div>	
@@ -358,5 +396,6 @@
 	<script type="text/javascript" src="../js/login.js"></script>
 	<!-- center -->
 	<script type="text/javascript" src="../js/center.js"></script>
+	<script type="text/javascript" src="../js/articleAndCourseCenter.js"></script>
 </body>
 </html>
