@@ -3,27 +3,37 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-<!-- 	<bean id="page.productsearch" class="org.springframework.web.servlet.view.RedirectView"> -->
-<!-- 		<property name="contextRelative" value="true"></property> -->
-<!-- 		<property name="url" value="/ProductTest.jsp"></property> -->
-<!-- 	</bean> -->
+	<!-- <bean id="page.productsearch" class="org.springframework.web.servlet.view.RedirectView"> -->
+	<!-- <property name="contextRelative" value="true"></property> -->
+	<!-- <property name="url" value="/ProductTest.jsp"></property> -->
+	<!-- </bean> -->
 
 
 	<bean id="page.productsearchtest"
 		class="org.springframework.web.servlet.view.InternalResourceView">
 		<property name="url" value="/ProductTest.jsp"></property>
 	</bean>
-	<bean id="page.productBackstage"
-		class="org.springframework.web.servlet.view.RedirectView">
+	<bean id="page.productBackstage" class="org.springframework.web.servlet.view.RedirectView">
 		<property name="contextRelative" value="true"></property>
 		<property name="url" value="/shoppingMall/productBackstage.jsp"></property>
 	</bean>
-	
-	<bean id="page.productsearch"
-		class="org.springframework.web.servlet.view.RedirectView">
+
+	<bean id="page.productsearch" class="org.springframework.web.servlet.view.RedirectView">
 		<property name="contextRelative" value="true"></property>
 		<property name="url" value="/pages/shop-2.jsp"></property>
 	</bean>
-	
-	
+
+	<bean id="page.product" class="org.springframework.web.servlet.view.RedirectView">
+	<property name="contextRelative" value="true"></property>
+	<property name="url" value="/shoppingMall/productContext.jsp"></property>
+	</bean>
+
+
+<!-- 	<bean id="page.product" class="org.springframework.web.servlet.view.InternalResourceView"> -->
+
+<!-- 		<property value="/shoppingMall/productContext.jsp" name="url"></property> -->
+
+<!-- 	</bean> -->
+
+
 </beans>

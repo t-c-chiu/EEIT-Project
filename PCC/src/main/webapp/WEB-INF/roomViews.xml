@@ -32,6 +32,12 @@
 	<bean id="delete.ok" class="org.springframework.web.servlet.view.InternalResourceView">
 		<property name="url" value="/roomjsp/showReservationList.jsp"></property>
 	</bean>
+	
+	
+	<bean id="insertRoom.ok" class="org.springframework.web.servlet.view.RedirectView">
+		<property name="contextRelative" value="true"></property>
+		<property name="url" value="/admin/production/room.jsp"></property>
+	</bean>
 
 
 

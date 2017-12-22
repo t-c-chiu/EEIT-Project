@@ -66,7 +66,7 @@ public class Clazz {
 		this.courseName = courseName;
 	}
 
-	@JsonFormat(pattern = "yyyy/MM/dd", timezone = "GMT+8")
+	@JsonFormat(pattern = "yyyy/MM/dd hh:mm", timezone = "GMT+8")
 	public Date getEndDate() {
 		return endDate;
 	}

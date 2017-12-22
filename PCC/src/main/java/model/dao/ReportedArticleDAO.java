@@ -23,9 +23,29 @@ public class ReportedArticleDAO {
 		return (Integer) getSession().save(reportedArticle);
 	}
 
+	public List<ReportedArticle> selectMessageIdByStatus(Integer status) {
+		return getSession().createQuery("from ReportedArticle where status = :status", ReportedArticle.class)
+				.setParameter("status", status).list();
+	}
+
+	public List<ReportedArticle> selectAll() {
+		return getSession().createQuery("from ReportedArticle order by status", ReportedArticle.class).list();
+	}
+
 	public List<ReportedArticle> selectByMessageId(Integer messageId) {
 		return getSession().createQuery("from ReportedArticle where messageId = :messageId", ReportedArticle.class)
 				.setParameter("messageId", messageId).list();
+	}
+
+	public ReportedArticle selectByReportId(Integer reportId) {
+		return getSession().get(ReportedArticle.class, reportId);
+	}
+
+	public Integer selectCountByMessageId(Integer messageId) {
+		Number number = (Number) getSession()
+				.createQuery("select count(*) from ReportedArticle where messageId = :messageId")
+				.setParameter("messageId", messageId).getSingleResult();
+		return number.intValue();
 	}
 
 	public boolean delete(ReportedArticle reportedArticle) {

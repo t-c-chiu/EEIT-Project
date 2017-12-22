@@ -16,6 +16,7 @@ import model.bean.Clazz;
 import model.bean.Student;
 import model.dao.ClazzDAO;
 import model.dao.StudentDAO;
+import model.dao.SystemMessageDAO;
 
 @Service
 @Transactional
@@ -25,6 +26,8 @@ public class ClazzService {
 	private ClazzDAO clazzDAO;
 	@Autowired
 	private StudentDAO studentDAO;
+	@Autowired
+	private SystemMessageDAO systemMessageDAO;
 
 	public Map<String, Object> showAllClazz() {
 		List<String> listOfCategory = clazzDAO.selectAllCategory();
@@ -51,6 +54,10 @@ public class ClazzService {
 		return clazzInfo;
 	}
 
+	public List<Clazz> showAllClazzSimple(){
+		return clazzDAO.selectAllClazz();
+	}
+	
 	public Clazz showClazzById(Integer classId) {
 		return clazzDAO.selectByClassId(classId);
 	}
@@ -67,11 +74,29 @@ public class ClazzService {
 		return clazzDAO.insert(clazz);
 	}
 
-	public Integer beStudent(String memberId, Integer classId) {
-		Student student =new Student();
+	public String beStudent(String memberId, Integer classId) {
+		List<Integer> classIds = studentDAO.selectClassIdByMemberId(memberId);
+		for (int cId : classIds) {
+			if (cId == classId) {
+				return "您已報名過此課程";
+			}
+		}
+		Student student = new Student();
 		student.setMemberId(memberId);
 		student.setClassId(classId);
 		student.setStatus(0);
-		return studentDAO.insert(student);
+		studentDAO.insert(student);
+		Clazz clazz = clazzDAO.selectByClassId(classId);
+		clazz.setCurrentStudents(clazz.getCurrentStudents() + 1);
+		if (clazz.getCurrentStudents() == clazz.getNumberOfStudents()) {
+			clazz.setStatus(1);
+			List<String> memberIds = studentDAO.selectMemberIdByClassId(classId);
+			for (String mId : memberIds) {
+				String courseName = clazz.getCourseName();
+				systemMessageDAO.insert(mId, courseName + "即將開課!!",
+						"您報名的課程" + courseName + "將於" + clazz.getEndDate() + "開課，請準時報到。");
+			}
+		}
+		return "報名成功";
 	}
 }

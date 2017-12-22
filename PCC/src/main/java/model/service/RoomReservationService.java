@@ -8,8 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import model.bean.Member;
+import model.bean.Room;
 import model.bean.RoomReservation;
 import model.dao.MemberDAO;
+import model.dao.RoomDAO;
 import model.dao.RoomReservationDAO;
 
 @Service
@@ -22,6 +24,9 @@ public class RoomReservationService {
 	@Autowired
 	MemberDAO memberDAO;
 	
+	@Autowired
+	RoomDAO roomDAO;
+	
 	public int insert(Member member, RoomReservation roomReservation,int newPoint) {	
 		roomReservation.setMemberId(member.getMemberId());
 		roomReservation = roomReservationDAO.insert(roomReservation);
@@ -32,6 +37,11 @@ public class RoomReservationService {
 	public List<RoomReservation> selectByMemberId(Member member) {						
 		return roomReservationDAO.selectByMemberId(member.getMemberId());		
 	}
+	
+	public List<RoomReservation> selectAllReservation(){
+		return roomReservationDAO.selectAllReservation();
+	}
+	
 	
 	public boolean delete(int roomReserverId) {
 		roomReservationDAO.delete(roomReserverId);
@@ -44,6 +54,31 @@ public class RoomReservationService {
 	
 	public Member selectMemberById(Member member) {
 		return memberDAO.select(member.getMemberId());
+	}
+	
+	
+	public List<Room> selectRoomByType(String roomType,String area){
+		return roomDAO.selectByType(roomType,area);
+	}
+	
+	public List<Room> selectByOrder(String order){
+		return roomDAO.selectByOrder(order);
+	}
+	
+	public List<String> selectByArea(String area){
+		return roomDAO.selectByArea(area);
+	}
+	
+	public List<Room> selectByPrice(int price,String roomType,String area){
+		return roomDAO.selectByPrice(price,roomType,area);		
+	}
+	
+	public List<Room> selectAllRoom(){
+		return roomDAO.selectAllRoom();
+	}
+	
+	public boolean insertRoom(Room room) {
+		return roomDAO.insertRoom(room);		
 	}
 	
 }
