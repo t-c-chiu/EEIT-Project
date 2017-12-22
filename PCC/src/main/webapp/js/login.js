@@ -1,18 +1,73 @@
+//登出
+$(function(){
+	$('#log-out').click(function(){
+		console.log("想登出");
+		$.ajax({url:"/PCC/logout.login",type:"POST",
+			success:
+			function(data){
+			
+			console.log(data);			
+			if(data=="登出"){
+				console.log("登出s");			
+				
+			}
+
+		}});
+	})
+});
+
+
 //JQ 成功的 登入
 $(function(){
     $('#sub').click(function(){
+    	console.log("點了");
         $.ajax({url: "/PCC/login.login",type:"POST",
         	data:$('#formid').serialize(),
         	success: function(data){
 			if(data=="會員" || data=="管理員"){
-				location.replace('/PCC/index.jsp');
+				console.log("登入了");
+				if(data=="管理員"){
+					console.log("管理員");
+					location.replace('/PCC/index.jsp'); 
+				}else{
+					console.log("會員");
+					$('#log-log').css("display","none");
+					$('#log-reg').css("display","none");
+					$('#log-cen').css("display","block");
+					$('#log-out').css("display","block");
+					$('#user').css("color","#EB7C81");
+					$('#exampleModal').css("opacity","0");
+//					$('.fade .in').css("display","none");
+					$('.modal-backdrop.in').css("opacity","0");
+//					document.getElementById("who-is-login").innerHTML =
+//						'<a id="log-cen" onclick="" href="/PCC/pages/center.jsp">會員中心</a>'+
+//						'<a id="log-out" onclick="" href="#">登出</a>';
+					
+//					$('.fade .in').css("opacity","0");
+//					$('.modal-backdrop.in').css("opacity","0");
+				}
+//				location.replace('/PCC/index.jsp'); 
 			}else if(data=="登入失敗"){
-				alert("無此帳號");
+				console.log("無此帳號");
 				location.replace('/PCC/pages/registy.jsp');
 			}
         }});
     });
 });
+
+
+$(document).ready(function(){
+	console.log($("#save").val());
+	var save=$("#save").val();
+	if(save!=''){
+		$('#exampleModal').css("opacity","0");
+		$('.modal-backdrop.in').css("opacity","0");
+		document.getElementById("who-is-login").innerHTML =
+			'<a id="log-cen" onclick="" href="/PCC/pages/center.jsp">會員中心</a>'+
+			'<a id="log-out" onclick="" href="#">登出</a>';
+	}
+});
+
 
 
 //JQ 註冊
@@ -23,7 +78,7 @@ $(function(){
 //			alert($('#account').val()+"back");
 			$.post("/PCC/registy.insert.login",$('#registy-form').serialize(),function(data){
 // 12/15沒有跳出歡迎
-//					alert(data);
+					console.log(data);
 					if(data=="成功註冊"){
 						alert("歡迎");
 					}else if(data=="註冊失敗"){
@@ -119,6 +174,41 @@ function match(){
 		ps2.innerHTML = " 請輸入相同的密碼";
 		ps2.style['color'] = 'red';
 		document.querySelector('#passwordMatch').style['border'] = '2px solid #EB7C81';
+	}
+}
+
+
+//JS 判斷 註冊 有寫email
+function emailCheck(){
+	var email =document.querySelector('input[name="email"]').value; 
+	emailRule = /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z]+$/;
+	var em=document.querySelector("#email-span");
+
+	if(email.search(emailRule)!= -1){
+	    em.innerHTML=" ";
+		em.style['color']='green';
+		document.querySelector('#r-email').style['border']='1px solid #d1d1d1';
+	}else{
+	    em.innerHTML=" 請輸入正確email格式";
+		em.style['color']='red';
+		document.querySelector('#r-email').style['border']='2px solid #EB7C81';
+	}
+}
+
+//JS 判斷 忘記密碼 有寫email
+function emailChangeCheck(){
+	var emailchange =document.querySelector('input[name="emailchange"]').value; 
+	emailRule = /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z]+$/;
+	var emc=document.querySelector("#emailchange-span");
+	
+	if(emailchange.search(emailRule)!= -1){
+		emc.innerHTML=" ";
+		emc.style['color']='green';
+		document.querySelector('#emailchange').style['border']='1px solid #d1d1d1';
+	}else{
+		emc.innerHTML=" 請輸入正確email格式";
+		emc.style['color']='red';
+		document.querySelector('#emailchange').style['border']='2px solid #EB7C81';
 	}
 }
 

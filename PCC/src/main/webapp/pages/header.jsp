@@ -95,23 +95,30 @@
 
 						<li style="display: none"><a href="#" title="Like"><i
 								class="icon icon-Heart"></i></a></li>
-						<li style="display: none"><a href="#" title="User"><i
-								class="icon icon-User"></i></a></li>
 					</ul>
-
-
-
-
-					<div class="login">
+						<div class="login cart">
 						<a href="#" id="member" title="User" data-toggle="modal"
-							data-target="#exampleModal" onclick="login();"> <i
-							class="icon icon-User"></i>
+							data-target="#exampleModal" onclick="login();">
+							<i id="user" class="icon icon-User"></i>
 						</a>
-						<!-- 						<ul class="dropdown-menu no-padding dropdown-login "> -->
-						<!-- 							<li class="button"><a href="#" title="Login">登入</a></li> -->
-						<!-- 							<li class="button"><a href="#" title="Registy">註冊</a></li> -->
-						<!-- 						</ul> -->
+						
+						<ul class="droplogin dropdown-menu no-padding">
+						<li id="who-is-login" class="button logbtn">
+							<a id="log-log" href="#" data-toggle="modal"
+							data-target="#exampleModal" onclick="login();">登入</a> 
+							<a id="log-reg" href="/PCC/pages/registy.jsp">註冊</a>
+							<a id="log-cen" onclick="" href="/PCC/pages/center.jsp" style="display:none;">會員中心</a>
+							<a id="log-out" onclick="" href="#" style="display:none;">登出</a>
+						</li>
+						</ul>
+<!-- 						<ul class="dropdown-menu no-padding droplogin "> -->
+<!-- 							<li class="button"><a href="#" title="Login">登入</a></li> -->
+<!-- 							<li class="button"><a href="#" title="Registy">註冊</a></li> -->
+<!-- 						</ul> -->
+
+
 					</div>
+
 				</div>
 
 				<!-- User Login Modal -->

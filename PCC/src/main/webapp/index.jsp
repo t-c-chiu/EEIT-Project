@@ -658,7 +658,7 @@
 
 	<!-- login  -->
 	<script type="text/javascript" src="js/login.js"></script>
-<!-- 	<!-- google login --> -->
+<!-- 	<!-- google login --> 
 <!-- 	<script src="https://apis.google.com/js/platform.js" async defer></script> -->
 </body>
 
