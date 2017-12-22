@@ -1,0 +1,95 @@
+package model.dao;
+
+import java.util.List;
+
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
+import org.springframework.stereotype.Repository;
+
+import model.bean.Order;
+
+@Repository
+public class OrderDAO {
+
+	private SessionFactory sessionFactory;
+	
+	public Session getSession() {
+		
+		return sessionFactory.getCurrentSession();
+	}
+	
+	
+	//會員一次新增一筆
+	public int insertOlder(Order order) {
+		if(order!=null) {
+			getSession().save(order);
+
+			return 1;
+		}		
+		return 0;
+	}
+	
+	
+	//系統或管理元修改，一次改一筆
+	public boolean updateOlder(Order order) {
+		if(order!=null) {
+			Order select=this.selectOrderId(order.getOrderId());
+			if(select!=null) {
+//				select.setMemberId(order.getMemberId());
+				select.setDiscount(order.getDiscount());
+				select.setStatus(order.getStatus());
+				select.setTotalPrice(order.getTotalPrice());
+				select.setLocation(order.getLocation());
+				select.setDate(order.getDate());
+				
+			}		
+		}		
+		return false;
+	}
+	
+	public boolean cancelOrder(int memberId) {
+		
+		if(memberId!=0) {
+			
+			getSession().delete(memberId);
+			
+			return true;
+		}
+		
+		return false;
+	}
+	
+	//會員查詢自己所有的訂單
+	
+	public List<Order> selectAllOrder(int memberId){
+		if(memberId!=0) {
+		Query<Order> query= getSession().createQuery("select * from ORDER where memberId = ?", Order.class);
+		query.setParameter(0, memberId);
+
+		return query.list();
+		}
+		return null;
+	}
+	
+	//管理員查詢所有訂單
+	public List<Order> selectAllOrderByAd(){
+		List<Order> listQuery=getSession().createQuery("select * from Order",Order.class).list();
+		return listQuery;
+	}
+	
+
+
+	//管理員按照訂單號碼查詢
+	
+	public Order selectOrderId(int orderId) {
+		if(orderId!=0) {
+			Order order=getSession().get(Order.class,orderId);
+			
+			return order;
+		}		
+		return null;
+	}
+	
+
+}

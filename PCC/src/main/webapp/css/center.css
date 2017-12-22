@@ -1,0 +1,100 @@
+.clear{
+	clear:both;
+}
+.center-date{
+	text-align:center;
+	border: 1px solid #fdbebe;
+	padding:2%;
+}
+.center-title{
+	text-align:center;
+	line-height: 26px;
+    letter-spacing: 0.68px;
+	margin:0 1.5% 2% 1.5%;
+	background-color:#fff;
+	
+}
+/*
+a#center-message {
+	color: #777;
+    letter-spacing: 0.56px;
+    text-transform: capitalize;
+    text-decoration: none;
+    -webkit-transition: all 1s ease 0s;
+    -moz-transition: all 1s ease 0s;
+    -o-transition: all 1s ease 0s;
+    transition: all 1s ease 0s;
+	cursor: pointer;
+}
+a#center-message:hover{
+	color: #b6795f;
+}
+*/
+.center-li{
+	color: #777;
+    letter-spacing: 0.56px;
+    text-transform: capitalize;
+    text-decoration: none;
+    -webkit-transition: all 1s ease 0s;
+    -moz-transition: all 1s ease 0s;
+    -o-transition: all 1s ease 0s;
+    transition: all 1s ease 0s;
+	cursor: pointer;
+}
+.center-li:hover{
+	color: #b6795f;
+	text-decoration: none;
+}
+.center-li li{
+	padding-bottom: 5px;
+    margin-bottom: 15px;
+}
+
+.personal-content{
+	margin: 0 5% 0 2%;
+	padding:10px 15px;
+	color: #777;
+    font-size: 14px;
+    line-height: 24px;
+    text-align: left;
+}
+.personal-content-right{
+	margin: 0 5% 0 2%;
+	padding:10px 15px;
+	color: #b6795f;
+    font-size: 14px;
+    line-height: 24px;
+	text-align: right;
+}
+span.points{
+	color:red;
+	font-size:22px;
+	font-weight:900;
+	padding-left:10px;
+}
+#points{
+	color:red;
+	font-size:22px;
+	font-weight:900;
+	padding-left:10px;
+}
+.password-send{
+	margin:0 3%;
+	width:94%;
+	height: 50px;
+	letter-spacing: 1.54px;
+	font-size:16px;
+    color: #fff;
+    border-radius: 0;
+    background-color: #EB7C81;
+}
+
+.center-title-s{
+	border-top: 1px solid #e6e6e6;
+    border-bottom: 1px solid #e6e6e6;
+    display: inline-block;
+    margin-bottom: 15px;
+    padding: 6px 0;
+    text-align: center;
+    width: 100%;
+}

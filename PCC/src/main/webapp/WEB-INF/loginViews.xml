@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+	<!-- 登入失敗 到 同一頁 顯示錯誤訊息 -->
+	<bean id="login.error"
+		class="org.springframework.web.servlet.view.InternalResourceView">
+		<property name="url" value="/index.html"></property>
+	</bean>
+	<!-- 一般會員登入成功 到 首頁 /index.html-->
+	<bean id="login.success.member" class="org.springframework.web.servlet.view.RedirectView">
+		<property name="contextRelative" value="true"></property>
+		<property name="url" value="/index.jsp"></property>
+	</bean>
+	<!-- 管理員登入成功 到 後台 -->
+	<bean id="login.success.admin" class="org.springframework.web.servlet.view.RedirectView">
+		<property name="contextRelative" value="true"></property>
+		<property name="url" value="/pages/member.html"></property>
+	</bean>
+	<!-- 註冊成功 到 首頁 -->
+	<bean id="registy.success" class="org.springframework.web.servlet.view.RedirectView">
+		<property name="contextRelative" value="true"></property>
+		<property name="url" value="/index.html"></property>
+	</bean>
+	<!-- 註冊失敗 到 註冊 -->
+	<bean id="registy.error"
+		class="org.springframework.web.servlet.view.InternalResourceView">
+		<property name="url" value="/login/registy.jsp"></property>
+	</bean>
+</beans>
