@@ -43,6 +43,10 @@
     <script>
     $(function() {
     	
+    	$('#roomId').keyup(function(){
+    		$('#roomImage').empty().val($(this).val())
+    	})
+    	
     	
     	$('#showReservation').click(function(){
     		initReservation()
@@ -121,6 +125,28 @@
         			})       			   			
         		})     		
     	}
+    	
+    	
+    	$("#insertRoom").click(function(event){
+    		event.preventDefault();
+    		var form=$('#roomForm')[0]
+    		var data=new FormData(form)
+    		$("#insertRoom").prop("disabled",true)
+    		$.ajax({
+    			type: "POST",
+    			enctype: 'multipart/form-data',
+    			url: '${pageContext.request.contextPath}/insertRoom.room',    			
+    			data: data,
+    			processData: false,
+    			contentType: false,
+    			cache: false,
+    			success:function(data){
+    				alert(data)
+    				$("#btnSubmit").prop("disabled", false);    				
+    			}
+    		})
+    		
+    	})
    		
     }); 	  		   	    	             
   </script>
@@ -200,7 +226,7 @@
                   <div class="x_content">
                     <p class="text-muted font-13 m-b-30"></p>
 			
-                 <form action="<c:url value="/insertRoom.room"/>" method="post">
+                 <form id="roomForm" method="post" enctype="multipart/form-data" action="<c:url value="/insertRoom.room"/>">
                     <table id="datatable-responsive3" class="table table-striped table-bordered dt-responsive nowrap dataTable no-footer dtr-inline collapsed" cellspacing="0" width="100%" role="grid" aria-describedby="datatable-responsive_info" style="width: 100%;">
               
                       <thead>                      
@@ -218,17 +244,18 @@
                       
                       <tbody>
                      <tr role="row" class="odd">
-                          <td><input name="roomId"   type="text" style="width:50px"></td>
+                          <td><input name="roomId"   id="roomId" type="text" style="width:50px"></td>
                           <td><input name="roomName" type="text" style="width:40px"></td>
                           <td><input name="area"     type="text" style="width:40px"></td>
                           <td><input name="roomType" type="text" style="width:40px"></td>
                           <td><input name="price"    type="text" style="width:40px"></td>
-                          <td><input name="info"     type="text" style="width:40px"></td>
-                          <td><button>上傳圖片</button></td>
-                          <td><input type="submit" value="新增房間"></td>                     
+                          <td><input name="info"     type="text" style="width:40px"></td>                         
+                          <td><input type="file" id="photo" name="photo" accept="image/*"></td>
+                          <td><input id="insertRoom" type="submit" value="新增房間"></td>                     
                         </tr>
                      </tbody>                                       
                     </table>
+                    <input name="roomImage"  id="roomImage"  type="text">
 				</form>	
 									
                   </div>
