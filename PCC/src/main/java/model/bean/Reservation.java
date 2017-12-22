@@ -14,6 +14,7 @@ public class Reservation {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer reservationId;
 	private String memberId;
+	private String name;
 	private String phone;
 	private String way;
 	private String email;
@@ -104,11 +105,19 @@ public class Reservation {
 		this.time = time;
 	}
 
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
 	@Override
 	public String toString() {
-		return "Reservation [reservationId=" + reservationId + ", memberId=" + memberId + ", phone=" + phone + ", way="
-				+ way + ", email=" + email + ", address=" + address + ", demand=" + demand + ", house=" + house
-				+ ", expectedday=" + expectedday + ", time=" + time + "]";
+		return "Reservation [reservationId=" + reservationId + ", memberId=" + memberId + ", name=" + name + ", phone="
+				+ phone + ", way=" + way + ", email=" + email + ", address=" + address + ", demand=" + demand
+				+ ", house=" + house + ", expectedday=" + expectedday + ", time=" + time + "]";
 	}
 
 	

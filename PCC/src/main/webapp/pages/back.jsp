@@ -22,12 +22,10 @@ function GetMessageList() {
   });
   AutoUpdContent(); 
 }
-
 //auto update member and message
 function AutoUpdContent() {
     setTimeout(GetMessageList, 1000);
 }
-
 //send message 
 function SendContent(content) {
     $.ajax({
@@ -64,7 +62,31 @@ $(function() {
     })
 
    });
+//rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr
+$(function(){
+	$.get("${pageContext.request.contextPath}/servantIdList.match", function(data){
+		console.log(data)
+		$.each(data, function(i, servant){
+			var cell1 = $("<option></option>").val(servant).text(servant);
+			var row = $("#idList").append(cell1);
+		})
+	})
+	$("#idList").on('select',function(){
+		$("#idList").empty();		
+		$.get("${pageContext.request.contextPath}/servantIdList.match", function(data){
+			console.log(data)			
+			$.each(data, function(i, servant){
+				var cell1 = $("<option></option>").val(servant).text(servant);
+				var row = $("#idList").append(cell1);
 
+			})
+			
+		})
+
+	})
+
+	
+})
 </script>    
 <style>
 body
@@ -158,8 +180,27 @@ h3
     <div id="divMain" style="width:50%">
         <div class="divtop">
             <div class="divL">
-            <h3>Chat Room</h3>
+            <h3>聊天室</h3>
                 <div class="divShow" id="divContent"></div>
+            </div>
+            <select id="idList">
+
+            </select>
+            <div>
+            xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+            
+            xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+            
+            xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+            
+            xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+            
+            xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+            
+            xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+            
+            xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+            
             </div>
 <!--             <div class="divR"> -->
 <!--                 <h3>Online Member</h3> -->
@@ -170,12 +211,12 @@ h3
             <table cellpadding="0" cellspacing="0">
                 <tr><td colspan="2" id="divFace" class="pb"></td></tr><tr><td>
                 <textarea id="txtContent" cols="61" rows="3" class="txt"></textarea></td><td class="pl">
-                <input id="Button1" type="button" value="Send" class="btn"/>
+                <input id="Button1" type="button" value="送出" class="btn"/>
 <!--                 <input id="Button3" type="button" value="Upload" class="btn"/> -->
 <!--                 <input id="Button2" type="button" value="Exit" class="btn"/> -->
                 <input id="Button4" style="display:none" type="button" value="Hide" class="btn"/>
 
-            </td></tr><tr><td colspan="2" class="pt">Content Cannot Be Empty</td></tr></table>
+            </td></tr><tr><td colspan="2" class="pt">請輸入對話</td></tr></table>
         </div>
         <span id="divMsg" class="clsTip">Sending Data...</span>
 <!--         <div class="upload" id="file"> -->

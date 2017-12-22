@@ -81,11 +81,19 @@ public class MatchController {
 	}
 
 	// 選擇服務員
-	@RequestMapping(path = "/chooseServant.match", method = RequestMethod.POST)
-	public String method5() {
+	@RequestMapping(path = "/chooseServant.match", method = RequestMethod.GET)
+	public String method5(String servantId, @SessionAttribute("member") Member member) {
+		System.out.println(servantId);
+		Boolean isMatch = service.matching(member.getMemberId(), Integer.parseInt(servantId));
+		System.out.println(isMatch);
 		return "memberCenter";
 	}
 	
+	// 選擇服務員對話id
+	@RequestMapping(path = "/servantIdList.match", method = RequestMethod.GET, produces = {"application/json;charset=UTF-8"})
+	public @ResponseBody List<String> method6(@SessionAttribute("member") Member member) {
+		return service.selectServantName(member.getMemberId());
+	}
 	
 	
 }

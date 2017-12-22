@@ -97,7 +97,7 @@
 						<table width="100%" border="0" cellspacing="1" cellpadding="5" bgcolor="#F19FAE">
               <tbody><tr>
                 <td width="18%" height="30" align="center" bgcolor="#FAD6DB"><span class="color_name">※ </span> 申請者姓名</td>
-                <td colspan="2" bgcolor="#FFFFFF" width="82%"><input type="text" name="memberId" id="name" style="width:100px;" class="borderall"></td>
+                <td colspan="2" bgcolor="#FFFFFF" width="82%"><input type="text" name="name" id="name" style="width:100px;" class="borderall"></td>
               </tr>
               <tr>
                 <td height="30" align="center" bgcolor="#FAD6DB"><span class="color_name">※ </span>手機</td>
@@ -144,17 +144,17 @@
                 <td width="13%" height="30" align="center" bgcolor="#FFFFFF">
                   陪伴照顧</td>
                 <td width="69%" bgcolor="#FFFFFF">(
-                  <input type="checkbox" name="demand" id="accompany" value="陪伴照顧-學兒" class="borderall">
+                  <input type="checkbox" name="demand" id="accompany" value="嬰兒" class="borderall">
 嬰兒/
-<input type="checkbox" name="demand" id="accompany2" value="陪伴照顧-產婦" class="borderall">
+<input type="checkbox" name="demand" id="accompany2" value="產婦" class="borderall">
 產婦)</td>
               </tr>
               <tr>
                 <td width="13%" height="30" align="center" bgcolor="#FFFFFF"> 膳食月子餐</td>
                 <td bgcolor="#FFFFFF">(
-                  <input type="checkbox" name="demand" id="food" value="膳食月子餐-葷食" class="borderall">
+                  <input type="checkbox" name="demand" id="food" value="葷食" class="borderall">
 葷食/
-<input type="checkbox" name="demand" id="food2" value="膳食月子餐-素食" class="borderall">
+<input type="checkbox" name="demand" id="food2" value="素食" class="borderall">
 素食) 　</td>
               </tr>
               <tr>

@@ -49,21 +49,13 @@
 
     <script>
         $(function(){
-        	$('#choose').on('click',function(){
-//         		var servant = $('#servantId').val();        		
-//         		$.ajax({
-//         		  type: "POST",
-//         		  url:  "${pageContext.request.contextPath}/chooseServant.match",
-//         		  data: "servant="+servant
-        	    
+        	$('button[name="choose"]').on('click',function(){
         		
-//         		})
-        		window.location.assign;
-        		
-        		
+        		var servantId = $(this).parent("div").find("span").text();     		
+        		window.location.assign("${pageContext.request.contextPath}/chooseServant.match?"+"servantId="+servantId);
+        		    		
         	})
-        	
-        	
+        	      	
         });
     
     </script>
@@ -148,7 +140,7 @@
 								   ${servant[5]}
 								   <span id="servantId" style="display:none">${servant[0]}</span>
 								</p>
-                                <button type="button" id="choose" name="choose">選擇</button>                           
+                                <button type="button" name="choose">選擇</button>                           
 							</div>
 						</div>
 					</div>
