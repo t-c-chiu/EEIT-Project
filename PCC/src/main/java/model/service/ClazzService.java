@@ -54,10 +54,10 @@ public class ClazzService {
 		return clazzInfo;
 	}
 
-	public List<Clazz> showAllClazzSimple(){
+	public List<Clazz> showAllClazzSimple() {
 		return clazzDAO.selectAllClazz();
 	}
-	
+
 	public Clazz showClazzById(Integer classId) {
 		return clazzDAO.selectByClassId(classId);
 	}
@@ -94,9 +94,13 @@ public class ClazzService {
 			for (String mId : memberIds) {
 				String courseName = clazz.getCourseName();
 				systemMessageDAO.insert(mId, courseName + "即將開課!!",
-						"您報名的課程" + courseName + "將於" + clazz.getEndDate() + "開課，請準時報到。");
+						"您報名的課程" + courseName + "將於" + clazz.getEndDate() + "開課，請在開課前繳費完畢。");
 			}
 		}
 		return "報名成功";
+	}
+
+	public List<Object[]> showMyCourses(String memberId) {
+		return studentDAO.selectClazzAndStudentByMemberId(memberId);
 	}
 }

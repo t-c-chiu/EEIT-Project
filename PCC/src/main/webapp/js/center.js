@@ -92,6 +92,13 @@ $('#reported-article').click(function(){
 		$('#center-change-11').show();
 	});
 })
+//我的課程
+$('#course-list').click(function(){
+	hide();
+	$('#center-change-12').fadeIn("slow", function() {
+		$('#center-change-12').show();
+	}); 
+})
 
 //function() {
 //hide();

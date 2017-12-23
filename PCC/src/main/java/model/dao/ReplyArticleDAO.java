@@ -32,8 +32,9 @@ public class ReplyArticleDAO {
 				.setParameter("messageId", messageId).list();
 	}
 
-	public List<ReplyArticle> selectByMemberId(String memberId) {
-		return getSession().createQuery("from ReplyArticle where memberId = :memberId order by date", ReplyArticle.class)
+	public List<Integer> selectDistinctMessageIdByMemberId(String memberId) {
+		return getSession()
+				.createQuery("select distinct messageId from ReplyArticle where memberId = :memberId", Integer.class)
 				.setParameter("memberId", memberId).list();
 	}
 

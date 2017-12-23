@@ -117,8 +117,7 @@ public class ForumService {
 		reportedArticle.setReason(reason);
 		reportedArticle.setMessageId(article.getMessageId());
 		reportedArticle.setStatus(0);
-		PostArticle postArticle = postArticleDAO.selectByMessageId(article.getMessageId());
-		postArticle.setStatus(1);
+		postArticleDAO.selectByMessageId(article.getMessageId()).setStatus(1);
 		return reportedArticleDAO.insert(reportedArticle);
 	}
 
@@ -135,8 +134,8 @@ public class ForumService {
 	public Map<String, Object> showMyArticles(String memberId) {
 		List<PostArticle> listOfMyPost = postArticleDAO.selectByMemberId(memberId);
 		List<PostArticle> listOfMyReply = new ArrayList<>();
-		for (ReplyArticle rArticle : replyArticleDAO.selectByMemberId(memberId)) {
-			listOfMyReply.add(postArticleDAO.selectByMessageId(rArticle.getMessageId()));
+		for (Integer messageId : replyArticleDAO.selectDistinctMessageIdByMemberId(memberId)) {
+			listOfMyReply.add(postArticleDAO.selectByMessageId(messageId));
 		}
 		List<PostArticle> listOfMyCollect = new ArrayList<>();
 		for (CollectArticle cArticle : collectArticleDAO.selectByMemberId(memberId)) {
