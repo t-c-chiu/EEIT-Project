@@ -128,9 +128,9 @@
     	
     	
     	$("#insertRoom").click(function(event){
-    		event.preventDefault();
     		var form=$('#roomForm')[0]
     		var data=new FormData(form)
+    		data.append('info',CKEDITOR.instances.info.getData())
     		$("#insertRoom").prop("disabled",true)
     		$.ajax({
     			type: "POST",
@@ -142,11 +142,28 @@
     			cache: false,
     			success:function(data){
     				alert(data)
-    				$("#btnSubmit").prop("disabled", false);    				
-    			}
+    				$("#btnSubmit").prop("disabled", false);
+    				$('#previewPhoto').removeAttr('src')
+    			},
+    		     error: function (e) {
+ 	                console.log("ERROR : ", e);
+ 	                $("#btnSubmit").prop("disabled", false);
+ 	            }
     		})
     		
     	})
+    	
+    	$('#photo').change(function(){
+    		if(this.files&&this.files[0]){
+    			var reader=new FileReader()
+    			reader.onload=function(e){
+    				$('#previewPhoto').attr('src',e.target.result)   					
+    			}
+    			reader.readAsDataURL(this.files[0])   			 			
+    		} 		   		
+    	})
+    	
+    	
    		
     }); 	  		   	    	             
   </script>
@@ -226,7 +243,7 @@
                   <div class="x_content">
                     <p class="text-muted font-13 m-b-30"></p>
 			
-                 <form id="roomForm" method="post" enctype="multipart/form-data" action="<c:url value="/insertRoom.room"/>">
+                 <form id="roomForm">
                     <table id="datatable-responsive3" class="table table-striped table-bordered dt-responsive nowrap dataTable no-footer dtr-inline collapsed" cellspacing="0" width="100%" role="grid" aria-describedby="datatable-responsive_info" style="width: 100%;">
               
                       <thead>                      
@@ -235,8 +252,7 @@
                         <th class="sorting" tabindex="0" aria-controls="datatable-responsive" rowspan="1" colspan="1" style="width: 50px;" >房間名稱</th>
                         <th class="sorting" tabindex="0" aria-controls="datatable-responsive" rowspan="1" colspan="1" style="width: 50px;" >地區</th>
                         <th class="sorting" tabindex="0" aria-controls="datatable-responsive" rowspan="1" colspan="1" style="width: 60px;" >房型</th>
-                        <th class="sorting" tabindex="0" aria-controls="datatable-responsive" rowspan="1" colspan="1" style="width: 60px;" >每晚房價</th>
-                        <th class="sorting" tabindex="0" aria-controls="datatable-responsive" rowspan="1" colspan="1" style="width: 50px;" >介紹</th>
+                        <th class="sorting" tabindex="0" aria-controls="datatable-responsive" rowspan="1" colspan="1" style="width: 60px;" >每晚房價</th>            
                         <th class="sorting" tabindex="0" aria-controls="datatable-responsive" rowspan="1" colspan="1" style="width: 60px;" >照片</th>
                         <th class="sorting" tabindex="0" aria-controls="datatable-responsive" rowspan="1" colspan="1" style="width: 50px;" >新增房間</th>                            
                         </tr>
@@ -248,14 +264,22 @@
                           <td><input name="roomName" type="text" style="width:40px"></td>
                           <td><input name="area"     type="text" style="width:40px"></td>
                           <td><input name="roomType" type="text" style="width:40px"></td>
-                          <td><input name="price"    type="text" style="width:40px"></td>
-                          <td><input name="info"     type="text" style="width:40px"></td>                         
+                          <td><input name="price"    type="text" style="width:40px"></td>   
                           <td><input type="file" id="photo" name="photo" accept="image/*"></td>
                           <td><input id="insertRoom" type="submit" value="新增房間"></td>                     
                         </tr>
                      </tbody>                                       
                     </table>
-                    <input name="roomImage"  id="roomImage"  type="text">
+                    <input name="roomImage"  id="roomImage"  type="hidden">            
+                  <span><textarea name="info" id="info"></textarea>
+                  <img id="previewPhoto" style="max-width:250px;margin-top:20px"></span>
+                    <script src="<c:url value="/ckeditorbasic/ckeditor.js"/>"></script>               
+                    <script>CKEDITOR.replace("info",{
+                    	width:500
+                    });
+                    </script>
+                    
+				   
 				</form>	
 									
                   </div>
