@@ -40,7 +40,7 @@ public class StudentDAO {
 
 	public List<Object[]> selectClazzAndStudentByMemberId(String memberId) {
 		return getSession().createQuery(
-				"select c, s from Clazz c, Student s where c.classId = s.classId and s.memberId = :memberId",
+				"select c, s from Clazz c, Student s where c.classId = s.classId and s.memberId = :memberId order by c.status desc, c.endDate",
 				Object[].class).setParameter("memberId", memberId).list();
 	}
 

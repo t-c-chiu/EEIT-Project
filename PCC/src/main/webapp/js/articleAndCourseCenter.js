@@ -2,10 +2,9 @@ $(function(){
 	
 	$.getJSON('/PCC/showMyCourses.clazz', function(data){
 		$('#course-list > span').text('(' + data.length + ')');
-		console.log(data);
 		
 		$.each(data, function(i,v){
-			var a1 = $('<a></a>').css('font-size','20px').attr('href','/PCC/clazzDetail.clazz?detail=' + v[0].classId).text(v[0].courseName);
+			var a1 = $('<a></a>').css('font-size','18px').attr('href','/PCC/clazzDetail.clazz?detail=' + v[0].classId).text(v[0].courseName);
 			var td1 = $('<td></td>').append(a1);
 			var td2 = $('<td></td>').text(v[0].location);
 			var td3 = $('<td></td>').text(v[0].endDate);
@@ -33,7 +32,7 @@ $(function(){
 		$('#center-message > span').text('(' + data.length + ')');
 		
 		$.each(data,function(i,v){
-			var td1 = $('<td></td>').text(v.title).css({cursor:'pointer',fontSize:'20px',color:'red'}).click(function(){
+			var td1 = $('<td></td>').text(v.title).css({cursor:'pointer',fontSize:'18px',color:'red'}).click(function(){
 				$.get('/PCC/alreadyRead.sysMsg?systemMessageId=' + v.systemMessageId, function(data){
 					td1.next().next().text(data);
 				})
@@ -75,7 +74,7 @@ $(function(){
 			var a11 = $('<a></a>').attr('href','/PCC/showAll.forum?category='+v.category).text(v.category);
 			var td11 = $('<td></td>').append(a11);
 			var a12 = $('<a></a>').attr('href','/PCC/showDetial.forum?messageId='+v.messageId).text(v.topic);
-			var td12 = $('<td></td>').append(a12).css('font-size','20px');
+			var td12 = $('<td></td>').append(a12).css('font-size','18px');
 			var td13 = $('<td></td>').text(v.date);
 			var td14 = $('<td></td>').text(v.likes);
 			var td15 = $('<td></td>');
@@ -97,7 +96,7 @@ $(function(){
 			var a21 = $('<a></a>').attr('href','/PCC/showAll.forum?category='+v.category).text(v.category);
 			var td22 = $('<td></td>').append(a21);
 			var a22 = $('<a></a>').attr('href','/PCC/showDetial.forum?messageId='+v.messageId).text(v.topic);
-			var td23 = $('<td></td>').append(a22).css('font-size','20px');
+			var td23 = $('<td></td>').append(a22).css('font-size','18px');
 			var td24 = $('<td></td>').text(v.date);
 			var td25 = $('<td></td>');
 			if(v.status == 0){
@@ -118,7 +117,7 @@ $(function(){
 			var a31 = $('<a></a>').attr('href','/PCC/showAll.forum?category='+v.category).text(v.category);
 			var td32 = $('<td></td>').append(a31);
 			var a32 = $('<a></a>').attr('href','/PCC/showDetial.forum?messageId='+v.messageId).text(v.topic);
-			var td33 = $('<td></td>').append(a32).css('font-size','20px');
+			var td33 = $('<td></td>').append(a32).css('font-size','18px');
 			var td34 = $('<td></td>').text(v.date);
 			var td35 = $('<td></td>');
 			if(v.status == 0){
@@ -137,7 +136,7 @@ $(function(){
 		$.each(myReported,function(i,v){
 			var td41 = $('<td></td>').text(v[0].memberId);
 			var a41 = $('<a></a>').attr('href','/PCC/showDetial.forum?messageId='+v[0].messageId).text(v[0].topic);
-			var td42 = $('<td></td>').append(a41).css('font-size','20px');;
+			var td42 = $('<td></td>').append(a41).css('font-size','18px');;
 			var td43 = $('<td></td>').text(v[0].date);
 			var td44 = $('<td></td>');
 			if(v[0].status == 0){
