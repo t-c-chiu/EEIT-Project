@@ -100,7 +100,7 @@
 							<h3 class="widget-title">交易訂單</h3>
 							<ul>
 								<li><a id="favorite-product" class="center-li">收藏商品<span>(4)</span></a></li>
-								<li><a id="shopping-cart" class="center-li">購物車<span>(5)</span></a></li>
+								<li><a id="shopping-cart" class="center-li">購物車<span></span></a></li>
 								<li><a id="order-list" class="center-li">訂單明細</a></li>
 								<li><a id="course-list" class="center-li">我的課程<span></span></a></li>
 							</ul>
@@ -111,9 +111,9 @@
 							<h3 class="widget-title">文章管理</h3>
 							<ul>
 								<li><a id="my-article" class="center-li">我的文章<span></span></a></li>
-								<li><a id="favorite-article" class="center-li">我的收藏<span>(x)</span></a></li>
-								<li><a id="reply-article" class="center-li">參與的討論<span>(x)</span></a></li>
-								<li><a id="reported-article" class="center-li">檢舉的文章<span>(x)</span></a></li>
+								<li><a id="favorite-article" class="center-li">我的收藏<span></span></a></li>
+								<li><a id="reply-article" class="center-li">參與的討論<span></span></a></li>
+								<li><a id="reported-article" class="center-li">檢舉的文章<span></span></a></li>
 							</ul>
 						</aside>
 						<!-- Widget article /-  -->
@@ -272,10 +272,19 @@
 					<!-- 購物車 -->
 					<div id="center-change-6" class="col-md-8 col-sm-7 col-xs-12 content-area product-section2 no-left-padding">
 					<h3 class="center-title">購物車</h3>
+					<table id="myBePaidTable" class="forumTable">
+						<tr>
+							<th>訂單類型</th>
+							<th>訂單名稱</th>
+							<th>訂單價格</th>
+						</tr>
+					</table>
 					</div>
 					<!-- 訂單明細 -->
 					<div id="center-change-7" class="col-md-8 col-sm-7 col-xs-12 content-area product-section2 no-left-padding">
 					<h3 class="center-title">訂單明細</h3>
+					<table id="myBePaidListTable">
+					</table>
 					</div>
 					<!-- 我的文章 -->
 					<div id="center-change-8" class="col-md-8 col-sm-7 col-xs-12 content-area product-section2 no-left-padding">

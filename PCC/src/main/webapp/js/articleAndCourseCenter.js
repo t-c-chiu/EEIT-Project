@@ -1,5 +1,50 @@
 $(function(){
 	
+	$.getJSON('/PCC/showMyBePaidList.admin',function(data){
+		console.log(data);
+		$('#shopping-cart > span').text('(' + (data.listOfMyClazz.length + data.listOfMyOrder.length + data.listOfMyReservation.length) + ')');
+		var totalPrice = 0;
+		if(data.listOfMyClazz.length > 0){
+			$.each(data.listOfMyClazz, function(i,v){
+				totalPrice += v.price;
+				var td1 = $('<td></td>').text('課程');
+				var a1 = $('<a></a>').attr('href','/PCC/clazzDetail.clazz?detail=' + v.classId).text(v.courseName);
+				var td2 = $('<td></td>').append(a1);
+				var td3 = $('<td></td>').text(v.price);
+				var tr1 = $('<tr></tr>').append(td1,td2,td3);
+				$('#myBePaidTable').append(tr1);
+			})
+		}
+		if(data.listOfMyReservation.length > 0){
+			$.each(data.listOfMyReservation, function(i,v){
+				totalPrice += v.totalPrice;
+				var td4 = $('<td></td>').text('房間');
+				var td5 = $('<td></td>').text(v.name + '：' + v.beginDate + ' - ' + v.endDate);
+				var td6 = $('<td></td>').text(v.totalPrice);
+				var tr2 = $('<tr></tr>').append(td4,td5,td6);
+				$('#myBePaidTable').append(tr2);
+			})
+		}
+		if(data.listOfMyOrder.length > 0){
+			$.each(data.listOfMyOrder, function(i,v){
+				totalPrice += v.totalPrice;
+				var td7 = $('<td></td>').text('商城');
+				var td8 = $('<td></td>').text(v.memberId + '：' + v.date);
+				var td9 = $('<td></td>').text(v.totalPrice);
+				var tr3 = $('<tr></tr>').append(td7,td8,td9);
+				$('#myBePaidTable').append(tr3);
+			})
+		}
+		var td10 = $('<td></td>').text('總價：').attr('colspan','2').css('font-size','16px');
+		var td11 = $('<td></td>').text(totalPrice).css('font-size','16px');
+		var tr4 = $('<tr></tr>').append(td10,td11);
+		var btn = $('<button></button>').text('確定結帳');
+		var td11 = $('<td></td>').attr('colspan','3').append(btn).css('text-align','center');
+		var tr5 = $('<tr></tr>').append(td11);
+		$('#myBePaidTable').append(tr4,tr5);
+		
+	})
+	
 	$.getJSON('/PCC/showMyCourses.clazz', function(data){
 		$('#course-list > span').text('(' + data.length + ')');
 		
@@ -15,7 +60,7 @@ $(function(){
 				var diff = v[0].numberOfStudents - v[0].currentStudents;
 				td5.text('尚缺'+ diff +'人方可開課');
 				td6.text('尚未開課');
-			}else if(v[0].status == 1){ 
+			}else if(v[0].status == 1){
 				td5.text('已達開課人數，即將開課。');
 				if(v[1].status == 0){
 					td6.text('尚未繳費');

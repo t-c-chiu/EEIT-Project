@@ -43,5 +43,10 @@ public class StudentDAO {
 				"select c, s from Clazz c, Student s where c.classId = s.classId and s.memberId = :memberId order by c.status desc, c.endDate",
 				Object[].class).setParameter("memberId", memberId).list();
 	}
-
+	
+	public List<Integer> selectClassIdByMemberIdStatus0(String memberId){
+		return getSession().createQuery("select classId from Student where memberId = :memberId and status = 0", Integer.class)
+				.setParameter("memberId", memberId).list();
+	}
+	
 }
