@@ -72,6 +72,36 @@ $('#area').keyup(function(){
 		})			
 	  })		
 	})
+	
+
+	var directionsDisplay;
+	function initMap() {
+		directionsDisplay = new google.maps.DirectionsRenderer();
+		var geocoder = new google.maps.Geocoder();
+		geocoder.geocode({
+			address : $('#loc').text()
+		}, 
+		
+		function(results, status) {
+			if (status == 'OK') {
+				var dest = {
+					lat : results[0].geometry.location.lat(),
+					lng : results[0].geometry.location.lng()
+				};
+				var map = new google.maps.Map(document.getElementById('map'), {
+					zoom : 16,
+					center : dest
+				});
+				var marker = new google.maps.Marker({
+					position : dest,
+					map : map
+				});
+			}
+		})
+	}
+	
+	
+	
 })
 
 </script>
@@ -203,6 +233,20 @@ $('#area').keyup(function(){
 			</div>
 			<!-- Container /- -->
 		</div>
+		QQ
+			<div >
+					<h3>
+						<span id="loc">台北市大安區復興南路一段390號</span>
+					</h3>
+					<br>
+					<div id="map" style="height: 450px; width: 600px;"></div>
+					<script async defer
+						src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB6xPewLqeX388Ecohy3LHWMWN5GtxjNZ4&callback=initMap">
+					</script>
+					<br>
+		   </div>
+		
+		
 		<!-- Clients /- --> </main>
 		<!--	內容結束	-->
 		<!-- Footer Main 1 -->
