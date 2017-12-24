@@ -106,7 +106,23 @@ $('#area').keyup(function(){
 					<li class="active">預約訂房</li>
 				</ol>
 			</div>
-			<div>
+
+			<!-- Container /- -->
+		</div>
+		<!-- Page Banner /- --> <!-- Clients -->
+			
+
+						
+			<div class="container-fluid no-left-padding no-right-padding woocommerce-checkout">
+			<!-- Container -->
+			<div class="container">
+
+				<!-- Billing -->
+				
+				<div class="checkout-form">
+         
+				<div class="col-md-12 col-sm-12 col-xs-12">
+			
 				<form action="<c:url value="/show.room"/>" method="get">
 					<table width="400" border="0" align="center">
 						<tr>
@@ -125,18 +141,20 @@ $('#area').keyup(function(){
 									<option value="normal">標準房</option>
 									<option value="good">貴賓房</option>									
 							</select></td>
-							<td><input type="submit" name="Room" value="送出"></td>
+							<td>						
+							<input type="submit" name="Room" value="送出"></td>
 						</tr>
 
 					</table>
 				</form>
 
 			</div>
-
-			<!-- Container /- -->
 		</div>
-		<!-- Page Banner /- --> <!-- Clients -->
-		<div class="clients container-fluid">
+		</div>
+		</div>
+		
+			
+		<div class="clients container-fluid" >
 			<!-- Container -->
 			<div class="container">
 				<div class="clients-carousel">
