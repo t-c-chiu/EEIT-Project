@@ -31,7 +31,7 @@ public class ShoppingForStartPage {
 	
 	@RequestMapping(path = {"/star.shopping"}, method = RequestMethod.POST)
 	public String startCategory(String pageName, Model model) {
-		System.out.println("srat:"+pageName);
+	
 
 		//為了旁邊的分類欄選項
 		List<CategoryType> categorys= productService.categoryFilter();

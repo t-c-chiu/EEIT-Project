@@ -48,9 +48,9 @@
 									<li class="mini_cart_item" id="${cart.value.productId}SS">
 										<!-- 刪除的X --> <a title="Remove this item" class="remove"
 										href="#">&#215;</a> <!-- /刪除的X --> <!-- 圖案+文字 --> <a href="#"
-										class="shop-thumbnail"> <img alt="poster_2_up"
-											class="attachment-shop_thumbnail"
-											src="../images/product-wishlist-1.jpg">
+										class="shop-thumbnail">
+										 <img alt="poster_2_up" class="attachment-shop_thumbnail"											 
+											src="/PCC/images/product-wishlist-2.jpg"  />
 											${cart.value.productName}
 									</a> <!-- /圖案+文字 --> <span class="quantity"> <!-- 數量 --> <span
 											class="cartSpan" id="${cart.value.productId}span">${cart.value.quantity}</span>
@@ -81,7 +81,7 @@
 								<li class="button" style="display: none" id="cartButtonLi">
 
 									<a id="toCartA" title="View Cart" href="/PCC/pages/cart.jsp">View
-										Cart</a> <a title="Check Out">Check out</a>
+										Cart</a> <a title="Check Out" href="/PCC/pages/check.jsp">Check out</a>
 
 
 								</li>

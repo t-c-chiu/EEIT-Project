@@ -119,7 +119,7 @@
 						<th></th>
 					</tr>
 
-					<c:forEach var="item" items="#{addToCart}">
+					<c:forEach var="item" items="${addToCart}">
 						<tr id="${item.key}tr">
 							<td>
 								<ul>

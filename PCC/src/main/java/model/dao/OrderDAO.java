@@ -23,9 +23,9 @@ public class OrderDAO {
 	//會員一次新增一筆
 	public int insertOlder(Order order) {
 		if(order!=null) {
-			getSession().save(order);
+			int orderId=(int)getSession().save(order);
 
-			return 1;
+			return orderId;
 		}		
 		return 0;
 	}
@@ -42,15 +42,17 @@ public class OrderDAO {
 				select.setTotalPrice(order.getTotalPrice());
 				select.setLocation(order.getLocation());
 				select.setDate(order.getDate());
+				select.setRecipient(order.getRecipient());
+				select.setRecipientPhone(order.getRecipientPhone());
 				
 			}		
 		}		
 		return false;
 	}
 	
-	public boolean cancelOrder(int memberId) {
+	public boolean cancelOrder(String memberId) {
 		
-		if(memberId!=0) {
+		if(memberId!=null) {
 			
 			getSession().delete(memberId);
 			
@@ -62,8 +64,8 @@ public class OrderDAO {
 	
 	//會員查詢自己所有的訂單
 	
-	public List<Order> selectAllOrder(int memberId){
-		if(memberId!=0) {
+	public List<Order> selectAllOrder(String memberId){
+		if(memberId!=null) {
 		Query<Order> query= getSession().createQuery("select * from ORDER where memberId = ?", Order.class);
 		query.setParameter(0, memberId);
 
