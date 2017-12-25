@@ -26,7 +26,7 @@ public class ProductService {
 	public Product search(int productId){
 		if(productId!=0) {
 		Product product=productDAO.selectId(productId);
-		System.out.println("Service ok :");
+//		System.out.println("Service ok :");
 		return product;
 		}
 		return null;
@@ -41,7 +41,7 @@ public class ProductService {
 	}
 	//搜索模糊商品名
 	public List<Product> searchText(String productName){
-		System.out.println("service start");
+//		System.out.println("service start");
 		if(productName!=null && productName.trim().length()!=0) {
 			
 			List<Product> listProduct=productDAO.selectProductName(productName);

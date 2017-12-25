@@ -41,7 +41,7 @@ public class SpringMvcConfigShoppingMAll
 		xmlViewResolver.setLocation(location);
 		registry.viewResolver(xmlViewResolver);
 		
-		System.out.println("configureViewResolvers ok");
+//		System.out.println("configureViewResolvers ok");
 	}
 
 
@@ -59,7 +59,7 @@ public class SpringMvcConfigShoppingMAll
 			<param-name>contextConfigLocation</param-name> 
 			<param-value>model.spring.SpringMvcJavaConfiguration</param-value> 	</init-param>
 		*/
-		System.out.println("getServletConfigClasses ok");
+//		System.out.println("getServletConfigClasses ok");
 		return new Class[] {SpringMvcConfigShoppingMAll.class};
 	}
 
@@ -71,14 +71,14 @@ public class SpringMvcConfigShoppingMAll
 			<url-pattern>*.controller</url-pattern> 
 		</servlet-mapping>	
 		*/
-		System.out.println("getServletMappings ok");
+//		System.out.println("getServletMappings ok");
 		return new String[] {"*.shopping"};
 	}
 	
 	@Override
 	protected String getServletName() {
 		
-		System.out.println("getServletName ok");
+//		System.out.println("getServletName ok");
 		return "springMvcConfigShoppingMAll";
 	}
 

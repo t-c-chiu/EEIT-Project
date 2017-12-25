@@ -153,11 +153,11 @@ public class ProductDAO {
 			
 			stmt.executeBatch();
 			conn.commit();
-			System.out.println("dao ok: " + saveCount);
+//			System.out.println("dao ok: " + saveCount);
 			return saveCount;
 
 		}
-		System.out.println("DAO is 0");
+//		System.out.println("DAO is 0");
 		return 0;
 	}
 

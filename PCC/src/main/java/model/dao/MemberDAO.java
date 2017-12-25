@@ -45,17 +45,9 @@ public class MemberDAO {
 	}
 
 	// UPDATE Member
-	// SET
-	// name = '我是測試',
-	// email = '123@gmail.com',
-	// phone = '0909123456',
-	// area = '大安區',
-	// address = '復興南路一段390號 2,3,15樓',
-	// WHERE memberId='Tester';
 	public Member update(Member member) {
 		if (member != null) {
 			Member select = this.select(member.getMemberId());
-			System.out.println("DAOselect="+select);
 			if(select !=null) {
 				select.setName(member.getName());
 				select.setEmail(member.getEmail());

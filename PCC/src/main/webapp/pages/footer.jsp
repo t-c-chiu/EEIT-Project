@@ -82,7 +82,8 @@
 									data-dismiss="modal">取消</button>
 								<button type="button" id="sub" class="btn btn-primary">登入</button>
 							</div>
-							<input id="save" value="${member.memberId}" style="display:none;"></input>
+							<input id="save" value="${member.role}" style="display:none;"></input>
 						</div>
 					</div>
 				</div>
+				
