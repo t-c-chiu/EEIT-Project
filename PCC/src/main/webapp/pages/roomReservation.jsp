@@ -72,9 +72,16 @@ href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" />
 
 #allForm {
 display:none
-
-
 }
+
+.googleMap:hover{
+ cursor:pointer
+}
+
+
+.dlg-no-close .ui-dialog-titlebar-close {display: none;} 
+
+
 
 </style>
 
@@ -217,12 +224,17 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDYpbCt__aSkFOPc8En0xCzF6G
 			var h3=$('<h3></h3>').addClass("entry-title").text(room.roomName)
 			
 			var div7=$('<div></div>').addClass("entry-meta")
-			var span1=$('<span></span>').addClass("post-like").text(room.address)
-			var span2=$('<span></span>').addClass("post-admin").text('房價 '+room.price)
+			var img2=$('<img></img>').addClass("googleMap")
+									 .attr('alt',room.address)
+									 .attr('width',"120px")
+									 .attr('src','/PCC/images/room/googleMap.png')
 			
+			var span1=$('<span></span>').addClass("post-like")
+			var span2=$('<span></span>').addClass("post-admin").text('房價 '+room.price)
 			var div8=$('<div></div>').addClass("entry-content")
 			var p1=$('<p></p>').text(room.info)
-					
+			
+			span1.append(img2)
 			div5.append(img)
 			div4.append(div5)		
 			div7.append([span1,span2])
@@ -317,8 +329,8 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDYpbCt__aSkFOPc8En0xCzF6G
 		})
 		
 		
-			$("body").on('click','.post-like',function(){		
-			var	point=$(this).text()
+			$("body").on('click','.googleMap',function(){		
+            var point=$(this).attr("alt")
 				
 			var geocoder = new google.maps.Geocoder();
 			geocoder.geocode({
@@ -339,18 +351,18 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDYpbCt__aSkFOPc8En0xCzF6G
 			});						
 		}
 	})
-	
-	
-	var test = $(this).parent('div').find('span').text();
-        	$('#dialog-confirm span:first-child').text(test);
-        
-        	
-            $("#dialog-confirm").dialog({  
-                resizable: true,
+
+            $("#dialog-confirm").dialog({ 
+              resizable: true,
                 height: $(window).height() * 0.5,//dialog視窗高度
                 width: $(window).width() * 0.5,
                 modal: true,
-                dialogClass: "dlg-no-close",                                  
+                dialogClass: "dlg-no-close",
+                buttons: {
+                                          關閉: function () {
+                     $(this).dialog("close");
+                 }
+             }      
             });
 })
 	
@@ -462,7 +474,9 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDYpbCt__aSkFOPc8En0xCzF6G
 						<div class="col-md-7 col-sm-12 col-xs-12 blog-content">
 						<h3 class="entry-title">${room.roomName}</h3>
 						<div class="entry-meta">
-						<span class="post-like">${room.address}</span>
+<%-- 						<span class="post-like">${room.address}</span> --%>
+						<span class="post-like"><img class="googleMap" alt="${room.address}" width="120px" src="<c:url value="../images/room/googleMap.png"/>">
+						</span>
 						<span class="post-admin">房價 ${room.price}</span>
 						</div>
 							
