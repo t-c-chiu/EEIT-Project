@@ -78,7 +78,6 @@ public class SpringMvcConfigShoppingMAll
 	@Override
 	protected String getServletName() {
 		
-
 		return "springMvcConfigShoppingMAll";
 	}
 

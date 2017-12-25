@@ -20,12 +20,14 @@ public class ProductService {
 	@Autowired
 	private CategoryDAO categoryDAO;
 
+
 	// 根據ID搜尋
 	public Product search(int productId) {
 		if (productId != 0) {
 			Product product = productDAO.selectId(productId);
 
 			return product;
+
 		}
 		return null;
 	}
@@ -37,6 +39,7 @@ public class ProductService {
 
 		return listProduct;
 	}
+
 
 	// 搜索模糊商品名
 	public List<Product> searchText(String productName) {

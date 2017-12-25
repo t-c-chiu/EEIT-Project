@@ -158,7 +158,7 @@
 						</div>
 						<button id="registy-btn"
 							class="btn btn-default form-control footer-send "
-							type="button submit">註冊</button>
+							type="button">註冊</button>
 					</form>
 
 				</div>

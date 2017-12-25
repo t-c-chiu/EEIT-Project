@@ -103,13 +103,15 @@
 							class="icon icon-User"></i>
 						</a>
 
-						<ul class="droplogin dropdown-menu no-padding">
-							<li id="who-is-login" class="button logbtn"><a id="log-log"
-								href="#" data-toggle="modal" data-target="#exampleModal"
-								onclick="login();">登入</a> <a id="log-reg"
-								href="/PCC/pages/registy.jsp">註冊</a> <a id="log-cen" onclick=""
-								href="/PCC/pages/center.jsp" style="display: none;">會員中心</a> <a
-								id="log-out" onclick="" href="#" style="display: none;">登出</a></li>
+						<ul id="login-back" class="droplogin dropdown-menu no-padding">
+						<li id="who-is-login" class="button logbtn">
+							<a id="log-log" href="#" data-toggle="modal"
+							data-target="#exampleModal" onclick="login();">登入</a> 
+							<a id="log-reg" href="/PCC/pages/registy.jsp">註冊</a>
+							<a id="log-cen" href="/PCC/pages/center.jsp">會員中心</a>
+							<a id="log-out" href="#" class="change-ds">登出</a>
+						</li>
+
 						</ul>
 						<!-- 						<ul class="dropdown-menu no-padding droplogin "> -->
 						<!-- 							<li class="button"><a href="#" title="Login">登入</a></li> -->
@@ -121,46 +123,7 @@
 
 				</div>
 
-				<!-- User Login Modal -->
-				<div class="modal fade" id="exampleModal" tabindex="-1"
-					role="dialog" aria-labelledby="exampleModalLabel"
-					aria-hidden="true">
-					<div class="modal-dialog" role="document">
-						<div class="modal-content">
-							<div class="modal-header">
-								<h5 class="modal-title" id="exampleModalLabel">登入</h5>
-								<button type="button" class="close" data-dismiss="modal"
-									aria-label="Close">
-									<span aria-hidden="true">&times;</span>
-								</button>
-							</div>
-							<div class="modal-body">
-								<form id="formid">
-									<div class="form-group">
-										<label for="memberId" class="col-form-label">帳號:</label> <input
-											type="text" class="login-pop" id="memberId" name="memberId">
-										<div id="memberId-error"></div>
-									</div>
-									<div class="form-group">
-										<label for="password" class="col-form-label">密碼:</label> <input
-											type="password" class="form-control login-pop" id="password"
-											name="password">
-										<div id="password-error"></div>
-										<!-- 												<textarea class="form-control" id="message-text"></textarea> -->
-									</div>
-								</form>
-							</div>
 
-							<!-- google -->
-							<div class="g-signin2" data-onsuccess="onSignIn"></div>
-							<div class="modal-footer">
-								<button type="button" class="btn btn-secondary"
-									data-dismiss="modal">取消</button>
-								<button type="button" id="sub" class="btn btn-primary">登入</button>
-							</div>
-						</div>
-					</div>
-				</div>
 
 				<!-- Menu Icon /- -->
 				<div class="navbar-collapse collapse navbar-right" id="navbar">
@@ -191,7 +154,7 @@
 								<%-- 								</c:forEach> --%>
 								<!-- /12/18 修改成功..>0< -->
 							</ul></li>
-						<li class="dropdown"><a href="pages/room.html" title="Room"
+						<li class="dropdown"><a href="<c:url value="/pages/showRoom.jsp"/>" title="Room"
 							class="dropdown-toggle" role="button" aria-haspopup="true"
 							aria-expanded="false">預約訂房</a></li>
 						<li class="dropdown"><a
@@ -211,7 +174,7 @@
 								<li><a href="<c:url value="/showAll.forum?category=育兒討論"/>">育兒討論</a></li>
 								<li><a href="<c:url value="/showAll.forum?category=心情分享"/>">心情分享</a></li>
 							</ul></li>
-						<li><a href="pages/contact-us.html" title="Contact Us">聯絡資訊</a></li>
+						<li><a href="#footer-main" title="Contact Us">聯絡資訊</a></li>
 					</ul>
 				</div>
 

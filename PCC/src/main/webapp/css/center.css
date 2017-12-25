@@ -98,3 +98,7 @@ span.points{
     text-align: center;
     width: 100%;
 }
+.pagination>li>a, .pagination>li>span {
+	border-radius: 50% !important;
+	margin: 0 5px;
+ }

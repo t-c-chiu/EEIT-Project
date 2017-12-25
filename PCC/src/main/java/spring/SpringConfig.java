@@ -25,6 +25,7 @@ import model.bean.Matching;
 import model.bean.Member;
 import model.bean.Order;
 import model.bean.OrderDetail;
+import model.bean.PointDetails;
 import model.bean.PostArticle;
 import model.bean.Product;
 import model.bean.ReplyArticle;
@@ -60,7 +61,7 @@ public class SpringConfig extends AbstractContextLoaderInitializer {
 		builder.addAnnotatedClasses(Clazz.class, CollectArticle.class, Conversation.class, Matching.class, Member.class,
 				Order.class, OrderDetail.class, PostArticle.class, Product.class, ReplyArticle.class, Reservation.class,
 				Room.class, RoomReservation.class, Servant.class, Student.class, SystemMessage.class,
-				ReportedArticle.class,CategoryType.class);
+				ReportedArticle.class,CategoryType.class,PointDetails.class);
 		return builder.buildSessionFactory();
 	}
 
