@@ -101,9 +101,6 @@ public class ProductController {
 		String path = this.imageHelper(saveOkId, photo);
 		productService.updateProduct(product, path);
 		}
-		
-		
-
 		return "admin.product";
 
 	}

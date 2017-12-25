@@ -1,0 +1,9 @@
+@charset "UTF-8";
+
+.forumTable{
+	margin: auto;
+}
+
+.forumTable th, .forumTable td{
+	padding: 10px;
+}

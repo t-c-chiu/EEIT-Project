@@ -32,6 +32,12 @@ public class ReplyArticleDAO {
 				.setParameter("messageId", messageId).list();
 	}
 
+	public List<Integer> selectDistinctMessageIdByMemberId(String memberId) {
+		return getSession()
+				.createQuery("select distinct messageId from ReplyArticle where memberId = :memberId", Integer.class)
+				.setParameter("memberId", memberId).list();
+	}
+
 	public Integer selectCountByMessageId(Integer messageId) {
 		Number number = (Number) getSession()
 				.createQuery("select count(*) from ReplyArticle where messageId = :messageId")

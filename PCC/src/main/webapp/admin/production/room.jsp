@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
   <head>
@@ -41,7 +42,19 @@
     
     <script>
     $(function() {
-    	init()
+    	
+    	$('#roomId').keyup(function(){
+    		$('#roomImage').empty().val($(this).val())
+    	})
+    	
+    	
+    	$('#showReservation').click(function(){
+    		initReservation()
+    	})
+    	
+    	$('#showRoom').click(function(){
+    		initRoom()
+    	})
     	
     	$("body").on('click','.delete',function(){
     			var roomReserverId=$(this).attr("id")
@@ -53,11 +66,11 @@
     			$(this).parents('tr').remove()
     	})
   	
-    	function init(){ 	   	   		
+    	function initReservation(){ 	   	   		
     		$.get('${pageContext.request.contextPath}/selectAllReservation.room',function(data){    	 
     		var tbody=$('<tbody></tbody>')
     			
-    		$('#datatable-responsive').append(tbody)
+    		$('#datatable-responsive').empty(tbody).append(tbody)
     		
     		$.each(data,function(i,roomReservation){
     			   var tr1=$('<tr></tr>').addClass("odd")
@@ -82,15 +95,16 @@
     			       			       	       			   
     			   tr1.append([td1,td2,td3,td4,td5,td6,td7,td8,td9,td10])
     			   tbody.append(tr1)                     
-    			})	
-    			
-    		})
-    		
-    		
+    			})	    			
+    		})    		   				
+    	 }
+    	
+    	
+    	function initRoom(){ 
     		$.get('${pageContext.request.contextPath}/selectAllRoom.room',function(data){
         		console.log(data)
         			var tbody=$('<tbody></tbody>')
-        			$('#datatable-responsive2').append(tbody)
+        			$('#datatable-responsive2').empty(tbody).append(tbody)
         			
         			$.each(data,function(i,room){
         			var tr1=$('<tr></tr>').addClass("odd")
@@ -108,10 +122,48 @@
      			    tr1.append([td1,td2,td3,td4,td5,td6])
     			    tbody.append(tr1)  
      				
-        			})
-        			   			
-        		}) 		
-    	 }
+        			})       			   			
+        		})     		
+    	}
+    	
+    	
+    	$("#insertRoom").click(function(event){
+    		var form=$('#roomForm')[0]
+    		var data=new FormData(form)
+    		data.append('info',CKEDITOR.instances.info.getData())
+    		$("#insertRoom").prop("disabled",true)
+    		$.ajax({
+    			type: "POST",
+    			enctype: 'multipart/form-data',
+    			url: '${pageContext.request.contextPath}/insertRoom.room',    			
+    			data: data,
+    			processData: false,
+    			contentType: false,
+    			cache: false,
+    			success:function(data){
+    				alert(data)
+    				$("#btnSubmit").prop("disabled", false);
+    				$('#previewPhoto').removeAttr('src')
+    			},
+    		     error: function (e) {
+ 	                console.log("ERROR : ", e);
+ 	                $("#btnSubmit").prop("disabled", false);
+ 	            }
+    		})
+    		
+    	})
+    	
+    	$('#photo').change(function(){
+    		if(this.files&&this.files[0]){
+    			var reader=new FileReader()
+    			reader.onload=function(e){
+    				$('#previewPhoto').attr('src',e.target.result)   					
+    			}
+    			reader.readAsDataURL(this.files[0])   			 			
+    		} 		   		
+    	})
+    	
+    	
    		
     }); 	  		   	    	             
   </script>
@@ -132,6 +184,7 @@
                   <div class="x_title">
                     <h2>訂單一覽</h2>
                     <ul class="nav navbar-right panel_toolbox">
+                    <li><button id="showReservation">查看訂單</button></li>
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                       </li>
                       <li class="dropdown">
@@ -171,14 +224,77 @@
               </div>
       
       
+                     <div class="col-md-8 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2>新增房間</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      </li>
+                      <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"></a>
+                       
+                      </li>
+                      <li><a class="close-link"><i class="fa fa-close"></i></a>
+                      </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+                    <p class="text-muted font-13 m-b-30"></p>
+			
+                 <form id="roomForm">
+                    <table id="datatable-responsive3" class="table table-striped table-bordered dt-responsive nowrap dataTable no-footer dtr-inline collapsed" cellspacing="0" width="100%" role="grid" aria-describedby="datatable-responsive_info" style="width: 100%;">
+              
+                      <thead>                      
+                        <tr role="row">
+                        <th class="sorting_asc" tabindex="0" aria-controls="datatable-responsive" rowspan="1" colspan="1" style="width: 50px;">房間編號</th>
+                        <th class="sorting" tabindex="0" aria-controls="datatable-responsive" rowspan="1" colspan="1" style="width: 50px;" >房間名稱</th>
+                        <th class="sorting" tabindex="0" aria-controls="datatable-responsive" rowspan="1" colspan="1" style="width: 50px;" >地區</th>
+                        <th class="sorting" tabindex="0" aria-controls="datatable-responsive" rowspan="1" colspan="1" style="width: 60px;" >房型</th>
+                        <th class="sorting" tabindex="0" aria-controls="datatable-responsive" rowspan="1" colspan="1" style="width: 60px;" >每晚房價</th>            
+                        <th class="sorting" tabindex="0" aria-controls="datatable-responsive" rowspan="1" colspan="1" style="width: 60px;" >照片</th>
+                        <th class="sorting" tabindex="0" aria-controls="datatable-responsive" rowspan="1" colspan="1" style="width: 50px;" >新增房間</th>                            
+                        </tr>
+                      </thead>
+                      
+                      <tbody>
+                     <tr role="row" class="odd">
+                          <td><input name="roomId"   id="roomId" type="text" style="width:50px"></td>
+                          <td><input name="roomName" type="text" style="width:40px"></td>
+                          <td><input name="area"     type="text" style="width:40px"></td>
+                          <td><input name="roomType" type="text" style="width:40px"></td>
+                          <td><input name="price"    type="text" style="width:40px"></td>   
+                          <td><input type="file" id="photo" name="photo" accept="image/*"></td>
+                          <td><input id="insertRoom" type="submit" value="新增房間"></td>                     
+                        </tr>
+                     </tbody>                                       
+                    </table>
+                    <input name="roomImage"  id="roomImage"  type="hidden">            
+                  <span><textarea name="info" id="info"></textarea>
+                  <img id="previewPhoto" style="max-width:250px;margin-top:20px"></span>
+                    <script src="<c:url value="/ckeditorbasic/ckeditor.js"/>"></script>               
+                    <script>CKEDITOR.replace("info",{
+                    	width:500
+                    });
+                    </script>
+                    
+				   
+				</form>	
+									
+                  </div>
+                </div>
+              </div>
+      
       
             <div class="col-md-8 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
                     <h2>房間一覽</h2>
                     <ul class="nav navbar-right panel_toolbox">
-                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                      </li>
+                    <li><button id="showRoom">查看房間</button></li>
+                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a> </li>
+                     
                       <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"></a>
                        
@@ -211,6 +327,7 @@
                 </div>
               </div>
               
+             
       </div>
         <!-- /page content -->
 

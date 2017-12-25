@@ -17,6 +17,7 @@ public class Clazz {
 	private Integer classId;
 	private Integer numberOfStudents;
 	private Integer price;
+	//0還沒到達開課人數  1到達開課人數
 	private Integer status;
 	private Integer currentStudents;
 	private String courseName;

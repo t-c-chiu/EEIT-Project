@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<%@ page import="java.util.HashMap, model.bean.Cart" %>
+<%@ page import="java.util.HashMap, model.bean.Cart"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -95,12 +95,13 @@
 				}
 			%>
 
-					<div align='center' id='noShoppingImg' style="display:none">
-					<img alt='noShopping' src='../images/noShopping.jpg'>
-					<button id="gotoShoppingButtoun" class="btn btn-default form-control footer-send "
-						type="button" style="border-color:pink">我要去購物</button>
-<!-- 					<input id="gotoShoppingButtoun" type="button" value="去購物" style="width:200px;height:70px;font-size:20px; dashed;background-color:pink;"/> -->
-					</div>
+			<div align='center' id='noShoppingImg' style="display: none">
+				<img alt='noShopping' src='../images/noShopping.jpg'>
+				<button id="gotoShoppingButtoun"
+					class="btn btn-default form-control footer-send " type="button"
+					style="border-color: pink">我要去購物</button>
+				<!-- 					<input id="gotoShoppingButtoun" type="button" value="去購物" style="width:200px;height:70px;font-size:20px; dashed;background-color:pink;"/> -->
+			</div>
 
 
 
@@ -133,24 +134,17 @@
 								<ul style="padding: 0px">
 									<li
 										style="list-style-type: none; padding: 5px; list-style-position: inside; margin-left: 0px;">規格：
-										<select>
-											<option>請選擇</option>
-											<option>F</option>
-									</select>
 									</li>
-									<li style="list-style-type: none; padding: 5px">樣式： <select >
-											<option>請選擇</option>
-											<option>F</option>
-									</select>
-									</li>
-									<li style="list-style-type: none; padding: 5px">數量： <input 
-										style="font-size: 11px; font-family: serif;" type="number" min="1" max="10"
-										size="7" value="${item.value.quantity}" id="${item.key}" class="quantityNumber"/>
+									<li style="list-style-type: none; padding: 5px">數量： <input
+										style="font-size: 11px; font-family: serif;" type="number"
+										min="1" max="10" size="7" value="${item.value.quantity}"
+										id="${item.key}" class="quantityNumber" />
 									</li>
 								</ul>
 							</td>
 							<td><span>$</span><span class="price" id="${item.key}price">${item.value.price}</span></td>
-							<td><span>$</span><span class="subtal" id="${item.key}subtotal">${item.value.subtotal}</span></td>
+							<td><span>$</span><span class="subtal"
+								id="${item.key}subtotal">${item.value.subtotal}</span></td>
 							<td class="eliminate" id="${item.key}eliminate">刪除</td>
 						</tr>
 
@@ -161,12 +155,15 @@
 						<th></th>
 						<th></th>
 						<th></th>
-						<th><label>共$<span id="tatlePrice" style="font-size:20px;font-weight:bold; color:red"></span>元</label></th>
+						<th><label>共$<span id="tatlePrice"
+								style="font-size: 20px; font-weight: bold; color: red"></span>元
+						</label></th>
 					</tr>
 				</table>
 				<div align="center" style="padding-top: 40px">
-					<button id="checkButton" class="btn btn-default form-control footer-send "
-						type="button" style="border-color:pink">我要結帳</button>
+					<button id="checkButton"
+						class="btn btn-default form-control footer-send " type="button"
+						style="border-color: pink">加入訂單</button>
 
 					<!-- 		<input type="button" value="我要結帳" style="width:200px;height:70px;font-size:20px; dashed;background-color:pink;"/> -->
 				</div>
@@ -177,8 +174,7 @@
 
 		</div>
 
-		<!-- Container /- --> 
-		<%@ include file="/pages/footer.jsp"%>
+		<!-- Container /- --> <%@ include file="/pages/footer.jsp"%>
 	</div>
 
 	<!-- JQuery v1.12.4 -->
@@ -259,10 +255,23 @@
 				
 			});
 			
-			//按下去結帳就會轉跳頁面
+			//按下去結帳就會轉跳頁面，並將購物車轉成訂單，status為0，訂單明細也會加入
 			$("#checkButton").click(function(){
+				var tatlePrice =$("#tatlePrice").text();
+				$.ajax({
+					url:"/PCC/addOrder.shopping",
+					type:"GET",
+					data:{
+						"totalPrice":tatlePrice,
+						"status":0
+						},
+					success:function(data){
+						alert(data);
+						location.replace("/PCC/pages/shop-2.jsp");
+					}				
+				});
 				
-				location.replace("/PCC/pages/check.jsp");
+ 				
 			})
 
 		})

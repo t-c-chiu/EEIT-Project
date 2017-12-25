@@ -48,9 +48,9 @@
 									<li class="mini_cart_item" id="${cart.value.productId}SS">
 										<!-- 刪除的X --> <a title="Remove this item" class="remove"
 										href="#">&#215;</a> <!-- /刪除的X --> <!-- 圖案+文字 --> <a href="#"
-										class="shop-thumbnail">
-										 <img alt="poster_2_up" class="attachment-shop_thumbnail"											 
-											src="/PCC/images/product-wishlist-2.jpg"  />
+										class="shop-thumbnail"> <img alt="poster_2_up"
+											class="attachment-shop_thumbnail"
+											src="/PCC/images/product-wishlist-2.jpg" />
 											${cart.value.productName}
 									</a> <!-- /圖案+文字 --> <span class="quantity"> <!-- 數量 --> <span
 											class="cartSpan" id="${cart.value.productId}span">${cart.value.quantity}</span>
@@ -81,7 +81,8 @@
 								<li class="button" style="display: none" id="cartButtonLi">
 
 									<a id="toCartA" title="View Cart" href="/PCC/pages/cart.jsp">View
-										Cart</a> <a title="Check Out" href="/PCC/pages/check.jsp">Check out</a>
+										Cart</a> <a title="Check Out" href="/PCC/pages/check.jsp">Check
+										out</a>
 
 
 								</li>
@@ -95,23 +96,29 @@
 
 						<li style="display: none"><a href="#" title="Like"><i
 								class="icon icon-Heart"></i></a></li>
-						<li style="display: none"><a href="#" title="User"><i
-								class="icon icon-User"></i></a></li>
 					</ul>
-
-
-
-
-					<div class="login">
+					<div class="login cart">
 						<a href="#" id="member" title="User" data-toggle="modal"
-							data-target="#exampleModal" onclick="login();"> <i
+							data-target="#exampleModal" onclick="login();"> <i id="user"
 							class="icon icon-User"></i>
 						</a>
-						<!-- 						<ul class="dropdown-menu no-padding dropdown-login "> -->
+
+						<ul class="droplogin dropdown-menu no-padding">
+							<li id="who-is-login" class="button logbtn"><a id="log-log"
+								href="#" data-toggle="modal" data-target="#exampleModal"
+								onclick="login();">登入</a> <a id="log-reg"
+								href="/PCC/pages/registy.jsp">註冊</a> <a id="log-cen" onclick=""
+								href="/PCC/pages/center.jsp" style="display: none;">會員中心</a> <a
+								id="log-out" onclick="" href="#" style="display: none;">登出</a></li>
+						</ul>
+						<!-- 						<ul class="dropdown-menu no-padding droplogin "> -->
 						<!-- 							<li class="button"><a href="#" title="Login">登入</a></li> -->
 						<!-- 							<li class="button"><a href="#" title="Registy">註冊</a></li> -->
 						<!-- 						</ul> -->
+
+
 					</div>
+
 				</div>
 
 				<!-- User Login Modal -->
@@ -164,24 +171,24 @@
 							aria-expanded="false">首頁</a></li>
 						<li><a href="pages/reservation.html" title="Reservation">線上預約</a></li>
 						<li><a href="pages/partner.html" title="Partner">服務夥伴</a></li>
-						<li class="dropdown"><a href="/PCC/pages/shop-2.jsp" title="Shop"
-							class="dropdown-toggle" role="button" aria-haspopup="true"
-							aria-expanded="false">購物商城 </a> <i
+						<li class="dropdown"><a href="/PCC/pages/shop-2.jsp"
+							title="Shop" class="dropdown-toggle" role="button"
+							aria-haspopup="true" aria-expanded="false">購物商城 </a> <i
 							class="ddl-switch fa fa-angle-down"></i>
-							<ul class="dropdown-menu">
+							<ul id="categoryUL" class="dropdown-menu">
 								<!-- 12/18 修改成功..>0< -->
-								<c:forEach var="category" items="${categorys}">
-								
-									<li class="categoryli">
-																		
-									<a href="#" title="">${category.categoryName}</a>
-									<form action='<c:url value="/searchCatagory.shopping"/>' method="get">
-									<input type="text" name="category" value="${category.categoryName}" hidden />
-									</form>
-			
-									</li>
-								
-								</c:forEach>
+								<%-- 								<c:forEach var="category" items="${categorys}"> --%>
+
+								<!-- 									<li class="categoryli"> -->
+
+								<%-- 									<a href="#" title="">${category.categoryName}</a> --%>
+								<%-- 									<form action='<c:url value="/searchCatagory.shopping"/>' method="get"> --%>
+								<%-- 									<input type="text" name="category" value="${category.categoryName}" hidden /> --%>
+								<!-- 									</form> -->
+
+								<!-- 									</li> -->
+
+								<%-- 								</c:forEach> --%>
 								<!-- /12/18 修改成功..>0< -->
 							</ul></li>
 						<li class="dropdown"><a href="pages/room.html" title="Room"
@@ -224,51 +231,11 @@
 		<!-- Container /- -->
 	</div>
 	<!-- Menu Block /- -->
+
+
 </header>
 <!-- Header /- -->
 
 
-<script type="text/javascript">
-	$(document).ready(function() {
 
-		// 按下X除去購物車物件
-		$(".remove").click(function() {
-			var parent = $(this).parent(".mini_cart_item");
-			var parentId = parent.attr("id").split("SS")[0];
-			console.log("點到啦"+parentId);
-
-		
-			$.ajax({
-				url : "/PCC/eliminate.shopping",
-				type : "POST",
-				data : {"productId":parentId} ,
-				success : function(data) {
-					$("#"+parentId+"span").text("0");
-					console.log($("#"+parentId+"span").text());
-					ViewCart();
-					parent.css("display", "none");
-			
-				}
-			});
-		
-		});
-
-	});
-
-	function ViewCart() {
-		var sum = 0;
-		$(".cartSpan").each(function() {
-			var number = parseInt($(this).text());
-			console.log(number);
-			sum = sum + number;
-		});
-		if (sum == 0) {
-			$("#cartButtonLi").css("display", "none");
-
-		} else {
-			$("#cartButtonLi").css("display", "");
-		}
-
-	}
-</script>
 

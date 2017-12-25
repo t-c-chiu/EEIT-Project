@@ -6,8 +6,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
+@Table(name="Orders")
 public class Order {
 
 
@@ -70,6 +74,7 @@ public class Order {
 		this.totalPrice = totalPrice;
 	}
 
+	@JsonFormat(pattern = "yyyy/MM/dd hh:mm", timezone = "GMT+8")
 	public Date getDate() {
 		return date;
 	}

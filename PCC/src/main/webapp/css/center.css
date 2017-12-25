@@ -72,6 +72,12 @@ span.points{
 	font-weight:900;
 	padding-left:10px;
 }
+#points{
+	color:red;
+	font-size:22px;
+	font-weight:900;
+	padding-left:10px;
+}
 .password-send{
 	margin:0 3%;
 	width:94%;

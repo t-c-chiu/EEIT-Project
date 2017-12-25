@@ -83,4 +83,9 @@ public class PostArticleDAO {
 		}
 		return null;
 	}
+
+	public List<PostArticle> selectByMemberId(String memberId) {
+		return getSession().createQuery("from PostArticle where memberId = :memberId order by date", PostArticle.class)
+				.setParameter("memberId", memberId).list();
+	}
 }

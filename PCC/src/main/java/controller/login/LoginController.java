@@ -1,7 +1,11 @@
 package controller.login;
 
+import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -48,7 +52,6 @@ public class LoginController {
 			// 管理員
 			case 1:
 				model.addAttribute("admin", bean);
-				System.out.println("hi2");
 				return "管理員";
 			// 一般會員
 			case 2:
@@ -62,6 +65,23 @@ public class LoginController {
 
 		}
 
+	}
+	
+	@RequestMapping(path="/logout.login", method = { RequestMethod.POST, RequestMethod.GET }, produces = {
+	"text/plain;charset=utf-8" })
+	public @ResponseBody String initSession(Model model,HttpSession session) {
+//		System.out.println("12345678");
+//		model.addAttribute("member",null);
+		Enumeration<String> em = session.getAttributeNames();
+		System.out.println(session.getAttribute("yyyy="+"member"));
+		while(em.hasMoreElements()){
+			session.removeAttribute("member");
+		System.out.println(session.getAttribute("nnnn="+"member"));
+		
+		return "登出";
+		}
+		
+		return "不登出";
 	}
 
 	// 註冊
@@ -111,6 +131,17 @@ public class LoginController {
 		// 把登入跟註冊的controller分開寫，才不會取到登入的 memberId 的 session
 		// 還有 註冊成功的時候 並不會跳出 alert 居然直接轉跳!!m
 
+	}
+	@RequestMapping(path="/personal.update.login",method= {RequestMethod.POST},produces= {"application/json;charset=utf-8"})
+	public @ResponseBody Member method4(Member member,Model model) {
+		System.out.println("hi controller"+member);
+		if(member!=null) {
+			Member bean = memberService.updatePersonal(member);
+			System.out.println("controllerbean="+bean);
+			return bean;
+		}
+		
+		return null;
 	}
 
 }

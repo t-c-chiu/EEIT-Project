@@ -72,6 +72,36 @@ $('#area').keyup(function(){
 		})			
 	  })		
 	})
+	
+
+	var directionsDisplay;
+	function initMap() {
+		directionsDisplay = new google.maps.DirectionsRenderer();
+		var geocoder = new google.maps.Geocoder();
+		geocoder.geocode({
+			address : $('#loc').text()
+		}, 
+		
+		function(results, status) {
+			if (status == 'OK') {
+				var dest = {
+					lat : results[0].geometry.location.lat(),
+					lng : results[0].geometry.location.lng()
+				};
+				var map = new google.maps.Map(document.getElementById('map'), {
+					zoom : 16,
+					center : dest
+				});
+				var marker = new google.maps.Marker({
+					position : dest,
+					map : map
+				});
+			}
+		})
+	}
+	
+	
+	
 })
 
 </script>
@@ -106,7 +136,23 @@ $('#area').keyup(function(){
 					<li class="active">預約訂房</li>
 				</ol>
 			</div>
-			<div>
+
+			<!-- Container /- -->
+		</div>
+		<!-- Page Banner /- --> <!-- Clients -->
+			
+
+						
+			<div class="container-fluid no-left-padding no-right-padding woocommerce-checkout">
+			<!-- Container -->
+			<div class="container">
+
+				<!-- Billing -->
+				
+				<div class="checkout-form">
+         
+				<div class="col-md-12 col-sm-12 col-xs-12">
+			
 				<form action="<c:url value="/show.room"/>" method="get">
 					<table width="400" border="0" align="center">
 						<tr>
@@ -125,18 +171,20 @@ $('#area').keyup(function(){
 									<option value="normal">標準房</option>
 									<option value="good">貴賓房</option>									
 							</select></td>
-							<td><input type="submit" name="Room" value="送出"></td>
+							<td>						
+							<input type="submit" name="Room" value="送出"></td>
 						</tr>
 
 					</table>
 				</form>
 
 			</div>
-
-			<!-- Container /- -->
 		</div>
-		<!-- Page Banner /- --> <!-- Clients -->
-		<div class="clients container-fluid">
+		</div>
+		</div>
+		
+			
+		<div class="clients container-fluid" >
 			<!-- Container -->
 			<div class="container">
 				<div class="clients-carousel">
@@ -185,6 +233,20 @@ $('#area').keyup(function(){
 			</div>
 			<!-- Container /- -->
 		</div>
+		QQ
+			<div >
+					<h3>
+						<span id="loc">台北市大安區復興南路一段390號</span>
+					</h3>
+					<br>
+					<div id="map" style="height: 450px; width: 600px;"></div>
+					<script async defer
+						src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB6xPewLqeX388Ecohy3LHWMWN5GtxjNZ4&callback=initMap">
+					</script>
+					<br>
+		   </div>
+		
+		
 		<!-- Clients /- --> </main>
 		<!--	內容結束	-->
 		<!-- Footer Main 1 -->

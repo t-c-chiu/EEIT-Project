@@ -156,7 +156,7 @@
 											<input type="text" name="productId"
 												value="${asideProducts.productId}" hidden />
 										</form> <a href="#"><img src="${asideProducts.pictureAscii}"
-											width="85px" height="75px"  alt="Post" /></a>
+											width="85px" height="75px" alt="Post" /></a>
 										<h5>
 											<a href="#" title="need max shop.">${asideProducts.productName}</a>
 										</h5>
@@ -252,7 +252,6 @@
 	<form id="startForm" action="/PCC/star.shopping" method="post">
 		<input name="pageName" type="text" value="searchPage" hidden /> <input
 			id="startInput" type="text" value="${start}" hidden />
-
 	</form>
 
 	<!-- JQuery v1.12.4 -->
@@ -285,9 +284,10 @@
 	<!-- Library - Theme JS -->
 	<script src="../js/functions.js"></script>
 	<!-- login  -->
-	<!-- 	<script type="text/javascript" src="../js/login.js"></script> -->
+	<script type="text/javascript" src="../js/login.js"></script>
 	<script type="text/javascript">
 		$(document).ready(function() {
+
 			var starInput = $('#startInput').val();
 
 			ViewCart();
@@ -309,13 +309,7 @@
 			})
 			// 分類欄點選分類
 			$(".categoryli").click(function() {
-				// alert(".categoryli被點選");
-				var formid = $(this).find("input").val();
-
-				// alert(formid);
-				if (formid != '') {
-					$(this).find("form").submit();
-				}
+				$(this).find("form").submit();
 
 			});
 

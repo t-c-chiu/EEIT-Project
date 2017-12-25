@@ -7,6 +7,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 @Entity
 public class ReportedArticle {
 
@@ -59,7 +61,8 @@ public class ReportedArticle {
 	public void setReason(String reason) {
 		this.reason = reason;
 	}
-
+	
+	@JsonFormat(pattern = "yyyy-MM-dd hh:mm", timezone = "GMT+8")
 	public Timestamp getDate() {
 		return date;
 	}

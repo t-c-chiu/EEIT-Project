@@ -45,6 +45,7 @@
 <!-- css -->
 <link rel="stylesheet" type="text/css" href="../css/login.css">
 <link rel="stylesheet" type="text/css" href="../css/center.css">
+<link rel="stylesheet" type="text/css" href="../css/articleAndCourseCenter.css">
 </head>
 <body data-offset="200" data-spy="scroll" data-target=".ow-navigation">
 	<div class="main-container">
@@ -87,10 +88,10 @@
 						<aside class="widget widget_categories center-aside">
 							<h3 class="widget-title">會員資訊</h3>
 							<ul>
-								<a id="center-message" class="center-li"><li>系統訊息<span>(1)</span></li></a>
-								<a id="personal-information" class="center-li"><li>個人資料</li></a>
-								<a id="member-point" class="center-li"><li>會員點數<span>21055點</span></li></a>
-								<a id="change-password" class="center-li"><li>更改密碼</li></a>
+								<li><a id="center-message" class="center-li">系統訊息<span></span></a></li>
+								<li><a id="personal-information" class="center-li">個人資料</a></li>
+								<li><a id="member-point" class="center-li">會員點數<span>21055點</span></a></li>
+								<li><a id="change-password" class="center-li">更改密碼</a></li>
 							</ul>
 						</aside>
 						<!-- Widget Member /-  -->
@@ -98,9 +99,10 @@
 						<aside class="widget widget_categories">
 							<h3 class="widget-title">交易訂單</h3>
 							<ul>
-								<li id="favorite-product"><a href="#">收藏商品<span>(4)</span></a></li>
-								<li id="shopping-cart"><a href="#">購物車<span>(5)</span></a></li>
-								<li id="order-list"><a href="#">訂單明細</a></li>
+								<li><a id="favorite-product" class="center-li">收藏商品<span>(4)</span></a></li>
+								<li><a id="shopping-cart" class="center-li">購物車<span></span></a></li>
+								<li><a id="order-list" class="center-li">訂單明細</a></li>
+								<li><a id="course-list" class="center-li">我的課程<span></span></a></li>
 							</ul>
 						</aside>
 						<!-- Widget oder /-  -->
@@ -108,8 +110,10 @@
 						<aside class="widget widget_categories">
 							<h3 class="widget-title">文章管理</h3>
 							<ul>
-								<li id="my-article"><a href="#">我的文章<span>(4)</span></a></li>
-								<li id="favorite-article"><a href="#">文章收藏<span>(5)</span></a></li>
+								<li><a id="my-article" class="center-li">我的文章<span></span></a></li>
+								<li><a id="favorite-article" class="center-li">我的收藏<span></span></a></li>
+								<li><a id="reply-article" class="center-li">參與的討論<span></span></a></li>
+								<li><a id="reported-article" class="center-li">檢舉的文章<span></span></a></li>
 							</ul>
 						</aside>
 						<!-- Widget article /-  -->
@@ -118,46 +122,14 @@
 					
 					<!-- 系統訊息 -->
 					<div id="center-change-1" class="col-md-8 col-sm-7 col-xs-12 content-area product-section2 no-left-padding">
-							<h3 class="center-title">系統訊息</h3>
-						<!-- 1 -->	
-						<div class="type-post">
-						<div class="col-md-12 col-sm-12 col-xs-12 blog-content">
-							<h3 class="entry-title">聖誕節商品特賣會!! 聖誕老人瘋狂好禮大抽獎!</h3>
-							<div class="entry-meta">
-								<span class="post-admin">活動期間: <i class="fa fa-calendar-o"></i>12/01 ~ 12/30</span>
-							</div>
-							<div class="entry-content">
-								<p>活動期間，凡於購物商城內消費滿1000，即可獲得「聖誕刮刮卡」乙張。iPhone X、NINTENDO SWITCH台灣專用主機、黑武士1：1藍芽喇叭、台南晶英酒店雙人住宿券、餐點商品優惠券等大獎，即刮即中，通通有獎！</p>
-								<a href="#" title="Read More" class="read-more">Read More<i class="fa fa-long-arrow-right"></i></a>
-							</div>
-						</div>
-					</div>
-					<!-- 2 -->	
-						<div class="type-post">
-						<div class="col-md-12 col-sm-12 col-xs-12 blog-content">
-							<h3 class="entry-title">聖誕節商品特賣會!! 聖誕老人瘋狂好禮大抽獎!</h3>
-							<div class="entry-meta">
-								<span class="post-admin">活動期間: <i class="fa fa-calendar-o"></i>12/01 ~ 12/30</span>
-							</div>
-							<div class="entry-content">
-								<p>活動期間，凡於購物商城內消費滿1000，即可獲得「聖誕刮刮卡」乙張。iPhone X、NINTENDO SWITCH台灣專用主機、黑武士1：1藍芽喇叭、台南晶英酒店雙人住宿券、餐點商品優惠券等大獎，即刮即中，通通有獎！</p>
-								<a href="#" title="Read More" class="read-more">Read More<i class="fa fa-long-arrow-right"></i></a>
-							</div>
-						</div>
-					</div>
-					<!-- 3 -->	
-						<div class="type-post">
-						<div class="col-md-12 col-sm-12 col-xs-12 blog-content">
-							<h3 class="entry-title">聖誕節商品特賣會!! 聖誕老人瘋狂好禮大抽獎!</h3>
-							<div class="entry-meta">
-								<span class="post-admin">活動期間: <i class="fa fa-calendar-o"></i>12/01 ~ 12/30</span>
-							</div>
-							<div class="entry-content">
-								<p>活動期間，凡於購物商城內消費滿1000，即可獲得「聖誕刮刮卡」乙張。iPhone X、NINTENDO SWITCH台灣專用主機、黑武士1：1藍芽喇叭、台南晶英酒店雙人住宿券、餐點商品優惠券等大獎，即刮即中，通通有獎！</p>
-								<a href="#" title="Read More" class="read-more">Read More<i class="fa fa-long-arrow-right"></i></a>
-							</div>
-						</div>
-					</div>
+						<h3 class="center-title">系統訊息</h3>
+						<table id="mySystemMsgTable" class="forumTable">
+							<tr>
+								<th>標題</th>
+								<th>訊息時間</th>
+								<th>狀態</th>
+							</tr>
+						</table>
 					</div>
 					<!-- 個人資料 -->
 					<div id="center-change-2" class="col-md-8 col-sm-7 col-xs-12 content-area product-section2 no-left-padding">
@@ -242,7 +214,7 @@
 					<form method="POST">
 					<div class="type-post">
 						<div class="col-md-12 col-sm-12 col-xs-12 blog-content">
-							<h3 class="entry-title">剩餘可使用點數: <span class="points"> ${member.point}  點</span></h3>
+							<h3 class="entry-title">剩餘可使用點數: <span id="points"> ${member.point}  </span><span class="points">點</span></h3>
 							<div class="entry-meta">
 								<span class="post-admin">會員點數使用明細</span>
 							</div>
@@ -263,19 +235,125 @@
 						<form method="POST">
 							<div class="col-md-8 col-sm-12 col-xs-12 col-md-push-2 ">
 								<div class="billing-field">
+<!-- 									<div class="col-md-12 form-group"> -->
+<!-- 										<label>E-mail *</label><span id="emailchange-span"></span>  -->
+<!-- 										<input onblur="emailChangeCheck();" id="emailchange" name="emailchange" class="form-control" type="email" required /> -->
+<!-- 									</div> -->
 									<div class="col-md-12 form-group">
-										<label>E-mail *</label><span id="emailchange-span"></span> 
-										<input onblur="emailChangeCheck();" id="emailchange" name="emailchange" class="form-control" type="email" required />
+									<label>舊密碼 *</label><span id="psold-span"></span> <input
+										onblur="" id="old-password" name="old-password"
+										class="form-control" type="password" autocomplete="off"
+										maxlength="20" required />
+									</div>
+									<div class="col-md-12 form-group">
+									<label>新密碼 *</label><span id="ps-span"></span> <input
+										onblur="psw();" id="r-password" name="password"
+										class="form-control" type="password" autocomplete="off"
+										maxlength="20" required />
+									</div>
+									<div class="col-md-12 form-group">
+									<label>重複新密碼 *</label><span id="ps2-span"></span> <input
+										onblur="match();" id="passwordMatch" class="form-control"
+										type="password" autocomplete="off" maxlength="20"
+										maxlength="20" required />
 									</div>
 								</div>
-							<button id=""
+							<button id="send-newpassword"
 								class="btn btn-default form-control password-send "
-								type="button submit">寄送新密碼給我</button>
+								type="button">確定更改為新密碼</button>
 							</div>
 						</form>
 					</div>
 					</div>
+					<!-- 收藏商品 -->
+					<div id="center-change-5" class="col-md-8 col-sm-7 col-xs-12 content-area product-section2 no-left-padding">
+					<h3 class="center-title">收藏商品</h3>
+					</div>
+					<!-- 購物車 -->
+					<div id="center-change-6" class="col-md-8 col-sm-7 col-xs-12 content-area product-section2 no-left-padding">
+					<h3 class="center-title">購物車</h3>
+					<table id="myBePaidTable" class="forumTable">
+						<tr>
+							<th>訂單類型</th>
+							<th>訂單名稱</th>
+							<th>訂單價格</th>
+						</tr>
+					</table>
+					</div>
+					<!-- 訂單明細 -->
+					<div id="center-change-7" class="col-md-8 col-sm-7 col-xs-12 content-area product-section2 no-left-padding">
+					<h3 class="center-title">訂單明細</h3>
+					<table id="myBePaidListTable">
+					</table>
+					</div>
+					<!-- 我的文章 -->
+					<div id="center-change-8" class="col-md-8 col-sm-7 col-xs-12 content-area product-section2 no-left-padding">
+					<h3 class="center-title">我的文章</h3>
+					<table id="postArticleTable" class="forumTable">
+						<tr>
+							<th>分類</th>
+							<th>主題</th>
+							<th>發文日期</th>
+							<th>收藏數</th>
+							<th>狀態</th>
+						</tr>
+					</table>
+					</div>
+					<!-- 文章收藏 -->
+					<div id="center-change-9" class="col-md-8 col-sm-7 col-xs-12 content-area product-section2 no-left-padding">
+					<h3 class="center-title">我的收藏</h3>
+					<table id="collectArticleTable" class="forumTable">
+						<tr>
+							<th>作者</th>
+							<th>分類</th>
+							<th>主題</th>
+							<th>發文日期</th>
+							<th>狀態</th>
+						</tr>
+					</table>
+					</div>
 					
+					<div id="center-change-10" class="col-md-8 col-sm-7 col-xs-12 content-area product-section2 no-left-padding">
+					<h3 class="center-title">參與的討論</h3>
+					<table id="replyArticleTable" class="forumTable">
+						<tr>
+							<th>作者</th>
+							<th>分類</th>
+							<th>主題</th>
+							<th>發文日期</th>
+							<th>狀態</th>
+						</tr>
+					</table>
+					</div>
+					
+					<div id="center-change-11" class="col-md-8 col-sm-7 col-xs-12 content-area product-section2 no-left-padding">
+					<h3 class="center-title">檢舉的文章</h3>
+					<table id="reportedArticleTable" class="forumTable">
+						<tr>
+							<th>作者</th>
+							<th>主題</th>
+							<th>發文日期</th>
+							<th>文章狀態</th>
+							<th>檢舉理由</th>
+							<th>檢舉日期</th>
+							<th>檢舉訊息狀態</th>
+						</tr> 
+					</table>
+					</div>
+					<!-- 我的課程 -->
+					<div id="center-change-12" class="col-md-8 col-sm-7 col-xs-12 content-area product-section2 no-left-padding">
+					<h3 class="center-title">我的課程</h3>
+					<table id="myCoursesTable" class="forumTable">
+						<tr>
+							<th>課程名稱</th>
+							<th>課程地點</th>
+							<th>上課時間</th>
+							<th>課程價位</th>
+							<th>課程狀態</th>
+							<th>繳費狀況</th>
+						</tr>
+					</table>
+					</div>
 					
 				</div>	
 			</div>
@@ -321,5 +399,6 @@
 	<script type="text/javascript" src="../js/login.js"></script>
 	<!-- center -->
 	<script type="text/javascript" src="../js/center.js"></script>
+	<script type="text/javascript" src="../js/articleAndCourseCenter.js"></script>
 </body>
 </html>
