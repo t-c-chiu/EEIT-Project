@@ -510,7 +510,7 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDYpbCt__aSkFOPc8En0xCzF6G
 							<h3>訂房填表</h3>						
 						</div>
 						
-					<button id="formButton">一鍵帶入</button>
+					<button id="formButton" class="btn btn-default form-control footer-send">一鍵帶入</button>
 						<form id="myform" action="<c:url value="/reserve.room"/>" method="post">
 							<div class="billing-field">
 						
@@ -551,7 +551,7 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDYpbCt__aSkFOPc8En0xCzF6G
 								</div>
 								<c:if test="${!empty member}">							
 								<div class="col-md-4 form-group">
-									<label>&#160;</label> <input class="form-control" type="submit"
+									<label>&#160;</label> <input class="btn btn-default form-control footer-send" type="submit"
 										id="commit" name="RoomReservation" value="送出訂單">
 								</div>
 								</c:if>
