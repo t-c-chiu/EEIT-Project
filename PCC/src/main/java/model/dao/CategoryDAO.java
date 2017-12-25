@@ -13,19 +13,17 @@ import model.bean.CategoryType;
 public class CategoryDAO {
 	@Autowired
 	private SessionFactory sessionFactory;
-	
+
 	private Session getSession() {
 		return sessionFactory.getCurrentSession();
 	}
-	
-	
-	//進入商城頁面，進入資料庫搜尋商品頁面該有的資料(欄位)
-	public List<CategoryType> selectTypeOfCategory(){
-		
-		 System.out.println("ininin");
-		 List<CategoryType> categoryType= getSession().createQuery("From CategoryType", CategoryType.class).list();
-		 System.out.println("categoryType"+categoryType);
-		 return categoryType;
-	
+
+	// 進入商城頁面，進入資料庫搜尋商品頁面該有的資料(欄位)
+	public List<CategoryType> selectTypeOfCategory() {
+
+		List<CategoryType> categoryType = getSession().createQuery("From CategoryType", CategoryType.class).list();
+
+		return categoryType;
+
 	}
 }

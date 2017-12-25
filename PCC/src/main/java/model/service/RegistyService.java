@@ -18,9 +18,8 @@ public class RegistyService {
 		if (member != null) {
 			member.setRole(1);
 			member.setStatus(0);
-			member.setPoint(0);
+			member.setPoint(50);
 			resulte = memberDao.insertRegisty(member);
-			System.out.println("Service=" + member);
 		}
 		return resulte;
 	}

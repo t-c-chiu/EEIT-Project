@@ -2,6 +2,7 @@ package controller.login;
 
 import java.util.Enumeration;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,7 +18,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import model.bean.Member;
+import model.bean.PointDetails;
 import model.service.MemberService;
+import model.service.PointDetailsService;
 import model.service.RegistyService;
 
 @Controller
@@ -38,7 +41,7 @@ public class LoginController {
 		Map<String, String> errors = new HashMap<String, String>();
 		model.addAttribute("errors", errors);
 		// 進行商業服務
-		System.out.println(memberId + password);
+//		System.out.println(memberId + password);
 		Member bean = memberService.login(memberId, password);
 		// 依照執行結果挑選適當的View元件
 		if (bean == null) {
@@ -70,17 +73,13 @@ public class LoginController {
 	@RequestMapping(path="/logout.login", method = { RequestMethod.POST, RequestMethod.GET }, produces = {
 	"text/plain;charset=utf-8" })
 	public @ResponseBody String initSession(Model model,HttpSession session) {
-//		System.out.println("12345678");
 //		model.addAttribute("member",null);
-		Enumeration<String> em = session.getAttributeNames();
-		System.out.println(session.getAttribute("yyyy="+"member"));
-		while(em.hasMoreElements()){
+		Enumeration em = session.getAttributeNames();
+		if(em.hasMoreElements()){
 			session.removeAttribute("member");
-		System.out.println(session.getAttribute("nnnn="+"member"));
-		
+			model.addAttribute("member",null);
 		return "登出";
 		}
-		
 		return "不登出";
 	}
 
@@ -98,12 +97,8 @@ public class LoginController {
 		model.addAttribute("errors", errors);
 
 		String memberId = member.getMemberId();
-		// String regEx =
-		// "[`~!@#$%^&*()+=|{}':;',\\[\\].<>/?~！@#￥%……&*（）——+|{}【】‘；：”“’。，、？]";
-
 		// 帳號 blur 檢查memberId
 		if (memberId == null || memberId.trim().length() == 0) {
-			// System.out.println("memberId沒輸入阿");
 			return "不可空白";
 		} else if (memberId.length() > 20 || memberId.length() < 8) {
 			return "8~19個英文或數字";
@@ -111,10 +106,8 @@ public class LoginController {
 		Member bean = registyService.checkMemberId(memberId);
 		if (bean != null) {
 			errors.put("accountError", "此帳號已被使用");
-			// System.out.println("bean有東西");
 			return "不可使用的帳號";
 		}
-		// System.out.println("可用的");
 		return "可以註冊";
 
 	}
@@ -134,14 +127,17 @@ public class LoginController {
 	}
 	@RequestMapping(path="/personal.update.login",method= {RequestMethod.POST},produces= {"application/json;charset=utf-8"})
 	public @ResponseBody Member method4(Member member,Model model) {
-		System.out.println("hi controller"+member);
 		if(member!=null) {
 			Member bean = memberService.updatePersonal(member);
-			System.out.println("controllerbean="+bean);
 			return bean;
 		}
 		
 		return null;
+		
+		
 	}
 
+	
+
+	
 }
