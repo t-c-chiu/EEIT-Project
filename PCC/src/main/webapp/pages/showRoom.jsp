@@ -203,7 +203,59 @@ $('#area').keyup(function(){
 				</div>
 			</div>
 			<!-- Container /- -->
-		</div>		
+		</div>	
+		
+		
+		
+				<div id="allForm" class="container-fluid no-left-padding no-right-padding woocommerce-checkout">
+			<!-- Container -->
+			<div class="container">
+
+				<!-- Billing -->
+				
+				<div class="checkout-form">
+         
+					<div class="col-md-12 col-sm-12 col-xs-12">
+					    <div>						
+							<h3>開始訂房</h3>						
+						</div>
+									
+						<form id="myform" action="<c:url value="/reserve.room"/>" method="post">
+							<div class="billing-field">
+						
+								<div class="col-md-4 form-group">
+									<label>地區<span style="color:red" class="content" id="areaSpan"></span></label> <input class="form-control" type="text"
+										name="name" id="name" >
+								</div>
+								
+								<div class="col-md-4 form-group">
+									<label>房型<span style="color:red" class="content" id="roomTypeSpan"></span></label> 
+									<div class="select">
+										<select class="form-control">
+											<option value="normal">標準房</option>
+											<option value="good">貴賓房</option>
+										</select>
+									</div>
+								</div>
+								
+								
+								<div class="col-md-4 form-group">
+									<label>&#160;<span style="color:red" class="content" id="phoneSpan"></span></label> <input class="form-control" type="submit"
+										name="送出查詢" id="phone">
+								</div>
+						</div>
+						</form>
+					</div>
+					
+
+				</div>
+				<!-- Billing /- -->		
+			</div>
+			
+									
+			<!-- Container /- -->
+		</div>
+			
 		<!-- Clients /- --> </main>
 		<!--	內容結束	-->
 		<!-- Footer Main 1 -->

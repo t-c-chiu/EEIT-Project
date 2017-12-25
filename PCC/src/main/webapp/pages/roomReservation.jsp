@@ -575,7 +575,7 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDYpbCt__aSkFOPc8En0xCzF6G
 		<%@ include file="footer.jsp" %>
 		<!-- Footer Main 1 -->
 
-	</div>
+
 
 	<!-- JQuery v1.12.4 -->
 	<script src="../js/jquery.min.js"></script>
