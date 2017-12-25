@@ -29,9 +29,15 @@
 	</bean>
 
 
-<!-- 	<bean id="page.product" class="org.springframework.web.servlet.view.InternalResourceView"> -->
+	<bean id="admin.product" class="org.springframework.web.servlet.view.RedirectView">
+	<property name="contextRelative" value="true"></property>
+	<property name="url" value="/admin/production/productsAdmin.jsp"></property>
+	</bean>
 
-<!-- 		<property value="/shoppingMall/productContext.jsp" name="url"></property> -->
+
+<!-- 	<bean id="admin.product" class="org.springframework.web.servlet.view.InternalResourceView"> -->
+
+<!-- 		<property value="/admin/production/productsAdmin.jsp" name="url"></property> -->
 
 <!-- 	</bean> -->
 

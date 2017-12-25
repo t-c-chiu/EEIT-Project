@@ -82,7 +82,7 @@
 							<ul>
 								<li><a id="center-message" class="center-li">系統訊息<span></span></a></li>
 								<li><a id="personal-information" class="center-li">個人資料</a></li>
-								<li><a id="member-point" class="center-li">會員點數<span>21055點</span></a></li>
+								<li><a id="member-point" class="center-li">會員點數<span>${member.point }點</span></a></li>
 								<li><a id="change-password" class="center-li">更改密碼</a></li>
 							</ul>
 						</aside>
@@ -210,11 +210,7 @@
 							<div class="entry-meta">
 								<span class="post-admin">會員點數使用明細</span>
 							</div>
-							<div class="entry-content">
-								<p><span class="personal-content">11/12</span>加入會員贈送 <span class="personal-content-right">+5000點</span></p>
-								<p><span class="personal-content">11/30</span>購物回饋 <span class="personal-content-right">+200點</span></p>
-								<p><span class="personal-content">12/02</span>點數消費 <span class="personal-content-right">-500點</span></p>
-								<p><span class="personal-content">12/20</span>聖誕節活動消費贈送 <span class="personal-content-right">+1000點</span></p>
+							<div id="point-details" class="entry-content">
 							</div>
 						</div>
 					</div>
@@ -410,7 +406,8 @@
 	<script type="text/javascript" src="../js/login.js"></script>
 	<!-- center -->
 	<script type="text/javascript" src="../js/center.js"></script>
+	<script type="text/javascript" src="../js/pointDetails.js"></script>
+	<script type="text/javascript" src="../js/pagination.js"></script>
 	<script type="text/javascript" src="../js/articleAndCourseCenter.js"></script>
-	
 </body>
 </html>

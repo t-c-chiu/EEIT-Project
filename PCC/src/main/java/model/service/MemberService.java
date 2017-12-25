@@ -35,7 +35,6 @@ public class MemberService {
 
 	public Member updatePersonal(Member member) {
 		Member bean = memberDao.update(member);
-		System.out.println("Servicebean=" + bean);
 		if (bean != null) {
 //			String name = bean.getName();
 //			String email = bean.getEmail();

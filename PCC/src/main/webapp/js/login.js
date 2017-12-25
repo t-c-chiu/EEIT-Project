@@ -1,97 +1,76 @@
 //登出
 $(function(){
 	$('#log-out').click(function(){
-		console.log("想登出");
 		$.ajax({url:"/PCC/logout.login",type:"POST",
-			success:
-			function(data){
-			
-			console.log(data);			
+			success:function(data){		
 			if(data=="登出"){
-				console.log("登出s");			
-				
+				location.replace('/PCC/index.jsp'); 
 			}
-
 		}});
 	})
 });
 
-
 //JQ 成功的 登入
 $(function(){
     $('#sub').click(function(){
-    	console.log("點了");
         $.ajax({url: "/PCC/login.login",type:"POST",
         	data:$('#formid').serialize(),
         	success: function(data){
 			if(data=="會員" || data=="管理員"){
-				console.log("登入了");
 				if(data=="管理員"){
-					console.log("管理員");
 					location.replace('/PCC/index.jsp'); 
 				}else{
-					console.log("會員");
 					$('#log-log').css("display","none");
 					$('#log-reg').css("display","none");
 					$('#log-cen').css("display","block");
 					$('#log-out').css("display","block");
-					$('#user').css("color","#EB7C81");
-					$('#exampleModal').css("opacity","0");
-//					$('.fade .in').css("display","none");
-					$('.modal-backdrop.in').css("opacity","0");
-//					document.getElementById("who-is-login").innerHTML =
-//						'<a id="log-cen" onclick="" href="/PCC/pages/center.jsp">會員中心</a>'+
-//						'<a id="log-out" onclick="" href="#">登出</a>';
-					
-//					$('.fade .in').css("opacity","0");
-//					$('.modal-backdrop.in').css("opacity","0");
+					window.location.reload();
 				}
-//				location.replace('/PCC/index.jsp'); 
 			}else if(data=="登入失敗"){
-				console.log("無此帳號");
+				$('#log-log').css("display","block");
+				$('#log-reg').css("display","block");
+				$('#log-cen').css("display","none");
+				$('#log-out').css("display","none");
 				location.replace('/PCC/pages/registy.jsp');
 			}
         }});
     });
 });
 
-
 $(document).ready(function(){
-	console.log($("#save").val());
 	var save=$("#save").val();
-	if(save!=''){
-		$('#exampleModal').css("opacity","0");
-		$('.modal-backdrop.in').css("opacity","0");
-		document.getElementById("who-is-login").innerHTML =
-			'<a id="log-cen" onclick="" href="/PCC/pages/center.jsp">會員中心</a>'+
-			'<a id="log-out" onclick="" href="#">登出</a>';
+	if(save==='1' || save==='2'){
+		$('#log-log').css("display","none");
+		$('#log-reg').css("display","none");
+		$('#log-cen').css("display","block");
+		$('#log-out').css("display","block");
+	}else{
+		$('#log-log').css("display","block");
+		$('#log-reg').css("display","block");
+		$('#log-cen').css("display","none");
+		$('#log-out').css("display","none");
 	}
 });
-
-
 
 //JQ 註冊
 $(function(){
 	$('#registy-btn').click(function(){
-//		alert($('#account').val());
 		if($('#account').val()!="" ){
-//			alert($('#account').val()+"back");
 			$.post("/PCC/registy.insert.login",$('#registy-form').serialize(),function(data){
 // 12/15沒有跳出歡迎
-					console.log(data);
 					if(data=="成功註冊"){
-						alert("歡迎");
+						alert("註冊成功，歡迎加入會員");
+						location.replace('/PCC/index.jsp'); 
 					}else if(data=="註冊失敗"){
-						alert("掰掰");
+						alert("註冊失敗");
 					}
 
 			});
+			
 		}
-		
 		
 	});
 });
-
 
 
 //JQ 註冊的 blur 帳號可以使用檢查
@@ -254,6 +233,86 @@ function addressCheck(){
 		ad.style['color']='green';
 		document.querySelector('#address').style['border']='1px solid #d1d1d1';
 	}
+}
+
+
+//--------------------------------購物車-----------------------------------------
+$(function() {
+
+	//頭部：;搜尋商品分類欄
+	$.ajax({
+		url : "/PCC/header.shopping",
+		type : "GET",
+		success : function(data) {
+			console.log(data);
+			$.each(data, function(i, category) {
+				var text = category.categoryName;
+				console.log(text);
+				var li = $("<li></li>").addClass("categoryli");
+				var a = $("<a></a>").text(text);
+					a.attr("href", "#");
+				var form=$("<form></form>").attr("action","/PCC/searchCatagory.shopping");
+					form.attr("method","get");
+				var input=$("<input></input>").attr("type","text");
+					input.attr("value",text);
+					input.attr("hidden","hidden");
+					
+					form.append(input);
+					
+				
+				li.append([a,form]);
+				$("#categoryUL").append(li);
+
+			});
+
+		}
+
+	});
+
+	// 底部：搜尋商品分類欄		
+
+	// 按下X除去購物車物件
+	$(".remove").click(function() {
+		var parent = $(this).parent(".mini_cart_item");
+		var parentId = parent.attr("id").split("SS")[0];
+		$.ajax({
+			url : "/PCC/eliminate.shopping",
+			type : "POST",
+			data : {
+				"productId" : parentId
+			},
+			success : function(data) {
+				$("#" + parentId + "span").text("0");
+				console.log($("#" + parentId + "span").text());
+				ViewCart();
+				parent.css("display", "none");
+
+			}
+		});
+
+	});
+
+	// 分類欄點選分類
+	$(".categoryli").click(function() {
+		$(this).find("form").submit();
+	});
+
+});
+
+function ViewCart() {
+	var sum = 0;
+	$(".cartSpan").each(function() {
+		var number = parseInt($(this).text());
+		console.log(number);
+		sum = sum + number;
+	});
+	if (sum == 0) {
+		$("#cartButtonLi").css("display", "none");
+
+	} else {
+		$("#cartButtonLi").css("display", "");
+	}
+
 }
 
 		

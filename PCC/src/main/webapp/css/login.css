@@ -50,6 +50,21 @@ ul.droplogin.dropdown-menu.no-padding{
 li.button.logbtn a{
 	background-color:#DCD2D4;
 }
+#log-log{
+	display:block;
+}
+#log-reg{
+	display:block;
+}
+#log-cen{
+	display:none;
+}
+#log-out{
+	display:none;
+}
+ul#login-back {
+    background-color: #fff0;
+}
 /*.login:hover .login.droplogin{
 	opacity: 1;
 	display:block;

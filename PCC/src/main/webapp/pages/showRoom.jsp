@@ -54,6 +54,7 @@ href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" />
 
 
 <script>
+
 $(function() {
 	keywords=[]	
 	$('#area').autocomplete({
@@ -71,7 +72,7 @@ $('#area').keyup(function(){
 			keywords.push(area)	
 		})			
 	  })		
-	})
+	})		
 })
 
 </script>
@@ -202,7 +203,7 @@ $('#area').keyup(function(){
 				</div>
 			</div>
 			<!-- Container /- -->
-		</div>
+		</div>		
 		<!-- Clients /- --> </main>
 		<!--	內容結束	-->
 		<!-- Footer Main 1 -->

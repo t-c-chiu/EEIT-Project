@@ -87,87 +87,73 @@
 
 		<div class="container">
 
-			<!-- 無購物會出現的圖， -->
-
-			<%
-				if (session.getAttribute("addToCart") == null) {
-					session.setAttribute("addToCart", new HashMap<Integer, Cart>());
-				}
-			%>
-
-			<div align='center' id='noShoppingImg' style="display: none">
-				<img alt='noShopping' src='../images/noShopping.jpg'>
-				<button id="gotoShoppingButtoun"
-					class="btn btn-default form-control footer-send " type="button"
-					style="border-color: pink">我要去購物</button>
-				<!-- 					<input id="gotoShoppingButtoun" type="button" value="去購物" style="width:200px;height:70px;font-size:20px; dashed;background-color:pink;"/> -->
-			</div>
-
-
-
 
 			<!-- 有購物後，出現的表單 -->
 
 			<div style="margin-bottom: 100px" class="table-responsive">
-				<table class="table" width="600" height="300"
+				<table class="table" width="600" height="200"
 					style="border: 3px #cccccc solid;">
-					<caption style="font-size: 50px">購物車</caption>
+					<caption style="font-size: 50px">已成立訂單</caption>
 					<tr style="height: 15px">
-						<th>商品名稱</th>
-						<th>數量及規格</th>
-						<th>價格</th>
-						<th>小計</th>
+						<th>訂單編號</th>
+						<th>訂購人資訊</th>
+						<th>總價</th>
+						<th>送達資訊</th>
+						<th>訂購日期</th>
 						<th></th>
 					</tr>
-
-					<c:forEach var="item" items="${addToCart}">
-						<tr id="${item.key}tr">
-							<td>
-								<ul>
-									<li style="list-style-type: none"><img alt="衣服"
-										src="/PCC/images/deal-5.jpg"></li>
-									<li style="list-style-type: none"><label>${item.value.productName}</label></li>
-								</ul>
-							</td>
-
-							<td>
-								<ul style="padding: 0px">
-									<li
-										style="list-style-type: none; padding: 5px; list-style-position: inside; margin-left: 0px;">規格：
-									</li>
-									<li style="list-style-type: none; padding: 5px">數量： <input
-										style="font-size: 11px; font-family: serif;" type="number"
-										min="1" max="10" size="7" value="${item.value.quantity}"
-										id="${item.key}" class="quantityNumber" />
-									</li>
-								</ul>
-							</td>
-							<td><span>$</span><span class="price" id="${item.key}price">${item.value.price}</span></td>
-							<td><span>$</span><span class="subtal"
-								id="${item.key}subtotal">${item.value.subtotal}</span></td>
-							<td class="eliminate" id="${item.key}eliminate">刪除</td>
-						</tr>
-
-					</c:forEach>
 					<tr>
+						<td>${order.orderId}</td>
+						<td>
 
-						<th></th>
-						<th></th>
-						<th></th>
-						<th></th>
-						<th><label>共$<span id="tatlePrice"
-								style="font-size: 20px; font-weight: bold; color: red"></span>元
-						</label></th>
+							<p>
+								<span class="personal-content">姓名:</span><span id="nameEl">${member.name}</span>
+							</p>
+							<p>
+								<span class="personal-content">E-mail:</span><span id="emailEl">${member.email }</span>
+							</p>
+							<p>
+								<span class="personal-content">電話:</span><span id="phoneEl">${member.phone }</span>
+							</p>
+							<p>
+								<span class="personal-content">地址:</span><span id="areaEl">${member.area }</span>
+								, <span id="addressEl">${member.address }</span>
+							</p>
+
+						</td>
+						<td>${order.totalPrice}</td>
+						<td>
+
+							<p>
+								<span class="personal-content">收件人姓名:</span><span id="nameEl">${order.recipient}</span>
+							</p>
+
+							<p>
+								<span class="personal-content">收件人電話:</span><span id="phoneEl">${order.recipientPhone }</span>
+							</p>
+							<p>
+								<span class="personal-content">收件地址:</span><span id="addressEl">${order.location}</span>
+							</p>
+
+
+						</td>
+						<td name="date" id="date">日期</td>
+						<td><input type="button" value="訂單明細" /></td>
 					</tr>
-				</table>
-				<div align="center" style="padding-top: 40px">
-					<button id="checkButton"
-						class="btn btn-default form-control footer-send " type="button"
-						style="border-color: pink">加入訂單</button>
 
-					<!-- 		<input type="button" value="我要結帳" style="width:200px;height:70px;font-size:20px; dashed;background-color:pink;"/> -->
+
+
+
+				</table>
+				<div align="center">
+				<h4 style="color:#FFBB00"><label >感謝您的購物!!</label></h4>
+				<input type="button" value="繼續購物">
 				</div>
 			</div>
+
+
+
+
 			<!--/ 有購物後，出現的表單 -->
 
 
@@ -211,86 +197,17 @@
 	<script type="text/javascript">
 		$(document).ready(function() {
 			//隱藏購物車內的東西
-			$(".mini_cart_item").css("display","none");
-			
-			//統計總數量
-			totalPrice();
-			
-			//統計小計
-			$('.quantityNumber').change(function() {
-
-				var product=$(this);
-				var number = product.val();
-				var id=product.attr("id");
-				var price=parseInt($("#"+id+"price").text());
-				var subtoal=price*number;
-				$("#"+id+"subtotal").text(subtoal);
-				totalPrice();
-			})
-			
-			// 按下刪除除去購物車物件
-			$(".eliminate").click(function() {
-				var spanId = $(this).attr("id").split("eliminate")[0];
-				console.log("點到啦"+spanId);
-
-			
-				$.ajax({
-					url : "/PCC/eliminate.shopping",
-					type : "POST",
-					data : {"productId":spanId} ,
-					success : function(data) {
-						
-						$("#"+spanId+"subtotal").text("0");
-						totalPrice();
-						$("#"+spanId+"tr").css("display","none");
-						
-					}
-				});
-			
-			});
-
-			//按下去購物的按鈕就會轉跳
-			$("#gotoShoppingButtoun").click(function(){
-				location.replace("/PCC/pages/shop-2.jsp");
-				
-			});
-			
-			//按下去結帳就會轉跳頁面，並將購物車轉成訂單，status為0，訂單明細也會加入
-			$("#checkButton").click(function(){
-				var tatlePrice =$("#tatlePrice").text();
-				$.ajax({
-					url:"/PCC/addOrder.shopping",
-					type:"GET",
-					data:{
-						"totalPrice":tatlePrice,
-						"status":0
-						},
-					success:function(data){
-						alert(data);
-						location.replace("/PCC/pages/shop-2.jsp");
-					}				
-				});
-				
- 				
-			})
-
-		})
+			$(".mini_cart_item").css("display", "none");
+			//取得今日日期
+			var Today=new Date();
+			$("#date").text(Today.getFullYear()+ " / " + (Today.getMonth()+1) + " / " + Today.getDate() + " "+Today.getHours()+':'+Today.getMinutes());
 		
-		//統計總數量
-		function totalPrice(){
-			var tal=0;
-			$(".subtal").each(function(){
-				tal=tal+parseInt($(this).text());
-			})
+		
+		
+		
+		});
+		
 
-			$("#tatlePrice").text(tal);
-			if(tal==0){
-				
-				$("#noShoppingImg").css("display","");
-				$(".table").css("display","none");	
-				$("#checkButton").css("display","none");
-			}
-		}
 		
 		
 	</script>

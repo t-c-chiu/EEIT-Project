@@ -147,19 +147,24 @@
 						<c:forEach var="asideProducts" items="${asideProducts}">
 							<div class="latest-box">
 								<div class="post-box">
-									<!-- 思考一下 少 點圖跳到相關頁面 -->
-									<a href="#"><img src="../images/latest-post-1.jpg"
-										alt="Post"></a>
-									<h5>
-										<a href="#" title="need max shop.">${asideProducts.productName}</a>
-									</h5>
-									<div class="star-rating">
-										<i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
-											class="fa fa-star"></i> <i class="fa fa-star"></i> <i
-											class="fa fa-star-o"></i>
-									</div>
-									<span class="price"><del>${asideProducts.price}</del>${asideProducts.price}</span>
-									<!-- /思考一下 -->
+									<span class="productItem">
+										<form id="${asideProducts.productId}ProductForm"
+											action="/PCC/productId.shopping" method="get">
+											<input type="text" name="productId"
+												value="${asideProducts.productId}" hidden />
+										</form> <a href="#"><img src="${asideProducts.pictureAscii}"
+											width="85px" height="75px"  alt="Post" /></a>
+										<h5>
+											<a href="#" title="need max shop.">${asideProducts.productName}</a>
+										</h5>
+
+
+										<div class="star-rating">
+											<i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
+												class="fa fa-star"></i> <i class="fa fa-star"></i> <i
+												class="fa fa-star-o"></i>
+										</div> <span class="price"><del>${asideProducts.price}</del>${asideProducts.price}</span>
+									</span>
 
 								</div>
 							</div>
@@ -408,6 +413,7 @@
 											$("#"+ data.productId+ "span").text(data.quantity);
 											// 只要購物車內有東西，就打開View Cart 和Check Out
 											ViewCart();
+											alert("已經入購物車!!")
 										}
 								});
 
@@ -428,6 +434,11 @@
 								});
 
 							});
+			//跳轉去結帳
+			 $("#e2e-item-checkout-top").click(function(){
+				 
+				 location.replace("/PCC/pages/check.jsp");
+			 });
 
 	});
 		// 是否打開 ViweCart和Check out

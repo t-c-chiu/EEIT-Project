@@ -50,7 +50,7 @@
 										href="#">&#215;</a> <!-- /刪除的X --> <!-- 圖案+文字 --> <a href="#"
 										class="shop-thumbnail"> <img alt="poster_2_up"
 											class="attachment-shop_thumbnail"
-											src="../images/product-wishlist-1.jpg">
+											src="/PCC/images/product-wishlist-2.jpg" />
 											${cart.value.productName}
 									</a> <!-- /圖案+文字 --> <span class="quantity"> <!-- 數量 --> <span
 											class="cartSpan" id="${cart.value.productId}span">${cart.value.quantity}</span>
@@ -81,7 +81,8 @@
 								<li class="button" style="display: none" id="cartButtonLi">
 
 									<a id="toCartA" title="View Cart" href="/PCC/pages/cart.jsp">View
-										Cart</a> <a title="Check Out">Check out</a>
+										Cart</a> <a title="Check Out" href="/PCC/pages/check.jsp">Check
+										out</a>
 
 
 								</li>
@@ -96,71 +97,33 @@
 						<li style="display: none"><a href="#" title="Like"><i
 								class="icon icon-Heart"></i></a></li>
 					</ul>
-						<div class="login cart">
+					<div class="login cart">
 						<a href="#" id="member" title="User" data-toggle="modal"
-							data-target="#exampleModal" onclick="login();">
-							<i id="user" class="icon icon-User"></i>
+							data-target="#exampleModal" onclick="login();"> <i id="user"
+							class="icon icon-User"></i>
 						</a>
-						
-						<ul class="droplogin dropdown-menu no-padding">
+
+						<ul id="login-back" class="droplogin dropdown-menu no-padding">
 						<li id="who-is-login" class="button logbtn">
 							<a id="log-log" href="#" data-toggle="modal"
 							data-target="#exampleModal" onclick="login();">登入</a> 
 							<a id="log-reg" href="/PCC/pages/registy.jsp">註冊</a>
-							<a id="log-cen" onclick="" href="/PCC/pages/center.jsp" style="display:none;">會員中心</a>
-							<a id="log-out" onclick="" href="#" style="display:none;">登出</a>
+							<a id="log-cen" href="/PCC/pages/center.jsp">會員中心</a>
+							<a id="log-out" href="#" class="change-ds">登出</a>
 						</li>
+
 						</ul>
-<!-- 						<ul class="dropdown-menu no-padding droplogin "> -->
-<!-- 							<li class="button"><a href="#" title="Login">登入</a></li> -->
-<!-- 							<li class="button"><a href="#" title="Registy">註冊</a></li> -->
-<!-- 						</ul> -->
+						<!-- 						<ul class="dropdown-menu no-padding droplogin "> -->
+						<!-- 							<li class="button"><a href="#" title="Login">登入</a></li> -->
+						<!-- 							<li class="button"><a href="#" title="Registy">註冊</a></li> -->
+						<!-- 						</ul> -->
 
 
 					</div>
 
 				</div>
 
-				<!-- User Login Modal -->
-				<div class="modal fade" id="exampleModal" tabindex="-1"
-					role="dialog" aria-labelledby="exampleModalLabel"
-					aria-hidden="true">
-					<div class="modal-dialog" role="document">
-						<div class="modal-content">
-							<div class="modal-header">
-								<h5 class="modal-title" id="exampleModalLabel">登入</h5>
-								<button type="button" class="close" data-dismiss="modal"
-									aria-label="Close">
-									<span aria-hidden="true">&times;</span>
-								</button>
-							</div>
-							<div class="modal-body">
-								<form id="formid">
-									<div class="form-group">
-										<label for="memberId" class="col-form-label">帳號:</label> <input
-											type="text" class="login-pop" id="memberId" name="memberId">
-										<div id="memberId-error"></div>
-									</div>
-									<div class="form-group">
-										<label for="password" class="col-form-label">密碼:</label> <input
-											type="password" class="form-control login-pop" id="password"
-											name="password">
-										<div id="password-error"></div>
-										<!-- 												<textarea class="form-control" id="message-text"></textarea> -->
-									</div>
-								</form>
-							</div>
 
-							<!-- google -->
-							<div class="g-signin2" data-onsuccess="onSignIn"></div>
-							<div class="modal-footer">
-								<button type="button" class="btn btn-secondary"
-									data-dismiss="modal">取消</button>
-								<button type="button" id="sub" class="btn btn-primary">登入</button>
-							</div>
-						</div>
-					</div>
-				</div>
 
 				<!-- Menu Icon /- -->
 				<div class="navbar-collapse collapse navbar-right" id="navbar">
@@ -171,27 +134,27 @@
 							aria-expanded="false">首頁</a></li>
 						<li><a href="pages/reservation.html" title="Reservation">線上預約</a></li>
 						<li><a href="pages/partner.html" title="Partner">服務夥伴</a></li>
-						<li class="dropdown"><a href="/PCC/pages/shop-2.jsp" title="Shop"
-							class="dropdown-toggle" role="button" aria-haspopup="true"
-							aria-expanded="false">購物商城 </a> <i
+						<li class="dropdown"><a href="/PCC/pages/shop-2.jsp"
+							title="Shop" class="dropdown-toggle" role="button"
+							aria-haspopup="true" aria-expanded="false">購物商城 </a> <i
 							class="ddl-switch fa fa-angle-down"></i>
-							<ul class="dropdown-menu">
+							<ul id="categoryUL" class="dropdown-menu">
 								<!-- 12/18 修改成功..>0< -->
-								<c:forEach var="category" items="${categorys}">
-								
-									<li class="categoryli">
-																		
-									<a href="#" title="">${category.categoryName}</a>
-									<form action='<c:url value="/searchCatagory.shopping"/>' method="get">
-									<input type="text" name="category" value="${category.categoryName}" hidden />
-									</form>
-			
-									</li>
-								
-								</c:forEach>
+								<%-- 								<c:forEach var="category" items="${categorys}"> --%>
+
+								<!-- 									<li class="categoryli"> -->
+
+								<%-- 									<a href="#" title="">${category.categoryName}</a> --%>
+								<%-- 									<form action='<c:url value="/searchCatagory.shopping"/>' method="get"> --%>
+								<%-- 									<input type="text" name="category" value="${category.categoryName}" hidden /> --%>
+								<!-- 									</form> -->
+
+								<!-- 									</li> -->
+
+								<%-- 								</c:forEach> --%>
 								<!-- /12/18 修改成功..>0< -->
 							</ul></li>
-						<li class="dropdown"><a href="pages/room.html" title="Room"
+						<li class="dropdown"><a href="<c:url value="/pages/showRoom.jsp"/>" title="Room"
 							class="dropdown-toggle" role="button" aria-haspopup="true"
 							aria-expanded="false">預約訂房</a></li>
 						<li class="dropdown"><a
@@ -211,7 +174,7 @@
 								<li><a href="<c:url value="/showAll.forum?category=育兒討論"/>">育兒討論</a></li>
 								<li><a href="<c:url value="/showAll.forum?category=心情分享"/>">心情分享</a></li>
 							</ul></li>
-						<li><a href="pages/contact-us.html" title="Contact Us">聯絡資訊</a></li>
+						<li><a href="#footer-main" title="Contact Us">聯絡資訊</a></li>
 					</ul>
 				</div>
 
@@ -231,51 +194,11 @@
 		<!-- Container /- -->
 	</div>
 	<!-- Menu Block /- -->
+
+
 </header>
 <!-- Header /- -->
 
 
-<script type="text/javascript">
-	$(document).ready(function() {
 
-		// 按下X除去購物車物件
-		$(".remove").click(function() {
-			var parent = $(this).parent(".mini_cart_item");
-			var parentId = parent.attr("id").split("SS")[0];
-			console.log("點到啦"+parentId);
-
-		
-			$.ajax({
-				url : "/PCC/eliminate.shopping",
-				type : "POST",
-				data : {"productId":parentId} ,
-				success : function(data) {
-					$("#"+parentId+"span").text("0");
-					console.log($("#"+parentId+"span").text());
-					ViewCart();
-					parent.css("display", "none");
-			
-				}
-			});
-		
-		});
-
-	});
-
-	function ViewCart() {
-		var sum = 0;
-		$(".cartSpan").each(function() {
-			var number = parseInt($(this).text());
-			console.log(number);
-			sum = sum + number;
-		});
-		if (sum == 0) {
-			$("#cartButtonLi").css("display", "none");
-
-		} else {
-			$("#cartButtonLi").css("display", "");
-		}
-
-	}
-</script>
 
