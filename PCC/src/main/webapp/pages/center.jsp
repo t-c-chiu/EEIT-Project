@@ -46,18 +46,10 @@
 <link rel="stylesheet" type="text/css" href="../css/login.css">
 <link rel="stylesheet" type="text/css" href="../css/center.css">
 <link rel="stylesheet" type="text/css" href="../css/articleAndCourseCenter.css">
+<!-- <link rel="stylesheet" href="../card/css/card.css"> -->
 </head>
 <body data-offset="200" data-spy="scroll" data-target=".ow-navigation">
 	<div class="main-container">
-		<!-- Loader -->
-		<div id="site-loader" class="load-complete">
-			<div class="loader">
-				<div class="loader-inner ball-clip-rotate">
-					<div></div>
-				</div>
-			</div>
-		</div>
-		<!-- Loader /- -->
 
 		<%@ include file="header.jsp"%>
 		<!--	內容開始	-->
@@ -100,7 +92,7 @@
 							<h3 class="widget-title">交易訂單</h3>
 							<ul>
 								<li><a id="favorite-product" class="center-li">收藏商品<span>(4)</span></a></li>
-								<li><a id="shopping-cart" class="center-li">購物車<span></span></a></li>
+								<li><a id="shopping-cart" class="center-li">我的購買清單<span></span></a></li>
 								<li><a id="order-list" class="center-li">訂單明細</a></li>
 								<li><a id="course-list" class="center-li">我的課程<span></span></a></li>
 							</ul>
@@ -267,7 +259,7 @@
 					</div>
 					<!-- 購物車 -->
 					<div id="center-change-6" class="col-md-8 col-sm-7 col-xs-12 content-area product-section2 no-left-padding">
-					<h3 class="center-title">購物車</h3>
+					<h3 class="center-title">我的購買清單</h3>
 					<table id="myBePaidTable" class="forumTable">
 						<tr>
 							<th>訂單類型</th>
@@ -275,6 +267,25 @@
 							<th>訂單價格</th>
 						</tr>
 					</table>
+					<div id="payFormAndCardArea" style="display: none;">
+			        <div class="card-wrapper"></div>
+			        <div class="form-container active">
+			            <form id="payForm" style="margin: 30px;text-align: center;">
+			                <input placeholder="卡片號碼" type="tel" name="number">
+			                <input placeholder="全名" type="text" name="name"><br><br>
+			                <input placeholder="MM/YY" type="tel" name="expiry">
+			                <input placeholder="CVC" type="number" name="cvc"><br><br> 
+			                <input type="submit" id="iWantToPay">
+			            </form>
+			        </div>
+			        </div>
+				    <script src="../card-master/dist/card.js"></script>
+				    <script>
+				        new Card({
+				            form: document.querySelector('#payForm'),
+				            container: '.card-wrapper'
+				        });
+				    </script>
 					</div>
 					<!-- 訂單明細 -->
 					<div id="center-change-7" class="col-md-8 col-sm-7 col-xs-12 content-area product-section2 no-left-padding">
