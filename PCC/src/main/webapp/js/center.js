@@ -1,9 +1,8 @@
 //document.addEventListener("DOMContentLoaded", function() {
 //	$('#center-change-1').show();
 //});
-hide();
 function hide() {
-	for (var j = 1; j < 10; j++) {
+	for (var j = 1; j <= $('div[id^="center-change-"]').size(); j++) {
 		var t = "#center-change-";
 		j = String(j);
 		var i = document.querySelector(t + j);
@@ -11,9 +10,9 @@ function hide() {
 			i.style.display = "none";
 		}
 	}
-	;
 };
 
+hide();
 // 系統訊息
 $('#center-message').click(function() {
 	hide();
@@ -79,6 +78,27 @@ $('#favorite-article').click(function() {
 		$('#center-change-9').show();
 	});
 });
+//我的回文
+$('#reply-article').click(function(){
+	hide();
+	$('#center-change-10').fadeIn("slow", function() {
+		$('#center-change-10').show();
+	});
+})
+//我的檢舉
+$('#reported-article').click(function(){
+	hide();
+	$('#center-change-11').fadeIn("slow", function() {
+		$('#center-change-11').show();
+	});
+})
+//我的課程
+$('#course-list').click(function(){
+	hide();
+	$('#center-change-12').fadeIn("slow", function() {
+		$('#center-change-12').show();
+	}); 
+})
 
 //function() {
 //hide();

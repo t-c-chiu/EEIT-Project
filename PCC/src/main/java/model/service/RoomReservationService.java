@@ -78,6 +78,7 @@ public class RoomReservationService {
 	}
 	
 	public boolean insertRoom(Room room) {
+		room.setInfo(room.getInfo().substring(1));		
 		return roomDAO.insertRoom(room);		
 	}
 	

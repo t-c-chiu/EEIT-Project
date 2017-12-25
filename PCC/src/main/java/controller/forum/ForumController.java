@@ -104,4 +104,10 @@ public class ForumController {
 		return "OK";
 	}
 
+	@RequestMapping(path = "/showMyArticles.forum", method = RequestMethod.GET, produces = {
+			"application/json;charset=UTF-8" })
+	public @ResponseBody Map<String, Object> showMyArticles(@SessionAttribute("member") Member member) {
+		return forumService.showMyArticles(member.getMemberId());
+	}
+
 }

@@ -93,4 +93,9 @@ public class ClazzController {
 	public @ResponseBody List<Clazz> showAllClazzSimple() {
 		return clazzService.showAllClazzSimple();
 	}
+
+	@RequestMapping(path = "/showMyCourses.clazz", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
+	public @ResponseBody List<Object[]> showMyCourses(@SessionAttribute("member") Member member) {
+		return clazzService.showMyCourses(member.getMemberId());
+	}
 }
