@@ -36,14 +36,18 @@ public class MemberService {
 	public Member updatePersonal(Member member) {
 		Member bean = memberDao.update(member);
 		if (bean != null) {
-//			String name = bean.getName();
-//			String email = bean.getEmail();
-//			String phone = bean.getPhone();
-//			String area = bean.getArea();
-//			String address = bean.getAddress();
 			return bean;
 		}
 		return null;
+	}
+	
+	public Member selectMember(String memberId) {
+		if(memberId!=null) {
+		Member member=memberDao.select(memberId);
+		return member;
+		}
+		return null;
+		
 	}
 
 }

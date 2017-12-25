@@ -1,5 +1,6 @@
 package model.dao;
 
+import java.io.Serializable;
 import java.util.List;
 
 import org.hibernate.Session;
@@ -24,6 +25,17 @@ public class PointDetailsDAO {
 		Query<PointDetails> query=getSession().createQuery("FROM PointDetails WHERE memberId=?",PointDetails.class);
 		query.setParameter(0, memberId);
 		return query.list();
+	}
+	
+	//insert 
+	public int insertPointDetail(PointDetails pointDetails) {
+		
+		if(pointDetails!=null) {
+			 int key =(int) getSession().save(pointDetails);
+			return key;
+		}
+		
+		return 0;
 	}
 
 }

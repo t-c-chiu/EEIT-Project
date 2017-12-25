@@ -200,7 +200,7 @@
 							</h1>
 							<p>
 								<span itemprop="description">1024
-									短版設計坑條針織搭配窄管寧褲化身韓妞STYLE~ </span>
+									${productPage.context} </span>
 							</p>
 
 						</div>
@@ -279,10 +279,7 @@
 
 
 						<div>
-							<button class="button button-default"
-								data-ylk="sec:buyinfo;slk:立即購買;" id="e2e-item-checkout-top"
-								hpp="add_cart_top" OnClick="ywaAddToCart('p0000145205549');"
-								type="submit" value="我要購買">立即購買</button>
+							
 							<button class="button button-white"
 								data-ylk="sec:buyinfo;slk:加入購物車;" id="e2e-item-add2cart-top"
 								type="button">
@@ -303,7 +300,7 @@
 						</div>
 
 									<!-- 之後商品內容在這邊 -->
-
+									<img alt="商品內容" src="${productPage.pictureAscii}">
 									<!-- /之後商品內容在這邊 -->
 
 

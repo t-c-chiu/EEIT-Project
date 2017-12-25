@@ -50,7 +50,7 @@
 										href="#">&#215;</a> <!-- /刪除的X --> <!-- 圖案+文字 --> <a href="#"
 										class="shop-thumbnail"> <img alt="poster_2_up"
 											class="attachment-shop_thumbnail"
-											src="/PCC/images/product-wishlist-2.jpg" />
+											src="${cart.value.pictureAscii}" width="60px" height="62px"/>
 											${cart.value.productName}
 									</a> <!-- /圖案+文字 --> <span class="quantity"> <!-- 數量 --> <span
 											class="cartSpan" id="${cart.value.productId}span">${cart.value.quantity}</span>
@@ -68,8 +68,8 @@
 										class="remove" href="#">&#215;</a> <a href="#"
 										class="shop-thumbnail"> <img alt="poster_2_up"
 											class="attachment-shop_thumbnail"
-											src="../images/product-wishlist-1.jpg">
-											${cartItem.productName}
+											src="${cartItem.pictureAscii}" width="60px" height="62px">
+											${cartItem.productName} 
 									</a> <span class="quantity"><span class="cartSpan"
 											id="${cartItem.productId}span">0</span> &#215; <span
 											class="amount">Rs. ${cartItem.price}</span> </span></li>
