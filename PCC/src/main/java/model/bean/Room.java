@@ -18,12 +18,21 @@ public class Room {
 	private String roomName;
 	private String info;
 	private String area;
+	private String address;
 	
 	@Override
 	public String toString() {
 		return "Room [roomId=" + roomId + ", price=" + price + ", status=" + status + ", roomType=" + roomType
 				+ ", roomPhoto=" + Arrays.toString(roomPhoto) + ", roomImage=" + roomImage + ", roomName=" + roomName
-				+ ", info=" + info + ", area=" + area + "]";
+				+ ", info=" + info + ", area=" + area + ", address=" + address + "]";
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
 	}
 
 	public String getRoomName() {

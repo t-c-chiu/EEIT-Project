@@ -191,7 +191,7 @@
 								</c:forEach>
 								<!-- /12/18 修改成功..>0< -->
 							</ul></li>
-						<li class="dropdown"><a href="pages/room.html" title="Room"
+						<li class="dropdown"><a href="<c:url value="/pages/showRoom.jsp"/>" title="Room"
 							class="dropdown-toggle" role="button" aria-haspopup="true"
 							aria-expanded="false">預約訂房</a></li>
 						<li class="dropdown"><a
