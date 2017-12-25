@@ -50,4 +50,8 @@ public class AdminController {
 		return memberCenterService.showMyBePaidList(member.getMemberId());
 	}
 
+	@RequestMapping(path = "/checkOut.admin", method = RequestMethod.POST, produces = "text/plain;charset=UTF-8")
+	public @ResponseBody String checkOut(@SessionAttribute("member") Member member) {
+		return memberCenterService.checkOut(member.getMemberId());
+	}
 }
