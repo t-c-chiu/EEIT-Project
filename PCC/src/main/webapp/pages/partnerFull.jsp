@@ -42,6 +42,7 @@
 
 <!-- fontawesome -->
 <link href="../revolution/fonts/fontawesome-all.css">
+<link rel="stylesheet" type="text/css" href="../css/login.css">
 
 <!-- jQuery CDN for login -->
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
@@ -72,15 +73,6 @@
 
 <body data-offset="200" data-spy="scroll" data-target=".ow-navigation">
 	<div class="main-container">
-		<!-- Loader -->
-		<div id="site-loader" class="load-complete">
-			<div class="loader">
-				<div class="loader-inner ball-clip-rotate">
-					<div></div>
-				</div>
-			</div>
-		</div>
-		<!-- Loader /- -->
 
 		<!-- Header -->
 		<%@ include file="header.jsp"%>
@@ -88,28 +80,14 @@
 		
 		<!--	內容開始	-->
 		<main> <!-- Page Banner -->
-		<div class="page-banner container-fluid no-padding">
-			<!-- Container -->
-			<div class="container">
-				<div class="banner-content">
-					<h3>文章/討論</h3>
-					<p>our vision is to be Earth's most customer centric company</p>
-				</div>
-				<ol class="breadcrumb">
-					<li><a href="../index.html" title="Home">首頁</a></li>
-					<li class="active">文章/討論</li>
-				</ol>
-			</div> 
-			<!-- Container /- -->
-		</div>
+		<div style="height: 100px;">		</div>
 		<!-- Page Banner /- --> <!-- Latest Blog -->
 		<div class="blog-section latest-blog container-fluid">
 			<!-- Container -->
 			<div class="container">
 				<!-- Section Header -->
 				<div class="section-header">
-					<h3>Latest News</h3>
-					<p>our vision is to be Earth's most customer centric company</p>
+					<h3>服務員清單</h3>
 					<img src="../images/section-seprator.png" alt="section-seprator" />
 				</div>
 				<!-- Section Header /- -->
@@ -119,26 +97,22 @@
 				<div class="col-md-4 col-sm-6 col-xs-6">
 					<div class="type-post">
 						<div class="entry-cover">
-							<a href="blog-post.html"><img src="../images/match/${servant[0]}.jpg"
-								alt="blog"></a> <span class="post-date"><a href="#"><i
-									class="fa fa-calendar-o"></i>July 20</a></span>
+							<a><img src="../images/match/${servant.serviceId}.jpg"
+								alt="blog"></a>
 						</div>
 						<div class="blog-content">
 							<h3 class="entry-title">
-								<a href="blog-post.html"
-									title="new Collectios are imported In Our shop.">new
-									Collectios are<span>imported</span> In Our shop.
+								<a title="new Collectios are imported In Our shop.">服務經驗: ${servant.experience}年  <span> 服務類型: ${servant.type}</span>
 								</a>
 							</h3>
 							<div class="entry-meta">
-								<span class="post-like"><a href="#" title="224 Likes"><i
-										class="fa fa-heart-o"></i>224 Likes</a></span> <span class="post-admin"><i
-									class="fa fa-user"></i>服務員: <a href="#" title="Max"><!-- 姓名 -->${servant[6]}</a></span>
+								<span class="post-like"><a><i
+										class="fa fa-heart-o"></i>${servant.area}</a></span> <span class="post-admin"><i
+									class="fa fa-user"></i>服務員: <a><!-- 姓名 -->${servant.name}</a></span>
 							</div>
 							<div class="entry-content">
 								<p><!-- 自我介紹 -->
-								   ${servant[5]}
-								   <span id="servantId" style="display:none">${servant[0]}</span>
+								   ${servant.introduction}
 								</p>
                                 <button type="button" name="choose">選擇</button>                           
 							</div>
@@ -210,6 +184,7 @@
 				</div>
 			</div>
 			<!-- Container /- -->
+		</div>
 		</div>
 		<!-- Latest Blog /- --> </main>
 		<!--	內容結束	-->

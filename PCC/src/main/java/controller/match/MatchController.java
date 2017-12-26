@@ -37,36 +37,9 @@ public class MatchController {
 	// 服務夥伴清單(清單上沒按鈕)
 	@RequestMapping(path = "/servantList.match", method = RequestMethod.GET)
 	public String method(Model model) {
-		List<List> servantList = service.showServantList();
+		List<Servant> servantList = service.showServantList();
 		model.addAttribute("servantList", servantList);
 		return "showServantList";
-	}
-
-	// 訊息清單(每秒刷新)
-	@RequestMapping(path = "/ChatList.match", method = RequestMethod.POST, produces = { "text/html;charset=UTF-8" })
-	public @ResponseBody String method1(HttpSession session, String memId) {
-		String result;
-		Member member = (Member) session.getAttribute("member");
-		Servant servant = (Servant) session.getAttribute("servant");
-		if (member != null)
-			result = service.chatList(member.getMemberId(), memId);
-		else
-			result = service.chatList(memId, servant.getMemberId());
-		return result;
-	}
-
-	// 傳送訊息(到訊息清單)
-	@RequestMapping(path = "/SendContent.match", method = RequestMethod.POST, produces = { "text/html;charset=UTF-8" })
-	public @ResponseBody String method2(HttpSession session, String memId, String content) {
-		Boolean result;
-		Member member = (Member) session.getAttribute("member");
-		Servant servant = (Servant) session.getAttribute("servant");
-		if (member != null)
-			result = service.sendContent(member.getMemberId(), memId, content, member.getName());
-		else
-			result = service.sendContent(memId, servant.getMemberId(), content, servant.getName());
-		String success = "1";
-		return success;
 	}
 
 	// 線上預約(正式服務夥伴清單)
@@ -74,7 +47,7 @@ public class MatchController {
 	public String method3(@SessionAttribute("member") Member member, Model model) {
 		Boolean isComplete = service.completeReservationForm(member.getMemberId());
 		if (isComplete) {
-			List<List> servantList = service.showServantList();
+			List<Servant> servantList = service.showServantList();
 			model.addAttribute("fullServantList", servantList);
 			return "showFullServantList";
 		}
@@ -86,7 +59,7 @@ public class MatchController {
 	public String method4(Reservation reservation, Model model, @SessionAttribute("member") Member member) {
 		reservation.setMemberId(member.getMemberId());
 		service.insertReservationForm(reservation);
-		List<List> servantList = service.showServantList();
+		List<Servant> servantList = service.showServantList();
 		model.addAttribute("fullServantList", servantList);
 		return "showFullServantList";
 	}
@@ -98,18 +71,6 @@ public class MatchController {
 		Boolean isMatch = service.matching(member.getMemberId(), Integer.parseInt(servantId));
 		System.out.println(isMatch);
 		return "memberCenter";
-	}
-
-	// 選擇服務員對話id
-	@RequestMapping(path = "/servantIdList.match", method = RequestMethod.GET, produces = {
-			"application/json;charset=UTF-8" })
-	public @ResponseBody List<Object[]> method6(HttpSession session) {
-		Member member = (Member) session.getAttribute("member");
-		Servant servant = (Servant) session.getAttribute("servant");
-		if (member != null)
-			return service.selectServantName(member.getMemberId());
-		else
-			return service.selectReservationName(servant.getMemberId());
 	}
 
 	// 選擇服務員資訊

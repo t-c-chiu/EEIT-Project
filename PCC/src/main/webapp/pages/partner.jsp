@@ -42,6 +42,8 @@
 
 <!-- fontawesome -->
 <link href="../revolution/fonts/fontawesome-all.css">
+<link rel="stylesheet" type="text/css" href="../css/login.css">
+
 
 <!-- 彈出視窗選擇服務員(jQuery-Dialog) -->
 <link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
@@ -101,15 +103,6 @@
 
 <body data-offset="200" data-spy="scroll" data-target=".ow-navigation">
 	<div class="main-container">
-		<!-- Loader -->
-		<div id="site-loader" class="load-complete">
-			<div class="loader">
-				<div class="loader-inner ball-clip-rotate">
-					<div></div>
-				</div>
-			</div>
-		</div>
-		<!-- Loader /- -->
 
 		<!-- Header -->
 		<%@ include file="header.jsp"%>
