@@ -8,9 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import model.bean.Member;
+import model.bean.PointDetails;
 import model.bean.Room;
 import model.bean.RoomReservation;
 import model.dao.MemberDAO;
+import model.dao.PointDetailsDAO;
 import model.dao.RoomDAO;
 import model.dao.RoomReservationDAO;
 
@@ -27,10 +29,15 @@ public class RoomReservationService {
 	@Autowired
 	RoomDAO roomDAO;
 	
-	public int insert(Member member, RoomReservation roomReservation,int newPoint) {	
+	@Autowired
+	PointDetailsDAO pointDetailsDAO; 
+	
+	public int insert(Member member,RoomReservation roomReservation,int newPoint,PointDetails pointDetails) {	
 		roomReservation.setMemberId(member.getMemberId());
-		roomReservation = roomReservationDAO.insert(roomReservation);
-		memberDAO.updateMemberPoint(member, newPoint);
+		roomReservationDAO.insert(roomReservation);
+		pointDetails.setMemberId(member.getMemberId());
+		pointDetailsDAO.insertPoint(pointDetails);
+		memberDAO.updateMemberPoint(member, newPoint);		
 		return newPoint;
 	};
 	

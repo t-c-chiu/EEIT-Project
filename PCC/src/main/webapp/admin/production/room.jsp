@@ -66,11 +66,12 @@
     			$(this).parents('tr').remove()
     	})
   	
-    	function initReservation(){ 	   	   		
+    	function initReservation(){ 
     		$.get('${pageContext.request.contextPath}/selectAllReservation.room',function(data){    	 
     		var tbody=$('<tbody></tbody>')
-    			
-    		$('#datatable-responsive').empty(tbody).append(tbody)
+    		
+    		$('#datatable-responsive >tbody').remove()
+    		$('#datatable-responsive').append(tbody)
     		
     		$.each(data,function(i,roomReservation){
     			   var tr1=$('<tr></tr>').addClass("odd")
@@ -104,7 +105,8 @@
     		$.get('${pageContext.request.contextPath}/selectAllRoom.room',function(data){
         		console.log(data)
         			var tbody=$('<tbody></tbody>')
-        			$('#datatable-responsive2').empty(tbody).append(tbody)
+        			$('#datatable-responsive2 >tbody').remove()
+        			$('#datatable-responsive2').append(tbody)
         			
         			$.each(data,function(i,room){
         			var tr1=$('<tr></tr>').addClass("odd")
@@ -116,10 +118,11 @@
      						 
      				var td2=$('<td></td>').text(room.roomName)
      				var td3=$('<td></td>').text(room.area)
-     				var td4=$('<td></td>').text(room.roomType)
-     				var td5=$('<td></td>').text(room.price)
-     				var td6=$('<td></td>').text(room.info)
-     			    tr1.append([td1,td2,td3,td4,td5,td6])
+     				var td4 =$('<td></td>').text(room.address)
+     				var td5=$('<td></td>').text(room.roomType)
+     				var td6=$('<td></td>').text(room.price)
+     				var td7=$('<td></td>').text(room.info)
+     			    tr1.append([td1,td2,td3,td4,td5,td6,td7])
     			    tbody.append(tr1)  
      				
         			})       			   			
@@ -251,6 +254,7 @@
                         <th class="sorting_asc" tabindex="0" aria-controls="datatable-responsive" rowspan="1" colspan="1" style="width: 50px;">房間編號</th>
                         <th class="sorting" tabindex="0" aria-controls="datatable-responsive" rowspan="1" colspan="1" style="width: 50px;" >房間名稱</th>
                         <th class="sorting" tabindex="0" aria-controls="datatable-responsive" rowspan="1" colspan="1" style="width: 50px;" >地區</th>
+                        <th class="sorting" tabindex="0" aria-controls="datatable-responsive" rowspan="1" colspan="1" style="width: 50px;" >地址</th>
                         <th class="sorting" tabindex="0" aria-controls="datatable-responsive" rowspan="1" colspan="1" style="width: 60px;" >房型</th>
                         <th class="sorting" tabindex="0" aria-controls="datatable-responsive" rowspan="1" colspan="1" style="width: 60px;" >每晚房價</th>            
                         <th class="sorting" tabindex="0" aria-controls="datatable-responsive" rowspan="1" colspan="1" style="width: 60px;" >照片</th>
@@ -261,17 +265,18 @@
                       <tbody>
                      <tr role="row" class="odd">
                           <td><input name="roomId"   id="roomId" type="text" style="width:50px"></td>
-                          <td><input name="roomName" type="text" style="width:40px"></td>
+                          <td><input name="roomName" type="text" style="width:60px"></td>
                           <td><input name="area"     type="text" style="width:40px"></td>
+                          <td><input name="address"  type="text" style="width:200px"></td>
                           <td><input name="roomType" type="text" style="width:40px"></td>
-                          <td><input name="price"    type="text" style="width:40px"></td>   
+                          <td><input name="price"    type="text" style="width:50px"></td>   
                           <td><input type="file" id="photo" name="photo" accept="image/*"></td>
-                          <td><input id="insertRoom" type="submit" value="新增房間"></td>                     
+                          <td><input id="insertRoom" type="submit" value="新增"></td>                     
                         </tr>
                      </tbody>                                       
                     </table>
                     <input name="roomImage"  id="roomImage"  type="hidden">            
-                  <span><textarea name="info" id="info"></textarea>
+                  <span><label>介紹</label><textarea name="info" id="info"></textarea>
                   <img id="previewPhoto" style="max-width:250px;margin-top:20px"></span>
                     <script src="<c:url value="/ckeditorbasic/ckeditor.js"/>"></script>               
                     <script>CKEDITOR.replace("info",{
@@ -315,8 +320,9 @@
                         <th class="sorting_asc" tabindex="0" aria-controls="datatable-responsive" rowspan="1" colspan="1" style="width: 50px;">房間編號</th>
                         <th class="sorting" tabindex="0" aria-controls="datatable-responsive" rowspan="1" colspan="1" style="width: 50px;" >房間名稱</th>
                         <th class="sorting" tabindex="0" aria-controls="datatable-responsive" rowspan="1" colspan="1" style="width: 50px;" >地區</th>
+                        <th class="sorting" tabindex="0" aria-controls="datatable-responsive" rowspan="1" colspan="1" style="width: 60px;" >地址</th>
                         <th class="sorting" tabindex="0" aria-controls="datatable-responsive" rowspan="1" colspan="1" style="width: 60px;" >房型</th>
-                        <th class="sorting" tabindex="0" aria-controls="datatable-responsive" rowspan="1" colspan="1" style="width: 60px;" >每晚房價</th>
+                        <th class="sorting" tabindex="0" aria-controls="datatable-responsive" rowspan="1" colspan="1" style="width: 60px;" >每晚房價</th>                      
                         <th class="sorting" tabindex="0" aria-controls="datatable-responsive" rowspan="1" colspan="1" style="width: 50px;" >介紹</th>                     
                         </tr>
                       </thead>
