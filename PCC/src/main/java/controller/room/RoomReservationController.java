@@ -26,6 +26,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
 import model.bean.Member;
+import model.bean.PointDetails;
 import model.bean.Room;
 import model.bean.RoomReservation;
 import model.service.RoomReservationService;
@@ -50,9 +51,9 @@ public class RoomReservationController {
 	}
 
 	@RequestMapping(path = "/reserve.room", method = RequestMethod.POST)
-	public String reserveRoom(@SessionAttribute("member") Member member, RoomReservation roomReservation,Model model,int newPoint) {
+	public String reserveRoom(@SessionAttribute("member") Member member, RoomReservation roomReservation,Model model,int newPoint,PointDetails pointDetails) {
 
-		roomReservationService.insert(member,roomReservation,newPoint);
+		roomReservationService.insert(member,roomReservation,newPoint,pointDetails);
 		model.addAttribute("newPoint",newPoint);
 		return "reserve.ok";
 	}

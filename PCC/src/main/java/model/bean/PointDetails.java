@@ -14,10 +14,19 @@ public class PointDetails {
 	private Date gettingDate;
 	private String getWay;
 	private int getPoint;
+	private String memberId;
+		
 	@Override
 	public String toString() {
 		return "PointDetails [pointId=" + pointId + ", gettingDate=" + gettingDate + ", getWay=" + getWay
-				+ ", getPoint=" + getPoint + "]";
+				+ ", getPoint=" + getPoint + ", memberId=" + memberId + "]";
+	}
+	
+	public String getMemberId() {
+		return memberId;
+	}
+	public void setMemberId(String memberId) {
+		this.memberId = memberId;
 	}
 	public int getPointId() {
 		return pointId;
