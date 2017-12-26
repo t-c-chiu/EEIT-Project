@@ -11,27 +11,27 @@
 <script type="text/javascript">
 //get message content
 //data is the message content data
-function GetMessageList() {
-  $.ajax({
-      type: "POST",
-      url: "${pageContext.request.contextPath}/ChatList.match",
-      data: "action=ChatList&d=" + new Date(),
-      success: function(data) {
-          $("#divContent").html(data);
-      }
-  });
-  AutoUpdContent(); 
-}
+function GetMessageList(){
+	  $.ajax({
+	      type: "POST",
+	      url: "${pageContext.request.contextPath}/ChatList.match",
+	      data: "memId=" + memId,
+	      success: function(data) {
+	          $("#divContent").html(data);
+	      }
+	  });
+	  AutoUpdContent();
+} 
 //auto update member and message
 function AutoUpdContent() {
-    setTimeout(GetMessageList, 1000);
+    setTimeout(GetMessageList, 500);
 }
 //send message 
 function SendContent(content) {
     $.ajax({
         type: "POST",
         url: "${pageContext.request.contextPath}/SendContent.match",
-        data: new Date() + "&content=" + content,
+        data: "content=" + content + "&memId=" + memId,
         success: function(data) {
             //alert(data);
             if (data==1) {
@@ -45,11 +45,38 @@ function SendContent(content) {
         }
     });
 }
+//選單換資訊
+function ChangeInfo(){
+	memId = $("#idList").val();//下拉選單選擇後讀取對話
+	$.ajax({
+		type: "POST",
+		url: "${pageContext.request.contextPath}/idInformation.match",
+		data: "memId=" + memId,
+		success: function(data){
+			$("#infoList").empty();
+			if(data.serviceId){
+			var img = "../images/match/" + data.serviceId + ".jpg";
+			var area = "服務地區: " + data.area;
+			var type = "服務類型: " + data.type;
+			var experience = "服務資歷: " + data.experience + "年";
+			var introduction = "介紹: " + data.introduction;
+			var cell0 = $("<img>").attr("src", img).css({width:'120px',height:'120px'});
+			var cell1 = $("<h3></h3>").text(area);
+			var cell2 = $("<h3></h3>").text(type);
+			var cell3 = $("<h3></h3>").text(experience);
+			var cell4 = $("<h3></h3>").text(introduction);
+			var row = $("#infoList").append(cell0,cell1,cell2,cell3,cell4);				
+			} else {
+	            console.log("reservation");
+			}			
+	      }	
+ })
+}
 //jQuery(document).ready(function{});
-$(function() {
-	
-    GetMessageList();
-
+$(function() {//載入網頁後要做的事
+  memId = $("#idList").val();//先讀對話
+  GetMessageList();
+//送出按鈕--------------------------------------------------------------------------------
     $("#Button1").click(function() { //按鈕點擊事件        
         if ($("#txtContent").val() != "") {//發送內容
             SendContent($("#txtContent").val());
@@ -60,31 +87,39 @@ $(function() {
             return false;
         }
     })
-
-   });
-//rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr
-$(function(){
-	$.get("${pageContext.request.contextPath}/servantIdList.match", function(data){
-		console.log(data)
-		$.each(data, function(i, servant){
-			var cell1 = $("<option></option>").val(servant).text(servant);
-			var row = $("#idList").append(cell1);
-		})
-	})
-	$("#idList").on('select',function(){
-		$("#idList").empty();		
+//下拉選單--------------------------------------------------------------------------------
+// 	$.get("${pageContext.request.contextPath}/servantIdList.match", function(data){
+// 		console.log(data);
+// 		$.each(data, function(i, servant){
+// 			var cell1 = $("<option></option>").val(servant[0]).text(servant[1]);
+// 			var row = $("#idList").append(cell1);
+// 		})
+// 	})
+	$("#idList").on('focus',function(){
+		$("#idList").empty();
+        var docFrag = $(document.createDocumentFragment());
+        docFrag.append("<option>請選擇</option>");
+console.log(55555555555555);
 		$.get("${pageContext.request.contextPath}/servantIdList.match", function(data){
 			console.log(data)			
 			$.each(data, function(i, servant){
-				var cell1 = $("<option></option>").val(servant).text(servant);
-				var row = $("#idList").append(cell1);
-
+				var cell1 = $("<option></option>").val(servant[0]).text(servant[1]);
+				docFrag.append(cell1);				
 			})
-			
+			$("#idList").html(docFrag);
 		})
-
+// 		$("#idList").prepend("<option>請選擇</option>");
+// 		$("#idList").val(data[0]);
+// 		memId = $('#idList option[index="1"]').attr("value");
+// 		console.log(memId);
+// 		ChangeInfo(); 
 	})
-
+//選單選人----------------------------------------------------------------------------------
+    $("#idList").on('change',function(){
+//     	if($('#test'))
+//         $("#idList option[id='test']").remove();
+		ChangeInfo();   		
+	})
 	
 })
 </script>    
@@ -177,20 +212,17 @@ h3
 </head>
 
 <body>
-    <div id="divMain" style="width:50%">
+    <div id="divMain" style="width:900px;">
         <div class="divtop">
             <div class="divL">
             <h3>聊天室</h3>
                 <div class="divShow" id="divContent"></div>
             </div>
             <select id="idList">
-
+            <option id="test">請選擇</option>
+            <!-- 即時通選單 -->
             </select>
-            <div>
-            xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-            
-            xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-            
+            <div id = "infoList">          
             xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
             
             xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
@@ -201,6 +233,7 @@ h3
             
             xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
             
+            xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx          
             </div>
 <!--             <div class="divR"> -->
 <!--                 <h3>Online Member</h3> -->
@@ -210,7 +243,7 @@ h3
         <div class="divBot">
             <table cellpadding="0" cellspacing="0">
                 <tr><td colspan="2" id="divFace" class="pb"></td></tr><tr><td>
-                <textarea id="txtContent" cols="61" rows="3" class="txt"></textarea></td><td class="pl">
+                <textarea id="txtContent" cols="61" rows="3" class="txt" style="resize:none;"></textarea></td><td class="pl">
                 <input id="Button1" type="button" value="送出" class="btn"/>
 <!--                 <input id="Button3" type="button" value="Upload" class="btn"/> -->
 <!--                 <input id="Button2" type="button" value="Exit" class="btn"/> -->

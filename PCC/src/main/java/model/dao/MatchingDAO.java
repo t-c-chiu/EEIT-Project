@@ -72,15 +72,33 @@ public class MatchingDAO {
 		return number.intValue();
 	}
 	
-	// 預約者選擇配對清單服務員
-	public List<String> selectServantName(int reservationId) {
-		Query<String> query = getSession().createQuery("select name from Member where memberId in (select memberId from Servant where serviceId in (select serviceId from Matching where reservationId = :reservationId)) ", String.class);
+	// 預約者下拉選擇配對清單服務員
+	public List<Object[]> selectServantName(int reservationId) {
+		Query query = getSession().createQuery("select memberId,name from Member where memberId in (select memberId from Servant where serviceId in (select serviceId from Matching where reservationId = :reservationId))");
 	    query.setParameter("reservationId", reservationId);
 		return query.getResultList();
 	}
 	
+	// 服務員下拉選擇配對清單預約者
+	public List<Object[]> selectReservationName(String servantMemberId){
+		Query query = getSession().createQuery("select memberId,name from Reservation where reservationId in (select reservation from Matching where serviceId in(select serviceId from Servant where memberId = :memberId ");
+	    query.setParameter("memberId", servantMemberId);
+	    return query.getResultList();
+	}
 	
-	
+	// 讀取單筆服務員資訊
+	public Object selectServantInfo(String memId) {
+		Query query = getSession().createQuery("from Servant where memberId = :memId");
+		query.setParameter("memId", memId);
+		return query.getSingleResult();
+	}
+		
+	// 讀取單筆客戶資訊
+	public Object selectReservationInfo(String memId) {
+		Query query = getSession().createQuery("from Reservation where memberId = :memId");
+		query.setParameter("memId", memId);
+		return query.getSingleResult();
+	}
 	
 	
 	

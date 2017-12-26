@@ -50,8 +50,8 @@
     <link rel="stylesheet" href="//jqueryui.com/resources/demos/style.css">
 
     <script>
-        //How to resize jquery ui dialog with browser
-        //http://stackoverflow.com/questions/9879571/how-to-resize-jquery-ui-dialog-with-browser
+//         How to resize jquery ui dialog with browser
+//         http://stackoverflow.com/questions/9879571/how-to-resize-jquery-ui-dialog-with-browser
 //         $(
 //             function () {
 //                 $('button[name="jump"]').click(function () {               	
@@ -175,7 +175,7 @@
 
 								</p>
 								    <!-- 彈出視窗按鈕-->
- 									<!--<button name="jump" style="background-color:black;color:orange;width:100px;">選擇</button> -->
+<!--  									<button name="jump" style="background-color:black;color:orange;width:100px;">選擇</button> -->
                                                                    
 							</div>
 						</div>
