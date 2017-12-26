@@ -82,6 +82,15 @@ display:none
 .dlg-no-close .ui-dialog-titlebar-close {display: none;} 
 
 
+.footer-send2{
+    color:#fff;
+    border-radius: 0;  
+    background-color: #20B2AA;
+}
+.footer-send2:hover{
+    background-color: #d4d4d4;
+    color:#2C3536;
+}
 
 </style>
 
@@ -100,10 +109,14 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDYpbCt__aSkFOPc8En0xCzF6G
 		var totalPrice
 		var unavailableDates
 		var selectedDates
-		var point
-		var newPoint
-		var usedPoint
-		var plusPoint
+		var point		//原持有點數
+		var newPoint	//更新後點數
+		var usedPoint	//本次使用點數
+		var plusPoint	//本次獲得點數
+		var getPoint	//本次點數變動(扣掉使用點數,加上獲得點數)
+		var today=new Date()
+		$('#gettingDate').val(today.getFullYear()+'/'+(today.getMonth()+1)+'/'+(today.getDate()))
+
 	
 		function showPrice() {
 			totalPrice = (((endDate - beginDate) * price) / (86400000)-(usedPoint*50))
@@ -113,7 +126,11 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDYpbCt__aSkFOPc8En0xCzF6G
 			if(newPoint<0)
 				{newPoint=0}
 			
+			getPoint=(plusPoint-usedPoint)
+			
 			$('#newPoint').empty().val(newPoint)
+			$('#getPoint').empty().val(getPoint)
+			
 							
 			if (!isNaN(totalPrice)&&!isNaN(newPoint)) {
 				if(totalPrice<0)
@@ -158,7 +175,9 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDYpbCt__aSkFOPc8En0xCzF6G
 			unavailableDates=[]
             roomId=$(this).attr("id")
             price = $(this).attr("alt")
+            roomName=$(this).attr("name")
 			$("#roomId").empty().val(roomId)
+			$("#roomName").empty().val(roomName)
 			showPrice()
 			$("#allForm").css('display','block')
 			
@@ -219,6 +238,7 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDYpbCt__aSkFOPc8En0xCzF6G
 			                        .addClass("image")
 			                        .attr('id',room.roomId)
 			                        .attr('alt',room.price)
+			                        .attr('name',room.roomName)
 					
 			var div6=$('<div></div>').addClass("col-md-7 col-sm-12 col-xs-12 blog-content")
 			var h3=$('<h3></h3>').addClass("entry-title").text(room.roomName)
@@ -305,6 +325,13 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDYpbCt__aSkFOPc8En0xCzF6G
 				isSubmit = false;	
 			}
 			
+			if(end<begin){
+				$('#beginSpan').text(" 無效日期")
+				$('#endSpan').text(" 無效日期")
+				isSubmit = false;
+		
+			}
+			
 			for (var d = new Date(begin);d <= new Date(end);d.setDate(d.getDate() + 1)) 
 		     {selectedDates.push($.datepicker.formatDate('yy/m/d', d));	
 		       }
@@ -320,12 +347,10 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDYpbCt__aSkFOPc8En0xCzF6G
 		})
 				
 		$('#range').change(function(){
-			var price=$('#rangeValue').empty().val($(this).val()).val()
-				
+			var price=$('#rangeValue').empty().val($(this).val()).val()			
 			$.get('${pageContext.request.contextPath}/getRoombyPrice.room','price='+price,function(data){
 				create(data)
-			})
-			
+			})			
 		})
 		
 		
@@ -430,7 +455,7 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDYpbCt__aSkFOPc8En0xCzF6G
 						
 							<h3 class="widget-title">您的搜尋條件</h3>
 							<ul>
-							<li>地區：${area}</li>
+							<li id="checkArea">地區：${area}</li>
 						    <li>房型：${roomType}</li>
 					
 						    <li>每晚最低價格：<input id="range" type="range" min="500" max="4000" step="500">
@@ -456,6 +481,8 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDYpbCt__aSkFOPc8En0xCzF6G
 				</div><!-- Widget Area /- -->
 		
 		<div id="main" class="col-md-8">
+				<div style="height:800px;overflow:hidden">
+				<div style="height:100%;width:770px;overflow-y:auto;overflow-x:hidden;">
 		<div class="container">
 				<!-- Content Area -->
 			            <c:forEach var="room" items="${listOfRooms}">		
@@ -466,7 +493,7 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDYpbCt__aSkFOPc8En0xCzF6G
 						
 						<div class="zoom">
 						<img src="<c:url value="../images/room/${room.roomImage}.jpg"/>"
-							 class="image" alt="${room.price}" id="${room.roomId}">
+							 class="image" alt="${room.price}" id="${room.roomId}" name="${room.roomName}">
 						</div>
 						
 						</div>
@@ -492,6 +519,8 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDYpbCt__aSkFOPc8En0xCzF6G
 				        </c:forEach>
 	    </div>			        			        			        
 		</div>
+		</div>			        			        			        
+		</div>
 						
 		</div>
 						
@@ -502,17 +531,31 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDYpbCt__aSkFOPc8En0xCzF6G
 			<div class="container">
 
 				<!-- Billing -->
-				
-				<div class="checkout-form">
-         
+				<div class="section-header">
+					<h4>訂房填表</h4>
+					<img src="../images/section-seprator.png" alt="section-seprator" />
+				</div>			
+				<div class="checkout-form">		        
 					<div class="col-md-12 col-sm-12 col-xs-12">
-					    <div>						
-							<h3>訂房填表</h3>						
-						</div>
-						
-					<button id="formButton" class="btn btn-default form-control footer-send">一鍵帶入</button>
+					
+					<button id="formButton" class="btn btn-default form-control footer-send2">一鍵帶入會員資料</button>			
 						<form id="myform" action="<c:url value="/reserve.room"/>" method="post">
 							<div class="billing-field">
+							
+								<div class="col-md-4 form-group">
+									<label>房間名稱</label><input class="form-control" type="text" readonly="readonly" 
+										id="roomName" value="一鍵帶入">
+								</div>
+								
+								<div class="col-md-4 form-group">
+									<label>入住日<span style="color:red" class="content" id="beginSpan"></span></label> <input class="form-control" type="text"
+										name="beginDate" id="beginDate">
+								</div>
+								
+								<div class="col-md-4 form-group">
+									<label>退房日<span style="color:red" class="content" id="endSpan"></span></label> <input class="form-control" type="text"
+										name="endDate" id="endDate">
+								</div>
 						
 								<div class="col-md-4 form-group">
 									<label>入住人<span style="color:red" class="content" id="nameSpan"></span></label> <input class="form-control" type="text"
@@ -525,21 +568,8 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDYpbCt__aSkFOPc8En0xCzF6G
 								<div class="col-md-4 form-group">
 									<label>電話<span style="color:red" class="content" id="phoneSpan"></span></label> <input class="form-control" type="text"
 										name="phone" id="phone">
-								</div>
-
-								<div class="col-md-4 form-group">
-									<label>房間ID(暫)</label> <input class="form-control" type="text"
-										name="roomId" id="roomId" readonly="readonly">
-								</div>
-								<div class="col-md-4 form-group">
-									<label>入住日<span style="color:red" class="content" id="beginSpan"></span></label> <input class="form-control" type="text"
-										name="beginDate" id="beginDate">
-								</div>
-								<div class="col-md-4 form-group">
-									<label>退房日<span style="color:red" class="content" id="endSpan"></span></label> <input class="form-control" type="text"
-										name="endDate" id="endDate">
-								</div>
-								
+								</div>								
+						
 								<div class="col-md-4 form-group">
 									<label>使用點數(一點折抵50)<span style="color:red" class="content" id="pointSpan"></span></label> <input class="form-control" type="text"
 										name="usedPoint" id="usedPoint">
@@ -552,10 +582,14 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDYpbCt__aSkFOPc8En0xCzF6G
 								<c:if test="${!empty member}">							
 								<div class="col-md-4 form-group">
 									<label>&#160;</label> <input class="btn btn-default form-control footer-send" type="submit"
-										id="commit" name="RoomReservation" value="送出訂單">
+										id="commit" value="送出訂單">
 								</div>
 								</c:if>
 					            <input name="newPoint" id="newPoint" type="hidden">
+					            <input type="hidden" name="roomId" id="roomId" >      
+					            <input name="gettingDate" id="gettingDate" type="hidden">
+					            <input name="getWay" id="getWay" type="hidden" value="訂房消費">
+					            <input name="getPoint" id="getPoint" type="hidden">
 					   
 							</div>
 						</form>

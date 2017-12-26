@@ -52,7 +52,6 @@ public class RoomReservationController {
 
 	@RequestMapping(path = "/reserve.room", method = RequestMethod.POST)
 	public String reserveRoom(@SessionAttribute("member") Member member, RoomReservation roomReservation,Model model,int newPoint,PointDetails pointDetails) {
-
 		roomReservationService.insert(member,roomReservation,newPoint,pointDetails);
 		model.addAttribute("newPoint",newPoint);
 		return "reserve.ok";
@@ -111,7 +110,7 @@ public class RoomReservationController {
 		return "新增成功";
 	}
 	
-				
+	//依照類別排序 沒用到			
 	@RequestMapping(path="/getRoombyOrder.room",method=RequestMethod.GET,produces= {"application/json;charset=UTF-8"})
 	public @ResponseBody List<Room> showRoomJson(String order,Model model){
 		return roomReservationService.selectByOrder(order);

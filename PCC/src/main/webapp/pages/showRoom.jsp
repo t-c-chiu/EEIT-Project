@@ -164,8 +164,71 @@ $('#area').keyup(function(){
 			</div>
 			<!-- Container /- -->
 		</div>	
+						
+									
+			<!-- Container /- -->
+		</div>
+		
+		
+		<div class="about-section container-fluid no-padding">
+			<!-- Container -->
+			<div class="container">
+				<div class="col-md-6 col-sm-6 col-xs-6">
+					<img src="../images/about.jpg" alt="about" />
+				</div>
+				<div class="col-md-6 col-sm-6 col-xs-6">
+					<div class="about-content">
+						<h5>
+							When you shop on <span>max shop</span> you can assured about the
+							quality of the products you're buying.
+						</h5>
+						<p>You wanna be where you can see our troubles are all the
+							same. You wanna be where everybody knows Your name. So lets make
+							the most of this beautiful day. Since we're together. , We're
+							gonna do it. On your mark get set and go now.</p>
+						<p>Makin their way the only way they know how. That's just a
+							little bit more than the law will allow. Doin' it our way.</p>
+						<ul>
+							<li>We Provide Only Branded Products</li>
+							<li>Max Shop Provides Best Offers</li>
+							<li>Our Shop Located In World Wide</li>
+						</ul>
+					</div>
+				</div>
+
+				<div id="about2" class="col-md-6 col-sm-6 col-xs-6">
+				<div class="about-content">
+						<h5>
+							When you shop on <span>max shop</span> you can assured about the
+							quality of the products you're buying.
+						</h5>
+						<p>You wanna be where you can see our troubles are all the
+							same. You wanna be where everybody knows Your name. So lets make
+							the most of this beautiful day. Since we're together. , We're
+							gonna do it. On your mark get set and go now.</p>
+						<p>Makin their way the only way they know how. That's just a
+							little bit more than the law will allow. Doin' it our way.</p>
+						<ul>
+							<li>We Provide Only Branded Products</li>
+							<li>Max Shop Provides Best Offers</li>
+							<li>Our Shop Located In World Wide</li>
+						</ul>
+					</div>
+				</div>
+				<div class="col-md-6 col-sm-6 col-xs-6">
+					<img src="../images/about.jpg" alt="about" />
+				</div>
 				
-				<div id="allForm" class="container-fluid no-left-padding no-right-padding woocommerce-checkout">
+			<div class="goto-next">
+				<a href="#about2"><i class="icon icon-Mouse bounce"></i></a>
+			</div>
+				
+		</div>
+			<!-- Container /- -->
+		</div>
+		<!-- About Section /- --> <!-- Category Section -->
+			
+					<div id="allForm" class="container-fluid no-left-padding no-right-padding woocommerce-checkout">
 			<!-- Container -->
 			<div class="container">
 
@@ -210,9 +273,7 @@ $('#area').keyup(function(){
 				<!-- Billing /- -->		
 			</div>
 			
-									
-			<!-- Container /- -->
-		</div>
+			
 			
 		<!-- Clients /- --> </main>
 		<!--	內容結束	-->
