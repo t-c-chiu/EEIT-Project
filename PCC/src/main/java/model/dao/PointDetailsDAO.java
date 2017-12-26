@@ -25,5 +25,10 @@ public class PointDetailsDAO {
 		query.setParameter(0, memberId);
 		return query.list();
 	}
+	
+	public boolean insertPoint(PointDetails pointDetails) {
+		getSession().save(pointDetails);
+		return true;
+	}
 
 }
