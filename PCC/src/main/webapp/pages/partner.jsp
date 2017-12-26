@@ -110,23 +110,7 @@
 		
 		<!--	內容開始	-->
 		<main> <!-- Page Banner -->
-		<div class="page-banner container-fluid no-padding">
-			<!-- Container -->
-			<div class="container">
-				<div class="banner-content">
-					<h3>文章/討論</h3>
-					<p>our vision is to be Earth's most customer centric company</p>
-				</div>
-				<ol class="breadcrumb">
-					<li><a href="../index.html" title="Home">首頁</a></li>
-					<li class="active">文章/討論</li>
-				</ol>
-			</div>
-			<!-- 彈出視窗頁面 -->
-<!-- 			<div id="dialog-confirm" title="服務員" style="display:none;background-color:activeborder;"> -->
-<!--                    <span></span> -->
-<!--             </div>     -->
-			<!-- Container /- -->
+		<div style="height: 100px;"></div>
 		</div>
 		<!-- Page Banner /- --> <!-- Latest Blog -->
 		<div class="blog-section latest-blog container-fluid">
@@ -134,8 +118,7 @@
 			<div class="container">
 				<!-- Section Header -->
 				<div class="section-header">
-					<h3>Latest News</h3>
-					<p>our vision is to be Earth's most customer centric company</p>
+					<h3>服務員清單</h3>
 					<img src="../images/section-seprator.png" alt="section-seprator" />
 				</div>
 				<!-- Section Header /- -->
@@ -145,20 +128,18 @@
 				<div class="col-md-4 col-sm-6 col-xs-6">
 					<div class="type-post">
 						<div class="entry-cover">
-							<a href="blog-post.html"><img src="../images/match/${servant.serviceId}.jpg"
-								alt="blog"></a> <span class="post-date"><a href="#"><i
-									class="fa fa-calendar-o"></i>July 20</a></span>
+							<a><img src="../images/match/${servant.serviceId}.jpg"
+								alt="blog"></a>
 						</div>
 						<div class="blog-content">
 							<h3 class="entry-title">
-								<a href="blog-post.html"
-									title="new Collectios are imported In Our shop.">服務經驗: ${servant.experience}年  <span> 服務類型: ${servant.type}</span>
+								<a title="new Collectios are imported In Our shop.">服務經驗: ${servant.experience}年  <span> 服務類型: ${servant.type}</span>
 								</a>
 							</h3>
 							<div class="entry-meta">
-								<span class="post-like"><a href="#" title="224 Likes"><i
+								<span class="post-like"><a><i
 										class="fa fa-heart-o"></i>${servant.area}</a></span> <span class="post-admin"><i
-									class="fa fa-user"></i>服務員: <a href="#" title="Max"><!-- 姓名 -->${servant.name}</a></span>
+									class="fa fa-user"></i>服務員: <a><!-- 姓名 -->${servant.name}</a></span>
 							</div>
 							<div class="entry-content">
 								<p><!-- 自我介紹 -->
@@ -236,6 +217,7 @@
 				</div>
 			</div>
 			<!-- Container /- -->
+		</div>
 		</div>
 		<!-- Latest Blog /- --> </main>
 		<!--	內容結束	-->

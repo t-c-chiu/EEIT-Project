@@ -109,14 +109,14 @@
                   <input type="radio" name="way" id="status" value="剖附產" class="borderall">
                   剖腹產　第
                   <select name="way" id="status_num" class="borderall">
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                    <option value="6">6</option>
-                    <option value="7">7</option>
-                    <option value="8">8</option>
+                    <option value="第1胎">1</option>
+                    <option value="第2胎">2</option>
+                    <option value="第3胎">3</option>
+                    <option value="第4胎">4</option>
+                    <option value="第5胎">5</option>
+                    <option value="第6胎">6</option>
+                    <option value="第7胎">7</option>
+                    <option value="第8胎">8</option>
                   </select>
                   胎</td>
               </tr>
@@ -151,16 +151,16 @@
                 <td width="13%" height="30" align="center" bgcolor="#FFFFFF">須準備晚餐</td>
                 <td bgcolor="#FFFFFF"><select name="demand" id="foodnum" class="borderall">
                   <option selected="selected" value="1">0</option>
-                  <option value="1">1</option>
-                  <option value="2">2</option>
-                  <option value="3">3</option>
-                  <option value="4">4</option>
-                  <option value="5">5</option>
-                  <option value="6">6</option>
-                  <option value="7">7</option>
-                  <option value="8">8</option>
-                  <option value="9">9</option>
-                  <option value="10">10</option>
+                  <option value="1餐">1</option>
+                  <option value="2餐">2</option>
+                  <option value="3餐">3</option>
+                  <option value="4餐">4</option>
+                  <option value="5餐">5</option>
+                  <option value="6餐">6</option>
+                  <option value="7餐">7</option>
+                  <option value="8餐">8</option>
+                  <option value="9餐">9</option>
+                  <option value="10餐">10</option>
                 </select>
 份</td>
               </tr>

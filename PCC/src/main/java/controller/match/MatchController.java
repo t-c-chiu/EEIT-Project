@@ -4,8 +4,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
@@ -27,7 +25,7 @@ import model.service.MatchService;
 @SessionAttributes({ "servantList", "fullServantList" })
 public class MatchController {
 	@Autowired
-	public MatchService service;
+	public MatchService matchService;
 
 	@InitBinder
 	public void init(WebDataBinder binder) {
@@ -36,18 +34,18 @@ public class MatchController {
 
 	// 服務夥伴清單(清單上沒按鈕)
 	@RequestMapping(path = "/servantList.match", method = RequestMethod.GET)
-	public String method(Model model) {
-		List<Servant> servantList = service.showServantList();
+	public String servantList(Model model) {
+		List<Servant> servantList = matchService.showServantList();
 		model.addAttribute("servantList", servantList);
 		return "showServantList";
 	}
 
 	// 線上預約(正式服務夥伴清單)
 	@RequestMapping(path = "/fullServantList.match", method = RequestMethod.GET)
-	public String method3(@SessionAttribute("member") Member member, Model model) {
-		Boolean isComplete = service.completeReservationForm(member.getMemberId());
+	public String fullServantList(@SessionAttribute("member") Member member, Model model) {
+		Boolean isComplete = matchService.completeReservationForm(member.getMemberId());
 		if (isComplete) {
-			List<Servant> servantList = service.showServantList();
+			List<Servant> servantList = matchService.showServantList();
 			model.addAttribute("fullServantList", servantList);
 			return "showFullServantList";
 		}
@@ -56,29 +54,26 @@ public class MatchController {
 
 	// 新申請預約表(成功後跳轉到正式服務夥伴清單)
 	@RequestMapping(path = "/submitReservationForm.match", method = RequestMethod.POST)
-	public String method4(Reservation reservation, Model model, @SessionAttribute("member") Member member) {
+	public String submitReservationForm(Reservation reservation, Model model,
+			@SessionAttribute("member") Member member) {
 		reservation.setMemberId(member.getMemberId());
-		service.insertReservationForm(reservation);
-		List<Servant> servantList = service.showServantList();
+		matchService.insertReservationForm(reservation);
+		List<Servant> servantList = matchService.showServantList();
 		model.addAttribute("fullServantList", servantList);
 		return "showFullServantList";
 	}
 
 	// 選擇服務員
-	@RequestMapping(path = "/chooseServant.match", method = RequestMethod.GET)
-	public String method5(String servantId, @SessionAttribute("member") Member member) {
-		System.out.println(servantId);
-		Boolean isMatch = service.matching(member.getMemberId(), Integer.parseInt(servantId));
-		System.out.println(isMatch);
-		return "memberCenter";
+	@RequestMapping(path = "/chooseServant.match", method = RequestMethod.POST, produces = "text/plain;charset=UTF-8")
+	public @ResponseBody String chooseServant(Integer serviceId, @SessionAttribute("member") Member member) {
+		return matchService.matching(member.getMemberId(), serviceId);
 	}
 
-	// 選擇服務員資訊
-	@RequestMapping(path = "/idInformation.match", method = RequestMethod.POST)
-	public @ResponseBody Object method6(HttpSession session, String memId) {
-		Member member = (Member) session.getAttribute("member");
-		Servant servant = (Servant) session.getAttribute("servant");
-		return service.idInformation(member, memId, servant);
+	@RequestMapping(path = "/showMyMatching.match", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
+	public @ResponseBody List<Object[]> showMyMatching(@SessionAttribute("member") Member member) {
+		List<Object[]> l = matchService.showMyMatching(member.getMemberId());
+		System.out.println(l);
+		return l;
 	}
 
 }

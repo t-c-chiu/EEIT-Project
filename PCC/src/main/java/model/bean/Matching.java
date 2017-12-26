@@ -7,6 +7,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 @Entity
 public class Matching {
 
@@ -51,6 +53,7 @@ public class Matching {
 		this.status = status;
 	}
 
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm", timezone = "GMT+8")
 	public Date getDate() {
 		return date;
 	}

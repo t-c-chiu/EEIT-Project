@@ -51,12 +51,11 @@
     <script>
         $(function(){
         	$('button[name="choose"]').on('click',function(){
-        		
-        		var servantId = $(this).parent("div").find("span").text();     		
-        		window.location.assign("${pageContext.request.contextPath}/chooseServant.match?"+"servantId="+servantId);
-        		    		
+        		var serviceId = $(this).val();
+				$.post('/PCC/chooseServant.match',{'serviceId':serviceId},function(data){
+					alert(data);
+				})
         	})
-        	      	
         });
     
     </script>
@@ -80,7 +79,7 @@
 		
 		<!--	內容開始	-->
 		<main> <!-- Page Banner -->
-		<div style="height: 100px;">		</div>
+		<div style="height: 100px;"></div>
 		<!-- Page Banner /- --> <!-- Latest Blog -->
 		<div class="blog-section latest-blog container-fluid">
 			<!-- Container -->
@@ -114,7 +113,7 @@
 								<p><!-- 自我介紹 -->
 								   ${servant.introduction}
 								</p>
-                                <button type="button" name="choose">選擇</button>                           
+                                <button type="button" name="choose" value="${servant.serviceId}">選擇</button>                           
 							</div>
 						</div>
 					</div>
