@@ -12,19 +12,56 @@ public class Reservation {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int reservationId;
+	private Integer reservationId;
 	private String memberId;
+	private String name;
+	private String phone;
 	private String way;
+	private String email;
+	private String address;
 	private String demand;
-	private String note;
+	private String house;
 	private Date expectedday;
-	private Date time;
+	private Integer time;
+	
+	
+	public String getPhone() {
+		return phone;
+	}
 
-	public int getReservationId() {
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public String getHouse() {
+		return house;
+	}
+
+	public void setHouse(String house) {
+		this.house = house;
+	}
+
+	public Integer getReservationId() {
 		return reservationId;
 	}
 
-	public void setReservationId(int reservationId) {
+	public void setReservationId(Integer reservationId) {
 		this.reservationId = reservationId;
 	}
 
@@ -52,14 +89,6 @@ public class Reservation {
 		this.demand = demand;
 	}
 
-	public String getNote() {
-		return note;
-	}
-
-	public void setNote(String note) {
-		this.note = note;
-	}
-
 	public Date getExpectedday() {
 		return expectedday;
 	}
@@ -68,19 +97,29 @@ public class Reservation {
 		this.expectedday = expectedday;
 	}
 
-	public Date getTime() {
+	public Integer getTime() {
 		return time;
 	}
 
-	public void setTime(Date time) {
+	public void setTime(Integer time) {
 		this.time = time;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	@Override
 	public String toString() {
-		return "Reservation [reservationId=" + reservationId + ", memberId=" + memberId + ", way=" + way + ", demand="
-				+ demand + ", note=" + note + ", expectedday=" + expectedday + ", time=" + time + "]";
+		return "Reservation [reservationId=" + reservationId + ", memberId=" + memberId + ", name=" + name + ", phone="
+				+ phone + ", way=" + way + ", email=" + email + ", address=" + address + ", demand=" + demand
+				+ ", house=" + house + ", expectedday=" + expectedday + ", time=" + time + "]";
 	}
+
 	
 	
 }

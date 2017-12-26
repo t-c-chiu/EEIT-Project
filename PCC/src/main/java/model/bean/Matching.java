@@ -15,9 +15,12 @@ public class Matching {
 	private int matchingId;
 	private int serviceId;
 	private int reservationId;
-	private int status;
-	private Date startDate;
-	private Date endDate;
+	private String mappingId;
+
+
+//	private int status;
+//	private Date startDate;
+//	private Date endDate;
 
 	public int getMatchingId() {
 		return matchingId;
@@ -43,27 +46,35 @@ public class Matching {
 		this.reservationId = reservationId;
 	}
 
-	public int getStatus() {
-		return status;
+	public String getMappingId() {
+		return mappingId;
 	}
 
-	public void setStatus(int status) {
-		this.status = status;
+	public void setMappingId(String mappingId) {
+		this.mappingId = mappingId;
 	}
 
-	public Date getStartDate() {
-		return startDate;
-	}
-
-	public void setStartDate(Date startDate) {
-		this.startDate = startDate;
-	}
-
-	public Date getEndDate() {
-		return endDate;
-	}
-
-	public void setEndDate(Date endDate) {
-		this.endDate = endDate;
-	}
+//	public int getStatus() {
+//		return status;
+//	}
+//
+//	public void setStatus(int status) {
+//		this.status = status;
+//	}
+//
+//	public Date getStartDate() {
+//		return startDate;
+//	}
+//
+//	public void setStartDate(Date startDate) {
+//		this.startDate = startDate;
+//	}
+//
+//	public Date getEndDate() {
+//		return endDate;
+//	}
+//
+//	public void setEndDate(Date endDate) {
+//		this.endDate = endDate;
+//	}
 }

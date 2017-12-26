@@ -43,51 +43,22 @@
 <!-- fontawesome -->
 <link href="../revolution/fonts/fontawesome-all.css">
 
-<!-- 彈出視窗選擇服務員(jQuery-Dialog) -->
-<link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
-    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
-    <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
-    <link rel="stylesheet" href="//jqueryui.com/resources/demos/style.css">
+<!-- jQuery CDN for login -->
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+
 
     <script>
-//         How to resize jquery ui dialog with browser
-//         http://stackoverflow.com/questions/9879571/how-to-resize-jquery-ui-dialog-with-browser
-//         $(
-//             function () {
-//                 $('button[name="jump"]').click(function () {               	
-//                 	var test = $(this).parent('div').find('span').text();
-//                 	$('#dialog-confirm span:first-child').text(test);
-                
-                	
-//                     $("#dialog-confirm").dialog({  
-//                         resizable: true,
-//                         height: $(window).height() * 0.6,//dialog視窗高度
-//                         width: $(window).width() * 0.5,
-//                         modal: true,
-//                         dialogClass: "dlg-no-close",
-//                         buttons: {
-//                             //自訂button名稱
-//                             "選擇服務員": function () {
-//                                 $(this).dialog("close");
-//                             },
-//                             Cancel: function () {
-//                                 $(this).dialog("close");
-//                             }
-//                         }                    
-//                     });
-//                 })
-
-//                 $(window).resize(function () {
-//                     var wWidth = $(window).width();
-//                     var dWidth = wWidth * 0.9;
-//                     var wHeight = $(window).height();
-//                     var dHeight = wHeight * 0.9;
-//                     $("#dialog-confirm").dialog("option", "width", dWidth);
-//                     $("#dialog-confirm").dialog("option", "height", dHeight);
-//                 });
-//             }
-//         )
-     </script>
+        $(function(){
+        	$('button[name="choose"]').on('click',function(){
+        		
+        		var servantId = $(this).parent("div").find("span").text();     		
+        		window.location.assign("${pageContext.request.contextPath}/chooseServant.match?"+"servantId="+servantId);
+        		    		
+        	})
+        	      	
+        });
+    
+    </script>
 
 
 <style type="text/css">
@@ -128,11 +99,7 @@
 					<li><a href="../index.html" title="Home">首頁</a></li>
 					<li class="active">文章/討論</li>
 				</ol>
-			</div>
-			<!-- 彈出視窗頁面 -->
-<!-- 			<div id="dialog-confirm" title="服務員" style="display:none;background-color:activeborder;"> -->
-<!--                    <span></span> -->
-<!--             </div>     -->
+			</div> 
 			<!-- Container /- -->
 		</div>
 		<!-- Page Banner /- --> <!-- Latest Blog -->
@@ -148,7 +115,7 @@
 				<!-- Section Header /- -->
 				
 
-				<c:forEach var="servant" items="${servantList}">
+				<c:forEach var="servant" items="${fullServantList}">
 				<div class="col-md-4 col-sm-6 col-xs-6">
 					<div class="type-post">
 						<div class="entry-cover">
@@ -171,19 +138,16 @@
 							<div class="entry-content">
 								<p><!-- 自我介紹 -->
 								   ${servant[5]}
-								   <span style="display:none">${servant[0]}</span>
-
+								   <span id="servantId" style="display:none">${servant[0]}</span>
 								</p>
-								    <!-- 彈出視窗按鈕-->
-<!--  									<button name="jump" style="background-color:black;color:orange;width:100px;">選擇</button> -->
-                                                                   
+                                <button type="button" name="choose">選擇</button>                           
 							</div>
 						</div>
 					</div>
 				</div>
 				</c:forEach>
-				
-				
+							
+
 <!--
 				<div class="col-md-4 col-sm-6 col-xs-6">
 					<div class="type-post">

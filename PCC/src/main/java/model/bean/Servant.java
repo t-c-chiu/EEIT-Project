@@ -16,6 +16,8 @@ public class Servant {
 	private String memberId;
 	private String type;
 	private String introduction;
+	private String area;
+	private String name;
 
 
 	public int getServiceId() {
@@ -66,11 +68,29 @@ public class Servant {
 		this.introduction = introduction;
 	}
 
+	public String getArea() {
+		return area;
+	}
+
+	public void setArea(String area) {
+		this.area = area;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
 	@Override
 	public String toString() {
 		return "Servant [serviceId=" + serviceId + ", experience=" + experience + ", status=" + status + ", memberId="
-				+ memberId + ", type=" + type + ", introduction=" + introduction + "]";
+				+ memberId + ", type=" + type + ", introduction=" + introduction + ", area=" + area + ", name=" + name
+				+ "]";
 	}
 
+	
 
 }
