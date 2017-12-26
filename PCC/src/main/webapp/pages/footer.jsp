@@ -46,3 +46,44 @@
                 </div>
                 <!-- Container /- -->
 		</footer><!-- Footer Main 1 -->
+						<!-- User Login Modal -->
+				<div class="modal fade" id="exampleModal" tabindex="-1"
+					role="dialog" aria-labelledby="exampleModalLabel"
+					aria-hidden="true">
+					<div class="modal-dialog" role="document">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title" id="exampleModalLabel">登入</h5>
+								<button type="button" class="close" data-dismiss="modal"
+									aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+							</div>
+							<div class="modal-body">
+								<form id="formid">
+									<div class="form-group">
+										<label for="memberId" class="col-form-label">帳號:</label> <input
+											type="text" class="login-pop" id="memberId" name="memberId">
+										<div id="memberId-error"></div>
+									</div>
+									<div class="form-group">
+										<label for="password" class="col-form-label">密碼:</label> <input
+											type="password" class="form-control login-pop" id="password"
+											name="password">
+										<div id="password-error"></div>
+										<!-- 												<textarea class="form-control" id="message-text"></textarea> -->
+									</div>
+								</form>
+							</div>
+								<!-- google -->
+<!-- 								<div class="g-signin2" data-onsuccess="onSignIn"></div> -->
+							<div id="pop" class="modal-footer">
+								<button type="button" class="btn btn-secondary"
+									data-dismiss="modal">取消</button>
+								<button type="button" id="sub" class="btn btn-primary">登入</button>
+							</div>
+							<input id="save" value="${member.role}" style="display:none;"></input>
+						</div>
+					</div>
+				</div>
+				

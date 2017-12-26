@@ -54,6 +54,7 @@ href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" />
 
 
 <script>
+
 $(function() {
 	keywords=[]	
 	$('#area').autocomplete({
@@ -71,7 +72,7 @@ $('#area').keyup(function(){
 			keywords.push(area)	
 		})			
 	  })		
-	})
+	})		
 })
 
 </script>
@@ -106,37 +107,15 @@ $('#area').keyup(function(){
 					<li class="active">預約訂房</li>
 				</ol>
 			</div>
-			<div>
-				<form action="<c:url value="/show.room"/>" method="get">
-					<table width="400" border="0" align="center">
-						<tr>
-							<td><h3>請輸入地區</h3></td>
-						</tr>
-						
-						<tr>
-						<td><input id="area" name="area" type="text"></td>					
-						</tr>
-
-						<tr>
-							<td><h3>請選擇房型</h3></td>
-						</tr>
-						<tr>
-							<td><select name="roomType">
-									<option value="normal">標準房</option>
-									<option value="good">貴賓房</option>									
-							</select></td>
-							<td><input type="submit" name="Room" value="送出"></td>
-						</tr>
-
-					</table>
-				</form>
-
-			</div>
 
 			<!-- Container /- -->
 		</div>
 		<!-- Page Banner /- --> <!-- Clients -->
-		<div class="clients container-fluid">
+			
+
+
+			
+		<div class="clients container-fluid" >
 			<!-- Container -->
 			<div class="container">
 				<div class="clients-carousel">
@@ -184,7 +163,57 @@ $('#area').keyup(function(){
 				</div>
 			</div>
 			<!-- Container /- -->
+		</div>	
+				
+				<div id="allForm" class="container-fluid no-left-padding no-right-padding woocommerce-checkout">
+			<!-- Container -->
+			<div class="container">
+
+				<!-- Billing -->
+				
+				<div class="checkout-form">
+         
+					<div class="col-md-12 col-sm-12 col-xs-12">
+					    <div>						
+							<h3>開始訂房</h3>						
+						</div>
+									
+						<form action="<c:url value="/show.room"/>" method="get">
+							<div class="billing-field">
+						
+								<div class="col-md-4 form-group">
+									<label>地區<span style="color:red" class="content" id="areaSpan"></span></label><input class="form-control" type="text"
+										name="area" id="area" >
+								</div>
+								
+								<div class="col-md-4 form-group">
+									<label>房型<span style="color:red" class="content" id="roomTypeSpan"></span></label> 
+									<div class="select">
+										<select class="form-control" name="roomType">										
+											<option value="normal">標準房</option>
+											<option value="good">貴賓房</option>
+										</select>
+									</div>
+								</div>
+								
+								
+								<div class="col-md-4 form-group">
+									<label>&#160;<span style="color:red" class="content"></span></label><input class="btn btn-default form-control footer-send" type="submit"
+										value="送出">
+								</div>																
+						</div>
+						</form>
+					</div>
+					
+
+				</div>
+				<!-- Billing /- -->		
+			</div>
+			
+									
+			<!-- Container /- -->
 		</div>
+			
 		<!-- Clients /- --> </main>
 		<!--	內容結束	-->
 		<!-- Footer Main 1 -->

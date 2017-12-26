@@ -17,6 +17,8 @@ public class RoomReservation {
 	private int roomReserverId;
 	private int roomId;
 	private int totalPrice;
+	//0是沒繳錢 1是繳錢
+	private int status;
 	private String memberId;
 	private Date beginDate;
 	private Date endDate;
@@ -103,5 +105,13 @@ public class RoomReservation {
 				+ ", memberId=" + memberId + ", beginDate=" + beginDate + ", endDate=" + endDate + 
 				", name="+ name+ ", phone=" + phone + ", email=" + email 
 				+ "]";
+	}
+
+	public int getStatus() {
+		return status;
+	}
+
+	public void setStatus(int status) {
+		this.status = status;
 	}	
 }

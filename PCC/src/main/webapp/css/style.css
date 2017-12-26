@@ -121,7 +121,7 @@ a {
 /* - montserratsemibold */
 
 @font-face {
-    font-family: 'montserratsemi_bold';
+    font-family: '微軟正黑體','montserratsemi_bold';
     src: url('fonts/montserrat-semibold-webfont.eot');
     src: url('fonts/montserrat-semibold-webfont.eot?#iefix') format('embedded-opentype'), url('fonts/montserrat-semibold-webfont.woff2') format('woff2'), url('fonts/montserrat-semibold-webfont.woff') format('woff'), url('fonts/montserrat-semibold-webfont.ttf') format('truetype'), url('fonts/montserrat-semibold-webfont.svg#montserratsemi_bold') format('svg');
     font-weight: normal;
@@ -132,7 +132,7 @@ a {
 /* montserratlight*/
 
 @font-face {
-    font-family: 'montserratlight';
+    font-family: '微軟正黑體','montserratlight';
     src: url('fonts/montserrat-light.eot');
     src: url('fonts/montserrat-light.eot?#iefix') format('embedded-opentype'), url('fonts/montserrat-light.woff2') format('woff2'), url('fonts/montserrat-light.woff') format('woff'), url('fonts/montserrat-light.ttf') format('truetype'), url('fonts/montserrat-light.svg#montserratlight') format('svg');
     font-weight: normal;
@@ -178,6 +178,7 @@ a {
     border: none;
     margin: 0;
 }
+
 
 .top-header .dropdown .btn {
     font-size: 14px;
@@ -464,8 +465,8 @@ a {
 }
 
 .menu-icon .cart .dropdown-menu .button a {
-    background-color: #000;
-    border: 2px solid #000;
+    background-color: #EB7C81;
+    border: 2px solid #EB7C81;
     color: #fff;
     display: inline-block;
     font-family: "Lato", sans-serif;
@@ -608,7 +609,6 @@ a {
     height: 40px;
     padding: 6px 20px;
     letter-spacing: 0.28px;
-    text-transform: capitalize;
 }
 
 .form-textarea {
@@ -622,7 +622,6 @@ a {
     font-family: 'Open Sans', sans-serif;
     padding: 6px 20px;
     letter-spacing: 0.28px;
-    text-transform: capitalize;
 }
 
 @media (max-width: 1000px) {
@@ -1076,6 +1075,7 @@ a {
         -ms-transform: scaleY(1);
         visibility: visible;
     }
+
 }
 
 

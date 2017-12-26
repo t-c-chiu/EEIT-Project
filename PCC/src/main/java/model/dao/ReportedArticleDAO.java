@@ -53,4 +53,9 @@ public class ReportedArticleDAO {
 		return true;
 	}
 
+	public List<ReportedArticle> selectByMemberId(String memberId) {
+		return getSession().createQuery("from ReportedArticle where memberId = :memberId", ReportedArticle.class)
+				.setParameter("memberId", memberId).list();
+	}
+
 }

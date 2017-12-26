@@ -35,12 +35,27 @@ public class MemberDAO {
 	// INSERT INTO
 	// Member(memberId,password,name,email,phone,area,address,role,status,point)VALUES('Tester2',0x70617373776F7264,'測試註冊','123@gmail.com','0909123456','大安區','復興南路一段390號
 	// 2,3,15樓',1,0,0);
-
 	public Member insertRegisty(Member member) {
 		if (member != null) {
 			Member select = this.select(member.getMemberId());
 			if (select == null) {
 				getSession().save(member);
+				return member;
+			}
+		}
+		return null;
+	}
+
+	// UPDATE Member
+	public Member update(Member member) {
+		if (member != null) {
+			Member select = this.select(member.getMemberId());
+			if(select !=null) {
+				select.setName(member.getName());
+				select.setEmail(member.getEmail());
+				select.setPhone(member.getPhone());
+				select.setArea(member.getArea());
+				select.setAddress(member.getAddress());
 				return member;
 			}
 		}
@@ -55,7 +70,7 @@ public class MemberDAO {
 		}
 		return false;
 	}
-
+	
 	public List<Member> selectMemberByStatus(Integer status) {
 		return getSession().createQuery("from Member where status = :status", Member.class)
 				.setParameter("status", status).list();

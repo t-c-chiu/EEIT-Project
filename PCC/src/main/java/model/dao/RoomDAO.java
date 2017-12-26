@@ -20,6 +20,11 @@ public class RoomDAO {
 		return sessionFactory.getCurrentSession();
 	}
 	
+	public List<Room> selectAllRoom(){
+		Query<Room> query=getSession().createQuery("from Room",Room.class);
+	    return query.list();
+	}
+		
 	public List<Room> selectByType(String roomType,String area){
 		Query<Room> query=getSession().createQuery("from Room where roomType=? and area=?",Room.class);
 		query.setParameter(0, roomType);
@@ -44,6 +49,11 @@ public class RoomDAO {
 		query.setParameter("roomType",roomType);
 		query.setParameter("price",price);
 		return query.list();	
+	}
+	
+	public boolean insertRoom(Room room) {
+		getSession().save(room);
+		return true;
 	}
 	
 

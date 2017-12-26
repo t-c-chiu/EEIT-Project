@@ -1,7 +1,5 @@
 package model.bean;
 
-import java.sql.Clob;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -19,7 +17,14 @@ public class Product {
 	private String category;
 	private String  pictureAscii;
 	private int status;
-//	private Date date;
+	private String context;
+public String getContext() {
+		return context;
+	}
+	public void setContext(String context) {
+		this.context = context;
+	}
+	//	private Date date;
 	public int getProductId() {
 		return productId;
 	}
@@ -75,8 +80,8 @@ public class Product {
 	@Override
 	public String toString() {
 		return "Product [productId=" + productId + ", stock=" + stock + ", price=" + price + ", productName="
-				+ productName + ", category=" + category + ", pictureAscii=" + pictureAscii + ", status="
-				+ status + "]";
+				+ productName + ", category=" + category + ", pictureAscii=" + pictureAscii + ", status=" + status
+				+ ", context=" + context + "]";
 	}
 
 

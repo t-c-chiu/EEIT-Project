@@ -72,16 +72,26 @@ href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" />
 
 #allForm {
 display:none
-
-
 }
+
+.googleMap:hover{
+ cursor:pointer
+}
+
+
+.dlg-no-close .ui-dialog-titlebar-close {display: none;} 
+
+
 
 </style>
 
 <link rel="stylesheet" type="text/css" href="../css/login.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
+<script async defer
+src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDYpbCt__aSkFOPc8En0xCzF6G8S_hD1Yg">
+</script>
 <script>
+
 	$(function() {
 		var price
 		var roomId
@@ -214,12 +224,17 @@ display:none
 			var h3=$('<h3></h3>').addClass("entry-title").text(room.roomName)
 			
 			var div7=$('<div></div>').addClass("entry-meta")
-			var span1=$('<span></span>').addClass("post-like").text('房型 '+room.roomType)
-			var span2=$('<span></span>').addClass("post-admin").text('房價 '+room.price)
+			var img2=$('<img></img>').addClass("googleMap")
+									 .attr('alt',room.address)
+									 .attr('width',"120px")
+									 .attr('src','/PCC/images/room/googleMap.png')
 			
+			var span1=$('<span></span>').addClass("post-like")
+			var span2=$('<span></span>').addClass("post-admin").text('房價 '+room.price)
 			var div8=$('<div></div>').addClass("entry-content")
 			var p1=$('<p></p>').text(room.info)
-					
+			
+			span1.append(img2)
 			div5.append(img)
 			div4.append(div5)		
 			div7.append([span1,span2])
@@ -313,12 +328,58 @@ display:none
 			
 		})
 		
+		
+			$("body").on('click','.googleMap',function(){		
+            var point=$(this).attr("alt")
+				
+			var geocoder = new google.maps.Geocoder();
+			geocoder.geocode({
+			address : point
+			}, function(results, status) {
+			if (status == 'OK') {
+			var dest = {
+				lat : results[0].geometry.location.lat(),
+				lng : results[0].geometry.location.lng()
+			};				
+			var map = new google.maps.Map(document.getElementById('map'), {
+				zoom : 16,
+				center : dest
+			});
+			var marker = new google.maps.Marker({
+				position : dest,
+				map : map
+			});						
+		}
+	})
 
-		
-		
+            $("#dialog-confirm").dialog({ 
+              resizable: true,
+                height: $(window).height() * 0.5,//dialog視窗高度
+                width: $(window).width() * 0.5,
+                modal: true,
+                dialogClass: "dlg-no-close",
+                buttons: {
+                                          關閉: function () {
+                     $(this).dialog("close");
+                 }
+             }      
+            });
+})
+	
+                $(window).resize(function () {
+                    var wWidth = $(window).width();
+                    var dWidth = wWidth * 0.9;
+                    var wHeight = $(window).height();
+                    var dHeight = wHeight * 0.9;
+                    $("#dialog-confirm").dialog("option", "width", dWidth);
+                    $("#dialog-confirm").dialog("option", "height", dHeight);
+                });
+
 	});
 </script>
+
 </head>
+
 
 <body data-offset="200" data-spy="scroll" data-target=".ow-navigation">
 	<div class="main-container">
@@ -356,7 +417,12 @@ display:none
 		</div>
 		<!-- Page Banner /- --> <!-- Clients --> <!-- Container --> 
 		
-	
+
+			<div id="dialog-confirm" style="display:none;background-color:activeborder;">
+            <div id="map" style="height: 500px; width: 1000px;"></div>	
+            </div>    
+		
+		
 		<div class="container">
 				<div class="col-md-4 col-sm-4 col-xs-12 widget-area">
 					<!-- Widget Search -->
@@ -408,14 +474,17 @@ display:none
 						<div class="col-md-7 col-sm-12 col-xs-12 blog-content">
 						<h3 class="entry-title">${room.roomName}</h3>
 						<div class="entry-meta">
-						<span class="post-like">房型 ${room.roomType}</span> 
+<%-- 						<span class="post-like">${room.address}</span> --%>
+						<span class="post-like"><img class="googleMap" alt="${room.address}" width="120px" src="<c:url value="../images/room/googleMap.png"/>">
+						</span>
 						<span class="post-admin">房價 ${room.price}</span>
 						</div>
 							
 						<div class="entry-content">
-						<p>${room.info}</p>								
-						</div>
-						
+                        <p>${room.info}</p> 
+	  	
+                        
+						</div>													
 						</div>
 					    </div>
 				        </div>
@@ -441,7 +510,7 @@ display:none
 							<h3>訂房填表</h3>						
 						</div>
 						
-					<button id="formButton">一鍵帶入</button>
+					<button id="formButton" class="btn btn-default form-control footer-send">一鍵帶入</button>
 						<form id="myform" action="<c:url value="/reserve.room"/>" method="post">
 							<div class="billing-field">
 						
@@ -482,15 +551,12 @@ display:none
 								</div>
 								<c:if test="${!empty member}">							
 								<div class="col-md-4 form-group">
-									<label>&#160;</label> <input class="form-control" type="submit"
+									<label>&#160;</label> <input class="btn btn-default form-control footer-send" type="submit"
 										id="commit" name="RoomReservation" value="送出訂單">
 								</div>
 								</c:if>
 					            <input name="newPoint" id="newPoint" type="hidden">
 					   
-	
-							
-								
 							</div>
 						</form>
 					</div>
@@ -509,7 +575,7 @@ display:none
 		<%@ include file="footer.jsp" %>
 		<!-- Footer Main 1 -->
 
-	</div>
+
 
 	<!-- JQuery v1.12.4 -->
 	<script src="../js/jquery.min.js"></script>
@@ -534,9 +600,6 @@ display:none
 	<script type="text/javascript"
 		src="../revolution/js/extensoins/revolution.extension.actions.min.js"></script>
 
-	<!-- Library - Google Map API -->
-	<script
-		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDW40y4kdsjsz714OVTvrw7woVCpD8EbLE"></script>
 
 	<!-- Library - Theme JS -->
 	<script src="../js/functions.js"></script>

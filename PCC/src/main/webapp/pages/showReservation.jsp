@@ -1,6 +1,7 @@
 ﻿<%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
 <html>
@@ -122,7 +123,7 @@ table#alter th {
 				
 				<tr>
 					<td>電話</td>
-					<td>0${roomReservation.phone}</td>
+					<td>${roomReservation.phone}</td>
 				</tr>
 				
 				<tr>
@@ -130,15 +131,17 @@ table#alter th {
 					<td>${roomReservation.email}</td>
 
 				</tr>
+	
+
 				
 				<tr>
 					<td>訂房日</td>
-					<td>${roomReservation.beginDate}</td>
+					<td><fmt:formatDate value="${roomReservation.beginDate}" pattern="yyyy/MM/dd"/></td>
 				</tr>
 				
 				<tr>
 					<td>退房日</td>
-					<td>${roomReservation.endDate}</td>
+					<td>	<fmt:formatDate value="${roomReservation.endDate}" pattern="yyyy/MM/dd"/></td>
 				</tr>
 				
 				<tr>

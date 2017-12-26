@@ -28,6 +28,11 @@ public class StudentDAO {
 		return number.intValue();
 	}
 
+	public List<Student> selectByMemberId(String memberId) {
+		return getSession().createQuery("from Student where memberId = :memberId", Student.class)
+				.setParameter("memberId", memberId).list();
+	}
+
 	public List<Integer> selectClassIdByMemberId(String memberId) {
 		return getSession().createQuery("select classId from Student where memberId = :memberId", Integer.class)
 				.setParameter("memberId", memberId).list();
@@ -36,6 +41,18 @@ public class StudentDAO {
 	public List<String> selectMemberIdByClassId(Integer classId) {
 		return getSession().createQuery("select memberId from Student where classId = :classId", String.class)
 				.setParameter("classId", classId).list();
+	}
+
+	public List<Object[]> selectClazzAndStudentByMemberId(String memberId) {
+		return getSession().createQuery(
+				"select c, s from Clazz c, Student s where c.classId = s.classId and s.memberId = :memberId order by c.status desc, c.endDate",
+				Object[].class).setParameter("memberId", memberId).list();
+	}
+
+	public List<Integer> selectClassIdByMemberIdStatus0(String memberId) {
+		return getSession()
+				.createQuery("select classId from Student where memberId = :memberId and status = 0", Integer.class)
+				.setParameter("memberId", memberId).list();
 	}
 
 }

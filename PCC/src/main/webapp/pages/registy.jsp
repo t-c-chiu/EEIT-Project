@@ -110,15 +110,16 @@
 										maxlength="20" required />
 								</div>
 								<div class="col-md-6 form-group">
-									<label>Email *</label> <input id="email" name="email"
-										class="form-control" type="text" required />
+									<label>Email *</label><span id="email-span"></span> <input 
+									onblur="emailCheck();" id="r-email" name="email"
+										class="form-control" type="email" required />
 								</div>
 								<div class="col-md-6 form-group">
 									<label>手機 *</label><span id="phone-span"></span> <input
 										onblur="phoneCheck();" id="phone" name="phone"
 										class="form-control" type="text" maxlength="10" required />
 								</div>
-								<div class="col-md-6 form-group">
+								<div class="col-md-6 form-group" style="clear:both;">
 									<label>縣市 *</label>
 									<div class="select">
 										<select name="area" class="form-control">
@@ -157,7 +158,7 @@
 						</div>
 						<button id="registy-btn"
 							class="btn btn-default form-control footer-send "
-							type="button submit">註冊</button>
+							type="button">註冊</button>
 					</form>
 
 				</div>
