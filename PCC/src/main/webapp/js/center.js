@@ -100,6 +100,13 @@ $('#course-list').click(function(){
 	}); 
 })
 
+$('#matchingInfo').click(function(){
+	hide();
+	$('#center-change-13').fadeIn("slow", function() {
+		$('#center-change-13').show();
+	}); 
+})
+
 //function() {
 //hide();
 // $('#center-change-4').append($("<div></div>").html('<p>'+'123'+'</p>'));

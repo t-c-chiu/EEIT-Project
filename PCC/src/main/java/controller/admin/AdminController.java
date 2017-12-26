@@ -1,5 +1,6 @@
 package controller.admin;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +17,7 @@ import model.service.AdminService;
 import model.service.MemberCenterService;
 
 @Controller
-@SessionAttributes({ "all" })
+@SessionAttributes({ "all", "listOfMatchingDetails" })
 public class AdminController {
 
 	@Autowired
@@ -53,5 +54,17 @@ public class AdminController {
 	@RequestMapping(path = "/checkOut.admin", method = RequestMethod.POST, produces = "text/plain;charset=UTF-8")
 	public @ResponseBody String checkOut(@SessionAttribute("member") Member member) {
 		return memberCenterService.checkOut(member.getMemberId());
+	}
+
+	@RequestMapping(path = "/matching.admin", method = RequestMethod.GET)
+	public String matchingAdmin(Model model) {
+		List<Object[]> listOfMatchingDetails = adminService.showMatchingAdmin();
+		for (Object[] oa : listOfMatchingDetails) {
+			for (Object oo : oa) {
+				System.out.println(oo);
+			}
+		}
+		model.addAttribute("listOfMatchingDetails", listOfMatchingDetails);
+		return "matching";
 	}
 }

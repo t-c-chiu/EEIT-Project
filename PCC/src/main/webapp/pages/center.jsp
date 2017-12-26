@@ -84,6 +84,7 @@
 								<li><a id="personal-information" class="center-li">個人資料</a></li>
 								<li><a id="member-point" class="center-li">會員點數<span>${member.point }點</span></a></li>
 								<li><a id="change-password" class="center-li">更改密碼</a></li>
+								<li><a id="matchingInfo" class="center-li">配對資訊<span></span></a></li>
 							</ul>
 						</aside>
 						<!-- Widget Member /-  -->
@@ -358,6 +359,20 @@
 							<th>課程價位</th>
 							<th>課程狀態</th>
 							<th>繳費狀況</th>
+						</tr>
+					</table>
+					</div>
+					
+					<div id="center-change-13" class="col-md-8 col-sm-7 col-xs-12 content-area product-section2 no-left-padding">
+					<h3 class="center-title">配對資訊</h3>
+					<table id="matchingTable" class="forumTable">
+						<tr>
+							<th>服務員姓名</th>
+							<th>服務型態</th>
+							<th>服務地區</th>
+							<th>經驗</th>
+							<th>配對時間</th>
+							<th>狀態</th>
 						</tr>
 					</table>
 					</div>

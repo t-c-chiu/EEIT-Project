@@ -38,7 +38,7 @@ public class SystemMessage {
 		this.memberId = memberId;
 	}
 
-	@JsonFormat(pattern = "yyyy-MM-dd hh:mm", timezone = "GMT+8")
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm", timezone = "GMT+8")
 	public Timestamp getDate() {
 		return date;
 	}

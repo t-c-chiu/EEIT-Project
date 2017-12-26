@@ -1,5 +1,27 @@
 $(function(){
 	
+	$.getJSON('/PCC/showMyMatching.match', function(data){
+		console.log(data);
+		$('#matchingInfo > span').text('(' + data.length + ')')
+		$.each(data, function(i,v){
+			var td1 = $('<td></td>').text(v[1].name);
+			var td2 = $('<td></td>').text(v[1].type);
+			var td3 = $('<td></td>').text(v[1].area);
+			var td4 = $('<td></td>').text(v[1].experience + '年');
+			var td5 = $('<td></td>').text(v[0].date);
+			var td6 = $('<td></td>');
+			if(v[0].status == 0){ 
+				td6.text('審核中');
+			}else if(v[0].status == 1){
+				td6.text('配對成功');
+			}else if(v[0].status == 2){
+				td6.text('審核未通過');
+			}
+			var tr = $('<tr></tr>').append(td1,td2,td3,td4,td5,td6);
+			$('#matchingTable').append(tr);
+		})
+	})
+	
 	$('#iWantToPay').click(function(e){
 		e.preventDefault();
 		$.post('/PCC/checkOut.admin', function(data){
