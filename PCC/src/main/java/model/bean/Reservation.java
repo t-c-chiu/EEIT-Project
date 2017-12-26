@@ -23,8 +23,7 @@ public class Reservation {
 	private String house;
 	private Date expectedday;
 	private Integer time;
-	
-	
+
 	public String getPhone() {
 		return phone;
 	}
@@ -120,6 +119,4 @@ public class Reservation {
 				+ ", house=" + house + ", expectedday=" + expectedday + ", time=" + time + "]";
 	}
 
-	
-	
 }

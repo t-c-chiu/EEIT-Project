@@ -12,69 +12,57 @@ public class Matching {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int matchingId;
-	private int serviceId;
-	private int reservationId;
-	private String mappingId;
+	private Integer matchingId;
+	private Integer serviceId;
+	private Integer reservationId;
+	// 0剛配 1審核成功 2審核後拒絕
+	private Integer status;
+	private Date date;
 
-
-//	private int status;
-//	private Date startDate;
-//	private Date endDate;
-
-	public int getMatchingId() {
+	public Integer getMatchingId() {
 		return matchingId;
 	}
 
-	public void setMatchingId(int matchingId) {
+	public void setMatchingId(Integer matchingId) {
 		this.matchingId = matchingId;
 	}
 
-	public int getServiceId() {
+	public Integer getServiceId() {
 		return serviceId;
 	}
 
-	public void setServiceId(int serviceId) {
+	public void setServiceId(Integer serviceId) {
 		this.serviceId = serviceId;
 	}
 
-	public int getReservationId() {
+	public Integer getReservationId() {
 		return reservationId;
 	}
 
-	public void setReservationId(int reservationId) {
+	public void setReservationId(Integer reservationId) {
 		this.reservationId = reservationId;
 	}
 
-	public String getMappingId() {
-		return mappingId;
+	public Integer getStatus() {
+		return status;
 	}
 
-	public void setMappingId(String mappingId) {
-		this.mappingId = mappingId;
+	public void setStatus(Integer status) {
+		this.status = status;
 	}
 
-//	public int getStatus() {
-//		return status;
-//	}
-//
-//	public void setStatus(int status) {
-//		this.status = status;
-//	}
-//
-//	public Date getStartDate() {
-//		return startDate;
-//	}
-//
-//	public void setStartDate(Date startDate) {
-//		this.startDate = startDate;
-//	}
-//
-//	public Date getEndDate() {
-//		return endDate;
-//	}
-//
-//	public void setEndDate(Date endDate) {
-//		this.endDate = endDate;
-//	}
+	public Date getDate() {
+		return date;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
+	}
+
+	@Override
+	public String toString() {
+		return "Matching [matchingId=" + matchingId + ", serviceId=" + serviceId + ", reservationId=" + reservationId
+				+ ", status=" + status + ", date=" + date + "]";
+	}
+
 }
