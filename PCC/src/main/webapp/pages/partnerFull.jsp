@@ -42,6 +42,7 @@
 
 <!-- fontawesome -->
 <link href="../revolution/fonts/fontawesome-all.css">
+<link rel="stylesheet" type="text/css" href="../css/login.css">
 
 <!-- jQuery CDN for login -->
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
@@ -119,26 +120,24 @@
 				<div class="col-md-4 col-sm-6 col-xs-6">
 					<div class="type-post">
 						<div class="entry-cover">
-							<a href="blog-post.html"><img src="../images/match/${servant[0]}.jpg"
+							<a href="blog-post.html"><img src="../images/match/${servant.serviceId}.jpg"
 								alt="blog"></a> <span class="post-date"><a href="#"><i
 									class="fa fa-calendar-o"></i>July 20</a></span>
 						</div>
 						<div class="blog-content">
 							<h3 class="entry-title">
 								<a href="blog-post.html"
-									title="new Collectios are imported In Our shop.">new
-									Collectios are<span>imported</span> In Our shop.
+									title="new Collectios are imported In Our shop.">服務經驗: ${servant.experience}年  <span> 服務類型: ${servant.type}</span>
 								</a>
 							</h3>
 							<div class="entry-meta">
 								<span class="post-like"><a href="#" title="224 Likes"><i
-										class="fa fa-heart-o"></i>224 Likes</a></span> <span class="post-admin"><i
-									class="fa fa-user"></i>服務員: <a href="#" title="Max"><!-- 姓名 -->${servant[6]}</a></span>
+										class="fa fa-heart-o"></i>${servant.area}</a></span> <span class="post-admin"><i
+									class="fa fa-user"></i>服務員: <a href="#" title="Max"><!-- 姓名 -->${servant.name}</a></span>
 							</div>
 							<div class="entry-content">
 								<p><!-- 自我介紹 -->
-								   ${servant[5]}
-								   <span id="servantId" style="display:none">${servant[0]}</span>
+								   ${servant.introduction}
 								</p>
                                 <button type="button" name="choose">選擇</button>                           
 							</div>

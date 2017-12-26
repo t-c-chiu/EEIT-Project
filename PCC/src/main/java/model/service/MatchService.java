@@ -29,25 +29,9 @@ public class MatchService {
     
     
     // 撈取服務料表
-    public List<List> showServantList() {
-    	  	
-    	List servantList2 = new ArrayList();
-    	List<Object[]> data = matchDao.selectServantList();
-    	for (int i=0; i<data.size(); i++) {   		
-    		List servantList1 = new ArrayList();   		
-    		Object[] array = data.get(i);
-    		Servant bean = (Servant) array[0];
-    		servantList1.add(bean.getServiceId());
-    		servantList1.add(bean.getExperience());
-    		servantList1.add(bean.getStatus());
-    		servantList1.add(bean.getMemberId());
-    		servantList1.add(bean.getType());
-    		servantList1.add(bean.getIntroduction());   		
-    		String memberName = (String) array[1];
-    		servantList1.add(memberName);
-    		servantList2.add(servantList1);
-    	}   	   	
-    	return servantList2;
+    public List<Servant> showServantList() {  	
+    	List<Servant> data = matchDao.selectServantList();
+    	return data;
     }  
 
     // 決定預約表是否完成

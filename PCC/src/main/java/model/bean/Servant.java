@@ -12,8 +12,6 @@ public class Servant {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int serviceId;
 	private int experience;
-	private int status;
-	private String memberId;
 	private String type;
 	private String introduction;
 	private String area;
@@ -34,22 +32,6 @@ public class Servant {
 
 	public void setExperience(int experience) {
 		this.experience = experience;
-	}
-
-	public int getStatus() {
-		return status;
-	}
-
-	public void setStatus(int status) {
-		this.status = status;
-	}
-
-	public String getMemberId() {
-		return memberId;
-	}
-
-	public void setMemberId(String memberId) {
-		this.memberId = memberId;
 	}
 
 	public String getType() {
@@ -86,10 +68,11 @@ public class Servant {
 
 	@Override
 	public String toString() {
-		return "Servant [serviceId=" + serviceId + ", experience=" + experience + ", status=" + status + ", memberId="
-				+ memberId + ", type=" + type + ", introduction=" + introduction + ", area=" + area + ", name=" + name
-				+ "]";
+		return "Servant [serviceId=" + serviceId + ", experience=" + experience + ", type=" + type + ", introduction="
+				+ introduction + ", area=" + area + ", name=" + name + "]";
 	}
+
+
 
 	
 
