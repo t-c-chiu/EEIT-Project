@@ -193,16 +193,19 @@ $('#area').keyup(function(){
 							<li>全室採用門禁感應管理系統</li>
 						</ul>
 					</div>
+	
 				</div>
-				</div>
-				
+				</div>		
 		<div class="about-section container-fluid no-padding">
 		<!-- Container -->
 			<div class="container">
+				<div class="goto-next">
+				<a href="#about2"><i class="icon icon-Mouse bounce"></i></a>
+			</div>	
 				<div id="about2" class="col-md-6 col-sm-6 col-xs-6">
 				<div class="about-content">
 						<h3>
-							想要一段難忘的坐月子經驗嗎？<span>貴賓房</span>提供度假般的感受，讓媽咪與家人享受最寬廣舒適的空間！
+							想要一段難忘的坐月子經驗嗎？<span>貴賓房</span>提供渡假般的感受，讓媽咪與家人享受最寬廣舒適的空間！
 						</h3>
 						<p>貴賓房住宿空間－客房設計低調奢華，提供免費 WiFi 和免費每日客房整理。
 						超五星雙人加大床墊，採用2000多個1.3線迷你獨立袋裝彈簧，遠紅外線天然環保棉氈，
@@ -220,9 +223,6 @@ $('#area').keyup(function(){
 					<img src="../images/room/doubleRoom.jpg" alt="about" />
 				</div>
 				
-			<div class="goto-next">
-				<a href="#about2"><i class="icon icon-Mouse bounce"></i></a>
-			</div>
 		</div>		
 		</div>
 		

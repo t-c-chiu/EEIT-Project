@@ -105,60 +105,37 @@ table#alter th {
 			</div>
 
 			<div>
-				<h3 align="center">您已訂房成功！謝謝您！${member.name}</h3>
+
 
 			</div>
 
-			<table width="600" border="0" align="center" id="alter">
-				<tr>
-					<th>欄位</th>
-					<th>資料</th>
-				</tr>
-			
-			
-				<tr>
-					<td>入住人</td>
-					<td>${roomReservation.name}</td>
-				</tr>
-				
-				<tr>
-					<td>電話</td>
-					<td>${roomReservation.phone}</td>
-				</tr>
-				
-				<tr>
-					<td>email</td>
-					<td>${roomReservation.email}</td>
-
-				</tr>
-	
-
-				
-				<tr>
-					<td>訂房日</td>
-					<td><fmt:formatDate value="${roomReservation.beginDate}" pattern="yyyy/MM/dd"/></td>
-				</tr>
-				
-				<tr>
-					<td>退房日</td>
-					<td>	<fmt:formatDate value="${roomReservation.endDate}" pattern="yyyy/MM/dd"/></td>
-				</tr>
-				
-				<tr>
-					<td>點數更新</td>
-					<td>${newPoint}</td>
-				</tr>
-								
-				<tr>
-					<td>總金額</td>
-					<td>${roomReservation.totalPrice}</td>
-				</tr>
-				
-			</table>
 		</div>
+<div class="about-section container-fluid no-padding">
+			<!-- Container -->
+			<div class="container">
+				<div class="col-md-6 col-sm-6 col-xs-6">
+					<img src="../images/room/thankYou.jpg" alt="about" />
+				</div>
+				<div class="col-md-6 col-sm-6 col-xs-6">
+					<div class="about-content">
+						<h3>
+							謝謝您！&#160;<span>${member.name}</span>&#160;您已成功訂房！
+						</h3>
+						<p>&#160;</p>
+						<ul>
+							<li>入住人：${roomReservation.name}</li>
+							<li>電話：${roomReservation.phone}</li>
+							<li>email：${roomReservation.email}</li>
+							<li>入住日：<fmt:formatDate value="${roomReservation.beginDate}" pattern="yyyy/MM/dd"/></li>
+							<li>退房日：<fmt:formatDate value="${roomReservation.endDate}" pattern="yyyy/MM/dd"/></li>
+							<li>點數更新：${newPoint}</li>
+							<li>總金額：${roomReservation.totalPrice}</li>
+						</ul>
+					</div>
+				</div>
+				</div>
 
-
-
+</div>
 
 
 		<!-- Container /- --> <!-- Clients /- --> </main>
