@@ -24,7 +24,7 @@ import model.service.PointDetailsService;
 import model.service.RegistyService;
 
 @Controller
-@SessionAttributes(names = { "member" })
+@SessionAttributes(names = { "member","admin", "servant"})
 public class LoginController {
 	@Autowired
 	private MemberService memberService;
@@ -57,8 +57,12 @@ public class LoginController {
 				model.addAttribute("admin", bean);
 				return "管理員";
 			// 一般會員
-			case 2:
+			case 2:			
 				model.addAttribute("member", bean);
+				return "會員";
+			// 服務員
+			case 3:
+				model.addAttribute("servant", bean);
 				return "會員";
 			// 不是會員
 			default:

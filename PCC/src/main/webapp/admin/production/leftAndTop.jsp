@@ -29,7 +29,8 @@
         <ul class="nav side-menu">
           <li><a href="admin.jsp"><i class="fa fa-home"></i> 首頁 </a>
           </li>
-          <li><a href="partner.jsp"><i class="fa fa-table"></i> 配對審核 </a>
+          
+          <li><a href="<c:url value="/matching.admin"/>"><i class="fa fa-table"></i> 配對審核 </a>
           </li>
           <li><a><i class="fa fa-desktop"></i> 商城管理 </a>
           </li>

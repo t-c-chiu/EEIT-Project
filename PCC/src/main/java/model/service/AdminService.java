@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import model.bean.Member;
 import model.bean.PostArticle;
 import model.bean.ReportedArticle;
+import model.dao.MatchingDAO;
 import model.dao.MemberDAO;
 import model.dao.PostArticleDAO;
 import model.dao.ReportedArticleDAO;
@@ -29,6 +30,8 @@ public class AdminService {
 	private MemberDAO memberDAO;
 	@Autowired
 	private SystemMessageDAO systemMessageDAO;
+	@Autowired
+	private MatchingDAO matchingDAO;
 
 	public Map<String, Object> showArticleAdmin() {
 		List<ReportedArticle> listOfReportedArticlesDetail = reportedArticleDAO.selectMessageIdByStatus(0);
@@ -88,6 +91,8 @@ public class AdminService {
 		return "已將" + postArticle.getTopic() + "封鎖";
 	}
 
-	
-	
+	public List<Object[]> showMatchingAdmin() {
+		return matchingDAO.selectMatchingDetailsByStatus0();
+	}
+
 }

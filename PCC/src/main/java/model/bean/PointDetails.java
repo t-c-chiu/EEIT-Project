@@ -16,11 +16,13 @@ public class PointDetails {
 	private String getWay;
 	private int getPoint;
 
-	@Override
 	public String toString() {
-		return "PointDetails [pointId=" + pointId + ", memberId=" + memberId + ", gettingDate=" + gettingDate
-				+ ", getWay=" + getWay + ", getPoint=" + getPoint + "]";
+
+		return "PointDetails [pointId=" + pointId + ", gettingDate=" + gettingDate + ", getWay=" + getWay
+				+ ", getPoint=" + getPoint + ", memberId=" + memberId + "]";
 	}
+	
+
 	public String getMemberId() {
 		return memberId;
 	}

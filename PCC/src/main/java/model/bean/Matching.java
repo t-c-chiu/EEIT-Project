@@ -7,63 +7,65 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 @Entity
 public class Matching {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int matchingId;
-	private int serviceId;
-	private int reservationId;
-	private int status;
-	private Date startDate;
-	private Date endDate;
+	private Integer matchingId;
+	private Integer serviceId;
+	private Integer reservationId;
+	// 0剛配 1審核成功 2審核後拒絕
+	private Integer status;
+	private Date date;
 
-	public int getMatchingId() {
+	public Integer getMatchingId() {
 		return matchingId;
 	}
 
-	public void setMatchingId(int matchingId) {
+	public void setMatchingId(Integer matchingId) {
 		this.matchingId = matchingId;
 	}
 
-	public int getServiceId() {
+	public Integer getServiceId() {
 		return serviceId;
 	}
 
-	public void setServiceId(int serviceId) {
+	public void setServiceId(Integer serviceId) {
 		this.serviceId = serviceId;
 	}
 
-	public int getReservationId() {
+	public Integer getReservationId() {
 		return reservationId;
 	}
 
-	public void setReservationId(int reservationId) {
+	public void setReservationId(Integer reservationId) {
 		this.reservationId = reservationId;
 	}
 
-	public int getStatus() {
+	public Integer getStatus() {
 		return status;
 	}
 
-	public void setStatus(int status) {
+	public void setStatus(Integer status) {
 		this.status = status;
 	}
 
-	public Date getStartDate() {
-		return startDate;
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm", timezone = "GMT+8")
+	public Date getDate() {
+		return date;
 	}
 
-	public void setStartDate(Date startDate) {
-		this.startDate = startDate;
+	public void setDate(Date date) {
+		this.date = date;
 	}
 
-	public Date getEndDate() {
-		return endDate;
+	@Override
+	public String toString() {
+		return "Matching [matchingId=" + matchingId + ", serviceId=" + serviceId + ", reservationId=" + reservationId
+				+ ", status=" + status + ", date=" + date + "]";
 	}
 
-	public void setEndDate(Date endDate) {
-		this.endDate = endDate;
-	}
 }

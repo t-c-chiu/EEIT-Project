@@ -27,15 +27,11 @@ public class PointDetailsDAO {
 		return query.list();
 	}
 	
-	//insert 
-	public int insertPointDetail(PointDetails pointDetails) {
-		
-		if(pointDetails!=null) {
-			 int key =(int) getSession().save(pointDetails);
-			return key;
-		}
-		
-		return 0;
+
+	public boolean insertPoint(PointDetails pointDetails) {
+		getSession().save(pointDetails);
+		return true;
+
 	}
 
 }

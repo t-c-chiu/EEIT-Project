@@ -8,4 +8,8 @@
 		<property name="url" value="/admin/production/article.jsp"></property>
 	</bean>
 
+	<bean id="matching" class="org.springframework.web.servlet.view.RedirectView">
+		<property name="contextRelative" value="true"></property>
+		<property name="url" value="/admin/production/partner.jsp"></property>
+	</bean>
 </beans>

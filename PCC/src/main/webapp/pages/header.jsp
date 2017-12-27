@@ -131,11 +131,11 @@
 						<li><a href="<c:url value="/index.jsp"/>" title="Home"
 							class="dropdown-toggle" role="button" aria-haspopup="true"
 							aria-expanded="false">首頁</a></li>
-						<li><a href="pages/reservation.html" title="Reservation">線上預約</a></li>
-						<li><a href="pages/partner.html" title="Partner">服務夥伴</a></li>
-						<li class="dropdown"><a href="/PCC/pages/shop-2.jsp"
-							title="Shop" class="dropdown-toggle" role="button"
-							aria-haspopup="true" aria-expanded="false">購物商城 </a> <i
+						<li><a href="<c:url value="/fullServantList.match"/>" title="Reservation">線上預約</a></li>
+						<li><a href="<c:url value="/servantList.match"/>" title="Partner">服務夥伴</a></li>
+						<li class="dropdown"><a href="pages/shop.html" title="Shop"
+							class="dropdown-toggle" role="button" aria-haspopup="true"
+							aria-expanded="false">購物商城 </a> <i
 							class="ddl-switch fa fa-angle-down"></i>
 							<ul id="categoryUL" class="dropdown-menu">
 								<!-- 12/18 修改成功..>0< -->

@@ -8,22 +8,30 @@ import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import model.bean.Servant;
+
 @Repository
 public class ServantDAO {
-    @Autowired
+	@Autowired
 	private SessionFactory sessionFactory;
+
 	public Session getSession() {
 		return sessionFactory.getCurrentSession();
 	}
-	
 
-	//抓取全部的服務員
-	public List<Object[]> selectServantList() {
-		Query query = getSession().createQuery("select s, m.name from Servant s, Member m where s.memberId = m.memberId");
-		/*"select new list(s, m.name) from Servant as s, Member as m where s.memberId = m.memberId"*/
+	public List<Servant> selectServantList() {
+		Query<Servant> query = getSession().createQuery("from Servant", Servant.class);
 		return query.getResultList();
-
 	}
-	
-	
+
+	public Object selectServantInfo(String memId) {
+		Query query = getSession().createQuery("from Servant where memberId = :memId");
+		query.setParameter("memId", memId);
+		return query.getSingleResult();
+	}
+
+	public Servant selectByServiceId(int serviceId) {
+		return getSession().get(Servant.class, serviceId);
+	}
+
 }
