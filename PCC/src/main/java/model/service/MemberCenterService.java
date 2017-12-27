@@ -15,7 +15,6 @@ import model.bean.Order;
 import model.bean.RoomReservation;
 import model.bean.Student;
 import model.dao.ClazzDAO;
-import model.dao.MemberDAO;
 import model.dao.OrderDAO;
 import model.dao.RoomReservationDAO;
 import model.dao.StudentDAO;
@@ -24,8 +23,6 @@ import model.dao.StudentDAO;
 @Transactional
 public class MemberCenterService {
 
-	@Autowired
-	private MemberDAO memberDAO;
 	@Autowired
 	private RoomReservationDAO roomReservationDAO;
 	@Autowired

@@ -71,9 +71,7 @@ public class MatchController {
 
 	@RequestMapping(path = "/showMyMatching.match", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
 	public @ResponseBody List<Object[]> showMyMatching(@SessionAttribute("member") Member member) {
-		List<Object[]> l = matchService.showMyMatching(member.getMemberId());
-		System.out.println(l);
-		return l;
+		return matchService.showMyMatching(member.getMemberId());
 	}
 
 }

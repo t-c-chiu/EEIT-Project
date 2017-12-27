@@ -24,14 +24,22 @@ public class ServantDAO {
 		return query.getResultList();
 	}
 
-	public Object selectServantInfo(String memId) {
-		Query query = getSession().createQuery("from Servant where memberId = :memId");
-		query.setParameter("memId", memId);
-		return query.getSingleResult();
+	public Servant selectServantInfo(String memId) {
+		return getSession().createQuery("from Servant where memberId = :memId", Servant.class)
+				.setParameter("memId", memId).getSingleResult();
 	}
 
 	public Servant selectByServiceId(int serviceId) {
 		return getSession().get(Servant.class, serviceId);
+	}
+
+	public boolean delete(Servant servant) {
+		getSession().delete(servant);
+		return true;
+	}
+
+	public Integer insert(Servant servant) {
+		return (Integer) getSession().save(servant);
 	}
 
 }
