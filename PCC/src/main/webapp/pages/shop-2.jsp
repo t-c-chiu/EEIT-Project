@@ -48,15 +48,6 @@
 
 <body data-offset="200" data-spy="scroll" data-target=".ow-navigation">
 	<div class="main-container">
-		<!-- Loader -->
-		<div id="site-loader" class="load-complete">
-			<div class="loader">
-				<div class="loader-inner ball-clip-rotate">
-					<div></div>
-				</div>
-			</div>
-		</div>
-		<!-- Loader /- -->
 		<%@ include file="header.jsp"%>
 
 		<!-- Header -->
@@ -215,15 +206,20 @@
 
 										<h5>${products8.productName}</h5> <span class="price">
 											<del>${products8.price}</del> ${products8.price}
+											
 									</span>
 								</a> <a href="#" class="add-to-cart1" title="Add To Cart"> Add
 										To Cart
 										<p hidden>${products8.productId}</p>
-								</a> <!-- 圖案旁邊的icon --> <!-- 									<div class="wishlist-box"> -->
-									<!-- 										<a href="#"> <i class="fa fa-arrows-alt"></i> -->
-									<!-- 										</a> <a href="#"> <i class="fa fa-heart-o"></i> -->
-									<!-- 										</a> <a href="#"> <i class="fa fa-search"></i> -->
-									<!-- 										</a> --> <!-- 									</div> /圖案旁邊的icon</li> -->
+										
+								</a> <!-- 圖案旁邊的icon --> 									
+								<div  class="wishlist-box heart-shop">
+										<a class="heart"> 
+										<h1 ><i class="fa fa-heart-o"></i></h1>
+										</a> 
+
+								</div>
+							 </li>
 							</c:forEach>
 					</div>
 					<!-- Content Area /- -->
@@ -250,8 +246,9 @@
 		<!-- Container /- -->
 	</div>
 	<form id="startForm" action="/PCC/star.shopping" method="post">
-		<input name="pageName" type="text" value="searchPage" hidden /> <input
-			id="startInput" type="text" value="${start}" hidden />
+		<input name="pageName" type="text" value="searchPage" hidden /> 
+		<input id="startInput" type="text" value="${start}" hidden />
+		<input id="startCategory" type="text" value="${start}" hidden />	
 	</form>
 
 	<!-- JQuery v1.12.4 -->
@@ -310,7 +307,6 @@
 			// 分類欄點選分類
 			$(".categoryli").click(function() {
 				$(this).find("form").submit();
-
 			});
 
 			// 加入購物車
@@ -318,7 +314,6 @@
 			$(".add-to-cart1").click(function() {
 				var productId = $(this).find("p").text();
 				var producIdCartLi = $("#" + productId + "SS");
-
 				$.ajax({
 					url : "/PCC/addCart.shopping",
 					type : "POST",
@@ -337,7 +332,6 @@
 						ViewCart();
 					}
 				});
-
 			});
 
 			//點圖轉跳頁面
@@ -346,15 +340,19 @@
 				var id = $(this).attr("id") + "ProductForm";
 				alert(id);
 				$("#" + id).submit();
-
 			});
 
 			//點擊旁邊小圖轉跳頁面
 			$(".post-box").click(function() {
-
 				location.replace("/PCC/shoppingMall/productContext.jsp");
-
 			});
+			
+			//點擊愛心加到我的最愛
+			$(".heart").click(function(){
+				
+			});
+			
+			
 
 		});
 		// 是否打開 ViweCart和Check out

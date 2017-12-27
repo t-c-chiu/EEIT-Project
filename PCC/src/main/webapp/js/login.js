@@ -249,18 +249,19 @@ $(function() {
 				var text = category.categoryName;
 				console.log(text);
 				var li = $("<li></li>").addClass("categoryli");
-				var a = $("<a></a>").text(text);
+					var a = $("<a></a>").text(text);
 					a.attr("href", "#");
+					a.addClass("categoryli");
 				var form=$("<form></form>").attr("action","/PCC/searchCatagory.shopping");
 					form.attr("method","get");
-				var input=$("<input></input>").attr("type","text");
+				var input=$("<input/>").attr("type","text");
 					input.attr("value",text);
+					input.attr("name","category");
 					input.attr("hidden","hidden");
-					
+		
 					form.append(input);
-					
-				
-				li.append([a,form]);
+					li.append(a);
+					li.append(form);
 				$("#categoryUL").append(li);
 
 			});
@@ -292,8 +293,8 @@ $(function() {
 
 	});
 
-	// 分類欄點選分類
-	$(".categoryli").click(function() {
+	// 分類欄點選分類****
+	$("body").on('click','.categoryli',function() {
 		$(this).find("form").submit();
 	});
 
