@@ -2,14 +2,13 @@ package model.dao;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import model.bean.Reservation;
 
 @Repository
-public class ReservationDAO {
+public class ReservationDAO{
 	@Autowired
 	private SessionFactory sessionFactory;
 
@@ -26,10 +25,13 @@ public class ReservationDAO {
 
 	// 選擇預約表Id(reservantionId)(有預約表才可選)
 	public Integer selectReservationId(String memberId) {
-		Query<Integer> query = getSession().createQuery("select reservationId from Reservation where memberId = ?",
-				Integer.class);
-		query.setParameter(0, memberId);
-		return query.getSingleResult();
+		try {
+			return getSession().createQuery("select reservationId from Reservation where memberId = ?", Integer.class)
+					.setParameter(0, memberId).getSingleResult();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 	// // 服務員下拉選擇配對清單預約者
@@ -44,16 +46,25 @@ public class ReservationDAO {
 
 	// 讀取單筆客戶資訊
 	public Reservation selectReservationInfo(String memId) {
-		Query<Reservation> query = getSession().createQuery("from Reservation where memberId = :memId",
-				Reservation.class);
-		query.setParameter("memId", memId);
-		return query.getSingleResult();
+		try {
+			return getSession().createQuery("from Reservation where memberId = :memId", Reservation.class)
+					.setParameter("memId", "123").getSingleResult();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 	// 新增會員的預約表資料
 	public boolean insertReservationForm(Reservation reservation) {
 		this.getSession().save(reservation);
 		return true;
+	}
+
+	public String selectMemberIdByReservationId(int reservationId) {
+		return getSession()
+				.createQuery("select memberId from Reservation where reservationId = :reservationId", String.class)
+				.setParameter("reservationId", reservationId).getSingleResult();
 	}
 
 }
