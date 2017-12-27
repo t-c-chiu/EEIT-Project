@@ -5,12 +5,23 @@ public class Cart {
 	private int quantity;
 	private String productName;
 	private int productId;
+	private String pictureAscii;
 	private int subtotal=quantity*price;
 	
+
+
 	@Override
 	public String toString() {
 		return "Cart [price=" + price + ", quantity=" + quantity + ", productName=" + productName + ", productId="
-				+ productId + "subtotal"+subtotal+"]";
+				+ productId + ", pictureAscii=" + pictureAscii + ", subtotal=" + subtotal + "]";
+	}
+
+	public String getPictureAscii() {
+		return pictureAscii;
+	}
+
+	public void setPictureAscii(String pictureAscii) {
+		this.pictureAscii = pictureAscii;
 	}
 
 	public int getSubtotal() {

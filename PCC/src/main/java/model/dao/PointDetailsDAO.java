@@ -1,5 +1,6 @@
 package model.dao;
 
+import java.io.Serializable;
 import java.util.List;
 
 import org.hibernate.Session;
@@ -26,9 +27,11 @@ public class PointDetailsDAO {
 		return query.list();
 	}
 	
+
 	public boolean insertPoint(PointDetails pointDetails) {
 		getSession().save(pointDetails);
 		return true;
+
 	}
 
 }

@@ -50,7 +50,7 @@
 										href="#">&#215;</a> <!-- /刪除的X --> <!-- 圖案+文字 --> <a href="#"
 										class="shop-thumbnail"> <img alt="poster_2_up"
 											class="attachment-shop_thumbnail"
-											src="/PCC/images/product-wishlist-2.jpg" />
+											src="${cart.value.pictureAscii}" width="60px" height="62px" />
 											${cart.value.productName}
 									</a> <!-- /圖案+文字 --> <span class="quantity"> <!-- 數量 --> <span
 											class="cartSpan" id="${cart.value.productId}span">${cart.value.quantity}</span>
@@ -68,7 +68,7 @@
 										class="remove" href="#">&#215;</a> <a href="#"
 										class="shop-thumbnail"> <img alt="poster_2_up"
 											class="attachment-shop_thumbnail"
-											src="../images/product-wishlist-1.jpg">
+											src="${cartItem.pictureAscii}" width="60px" height="62px">
 											${cartItem.productName}
 									</a> <span class="quantity"><span class="cartSpan"
 											id="${cartItem.productId}span">0</span> &#215; <span
@@ -104,13 +104,12 @@
 						</a>
 
 						<ul id="login-back" class="droplogin dropdown-menu no-padding">
-						<li id="who-is-login" class="button logbtn">
-							<a id="log-log" href="#" data-toggle="modal"
-							data-target="#exampleModal" onclick="login();">登入</a> 
-							<a id="log-reg" href="/PCC/pages/registy.jsp">註冊</a>
-							<a id="log-cen" href="/PCC/pages/center.jsp">會員中心</a>
-							<a id="log-out" href="#" class="change-ds">登出</a>
-						</li>
+							<li id="who-is-login" class="button logbtn"><a id="log-log"
+								href="#" data-toggle="modal" data-target="#exampleModal"
+								onclick="login();">登入</a> <a id="log-reg"
+								href="/PCC/pages/registy.jsp">註冊</a> <a id="log-cen"
+								href="/PCC/pages/center.jsp">會員中心</a> <a id="log-out" href="#"
+								class="change-ds">登出</a></li>
 
 						</ul>
 						<!-- 						<ul class="dropdown-menu no-padding droplogin "> -->
@@ -142,19 +141,33 @@
 								<!-- 12/18 修改成功..>0< -->
 								<%-- 								<c:forEach var="category" items="${categorys}"> --%>
 
-								<!-- 									<li class="categoryli"> -->
+<!-- 								<li class="categoryli"><a href="#" title="">藥膳</a> -->
+<%-- 									<form action='<c:url value="/searchCatagory.shopping"/>' --%>
+<!-- 										method="get"> -->
+<!-- 										<input type="text" name="category" value="藥膳" hidden /> -->
+<!-- 									</form></li> -->
 
-								<%-- 									<a href="#" title="">${category.categoryName}</a> --%>
-								<%-- 									<form action='<c:url value="/searchCatagory.shopping"/>' method="get"> --%>
-								<%-- 									<input type="text" name="category" value="${category.categoryName}" hidden /> --%>
-								<!-- 									</form> -->
-
-								<!-- 									</li> -->
+<!-- 								<li class="categoryli"><a href="#" title="">產前產品</a> -->
+<%-- 									<form action='<c:url value="/searchCatagory.shopping"/>' --%>
+<!-- 										method="get"> -->
+<!-- 										<input type="text" name="category" value="產前產品" hidden /> -->
+<!-- 									</form></li> -->
+<!-- 								<li class="categoryli"><a href="#" title="">產後產品</a> -->
+<%-- 									<form action='<c:url value="/searchCatagory.shopping"/>' --%>
+<!-- 										method="get"> -->
+<!-- 										<input type="text" name="category" value="產後產品" hidden /> -->
+<!-- 									</form></li> -->
+<!-- 								<li class="categoryli"><a href="#" title="">嬰兒產品</a> -->
+<%-- 									<form action='<c:url value="/searchCatagory.shopping"/>' --%>
+<!-- 										method="get"> -->
+<!-- 										<input type="text" name="category" value="嬰兒產品" hidden /> -->
+<!-- 									</form></li> -->
 
 								<%-- 								</c:forEach> --%>
 								<!-- /12/18 修改成功..>0< -->
 							</ul></li>
-						<li class="dropdown"><a href="<c:url value="/pages/showRoom.jsp"/>" title="Room"
+						<li class="dropdown"><a
+							href="<c:url value="/pages/showRoom.jsp"/>" title="Room"
 							class="dropdown-toggle" role="button" aria-haspopup="true"
 							aria-expanded="false">預約訂房</a></li>
 						<li class="dropdown"><a

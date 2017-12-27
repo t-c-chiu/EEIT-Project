@@ -65,46 +65,29 @@ li.button.logbtn a{
 ul#login-back {
     background-color: #fff0;
 }
-/*.login:hover .login.droplogin{
-	opacity: 1;
-	display:block;
-}*/
-/*.login .droplogin{
-	opacity: 0;
-	visibility: visible;
-	min-width:100px;
-	position:absolute;
-	background-color: #f8f8f8;
-    left: auto;
-    padding: 10px 10px 25px 10px;
-    right: 0;
-    top: 100px;
-	border-radius: 0;
-	list-style-type: none;
-    display: none;
-    margin: 0;
-    border: none;
-}*/
-/*.login .droplogin{
-	border-radius: 0;
-	transform: scaleY(0);
-	-webkit-transform: scaleY(0);
-	-moz-transform: scaleY(0);
-	-ms-transform: scaleY(0);
-	transform-origin: 0 0 0;
-	transition: all 0.4s ease-in-out 0s;
-	display: block;
-	margin: 0;
-	border: none;
-	position:absolute;
-	min-width: 100px;
-    list-style-type: none;
+
+/*  heart-shop  */
+.product-section1 .products .product .heart-shop{
+    left: 9%;
+    top: -1%;
 }
-.login:hover .droplogin{
+.product-section1 .products .product .heart-shop a{
+	width: 19%;
+    margin-left: 2%;
+	border-radius: 100%;
+	opacity: 0.6;
+}
+.product-section1 .products .product .heart-shop a:hover{
+	color:red;
 	opacity: 1;
-	transform: scaleY(1);
-	-webkit-transform: scaleY(1);
-	-moz-transform: scaleY(1);
-	-ms-transform: scaleY(1);
-	visibility: visible;
-}*/
+}
+i.fa.fa-heart-o {
+    margin-top: 23%;
+}
+.product-con{
+	color:#777;
+}
+.product-con ul{
+	list-style-type: none;
+	padding: 0;
+}
