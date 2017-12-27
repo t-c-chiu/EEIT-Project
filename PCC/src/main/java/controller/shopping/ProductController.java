@@ -43,6 +43,24 @@ public class ProductController {
 		webDataBinder.registerCustomEditor(int.class, new PrimitiveNumberEditor(Integer.class, true));
 
 	}
+	
+	
+	// 產品加到喜愛蒐藏
+	@RequestMapping(path = { "/addToFavoriteProduct.shopping" }, method = RequestMethod.GET)
+	public @ResponseBody String addToFavoriteProduct(int productId,String searchWay ,Model model) {
+
+		if (productId != 0) {
+			this.searchWay=searchWay;
+			adminProduct = new ArrayList<Product>();
+			Product pp = productService.search(productId);
+			adminProduct.add(pp);
+			model.addAttribute("adminProduct", adminProduct);
+
+		}
+
+		return "admin.product";
+	}
+	
 
 	// 後台ID搜尋商品
 	@RequestMapping(path = { "/adminSearchIdForProduct.shopping" }, method = RequestMethod.GET)

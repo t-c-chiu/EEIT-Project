@@ -21,9 +21,12 @@ import model.bean.Cart;
 import model.bean.Member;
 import model.bean.Order;
 import model.bean.OrderDetail;
+import model.bean.PointDetails;
 import model.bean.Product;
 import model.dao.SystemMessageDAO;
+import model.service.MemberService;
 import model.service.OrderService;
+import model.service.PointDetailsService;
 import model.service.ProductService;
 
 @Controller
@@ -35,6 +38,10 @@ public class CartController {
 	private OrderService orderService;
 	@Autowired
 	private SystemMessageDAO systemMessageDAO;
+	@Autowired
+	private MemberService memberService;
+	@Autowired
+	private PointDetailsService pointDetailsService;
 	
 
 	//除去購物車內的商品
@@ -87,6 +94,7 @@ public class CartController {
 			cart1.setProductName(product.getProductName());
 			cart1.setPrice(product.getPrice());
 			cart1.setQuantity(1);
+			cart1.setPictureAscii(product.getPictureAscii());
 
 		}
 
@@ -104,33 +112,46 @@ public class CartController {
 	
 	//將商品加入訂單，狀態為0
 	@RequestMapping(path = { "/addOrder.shopping" }, method = RequestMethod.GET,produces= {"text/plain;charset=UTF-8" })
-	public @ResponseBody String useCartPage(Order order,HttpSession session,OrderDetail orderDetail ,Model model ) {
-		System.out.println("addOrder start"+order);
-		//1.先成立訂單
-		Member member=(Member)session.getAttribute("member");
-		String memberId= member.getMemberId();
-		order.setDate(new Date());
-		order.setMemberId(memberId);			
-		int orderId=orderService.insertOrder(order);
-		//2.加入訂單明細
-		Map<Integer,Cart> map=(Map<Integer,Cart>)session.getAttribute("addToCart");
-		List<OrderDetail> listOrderDetail =new ArrayList<OrderDetail>();
-		for(Object key: map.keySet()) {
-			orderDetail.setOrderId(orderId);
-			orderDetail.setPrice(map.get(key).getPrice());
-			orderDetail.setQuantity(map.get(key).getQuantity());
-			orderDetail.setProductName(map.get(key).getProductName());
-			orderDetail.setProductId(map.get(key).getProductId());
-			
-			listOrderDetail.add(orderDetail);
-		}
+	public @ResponseBody String useCartPage(Order order,HttpSession session,OrderDetail orderDetail ,PointDetails pointDetails,Model model ) {
+	
+		if (order!=null) {
+			//1.先成立訂單
+			Member member = (Member) session.getAttribute("member");
+			String memberId = member.getMemberId();
+			Date today = new Date();
+			order.setDate(today);
+			order.setMemberId(memberId);
+			int orderId = orderService.insertOrder(order);
+			//2.加入訂單明細
+			Map<Integer, Cart> map = (Map<Integer, Cart>) session.getAttribute("addToCart");
+			List<OrderDetail> listOrderDetail = new ArrayList<OrderDetail>();
+			for (Object key : map.keySet()) {
+				orderDetail.setOrderId(orderId);
+				orderDetail.setPrice(map.get(key).getPrice());
+				orderDetail.setQuantity(map.get(key).getQuantity());
+				orderDetail.setProductName(map.get(key).getProductName());
+				orderDetail.setProductId(map.get(key).getProductId());
 
-		//3.把購物車清除
-		map.clear();
-		model.addAttribute("addToCart", map);
-		//4.發送系統信
-		systemMessageDAO.insert(memberId,"新增訂單編號："+ orderId,"已加入訂單，記得去會員中心的購物車結帳喔~~" );
-		return "加入訂單成功!!";	
+				listOrderDetail.add(orderDetail);
+			}
+			//3.把購物車清除
+			map.clear();
+			model.addAttribute("addToCart", map);
+			//4.發送系統信
+			systemMessageDAO.insert(memberId, "新增訂單編號：" + orderId, "已加入訂單，記得去會員中心的購物車結帳喔~~");
+			//5.將購物的金錢轉成點數，500元一點 。並新增到會員總點數和點數明細中
+			int total= order.getTotalPrice();
+			Integer opint =total/500;
+			pointDetails.setGettingDate(today);
+			pointDetails.setGetWay("購物");
+			pointDetails.setMemberId(memberId);
+			pointDetails.setGetPoint(opint);
+			pointDetailsService.insertPointDetail(pointDetails);
+			
+			return "加入訂單成功!!";	
+		}
+		
+		return"加入訂單失敗";
 	}
 }
 

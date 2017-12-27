@@ -56,11 +56,20 @@ public class ShoppingForStartPage {
 	
 	@RequestMapping(path = {"/header.shopping"}, method = RequestMethod.GET,produces= {"application/json;utf-8"})
 	public @ResponseBody List<CategoryType> headerCategory(String pageName, Model model){
-		
+		//為了旁邊的分類欄選項
 		List<CategoryType> categorys= productService.categoryFilter();
+		//為了旁邊的新上市選項(狀態3)
+		List<Product> products3= productService.hotProduct(3);
+
+
+		//告訴頁面已經下載過了
+		model.addAttribute("start", "lorded");
+		//將搜尋到的東西擺入物件中傳送
 		model.addAttribute("categorys", categorys);
-		return categorys;
-	}
+		model.addAttribute("asideProducts", products3);
 	
+		return categorys;
+
+	}
 
 }
