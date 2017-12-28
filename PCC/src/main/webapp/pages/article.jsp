@@ -42,9 +42,9 @@
 <link rel="stylesheet" type="text/css" href="../css/style.css">
 
 <!-- fontawesome -->
-<link href="../revolution/fonts/fontawesome-all.css">
-
-<link rel="stylesheet" type="text/css" href="../css/login.css">
+<!-- <link href="../revolution/fonts/fontawesome-all.css"> -->  
+ 
+<link rel="stylesheet" type="text/css" href="../css/login.css"> 
 	
 	<script src="<c:url value="/ckeditor/ckeditor.js"/>"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -170,12 +170,11 @@
 							<h3 class="entry-title">${article.topic}</h3>
 							<span>主題分類&nbsp;:&nbsp;${article.category}</span>
 							<span style="float:right;">發文時間&nbsp;:&nbsp;<fmt:formatDate value="${article.date}" pattern="yyyy-MM-dd HH:mm" /></span>
-							<div class="entry-meta">
+							<div class="entry-meta"> 
 								<span class="post-like"><i class="fa fa-heart-o"></i>${article.likes} Likes</span>
 								<span class="post-admin"><i class="fa fa-user"></i>${article.memberId}</span>
 							</div>
 							<div class="entry-content">
-								</p>
 								<a href="<c:url value="/showDetial.forum?messageId=${article.messageId}" />" title="Read More" class="read-more">閱讀本文<i class="fa fa-long-arrow-right"></i></a>
 							</div>
 						</div>

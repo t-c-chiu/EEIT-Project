@@ -81,8 +81,9 @@
 								<li class="button" style="display: none" id="cartButtonLi">
 
 									<a id="toCartA" title="View Cart" href="/PCC/pages/cart.jsp">View
-										Cart</a> <a title="Check Out" href="/PCC/pages/check.jsp">Check
-										out</a>
+										Cart</a> 
+<!-- 										<a title="Check Out" href="/PCC/pages/check.jsp">Check -->
+<!-- 										out</a> -->
 
 
 								</li>

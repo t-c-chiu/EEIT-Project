@@ -143,8 +143,7 @@
 								<div class="post-box">
 
 									<span class="productItem">
-										<form id="${asideProducts.productId}ProductForm"
-											action="/PCC/productId.shopping" method="get">
+										<form id="${asideProducts.productId}ProductForm" action="/PCC/productId.shopping" method="get">
 											<input type="text" name="productId"
 												value="${asideProducts.productId}" hidden />
 										</form> <a href="#"><img src="${asideProducts.pictureAscii}"
@@ -330,7 +329,8 @@
 					url : "/PCC/addCart.shopping",
 					type : "POST",
 					data : {
-						"productId" : productId
+						"productId" : productId,
+						"number":1
 					},
 					success : function(data) {
 						if (producIdCartLi.text() == "") {
@@ -378,7 +378,7 @@
 			
 		});
 
-		// 是否打開 ViweCart和Check out
+		// 是否打開 ViweCart
 		function ViewCart() {
 			var sum = 0;
 			$(".cartSpan").each(function() {

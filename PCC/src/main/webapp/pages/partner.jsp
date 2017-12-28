@@ -134,7 +134,8 @@
 						</div>
 						<div class="blog-content">
 							<h3 class="entry-title">
-								<a title="new Collectios are imported In Our shop.">服務經驗: ${servant.experience}年  <span> 服務類型: ${servant.type}</span>
+								<a title="new Collectios are imported In Our shop.">年紀: 50-55&nbsp;&nbsp;&nbsp;服務經驗: ${servant.experience}年 
+								<br><span> 服務類型: ${servant.type}</span>
 								</a>
 							</h3>
 							<div class="entry-meta">

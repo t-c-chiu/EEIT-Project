@@ -27,7 +27,7 @@ import model.service.MemberService;
 import model.service.RegistyService;
 
 @Controller
-@SessionAttributes(names = { "member","admin", "servant"})
+@SessionAttributes(names = { "member", "admin", "servant" })
 public class LoginController {
 	@Autowired
 	private MemberService memberService;
@@ -48,7 +48,7 @@ public class LoginController {
 		Map<String, String> errors = new HashMap<String, String>();
 		model.addAttribute("errors", errors);
 		// 進行商業服務
-//		System.out.println(memberId + password);
+		// System.out.println(memberId + password);
 		Member bean = memberService.login(memberId, password);
 		// 依照執行結果挑選適當的View元件
 		if (bean == null) {
@@ -63,7 +63,7 @@ public class LoginController {
 				model.addAttribute("admin", bean);
 				return "管理員";
 			// 一般會員
-			case 2:			
+			case 2:
 				model.addAttribute("member", bean);
 				return "會員";
 			// 服務員
@@ -79,16 +79,16 @@ public class LoginController {
 		}
 
 	}
-	
-	@RequestMapping(path="/logout.login", method = { RequestMethod.POST, RequestMethod.GET }, produces = {
-	"text/plain;charset=utf-8" })
-	public @ResponseBody String initSession(Model model,HttpSession session) {
-//		model.addAttribute("member",null);
+
+	@RequestMapping(path = "/logout.login", method = { RequestMethod.POST, RequestMethod.GET }, produces = {
+			"text/plain;charset=utf-8" })
+	public @ResponseBody String initSession(Model model, HttpSession session) {
+		// model.addAttribute("member",null);
 		Enumeration em = session.getAttributeNames();
-		if(em.hasMoreElements()){
+		if (em.hasMoreElements()) {
 			session.removeAttribute("member");
-			model.addAttribute("member",null);
-		return "登出";
+			model.addAttribute("member", null);
+			return "登出";
 		}
 		return "不登出";
 	}
@@ -122,6 +122,7 @@ public class LoginController {
 
 	}
 
+
 	@RequestMapping(path = "/registy.insert.login", method = { RequestMethod.POST }, produces = {"text/plain;charset=utf-8" })
 	public @ResponseBody String method3(Member member, PointDetails pointDetails,Model model) {
 		if (member != null) {
@@ -139,7 +140,7 @@ public class LoginController {
 			Member bean = memberService.updatePersonal(member);
 			return bean;
 		}
-		
+
 		return null;
 
 	}

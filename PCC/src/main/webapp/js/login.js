@@ -105,7 +105,7 @@ $(function() {
 			success : function(data) {
 				if (data == "會員" || data == "管理員") {
 					if (data == "管理員") {
-						location.replace('/PCC/admin/production/admin.jsp');
+						location.assign('/PCC/matching.admin'); 
 					} else {
 						$('#log-log').css("display", "none");
 						$('#log-reg').css("display", "none");

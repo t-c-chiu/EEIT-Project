@@ -69,20 +69,19 @@ public class ProductDAO {
 
 	// 更新商品，一次一個
 
-	public boolean updateProduct(int productId, int stock, int price, String productName, String category,
-			String pictureascii, String context, int status) {
+	public boolean updateProduct(Product product) {
 
-		Product selectBean = this.selectId(productId);
+		Product selectBean = this.selectId(product.getProductId());
 		if (selectBean != null) {
 
-			selectBean.setStock(stock);
-			selectBean.setPrice(price);
-			selectBean.setProductName(productName);
-			selectBean.setCategory(category);
-			selectBean.setPictureAscii(pictureascii);
-			selectBean.setStatus(status);
-			selectBean.setContext(context);
-			System.out.println("dao back");
+			selectBean.setProductName(product.getProductName());
+			selectBean.setStock(product.getStock());
+			selectBean.setPrice(product.getPrice());
+			selectBean.setCategory(product.getCategory());
+			selectBean.setStatus(product.getStatus());
+			selectBean.setPictureAscii(product.getPictureAscii());
+			selectBean.setContext(product.getContext());
+
 			return true;
 		}
 

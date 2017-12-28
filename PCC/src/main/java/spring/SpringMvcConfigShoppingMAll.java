@@ -24,14 +24,14 @@ public class SpringMvcConfigShoppingMAll
 	@Autowired
 	private ServletContext application;
 	
-	
+	//為了解析      enctype="multipart/form-data"
 	@Bean
 	public CommonsMultipartResolver multipartResolver() {
 		CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver();
 		multipartResolver.setDefaultEncoding("UTF-8");
 		return multipartResolver;
 	}
-	
+	//為了解析      enctype="multipart/form-data"
 	
 	
 	@Override
