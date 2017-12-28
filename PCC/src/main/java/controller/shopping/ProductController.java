@@ -14,12 +14,10 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -28,7 +26,7 @@ import model.service.ProductService;
 import spring.PrimitiveNumberEditor;
 
 @Controller
-@SessionAttributes(value = { "products", "productPage", "adminProduct" })
+@SessionAttributes(value = { "products", "productPage", "adminProduct" ,"categoryName"})
 public class ProductController {
 
 	@Autowired
@@ -38,6 +36,7 @@ public class ProductController {
 	private List<Product> adminProduct; 
 	private String searchWay;
 
+
 	@InitBinder
 	public void initlization(WebDataBinder webDataBinder) {
 		webDataBinder.registerCustomEditor(int.class, new PrimitiveNumberEditor(Integer.class, true));
@@ -45,21 +44,7 @@ public class ProductController {
 	}
 	
 	
-	// 產品加到喜愛蒐藏
-	@RequestMapping(path = { "/addToFavoriteProduct.shopping" }, method = RequestMethod.GET)
-	public @ResponseBody String addToFavoriteProduct(int productId,String searchWay ,Model model) {
-
-		if (productId != 0) {
-			this.searchWay=searchWay;
-			adminProduct = new ArrayList<Product>();
-			Product pp = productService.search(productId);
-			adminProduct.add(pp);
-			model.addAttribute("adminProduct", adminProduct);
-
-		}
-
-		return "admin.product";
-	}
+	
 	
 
 	// 後台ID搜尋商品
@@ -127,7 +112,7 @@ public class ProductController {
 	@RequestMapping(path = { "/adminUpdata.shopping" }, method = RequestMethod.POST, produces = {
 			"text/plain;charset=utf-8" })
 	public String updateProduct(Product product, MultipartFile photo, Model model) {
-	System.out.println("controller:"+photo);
+	
 		if (product != null) {
 			if(photo!=null) {
 			String path = this.imageHelper(product.getProductId(), photo);
@@ -165,7 +150,7 @@ public class ProductController {
 		if (productId != 0) {
 			Product product = productService.search(productId);
 			model.addAttribute("productPage", product);
-			System.out.println("in :");
+			
 		}
 		return "page.product";
 	}
@@ -173,13 +158,13 @@ public class ProductController {
 	// 商品名搜尋頁面
 	@RequestMapping(path = { "/searchProduct.shopping" }, method = RequestMethod.GET)
 	public String searchProductFromSearchText(String searchText, Model model) {
-		// System.out.println("new controller start " + searchText);
+		
 		if (searchText != null && searchText.trim().length() != 0) {
-			System.out.println("new controller 1");
+		
 			List<Product> products = productService.searchText(searchText);
 
 			int page = 1;
-			System.out.println("new controller 2" + products);
+		
 			model.addAttribute("page", page);
 
 			if (products != null && !products.isEmpty()) {
@@ -201,21 +186,20 @@ public class ProductController {
 	// 商品利用分頁搜尋頁面
 	@RequestMapping(path = { "/searchCatagory.shopping" }, method = RequestMethod.GET)
 	public String searchProductFromSearchCategory(String category, Model model) {
-		System.out.println("new controller start " + category);
+	
 		if (category != null && category.trim().length() != 0) {
-			System.out.println("new controller 1");
+			
 			List<Product> products = productService.searchByCategory(category);
 
 			int page = 1;
-			System.out.println("new controller 2" + products);
+	
 			model.addAttribute("page", page);
 
 			if (products != null && !products.isEmpty()) {
 				// List<Product> page8 = null;
 				model.addAttribute("products", products);
 				model.addAttribute("page", page);
-
-				System.out.println("new controller out");
+				model.addAttribute("categoryName", category);
 				return "page.productsearch";
 
 			} else {
@@ -232,7 +216,7 @@ public class ProductController {
 
 	}
 
-	// 未完成
+	// 未完成想轉換頁面
 	@RequestMapping(path = { "/pageChange.shopping" }, method = RequestMethod.GET
 
 	)

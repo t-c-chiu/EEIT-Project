@@ -237,17 +237,17 @@ function addressCheck(){
 
 
 //--------------------------------購物車-----------------------------------------
+//頭部：;搜尋商品分類欄
 $(function() {
 
-	//頭部：;搜尋商品分類欄
 	$.ajax({
 		url : "/PCC/header.shopping",
 		type : "GET",
 		success : function(data) {
-			console.log(data);
+		
 			$.each(data, function(i, category) {
 				var text = category.categoryName;
-				console.log(text);
+			
 				var li = $("<li></li>").addClass("categoryli");
 					var a = $("<a></a>").text(text);
 					a.attr("href", "#");
@@ -269,8 +269,8 @@ $(function() {
 		}
 
 	});
-
-	// 底部：搜尋商品分類欄		
+});
+			
 
 	// 按下X除去購物車物件
 	$(".remove").click(function() {
@@ -297,14 +297,17 @@ $(function() {
 	$("body").on('click','.categoryli',function() {
 		$(this).find("form").submit();
 	});
+	//跑去購物商城首頁
+	$("#shoppingMall").click(function(){
+		$("#shoppingMallForm").submit();
+	});
+	
 
-});
 
 function ViewCart() {
 	var sum = 0;
 	$(".cartSpan").each(function() {
 		var number = parseInt($(this).text());
-		console.log(number);
 		sum = sum + number;
 	});
 	if (sum == 0) {

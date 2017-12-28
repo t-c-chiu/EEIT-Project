@@ -17,9 +17,7 @@ public class OrderService {
 
 	// 新增訂單
 	public int insertOrder(Order order) {
-		System.out.println("service in" + order);
 		int i = orderDAO.insertOlder(order);
-		System.out.println("service out" + i);
 		return i;
 	}
 

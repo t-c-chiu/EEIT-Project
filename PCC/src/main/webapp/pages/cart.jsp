@@ -125,7 +125,7 @@
 							<td>
 								<ul>
 									<li style="list-style-type: none"><img alt="衣服"
-										src="/PCC/images/deal-5.jpg"></li>
+										src="${item.value.pictureAscii}.jpg" width="140px" height="140px" /></li>
 									<li style="list-style-type: none"><label>${item.value.productName}</label></li>
 								</ul>
 							</td>

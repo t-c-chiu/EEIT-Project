@@ -142,11 +142,17 @@ public class CartController {
 			//5.將購物的金錢轉成點數，500元一點 。並新增到會員總點數和點數明細中
 			int total= order.getTotalPrice();
 			Integer opint =total/500;
+			
 			pointDetails.setGettingDate(today);
 			pointDetails.setGetWay("購物");
 			pointDetails.setMemberId(memberId);
 			pointDetails.setGetPoint(opint);
 			pointDetailsService.insertPointDetail(pointDetails);
+			
+			int p=member.getPoint();
+			member.setPoint((p+opint));
+			memberService.updatePersonal(member);
+			
 			
 			return "加入訂單成功!!";	
 		}

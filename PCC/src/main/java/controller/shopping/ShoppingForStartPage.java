@@ -18,7 +18,7 @@ import model.service.ProductService;
 import spring.PrimitiveNumberEditor;
 
 @Controller
-@SessionAttributes(value= {"categorys","start","products","asideProducts"})
+@SessionAttributes(value= {"categorys","start","products","asideProducts","categoryName"})
 public class ShoppingForStartPage {
 	
 	@Autowired
@@ -31,7 +31,7 @@ public class ShoppingForStartPage {
 	}
 	
 	@RequestMapping(path = {"/star.shopping"}, method = RequestMethod.POST)
-	public String startCategory(String pageName, Model model) {
+	public String startCategory(String pageName,String categoryName,Model model) {
 		//為了旁邊的分類欄選項
 		List<CategoryType> categorys= productService.categoryFilter();
 		//為了旁邊的新上市選項(狀態3)
@@ -40,11 +40,16 @@ public class ShoppingForStartPage {
 		List<Product> products= productService.hotProduct(2);
 
 		//告訴頁面已經下載過了
+		
 		model.addAttribute("start", "lorded");
+		model.addAttribute("categoryName",categoryName);
+		
+		
 		//將搜尋到的東西擺入物件中傳送
 		model.addAttribute("categorys", categorys);
 		model.addAttribute("products",products);
 		model.addAttribute("asideProducts", products3);
+
 		if(pageName.equals("searchPage")) {
 			return "page.productsearch";
 		}else if(pageName.equals("prodcutPage")) {

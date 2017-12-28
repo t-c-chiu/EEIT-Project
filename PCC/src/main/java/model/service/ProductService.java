@@ -81,7 +81,7 @@ public class ProductService {
 
 	// 產品更新for後台(一次一更新一筆)
 	public boolean updateProduct(Product product, String path) {
-		System.out.println("servic in" + product + "path:" + path);
+		
 		if (product != null) {
 			productDAO.updateProduct(product.getProductId(), product.getStock(), product.getPrice(),
 					product.getProductName(), product.getCategory(), path, product.getContext(), product.getStatus());
