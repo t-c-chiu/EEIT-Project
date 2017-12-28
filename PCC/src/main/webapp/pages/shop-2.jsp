@@ -58,7 +58,7 @@
 			<!-- Container -->
 			<div class="container">
 				<div class="banner-content">
-					<h3>購物商城</h3>
+					<h3 id="shoppingTitil"><a>購物商城</a></h3>
 					<p>our vision is to be Earth's most customer centric company</p>
 
 
@@ -142,8 +142,7 @@
 								<div class="post-box">
 
 									<span class="productItem">
-										<form id="${asideProducts.productId}ProductForm"
-											action="/PCC/productId.shopping" method="get">
+										<form id="${asideProducts.productId}ProductForm" action="/PCC/productId.shopping" method="get">
 											<input type="text" name="productId"
 												value="${asideProducts.productId}" hidden />
 										</form> <a href="#"><img src="${asideProducts.pictureAscii}"
@@ -214,7 +213,7 @@
 										
 								</a> <!-- 圖案旁邊的icon --> 									
 								<div  class="wishlist-box heart-shop">
-										<a class="heart"> 
+										<a class="heart" name="${products8.productId}"> 
 										<h1 ><i class="fa fa-heart-o"></i></h1>
 										</a> 
 
@@ -248,7 +247,7 @@
 	<form id="startForm" action="/PCC/star.shopping" method="post">
 		<input name="pageName" type="text" value="searchPage" hidden /> 
 		<input id="startInput" type="text" value="${start}" hidden />
-		<input id="startCategory" type="text" value="${start}" hidden />	
+		<input id="startCategory" type="text" name="categoryName" value="${categoryName}" hidden />	
 	</form>
 
 	<!-- JQuery v1.12.4 -->
@@ -286,12 +285,23 @@
 		$(document).ready(function() {
 
 			var starInput = $('#startInput').val();
-
+			var startCategory=$("#startCategory");
 			ViewCart();
 
-			if (starInput == "") {
+			if (starInput == "" || startCategory.val()=="") {
+				startCategory.val("一開始");
 				$('#startForm').submit();
 			}
+				
+// 			//回到熱門商品首頁
+			$("#shoppingTitil").click(function(){
+				$("#startForm").submit();
+				
+			});
+			
+			
+			
+			
 			// 搜尋欄搜尋商品名
 			$('#serch-btn').click(function() {
 				// alert("已點");
@@ -318,7 +328,8 @@
 					url : "/PCC/addCart.shopping",
 					type : "POST",
 					data : {
-						"productId" : productId
+						"productId" : productId,
+						"number":1
 					},
 					success : function(data) {
 						if (producIdCartLi.text() == "") {
@@ -349,13 +360,24 @@
 			
 			//點擊愛心加到我的最愛
 			$(".heart").click(function(){
+				var id=$(this).attr("name");
+				console.log(id);
+				$.ajax({
+					url:"/PCC/addToFavoriteProduct.shopping",
+					type:"GET",
+					data:{"productId":id},
+					success:function(data){
+						alert(data);						
+					}
+					
+				});
 				
 			});
 			
 			
-
 		});
-		// 是否打開 ViweCart和Check out
+
+		// 是否打開 ViweCart
 		function ViewCart() {
 			var sum = 0;
 			$(".cartSpan").each(function() {

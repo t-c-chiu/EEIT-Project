@@ -12,4 +12,9 @@
 		<property name="contextRelative" value="true"></property>
 		<property name="url" value="/admin/production/partner.jsp"></property>
 	</bean>
+	
+	<bean id="index" class="org.springframework.web.servlet.view.RedirectView">
+		<property name="contextRelative" value="true"></property>
+		<property name="url" value="/index.jsp"></property>
+	</bean>
 </beans>

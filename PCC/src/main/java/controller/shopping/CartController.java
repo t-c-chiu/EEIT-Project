@@ -64,7 +64,7 @@ public class CartController {
 	// 購物車加入功能
 	@RequestMapping(path = { "/addCart.shopping" }, method = RequestMethod.POST, produces = {
 			"application/json;charset=UTF-8" })
-	public @ResponseBody Cart addCart(int productId, Model model, HttpServletRequest request) {
+	public @ResponseBody Cart addCart(int productId, Model model,int number ,HttpServletRequest request) {
 
 
 		Product product = productService.search(productId);
@@ -84,7 +84,7 @@ public class CartController {
 
 			// 設置數量+1
 			cart1 = addToCart.get(product.getProductId());
-			cart1.setQuantity(cart1.getQuantity() + 1);
+			cart1.setQuantity(cart1.getQuantity() + number);
 
 		} else {
 
@@ -142,11 +142,17 @@ public class CartController {
 			//5.將購物的金錢轉成點數，500元一點 。並新增到會員總點數和點數明細中
 			int total= order.getTotalPrice();
 			Integer opint =total/500;
+			
 			pointDetails.setGettingDate(today);
 			pointDetails.setGetWay("購物");
 			pointDetails.setMemberId(memberId);
 			pointDetails.setGetPoint(opint);
 			pointDetailsService.insertPointDetail(pointDetails);
+			
+			int p=member.getPoint();
+			member.setPoint((p+opint));
+			memberService.updatePersonal(member);
+			
 			
 			return "加入訂單成功!!";	
 		}

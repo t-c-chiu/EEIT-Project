@@ -26,7 +26,7 @@ public class PointDetailsService {
 	
 	public int insertPointDetail(PointDetails pointDetails) {
 		if(pointDetailsDAO!=null) {
-			int key=pointDetailsDAO.insertPointDetail(pointDetails);
+			int key=pointDetailsDAO.insertPoint(pointDetails);
 			return key;
 		}
 		return 0;

@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -91,6 +92,12 @@ public class AdminController {
 	@RequestMapping(path = "/deleteThisServant.admin", method = RequestMethod.GET, produces = "text/plain;charset=UTF-8")
 	public @ResponseBody String deleteThisServant(Integer serviceId) {
 		return adminService.deleteThisServant(serviceId);
+	}
+
+	@RequestMapping(path = "/adminLogout.admin", method = RequestMethod.GET)
+	public String adminLogout(HttpSession session) {
+		session.removeAttribute("admin");
+		return "index";
 	}
 
 	@RequestMapping(path = "/createServant.admin", method = RequestMethod.POST, produces = "text/plain;charset=UTF-8")
