@@ -64,7 +64,7 @@ public class CartController {
 	// 購物車加入功能
 	@RequestMapping(path = { "/addCart.shopping" }, method = RequestMethod.POST, produces = {
 			"application/json;charset=UTF-8" })
-	public @ResponseBody Cart addCart(int productId, Model model, HttpServletRequest request) {
+	public @ResponseBody Cart addCart(int productId, Model model,int number ,HttpServletRequest request) {
 
 
 		Product product = productService.search(productId);
@@ -84,7 +84,7 @@ public class CartController {
 
 			// 設置數量+1
 			cart1 = addToCart.get(product.getProductId());
-			cart1.setQuantity(cart1.getQuantity() + 1);
+			cart1.setQuantity(cart1.getQuantity() + number);
 
 		} else {
 

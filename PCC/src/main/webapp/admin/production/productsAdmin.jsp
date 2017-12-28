@@ -150,37 +150,7 @@ th, td {
 									type="submit" value="狀態查詢" class="submit"> <br>
 							</form>
 						</div>
-					</div>
-
-
-					<div id="applyCourseFrom" style="display: none; float: left;">
-						<form id="formData" method="post"
-							action="<c:url value="/adminInsert.shopping"/>"
-							enctype="multipart/form-data">
-							<label>商品名稱：</label><input id="productName" type="text"
-								name="productName" required><br> <label>商品分類：</label><select
-								name="category" id="category" required>
-								<option>請選擇</option>
-								<option value="藥膳">藥膳</option>
-								<option value="產前產品">產前產品</option>
-								<option value="產後產品">產後產品</option>
-								<option value="嬰兒產品">嬰兒產品</option>
-							</select> <br> <label>商品價位：</label><input type="number" name="price"
-								min="1" id="price" /><br> <label>商品存貨：</label><input
-								type="number" name="stock" min="1" id="stock" /><br> <label>狀態</label>
-							<input type="checkbox" name="status" value="1" checked="checked" />上架
-							<input type="checkbox" name="status" value="0" />下架 <input
-								type="checkbox" name="status" value="2" />熱門商品 <input
-								type="checkbox" name="status" value="3" />新上架商品 <br> <label>商品內容：</label>
-							<textarea name="context" id="introduction"></textarea>
-							<br> <label>商品截圖：</label> <input type="file" id="photo"
-								name="photo" accept="image/*"><br> <img
-								id="previewPhoto" style="max-width: 250px;" /> <br> <input
-								id="btnSubmit" type="submit" value="確定上架"> <input
-								type="reset" value="重新填寫">
-						</form>
-					</div>
-					<!-- center旁邊的right -->
+						<!-- center旁邊的right -->
 					<div id="sidebar_right">
 						<span class="right">
 							<table>
@@ -229,6 +199,38 @@ th, td {
 						</span>
 					</div>
 					<!-- /center旁邊的right -->
+						
+					</div>
+
+
+					<div id="applyCourseFrom" style="display: none; float: left;">
+						<form id="formData" method="post"
+							action="<c:url value="/adminInsert.shopping"/>"
+							enctype="multipart/form-data">
+							<label>商品名稱：</label><input id="productName" type="text"
+								name="productName" required><br> <label>商品分類：</label><select
+								name="category" id="category" required>
+								<option>請選擇</option>
+								<option value="藥膳">藥膳</option>
+								<option value="產前產品">產前產品</option>
+								<option value="產後產品">產後產品</option>
+								<option value="嬰兒產品">嬰兒產品</option>
+							</select> <br> <label>商品價位：</label><input type="number" name="price"
+								min="1" id="price" /><br> <label>商品存貨：</label><input
+								type="number" name="stock" min="1" id="stock" /><br> <label>狀態</label>
+							<input type="checkbox" name="status" value="1" checked="checked" />上架
+							<input type="checkbox" name="status" value="0" />下架 <input
+								type="checkbox" name="status" value="2" />熱門商品 <input
+								type="checkbox" name="status" value="3" />新上架商品 <br> <label>商品內容：</label>
+							<textarea name="context" id="introduction"></textarea>
+							<br> <label>商品截圖：</label> <input type="file" id="photo"
+								name="photo" accept="image/*"><br> <img
+								id="previewPhoto" style="max-width: 250px;" /> <br> <input
+								id="btnSubmit" type="submit" value="確定上架"> <input
+								type="reset" value="重新填寫">
+						</form>
+					</div>
+					
 				</div>
 				<!-- /中間的certer -->
 
@@ -364,11 +366,13 @@ th, td {
 			// 			init();
 			$('#applyCourseFrom').css('display', 'none');
 			$('#currentCourseArea').css('display', 'block');
+			$("#sidebar_right").css("disaplay","block");
 		})
 
 		$('#applyCourse').click(function() {
 			$('#currentCourseArea').css('display', 'none');
 			$('#applyCourseFrom').css('display', 'block');
+			$("#sidebar_right").css("disaplay","none");
 		})
 
 		$('input[type="reset"]').click(function() {
@@ -385,8 +389,10 @@ th, td {
 			stepMinute : 30
 		});
 
-		$('#photo').change(function() {
+		$('#upfile').change(function() {
+			alert("hihihihij"+this);
 			if (this.files && this.files[0]) {
+		
 				var reader = new FileReader();
 				reader.onload = function(e) {
 					$('#previewPhoto').attr('src', e.target.result);
