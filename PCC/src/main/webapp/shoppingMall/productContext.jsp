@@ -266,14 +266,14 @@
 
 								<tr>
 									<th scope="row">訂購數量</th>
-									<td><input name="qunaity " type="number" min="1" max="10" />
-								
+									<td><input id="number" name="qunaity " type="number"
+										min="1" max="10"  />
+
 										<button class="button button-white"
 											data-ylk="sec:buyinfo;slk:加入購物車;" id="e2e-item-add2cart-top"
 											type="button">
 											<span class="sprite sprite-cart-default"></span> <span>加入購物車</span>
-										</button>
-									</td>
+										</button></td>
 								</tr>
 
 							</table>
@@ -346,109 +346,88 @@
 	<!-- login  -->
 	<script type="text/javascript" src="../js/login.js"></script>
 	<script type="text/javascript">
-		$(document)
-				.ready(
-						function() {
-							var starInput = $('#startInput').val();
+		$(document).ready(function() {
+			var starInput = $('#startInput').val();
+			console.log(productId);
+			ViewCart();
+			initNumber();
+		
+			
+			//為了初始化的載入
+			if (starInput == "") {
+				$('#startForm').submit();
+			}
+			// 搜尋欄搜尋商品名
+			$('#serch-btn').click(function() {
+				// alert("已點");
+				var searchText = $('#searchText').val();
+				// alert(searchText);
+				if (searchText.trim().length == 0) {
+					alert('請輸入搜尋條件');
+					$('#filter').val('').focus();
+				} else {
+					$('#searchForm').submit();
+				}
+			});
+			// 分類欄點選分類
+			$(".categoryli").click(function() {
+				// alert(".categoryli被點選");
+				var formid = $(this).find("input").val();
+				// alert(formid);
+				if (formid != '') {
+					$(this).find("form").submit();
+				}
 
-							console.log(productId);
-							ViewCart();
-							//為了初始化的載入
-							if (starInput == "") {
-								$('#startForm').submit();
-							}
+			});
 
-							// 搜尋欄搜尋商品名
-							$('#serch-btn').click(function() {
-								// alert("已點");
-								var searchText = $('#searchText').val();
-								// alert(searchText);
-								if (searchText.trim().length == 0) {
-									alert('請輸入搜尋條件');
-									$('#filter').val('').focus();
-								} else {
-									$('#searchForm').submit();
-								}
-							})
-							// 分類欄點選分類
-							$(".categoryli").click(function() {
-								// alert(".categoryli被點選");
-								var formid = $(this).find("input").val();
+			// 加入購物車
 
-								// alert(formid);
-								if (formid != '') {
-									$(this).find("form").submit();
-								}
+			$("#e2e-item-add2cart-top").click(function() {
+				var productId = $("#productId").val();
+				var producIdCartLi = $("#"+ productId + "SS");
+				var number =$("#number").val();
+				$.ajax({
+					url : "/PCC/addCart.shopping",
+					type : "POST",
+					data : {
+						"productId" : productId,
+						"number":number
+					},
+					success : function(data) {
+						if (producIdCartLi.text() == "") {
+							var item = $("#"+ data.productId);
+							item.css("display","");
+						}
+						// 抓數量的數字
+						$("#"+ data.productId+"span").text(data.quantity);
+						// 只要購物車內有東西，就打開View Cart 和Check Out
+						ViewCart();
+						alert("已經入購物車!!")
+				}});
 
-							});
+			});
 
-							// 加入購物車
+			//點圖轉跳頁面
 
-							$("#e2e-item-add2cart-top")
-									.click(
-											function() {
-												var productId = $("#productId")
-														.val();
-												var producIdCartLi = $("#"
-														+ productId + "SS");
-												$
-														.ajax({
-															url : "/PCC/addCart.shopping",
-															type : "POST",
-															data : {
-																"productId" : productId
-															},
-															success : function(
-																	data) {
-																if (producIdCartLi
-																		.text() == "") {
-																	var item = $("#"
-																			+ data.productId);
-																	item
-																			.css(
-																					"display",
-																					"");
-																}
-																// 抓數量的數字
-																$("#"+ data.productId+ "span")
-																		.text(
-																				data.quantity);
-																// 只要購物車內有東西，就打開View Cart 和Check Out
-																ViewCart();
-																alert("已經入購物車!!")
-															}
-														});
+			$(".productItem").click(function() {
+				var id = $(this).attr("id");
+				$.ajax({
+					url : "/PCC/controller.shopping",
+					type : "GET",
+					data : {"productId" : id},
+					success : function(data) {
+						location.replace("/PCC/shoppingMall/productContext.jsp");
+					}
+				});
 
-											});
+			});
+			
+		//跳轉去結帳
+		$("#e2e-item-checkout-top").click(function() {
+			location.replace("/PCC/pages/check.jsp");
+		});
 
-							//點圖轉跳頁面
-
-							$(".productItem")
-									.click(
-											function() {
-												var id = $(this).attr("id");
-												$
-														.ajax({
-															url : "/PCC/controller.shopping",
-															type : "GET",
-															data : {
-																"productId" : id
-															},
-															success : function(
-																	data) {
-																location
-																		.replace("/PCC/shoppingMall/productContext.jsp");
-															}
-														});
-
-											});
-							//跳轉去結帳
-							$("#e2e-item-checkout-top").click(function() {
-
-								location.replace("/PCC/pages/check.jsp");
-							});
-
-						});
+});
 		// 是否打開 ViweCart和Check out
 		function ViewCart() {
 			var sum = 0;
@@ -464,6 +443,12 @@
 				$("#cartButtonLi").css("display", "");
 			}
 
+		}
+		
+		
+		function initNumber(){
+			
+			document.getElementById("number").defaultValue='1';
 		}
 	</script>
 </body>

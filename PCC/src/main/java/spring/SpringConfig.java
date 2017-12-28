@@ -20,6 +20,10 @@ import org.springframework.web.context.support.AnnotationConfigWebApplicationCon
 import model.bean.CategoryType;
 import model.bean.Clazz;
 import model.bean.CollectArticle;
+import model.bean.Exchange;
+import model.bean.ExchangeDetails;
+import model.bean.FavoriteProduct;
+import model.bean.Gift;
 import model.bean.Matching;
 import model.bean.Member;
 import model.bean.Order;
@@ -60,7 +64,8 @@ public class SpringConfig extends AbstractContextLoaderInitializer {
 		builder.addAnnotatedClasses(Clazz.class, CollectArticle.class, Matching.class, Member.class, Order.class,
 				OrderDetail.class, PostArticle.class, Product.class, ReplyArticle.class, Reservation.class, Room.class,
 				RoomReservation.class, Servant.class, Student.class, SystemMessage.class, ReportedArticle.class,
-				CategoryType.class, PointDetails.class);
+				CategoryType.class, PointDetails.class, Gift.class, Exchange.class, ExchangeDetails.class,FavoriteProduct.class);
+
 		return builder.buildSessionFactory();
 	}
 
