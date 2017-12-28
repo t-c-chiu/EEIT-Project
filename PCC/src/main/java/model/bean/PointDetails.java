@@ -11,16 +11,17 @@ public class PointDetails {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int pointId;
-	private Date gettingDate;
 	private String memberId;
+	private Date gettingDate;
 	private String getWay;
 	private int getPoint;
 
 	@Override
 	public String toString() {
-		return "PointDetails [pointId=" + pointId + ", gettingDate=" + gettingDate + ", memberId=" + memberId
-				+ ", getWay=" + getWay + ", getPoint=" + getPoint + "]";
+		return "PointDetails [pointId=" + pointId + ", gettingDate=" + gettingDate + ", getWay=" + getWay
+				+ ", getPoint=" + getPoint + ", memberId=" + memberId + "]";
 	}
+
 	public String getMemberId() {
 		return memberId;
 	}

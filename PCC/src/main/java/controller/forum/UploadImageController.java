@@ -1,7 +1,10 @@
 package controller.forum;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -47,15 +50,21 @@ public class UploadImageController {
 
 		DateFormat df = new SimpleDateFormat("yyyyMMddHHmmss");
 		name = df.format(new Date()) + expandedName;
+		byte[] photoByte = new byte[(int) upload.getSize()];
 		try {
-			File file = new File(application.getRealPath("/images"), name);
+			InputStream is = upload.getInputStream();
+			is.read(photoByte);
+			OutputStream os = new FileOutputStream(
+					new File("C:\\Maven\\git\\PCC\\src\\main\\webapp\\images\\forum", name));
+			os.write(photoByte);
+			os.close();
+			File file = new File(application.getRealPath("/images/forum"), name);
 			upload.transferTo(file);
-
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
-		String fileURL = application.getContextPath() + "/images/" + name;
+		String fileURL = application.getContextPath() + "/images/forum/" + name;
 
 		out.println("<script type=\"text/javascript\">");
 		out.println("window.parent.CKEDITOR.tools.callFunction(" + CKEditorFuncNum + ",'" + fileURL + "','')");

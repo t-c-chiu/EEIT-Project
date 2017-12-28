@@ -145,14 +145,6 @@
 </head>
 <body data-offset="200" data-spy="scroll" data-target=".ow-navigation">
 	<div class="main-container">
-		<!-- Loader -->
-		<div id="site-loader" class="load-complete">
-			<div class="loader">
-				<div class="loader-inner ball-clip-rotate">
-					<div></div>
-				</div>
-			</div>
-		</div><!-- Loader /- -->	
 		
 <%@ include file="header.jsp"%>
 
@@ -163,7 +155,7 @@
 			<div class="container">
 				<!-- Content Area -->
 			<div class="content-area blog-section col-md-8 col-sm-8 col-xs-12">
-			<h1>${detail.post.topic}</h1>
+			<h1><a href="<c:url value="/showDetial.forum?messageId=${detail.post.messageId}"/>">${detail.post.topic}</a></h1>
 			<hr>
 			<h3>${detail.post.memberId}</h3>
 			文章類型&nbsp;:&nbsp;${detail.post.category}&nbsp;&nbsp;&nbsp;&nbsp;

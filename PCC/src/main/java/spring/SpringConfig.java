@@ -20,7 +20,6 @@ import org.springframework.web.context.support.AnnotationConfigWebApplicationCon
 import model.bean.CategoryType;
 import model.bean.Clazz;
 import model.bean.CollectArticle;
-import model.bean.Conversation;
 import model.bean.Matching;
 import model.bean.Member;
 import model.bean.Order;
@@ -58,10 +57,10 @@ public class SpringConfig extends AbstractContextLoaderInitializer {
 		LocalSessionFactoryBuilder builder = new LocalSessionFactoryBuilder(dataSource());
 		builder.setProperty("hibernate.show_sql", "true");
 		builder.setProperty("hibernate.dialect", "org.hibernate.dialect.SQLServerDialect");
-		builder.addAnnotatedClasses(Clazz.class, CollectArticle.class, Conversation.class, Matching.class, Member.class,
-				Order.class, OrderDetail.class, PostArticle.class, Product.class, ReplyArticle.class, Reservation.class,
-				Room.class, RoomReservation.class, Servant.class, Student.class, SystemMessage.class,
-				ReportedArticle.class,CategoryType.class,PointDetails.class);
+		builder.addAnnotatedClasses(Clazz.class, CollectArticle.class, Matching.class, Member.class, Order.class,
+				OrderDetail.class, PostArticle.class, Product.class, ReplyArticle.class, Reservation.class, Room.class,
+				RoomReservation.class, Servant.class, Student.class, SystemMessage.class, ReportedArticle.class,
+				CategoryType.class, PointDetails.class);
 		return builder.buildSessionFactory();
 	}
 

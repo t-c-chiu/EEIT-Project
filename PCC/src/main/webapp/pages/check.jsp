@@ -70,6 +70,8 @@
 
 		<!--	內容開始	-->
 		<main> <!-- Page Banner -->
+
+
 		<div class="page-banner container-fluid no-padding">
 			<!-- Container -->
 			<div class="container">
@@ -87,11 +89,93 @@
 		<!-- Page Banner /- -->
 
 		<div class="container" style="margin-bottom: 100px">
+			<!-- 無購物會出現的圖， -->
+
+			<%
+				if (session.getAttribute("addToCart") == null) {
+					session.setAttribute("addToCart", new HashMap<Integer, Cart>());
+				}
+			%>
+
+			<div align='center' id='noShoppingImg' style="display: none">
+				<img alt='noShopping' src='../images/noShopping.jpg'>
+				<button id="gotoShoppingButtoun"
+					class="btn btn-default form-control footer-send " type="button"
+					style="border-color: pink">我要去購物</button>
+				<!-- 					<input id="gotoShoppingButtoun" type="button" value="去購物" style="width:200px;height:70px;font-size:20px; dashed;background-color:pink;"/> -->
+			</div>
 
 
-			<div class="checkout-form">
+			<!-- 有購物後，出現的表單 -->
+			<form action="/PCC/insertOrder.shopping" method="post">
+				<div style="margin-bottom: 100px" class="table-responsive">
+					<table class="table" width="600" height="300"
+						style="border: 3px #cccccc solid;">
+						<caption style="font-size: 50px">購物車</caption>
+						<tr style="height: 15px">
+							<th>商品名稱</th>
+							<th>數量及規格</th>
+							<th>價格</th>
+							<th>小計</th>
+							<th></th>
+						</tr>
 
-				<form>
+						<c:forEach var="item" items="#{addToCart}">
+							<tr id="${item.key}tr">
+								<td>
+									<ul>
+										<li style="list-style-type: none"><img alt="衣服"
+											src="/PCC/images/deal-5.jpg"></li>
+										<li style="list-style-type: none"><label>${item.value.productName}</label></li>
+									</ul>
+								</td>
+
+								<td>
+									<ul style="padding: 0px">
+										<li
+											style="list-style-type: none; padding: 5px; list-style-position: inside; margin-left: 0px;">規格：
+											<select>
+												<option>請選擇</option>
+												<option>F</option>
+										</select>
+										</li>
+										<li style="list-style-type: none; padding: 5px">樣式： <select>
+												<option>請選擇</option>
+												<option>F</option>
+										</select>
+										</li>
+										<li style="list-style-type: none; padding: 5px">數量： <input
+											style="font-size: 11px; font-family: serif;" type="number"
+											min="1" max="10" size="7" value="${item.value.quantity}"
+											id="${item.key}" class="quantityNumber" />
+										</li>
+									</ul>
+								</td>
+								<td><span>$</span><span class="price" id="${item.key}price">${item.value.price}</span></td>
+								<td><span>$</span><span class="subtal"
+									id="${item.key}subtotal">${item.value.subtotal}</span></td>
+								<td class="eliminate" id="${item.key}eliminate">刪除</td>
+							</tr>
+
+						</c:forEach>
+						<tr>
+
+							<th></th>
+							<th></th>
+							<th></th>
+							<th></th>
+							<th><label>共$<span id="tatlePrice"
+									style="font-size: 20px; font-weight: bold; color: red"></span>元
+							</label> <input name="totalPrice" hidden value="" /></th>
+						</tr>
+					</table>
+
+				</div>
+				<!--/ 有購物後，出現的表單 -->
+
+				<div class="checkout-form">
+
+
 					<div class="col-md-8 col-sm-12 col-xs-12 col-md-push-2 ">
 						<div style="background-color: #FFB6C1">
 							<h3>
@@ -99,6 +183,11 @@
 							</h3>
 						</div>
 						<div class="billing-field">
+							<div class="col-md-12 form-group">
+								<label>帳號 *</label><span></span> <input id="name"
+									name="memberId" class="form-control" type="text"
+									value="${member.name }" required />
+							</div>
 							<div class="col-md-12 form-group">
 								<label>姓名 *</label><span></span> <input onblur="nameCheck();"
 									id="name" name="name" class="form-control" type="text"
@@ -195,95 +284,88 @@
 
 							</div>
 							<div class="col-md-6 form-group">
-								<label>背面末三碼：<label> <input type="text" size="4"
-										maxlength="3" />
+								<label>背面末三碼：</label> <input type="text" size="4" maxlength="3" />
+							</div>
+
+						</div>
+
+					</div>
+
+
+
+					<!-- 收件人資料 -->
+
+
+
+
+					<div class="col-md-8 col-sm-12 col-xs-12 col-md-push-2 ">
+						<div style="background-color: #FFB6C1">
+							<h3>
+								<label>收件人資訊</label>
+							</h3>
+
+						</div>
+						<label>同訂購人資料</label><input type="checkbox" checked />
+						<div class="billing-field">
+							<div class="col-md-12 form-group">
+								<label>姓名 *</label><span></span> <input onblur="" id="name"
+									name="recipient" class="form-control" type="text"
+									value="${member.name }" required />
+							</div>
+							<div class="col-md-6 form-group">
+								<label>手機 *</label><span></span> <input onblur=";"
+									name="recipientPhone" class="form-control" type="text"
+									maxlength="10" value="${member.phone }" required />
+							</div>
+							<div class="col-md-6 form-group">
+								<label>縣市 *</label>
+								<div class="select">
+									<select id="${member.area }" name="area" class="form-control">
+										<option value="基隆市">基隆市</option>
+										<option value="臺北市">臺北市</option>
+										<option value="新北市">新北市</option>
+										<option value="宜蘭縣">宜蘭縣</option>
+										<option value="新竹市">新竹市</option>
+										<option value="新竹縣">新竹縣</option>
+										<option value="桃園市">桃園市</option>
+										<option value="苗栗縣">苗栗縣</option>
+										<option value="臺中市">臺中市</option>
+										<option value="彰化縣">彰化縣</option>
+										<option value="南投縣">南投縣</option>
+										<option value="嘉義市">嘉義市</option>
+										<option value="嘉義縣">嘉義縣</option>
+										<option value="雲林縣">雲林縣</option>
+										<option value="臺南市">臺南市</option>
+										<option value="高雄市">高雄市</option>
+										<option value="屏東縣">屏東縣</option>
+										<option value="臺東縣">臺東縣</option>
+										<option value="花蓮縣">花蓮縣</option>
+										<option value="金門縣">金門縣</option>
+										<option value="連江縣">連江縣</option>
+										<option value="澎湖縣">澎湖縣</option>
+									</select>
+								</div>
+							</div>
+							<div class="col-md-12 form-group">
+								<label>地址 *</label><span></span> <input onblur="addressCheck();"
+									name="location" class="form-control" type="text"
+									value="${member.address }" required />
 							</div>
 
 
 
+
 						</div>
-
+						<button id="personal-updatebtn"
+							class="btn btn-default form-control password-send " type="button"
+							style="background-color: pink">確認送出</button>
 					</div>
-			</div>
-
-
-			<!-- 收件人資料 -->
-
-
-
-
-			<div class="col-md-8 col-sm-12 col-xs-12 col-md-push-2 ">
-				<div style="background-color: #FFB6C1">
-					<h3>
-						<label>收件人資訊</label>
-					</h3>
-					
-				</div>
-				<label>同訂購人資料</label><input type="checkbox" checked/>
-				<div class="billing-field">
-					<div class="col-md-12 form-group">
-						<label>姓名 *</label><span></span> <input onblur="nameCheck();"
-							id="name" name="name" class="form-control" type="text"
-							value="${member.name }" required />
-					</div>
-					<div class="col-md-6 form-group">
-						<label>Email *</label><span></span> <input onblur="emailCheck();"
-							id="r-email" name="email" class="form-control" type="email"
-							value="${member.email }" required />
-					</div>
-					<div class="col-md-6 form-group">
-						<label>手機 *</label><span></span> <input onblur="phoneCheck();"
-							name="phone" class="form-control" type="text" maxlength="10"
-							value="${member.phone }" required />
-					</div>
-					<div class="col-md-6 form-group">
-						<label>縣市 *</label>
-						<div class="select">
-							<select id="${member.area }" name="area" class="form-control">
-								<option value="基隆市">基隆市</option>
-								<option value="臺北市">臺北市</option>
-								<option value="新北市">新北市</option>
-								<option value="宜蘭縣">宜蘭縣</option>
-								<option value="新竹市">新竹市</option>
-								<option value="新竹縣">新竹縣</option>
-								<option value="桃園市">桃園市</option>
-								<option value="苗栗縣">苗栗縣</option>
-								<option value="臺中市">臺中市</option>
-								<option value="彰化縣">彰化縣</option>
-								<option value="南投縣">南投縣</option>
-								<option value="嘉義市">嘉義市</option>
-								<option value="嘉義縣">嘉義縣</option>
-								<option value="雲林縣">雲林縣</option>
-								<option value="臺南市">臺南市</option>
-								<option value="高雄市">高雄市</option>
-								<option value="屏東縣">屏東縣</option>
-								<option value="臺東縣">臺東縣</option>
-								<option value="花蓮縣">花蓮縣</option>
-								<option value="金門縣">金門縣</option>
-								<option value="連江縣">連江縣</option>
-								<option value="澎湖縣">澎湖縣</option>
-							</select>
-						</div>
-					</div>
-					<div class="col-md-12 form-group">
-						<label>地址 *</label><span></span> <input onblur="addressCheck();"
-							name="address" class="form-control" type="text"
-							value="${member.address }" required />
-					</div>
-
 
 
 
 				</div>
-				<button id="personal-updatebtn"
-					class="btn btn-default form-control password-send " type="button"
-					style="background-color: pink">確認送出</button>
-			</div>
-
-
+			</form>
 		</div>
-
-		</form>
 	</div>
 
 	<!-- Container /- -->

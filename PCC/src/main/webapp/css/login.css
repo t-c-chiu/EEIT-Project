@@ -62,9 +62,13 @@ ul#login-back {
 }
 .quick{
 	margin-top:10%;
+
+/*  heart-shop  */
+.product-section1 .products .product .heart-shop{
+    left: 9%;
+    top: -1%;
 }
-
-
+/***/
 .profile{
     border: 3px solid #B7B7B7;
     padding: 10px;
@@ -78,3 +82,24 @@ ul#login-back {
 .head a{float: right;}
 .profile img{width: 100px;float: left;margin: 0px 10px 10px 0px;}
 .proDetails{float: left;}
+/***/
+.product-section1 .products .product .heart-shop a{
+	width: 19%;
+    margin-left: 2%;
+	border-radius: 100%;
+	opacity: 0.6;
+}
+.product-section1 .products .product .heart-shop a:hover{
+	color:red;
+	opacity: 1;
+}
+i.fa.fa-heart-o {
+    margin-top: 23%;
+}
+.product-con{
+	color:#777;
+}
+.product-con ul{
+	list-style-type: none;
+	padding: 0;
+}

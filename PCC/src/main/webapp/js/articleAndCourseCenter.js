@@ -1,8 +1,46 @@
 $(function(){
 	
+	$.getJSON('/PCC/showMyMatching.match', function(data){
+		$('#matchingInfo > span').text('(' + data.length + ')')
+		if(data.length == 0){
+			$('#matchingTable').text('你沒有配對資料');
+			return;
+		}
+		$.each(data, function(i,v){
+			var td1 = $('<td></td>').text(v[1].name);
+			var td2 = $('<td></td>').text(v[1].type);
+			var td3 = $('<td></td>').text(v[1].area);
+			var td4 = $('<td></td>').text(v[1].experience + '年');
+			var td5 = $('<td></td>').text(v[0].date);
+			var td6 = $('<td></td>');
+			if(v[0].status == 0){ 
+				td6.text('審核中');
+			}else if(v[0].status == 1){
+				td6.text('配對成功');
+			}else if(v[0].status == 2){
+				td6.text('審核未通過');
+			}
+			var tr = $('<tr></tr>').append(td1,td2,td3,td4,td5,td6);
+			$('#matchingTable').append(tr);
+		})
+	})
+	
+	$('#iWantToPay').click(function(e){
+		e.preventDefault();
+		$.post('/PCC/checkOut.admin', function(data){
+			alert(data);
+			location.reload();
+		})
+	})
+	
 	$.getJSON('/PCC/showMyBePaidList.admin',function(data){
-		console.log(data);
 		$('#shopping-cart > span').text('(' + (data.listOfMyClazz.length + data.listOfMyOrder.length + data.listOfMyReservation.length) + ')');
+		
+		if(data.listOfMyClazz.length == 0 && data.listOfMyOrder.length == 0 && data.listOfMyReservation.length == 0){
+			$('#myBePaidTable').empty().text('您目前沒有購買任何商品。');
+			return;
+		}
+		
 		var totalPrice = 0;
 		if(data.listOfMyClazz.length > 0){
 			$.each(data.listOfMyClazz, function(i,v){
@@ -38,11 +76,13 @@ $(function(){
 		var td10 = $('<td></td>').text('總價：').attr('colspan','2').css('font-size','16px');
 		var td11 = $('<td></td>').text(totalPrice).css('font-size','16px');
 		var tr4 = $('<tr></tr>').append(td10,td11);
-		var btn = $('<button></button>').text('確定結帳');
+		var btn = $('<button></button>').text('結帳').click(function(){
+			$(this).remove();
+			$('#payFormAndCardArea').slideDown(3000);
+		}); 
 		var td11 = $('<td></td>').attr('colspan','3').append(btn).css('text-align','center');
 		var tr5 = $('<tr></tr>').append(td11);
 		$('#myBePaidTable').append(tr4,tr5);
-		
 	})
 	
 	$.getJSON('/PCC/showMyCourses.clazz', function(data){
@@ -99,13 +139,11 @@ $(function(){
 			}else if(v.status == 1){
 				td3.text('已讀');
 			}
-			var td4 = $('<td></td>').attr('colspan','3').text(v.contents);
+			var td4 = $('<td></td>').attr('colspan','3').html(v.contents); 
 			var tr1 = $('<tr></tr>').append(td1,td2,td3);
 			var tr2 = $('<tr></tr>').css('display','none').append(td4);
 			$('#mySystemMsgTable').append(tr1,tr2);
 		})
-		
-		
 	})
 	
 	$.getJSON('/PCC/showMyArticles.forum',function(data){

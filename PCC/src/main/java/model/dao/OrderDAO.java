@@ -26,6 +26,7 @@ public class OrderDAO {
 			return (Integer) getSession().save(order);
 		}
 		return -1;
+
 	}
 
 	// 系統或管理元修改，一次改一筆
@@ -38,11 +39,18 @@ public class OrderDAO {
 				select.setTotalPrice(order.getTotalPrice());
 				select.setLocation(order.getLocation());
 				select.setDate(order.getDate());
-			}
-		}
+				select.setRecipient(order.getRecipient());
+				select.setRecipientPhone(order.getRecipientPhone());
+				
+			}		
+		}		
 		return false;
 	}
+	
 
+	
+	//會員查詢自己所有的訂單
+	
 	public boolean cancelOrder(String memberId) {
 		getSession().delete(memberId);
 		return true;
@@ -65,6 +73,16 @@ public class OrderDAO {
 	public Order selectOrderId(int orderId) {
 		return getSession().get(Order.class, orderId);
 	}
+	
+	
+	// 刪除：管理員或系統管理用
+	public int deleteOrder(int orderId) {
+		if(orderId!=0)
+		getSession().delete(orderId);
+		
+		return 0;
+	}
+	
 
 	public List<Order> selectAllByMemberIdStatus0(String memberId) {
 		return getSession().createQuery("from Order where memberId = :memberId and status = 0", Order.class)

@@ -10,44 +10,27 @@ public class Servant {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int serviceId;
-	private int experience;
-	private int status;
-	private String memberId;
+	private Integer serviceId;
+	private Integer experience;
 	private String type;
 	private String introduction;
+	private String area;
+	private String name;
 
-
-	public int getServiceId() {
+	public Integer getServiceId() {
 		return serviceId;
 	}
 
-	public void setServiceId(int serviceId) {
+	public void setServiceId(Integer serviceId) {
 		this.serviceId = serviceId;
 	}
 
-	public int getExperience() {
+	public Integer getExperience() {
 		return experience;
 	}
 
-	public void setExperience(int experience) {
+	public void setExperience(Integer experience) {
 		this.experience = experience;
-	}
-
-	public int getStatus() {
-		return status;
-	}
-
-	public void setStatus(int status) {
-		this.status = status;
-	}
-
-	public String getMemberId() {
-		return memberId;
-	}
-
-	public void setMemberId(String memberId) {
-		this.memberId = memberId;
 	}
 
 	public String getType() {
@@ -66,11 +49,26 @@ public class Servant {
 		this.introduction = introduction;
 	}
 
-	@Override
-	public String toString() {
-		return "Servant [serviceId=" + serviceId + ", experience=" + experience + ", status=" + status + ", memberId="
-				+ memberId + ", type=" + type + ", introduction=" + introduction + "]";
+	public String getArea() {
+		return area;
 	}
 
+	public void setArea(String area) {
+		this.area = area;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	@Override
+	public String toString() {
+		return "Servant [serviceId=" + serviceId + ", experience=" + experience + ", type=" + type + ", introduction="
+				+ introduction + ", area=" + area + ", name=" + name + "]";
+	}
 
 }

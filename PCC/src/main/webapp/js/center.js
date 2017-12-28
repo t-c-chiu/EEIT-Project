@@ -13,14 +13,13 @@ function hide() {
 };
 
 hide();
-// 系統訊息
+//系統訊息
 $('#center-message').click(function() {
 	hide();
 	$('#center-change-1').fadeIn("slow", function() {
 		$('#center-change-1').show();
 	});
 });
-
 // 個人資料
 $('#personal-information').click(function() {
 	hide();
@@ -97,6 +96,13 @@ $('#course-list').click(function(){
 	hide();
 	$('#center-change-12').fadeIn("slow", function() {
 		$('#center-change-12').show();
+	}); 
+})
+
+$('#matchingInfo').click(function(){
+	hide();
+	$('#center-change-13').fadeIn("slow", function() {
+		$('#center-change-13').show();
 	}); 
 })
 

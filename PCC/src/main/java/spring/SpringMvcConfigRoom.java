@@ -24,6 +24,7 @@ public class SpringMvcConfigRoom extends AbstractAnnotationConfigDispatcherServl
 	@Autowired
 	private ServletContext application;
 
+	//為了上傳圖片加的
 	@Bean
 	public CommonsMultipartResolver multipartResolver() {
 		CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver();

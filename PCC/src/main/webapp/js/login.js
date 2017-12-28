@@ -331,3 +331,86 @@ function addressCheck() {
 		document.querySelector('#address').style['border'] = '1px solid #d1d1d1';
 	}
 }
+
+//--------------------------------購物車-----------------------------------------
+$(function() {
+
+	//頭部：;搜尋商品分類欄
+	$.ajax({
+		url : "/PCC/header.shopping",
+		type : "GET",
+		success : function(data) {
+			console.log(data);
+			$.each(data, function(i, category) {
+				var text = category.categoryName;
+				console.log(text);
+				var li = $("<li></li>").addClass("categoryli");
+					var a = $("<a></a>").text(text);
+					a.attr("href", "#");
+					a.addClass("categoryli");
+				var form=$("<form></form>").attr("action","/PCC/searchCatagory.shopping");
+					form.attr("method","get");
+				var input=$("<input/>").attr("type","text");
+					input.attr("value",text);
+					input.attr("name","category");
+					input.attr("hidden","hidden");
+		
+					form.append(input);
+					li.append(a);
+					li.append(form);
+				$("#categoryUL").append(li);
+
+			});
+
+		}
+
+	});
+
+	// 底部：搜尋商品分類欄		
+
+	// 按下X除去購物車物件
+	$(".remove").click(function() {
+		var parent = $(this).parent(".mini_cart_item");
+		var parentId = parent.attr("id").split("SS")[0];
+		$.ajax({
+			url : "/PCC/eliminate.shopping",
+			type : "POST",
+			data : {
+				"productId" : parentId
+			},
+			success : function(data) {
+				$("#" + parentId + "span").text("0");
+				console.log($("#" + parentId + "span").text());
+				ViewCart();
+				parent.css("display", "none");
+
+			}
+		});
+
+	});
+
+	// 分類欄點選分類****
+	$("body").on('click','.categoryli',function() {
+		$(this).find("form").submit();
+	});
+
+});
+
+function ViewCart() {
+	var sum = 0;
+	$(".cartSpan").each(function() {
+		var number = parseInt($(this).text());
+		console.log(number);
+		sum = sum + number;
+	});
+	if (sum == 0) {
+		$("#cartButtonLi").css("display", "none");
+
+	} else {
+		$("#cartButtonLi").css("display", "");
+	}
+
+}
+
+		
+	

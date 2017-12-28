@@ -62,7 +62,7 @@ public class ReportedArticle {
 		this.reason = reason;
 	}
 	
-	@JsonFormat(pattern = "yyyy-MM-dd hh:mm", timezone = "GMT+8")
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm", timezone = "GMT+8")
 	public Timestamp getDate() {
 		return date;
 	}

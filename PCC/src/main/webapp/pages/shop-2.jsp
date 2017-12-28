@@ -48,15 +48,6 @@
 
 <body data-offset="200" data-spy="scroll" data-target=".ow-navigation">
 	<div class="main-container">
-		<!-- Loader -->
-		<div id="site-loader" class="load-complete">
-			<div class="loader">
-				<div class="loader-inner ball-clip-rotate">
-					<div></div>
-				</div>
-			</div>
-		</div>
-		<!-- Loader /- -->
 		<%@ include file="header.jsp"%>
 
 		<!-- Header -->
@@ -70,7 +61,7 @@
 					<h3>購物商城</h3>
 					<p>our vision is to be Earth's most customer centric company</p>
 
-					
+
 				</div>
 				<ol class="breadcrumb">
 					<li><a href="../index.html" title="Home">首頁</a></li>
@@ -149,19 +140,25 @@
 						<c:forEach var="asideProducts" items="${asideProducts}">
 							<div class="latest-box">
 								<div class="post-box">
-									<!-- 思考一下 少 點圖跳到相關頁面 -->
-									<a href="#"><img src="../images/latest-post-1.jpg"
-										alt="Post"></a>
-									<h5>
-										<a href="#" title="need max shop.">${asideProducts.productName}</a>
-									</h5>
-									<div class="star-rating">
-										<i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
-											class="fa fa-star"></i> <i class="fa fa-star"></i> <i
-											class="fa fa-star-o"></i>
-									</div>
-									<span class="price"><del>${asideProducts.price}</del>${asideProducts.price}</span>
-									<!-- /思考一下 -->
+
+									<span class="productItem">
+										<form id="${asideProducts.productId}ProductForm"
+											action="/PCC/productId.shopping" method="get">
+											<input type="text" name="productId"
+												value="${asideProducts.productId}" hidden />
+										</form> <a href="#"><img src="${asideProducts.pictureAscii}"
+											width="85px" height="75px" alt="Post" /></a>
+										<h5>
+											<a href="#" title="need max shop.">${asideProducts.productName}</a>
+										</h5>
+
+
+										<div class="star-rating">
+											<i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
+												class="fa fa-star"></i> <i class="fa fa-star"></i> <i
+												class="fa fa-star-o"></i>
+										</div> <span class="price"><del>${asideProducts.price}</del>${asideProducts.price}</span>
+									</span>
 
 								</div>
 							</div>
@@ -194,35 +191,35 @@
 						<ul class="products">
 							<!-- 商品點選區  Product -->
 							<c:forEach var="products8" items="${products}">
-							
-							<form id="${products8.productId}ProductForm" action="/PCC/productId.shopping" method="get">
-								<input type="text" name="productId" value="${products8.productId}" hidden/>
-							</form>
 
-								<li class="product">
-									
-									<a id="${products8.productId}" class="productItem" href="#"> 
-									<img src="../images/product-10.jpg" alt="Product" />
-								
-									
-									<h5>${products8.productName}</h5> 
-									<span class="price">
-											<del>${products8.price}</del> 
-											${products8.price}
+								<form id="${products8.productId}ProductForm"
+									action="/PCC/productId.shopping" method="get">
+									<input type="text" name="productId"
+										value="${products8.productId}" hidden />
+								</form>
+
+								<li class="product"><a id="${products8.productId}"
+									class="productItem" href="#"> <img
+										src="${products8.pictureAscii }" alt="Product" width="375px"
+										height="300px" />
+
+
+										<h5>${products8.productName}</h5> <span class="price">
+											<del>${products8.price}</del> ${products8.price}
+											
 									</span>
-									</a> 
-									<a href="#" class="add-to-cart1" title="Add To Cart"> 
-										Add	To Cart
+								</a> <a href="#" class="add-to-cart1" title="Add To Cart"> Add
+										To Cart
 										<p hidden>${products8.productId}</p>
-									</a> 
-									<!-- 圖案旁邊的icon -->
-<!-- 									<div class="wishlist-box"> -->
-<!-- 										<a href="#"> <i class="fa fa-arrows-alt"></i> -->
-<!-- 										</a> <a href="#"> <i class="fa fa-heart-o"></i> -->
-<!-- 										</a> <a href="#"> <i class="fa fa-search"></i> -->
-<!-- 										</a> -->
-<!-- 									</div> /圖案旁邊的icon</li> -->
+										
+								</a> <!-- 圖案旁邊的icon --> 									
+								<div  class="wishlist-box heart-shop">
+										<a class="heart"> 
+										<h1 ><i class="fa fa-heart-o"></i></h1>
+										</a> 
 
+								</div>
+							 </li>
 							</c:forEach>
 					</div>
 					<!-- Content Area /- -->
@@ -249,9 +246,9 @@
 		<!-- Container /- -->
 	</div>
 	<form id="startForm" action="/PCC/star.shopping" method="post">
-		<input name="pageName" type="text" value="searchPage" hidden/>
+		<input name="pageName" type="text" value="searchPage" hidden /> 
 		<input id="startInput" type="text" value="${start}" hidden />
-
+		<input id="startCategory" type="text" value="${start}" hidden />	
 	</form>
 
 	<!-- JQuery v1.12.4 -->
@@ -284,94 +281,96 @@
 	<!-- Library - Theme JS -->
 	<script src="../js/functions.js"></script>
 	<!-- login  -->
-	<!-- 	<script type="text/javascript" src="../js/login.js"></script> -->
+	<script type="text/javascript" src="../js/login.js"></script>
 	<script type="text/javascript">
-	$(document).ready(function() {
-		var starInput = $('#startInput').val();
+		$(document).ready(function() {
 
-		ViewCart();
+			var starInput = $('#startInput').val();
 
-		if (starInput == "") {
-			$('#startForm').submit();
-		}
-		// 搜尋欄搜尋商品名
-		$('#serch-btn').click(function() {
-			// alert("已點");
-			var searchText = $('#searchText').val();
-			// alert(searchText);
-			if (searchText.trim().length == 0) {
-				alert('請輸入搜尋條件');
-				$('#filter').val('').focus();
-			} else {
-				$('#searchForm').submit();
+			ViewCart();
+
+			if (starInput == "") {
+				$('#startForm').submit();
 			}
-		})
-		// 分類欄點選分類
-		$(".categoryli").click(function() {
-			// alert(".categoryli被點選");
-			var formid = $(this).find("input").val();
-
-			// alert(formid);
-			if (formid != '') {
-				$(this).find("form").submit();
-			}
-
-		});
-
-		// 加入購物車
-
-		$(".add-to-cart1").click(function() {
-			var productId = $(this).find("p").text();
-			var producIdCartLi = $("#" + productId + "SS");
-
-			$.ajax({
-				url : "/PCC/addCart.shopping",
-				type : "POST",
-				data : {
-					"productId" : productId
-				},
-				success : function(data) {
-					if (producIdCartLi.text() == "") {
-						var item = $("#" + data.productId);
-						item.css("display", "");
-					}
-					// 抓數量的數字
-					$("#" + data.productId + "span").text(data.quantity);
-					// 只要購物車內有東西，就打開View Cart 和Check Out
-					ViewCart();
+			// 搜尋欄搜尋商品名
+			$('#serch-btn').click(function() {
+				// alert("已點");
+				var searchText = $('#searchText').val();
+				// alert(searchText);
+				if (searchText.trim().length == 0) {
+					alert('請輸入搜尋條件');
+					$('#filter').val('').focus();
+				} else {
+					$('#searchForm').submit();
 				}
+			})
+			// 分類欄點選分類
+			$(".categoryli").click(function() {
+				$(this).find("form").submit();
 			});
 
-		});
+			// 加入購物車
 
-	//點圖轉跳頁面
-		
-		$(".productItem").click(function(){
-			var id=$(this).attr("id")+"ProductForm";
-			alert(id);
-			$("#"+id).submit();	
-		
+			$(".add-to-cart1").click(function() {
+				var productId = $(this).find("p").text();
+				var producIdCartLi = $("#" + productId + "SS");
+				$.ajax({
+					url : "/PCC/addCart.shopping",
+					type : "POST",
+					data : {
+						"productId" : productId
+					},
+					success : function(data) {
+						if (producIdCartLi.text() == "") {
+							var item = $("#" + data.productId);
+							item.css("display", "");
+							alert("已加入購物車喔!!");
+						}
+						// 抓數量的數字
+						$("#" + data.productId + "span").text(data.quantity);
+						// 只要購物車內有東西，就打開View Cart 和Check Out
+						ViewCart();
+					}
+				});
+			});
+
+			//點圖轉跳頁面
+
+			$(".productItem").click(function() {
+				var id = $(this).attr("id") + "ProductForm";
+				alert(id);
+				$("#" + id).submit();
+			});
+
+			//點擊旁邊小圖轉跳頁面
+			$(".post-box").click(function() {
+				location.replace("/PCC/shoppingMall/productContext.jsp");
+			});
+			
+			//點擊愛心加到我的最愛
+			$(".heart").click(function(){
+				
+			});
 			
 			
-		});
 
-	});
-	// 是否打開 ViweCart和Check out
-	function ViewCart() {
-		var sum = 0;
-		$(".cartSpan").each(function() {
-			var number = parseInt($(this).text());
-		
-			sum = sum + number;
 		});
-		if (sum == 0) {
-			$("#cartButtonLi").css("display", "none");
+		// 是否打開 ViweCart和Check out
+		function ViewCart() {
+			var sum = 0;
+			$(".cartSpan").each(function() {
+				var number = parseInt($(this).text());
 
-		} else {
-			$("#cartButtonLi").css("display", "");
+				sum = sum + number;
+			});
+			if (sum == 0) {
+				$("#cartButtonLi").css("display", "none");
+
+			} else {
+				$("#cartButtonLi").css("display", "");
+			}
+
 		}
-
-	}
 	</script>
 </body>
 </html>
