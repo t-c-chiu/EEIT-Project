@@ -22,5 +22,6 @@ public class PointDetailsService {
 		}
 		return null;
 	}
+	
 
 }

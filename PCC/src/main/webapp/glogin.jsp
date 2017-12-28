@@ -16,13 +16,17 @@
 <h3>請用Google帳號登入</h3>
 <img id="loginImage" src="glogin.gif"><br />
 <div class="g-signin2" data-onsuccess="onSignIn" style="width:192px;"></div>
+<div id="my-signin2"></div>
 </div>
 
   <script>
+
+  
+  
       function onSignIn(googleUser) {
          var profile = googleUser.getBasicProfile();
 
-         var redirectUrl = 'glogin.controller';
+         var redirectUrl = 'glogin.login';
 
          var form = $('<form action="' + redirectUrl + '" method="post">' +
                           '<input type="text" name="id_token" value="' +

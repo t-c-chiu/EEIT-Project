@@ -135,7 +135,15 @@ $('#personal-updatebtn').click(function(){
 
 //更改密碼
 $('#send-newpassword').click(function(){
-	alert("new");
+//	console.log("開始");
+	$.post("/PCC/changePassword.login",{"oldPassword":$('#old-password').val() ,"newPassword":$('#r-password').val() },function(data){
+		if(data=="更改密碼成功"){
+			alert("修改成功");
+		}else if(data=="密碼不正確"){
+			alert("密碼不正確，修改失敗");
+		}
+	});
+	
 });
 
 

@@ -9,7 +9,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- google login -->
-<!-- <meta name =“google- AIzaSyAvKEKkluLo31_D7v-civI6skhGGAisRyA -client_id”content =“AIzaSyAvKEKkluLo31_D7v-civI6skhGGAisRyA”> -->
+<meta name="google-signin-client_id" content="368506092635-g2qmv1vf4gu9tbs24d644k0kgqqg79kr.apps.googleusercontent.com">
+<!-- google login/ -->    
 <title>PCC - Home</title>
 <!-- Standard Favicon -->
 <link rel="icon" type="image/x-icon" href="images/pcc/pcc.png" />
@@ -45,8 +46,6 @@
 
 <!-- css -->
 <link rel="stylesheet" type="text/css" href="css/login.css">
-
-
 </head>
 <body data-offset="200" data-spy="scroll" data-target=".ow-navigation">
 	<div class="main-container">

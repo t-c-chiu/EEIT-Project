@@ -33,9 +33,11 @@ public class MemberCenterService {
 	private OrderDAO orderDAO;
 	@Autowired
 	private ClazzDAO clazzDAO;
-
-	public Member updatePersonal(Member member) {
-		return null;
+	
+	public Member updatePSW(Member member) {
+		member=memberDAO.updatePSW(member);
+		System.out.println("service member="+member);
+		return member;
 	}
 
 	public Map<String, Object> showMyBePaidList(String memberId) {

@@ -61,6 +61,19 @@ public class MemberDAO {
 		}
 		return null;
 	}
+	
+	//UPDATE Password
+	public Member updatePSW(Member member) {
+		if(member !=null) {
+			Member select=this.select(member.getMemberId());
+			if(select !=null) {
+				select.setPassword(member.getPassword());
+				System.out.println("UPDATE Password DAO member="+member);
+				return member;
+			}
+		}
+		return null;
+	}
 
 	public boolean updateMemberPoint(Member member, int newPoint) {
 		Member result = select(member.getMemberId());
@@ -70,6 +83,7 @@ public class MemberDAO {
 		}
 		return false;
 	}
+	
 	
 	public List<Member> selectMemberByStatus(Integer status) {
 		return getSession().createQuery("from Member where status = :status", Member.class)

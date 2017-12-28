@@ -12,12 +12,20 @@ public class PointDetails {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int pointId;
 	private Date gettingDate;
+	private String memberId;
 	private String getWay;
 	private int getPoint;
+
 	@Override
 	public String toString() {
-		return "PointDetails [pointId=" + pointId + ", gettingDate=" + gettingDate + ", getWay=" + getWay
-				+ ", getPoint=" + getPoint + "]";
+		return "PointDetails [pointId=" + pointId + ", gettingDate=" + gettingDate + ", memberId=" + memberId
+				+ ", getWay=" + getWay + ", getPoint=" + getPoint + "]";
+	}
+	public String getMemberId() {
+		return memberId;
+	}
+	public void setMemberId(String memberId) {
+		this.memberId = memberId;
 	}
 	public int getPointId() {
 		return pointId;
