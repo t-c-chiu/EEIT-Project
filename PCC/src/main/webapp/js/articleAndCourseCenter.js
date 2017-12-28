@@ -1,8 +1,11 @@
 $(function(){
 	
 	$.getJSON('/PCC/showMyMatching.match', function(data){
-		console.log(data);
 		$('#matchingInfo > span').text('(' + data.length + ')')
+		if(data.length == 0){
+			$('#matchingTable').text('你沒有配對資料');
+			return;
+		}
 		$.each(data, function(i,v){
 			var td1 = $('<td></td>').text(v[1].name);
 			var td2 = $('<td></td>').text(v[1].type);
@@ -136,13 +139,11 @@ $(function(){
 			}else if(v.status == 1){
 				td3.text('已讀');
 			}
-			var td4 = $('<td></td>').attr('colspan','3').text(v.contents);
+			var td4 = $('<td></td>').attr('colspan','3').html(v.contents); 
 			var tr1 = $('<tr></tr>').append(td1,td2,td3);
 			var tr2 = $('<tr></tr>').css('display','none').append(td4);
 			$('#mySystemMsgTable').append(tr1,tr2);
 		})
-		
-		
 	})
 	
 	$.getJSON('/PCC/showMyArticles.forum',function(data){

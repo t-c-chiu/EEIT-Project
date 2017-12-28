@@ -43,7 +43,101 @@
 	button{
 		margin:0px 20px;
 	}
+	
+	label{ 
+ 		width: 80px;
+ 		height: 30px;
+	}
+	 
 	</style>
+	<script>
+		$(function(){
+			
+			$.getJSON('/PCC/giveMeServant.admin', function(data){
+				console.log(data);
+				$.each(data, function(i,v){
+					var td1 = $('<td></td>').text(v.serviceId);
+					var td2 = $('<td></td>').text(v.name);
+					var td3 = $('<td></td>').text(v.experience + '年');
+					var td4 = $('<td></td>').text(v.type);
+					var td5 = $('<td></td>').text(v.area);
+					var btn = $('<button></button>').text('刪除服務員').click(function(){
+						var isDelete = confirm('確認刪除此服務員?');
+						if(!isDelete){
+							return;
+						}
+						var serviceId = $(this).parents('tr').find('td:eq(0)').text();
+						$.get('/PCC/deleteThisServant.admin?serviceId=' + serviceId, function(data){
+							alert(data);
+						})
+						$(this).parents('tr').remove();
+					});
+					var td6 = $('<td></td>').append(btn);
+					var tr = $('<tr></tr>').append(td1,td2,td3,td4,td5,td6);
+					$('#ServantTable').append(tr);
+				})
+			})
+			
+			$('.passBtn').click(function(){
+				$.get('/PCC/passMatching.admin?matchingId=' + $(this).val() ,function(data){
+					alert(data);
+				})
+			})
+			
+			$('.refuseBtn').click(function(){
+				var reason = prompt('請輸入拒絕理由');
+				if(reason.trim().length == 0){
+					return;
+				}
+				var isRecommend = confirm('是否要推薦其他服務員?');
+				var recommend = 0;
+				if(isRecommend){
+					recommend = prompt('請輸入推薦的服務員編號');
+				}
+				
+				$.get('/PCC/refuseMatching.admin?matchingId=' + $(this).val() +'&reason=' + reason + '&recommend=' + recommend,function(data){
+					alert(data);
+				})
+				
+			})
+			
+			$('#photo').change(function(){
+	        if (this.files && this.files[0]) {
+	            var reader = new FileReader();
+	            reader.onload = function (e) {
+	                $('#previewArea').attr('src', e.target.result);
+	            	}
+	            	reader.readAsDataURL(this.files[0]);
+	        	}
+			})
+		
+			$("#gogo").click(function (event) {
+		        event.preventDefault();
+		        var form = $('#formData')[0];
+		        var data = new FormData(form);
+				data.append('introduction',CKEDITOR.instances.introduction.getData());
+		        $("#gogo").prop("disabled", true);
+		        $.ajax({
+		            type: "POST",
+		            enctype: 'multipart/form-data',
+		            url: "/PCC/createServant.admin",
+		            data: data,
+		            processData: false,
+		            contentType: false,
+		            cache: false,
+		            success: function (data) {
+		            	alert(data);
+		                $("#gogo").prop("disabled", false);
+		                location.reload();
+		            },
+		            error: function (e) {
+		                console.log("ERROR : ", e);
+		                $("#gogo").prop("disabled", false);
+		            }
+		        });
+		    });
+		})
+	</script>
   </head>
 
   <body class="nav-md">
@@ -98,20 +192,57 @@
 						<th>經驗</th>
 						<th rowspan="2" colspan="5">
 							<span style="margin: 0px 200px 0px 0px;">申請時間：<fmt:formatDate value="${matching[2].date}" pattern="yyyy-MM-dd HH:mm"/></span>
-							<button>審核通過</button><button>拒絕申請</button>
+							<button class="passBtn" value="${matching[2].matchingId}">審核通過</button>
+							<button class="refuseBtn" value="${matching[2].matchingId}">拒絕申請</button>
 						</th>
 					</tr>
 					<tr>
 						<td>${matching[1].name}</td>
 						<td>${matching[1].area}</td>
 						<td>${matching[1].type}</td>
-						<td>${matching[1].experience}年</td>  
+						<td>${matching[1].experience}年</td>
 					</tr>
 					<tr>
 						<td colspan="10" style="border:	none;"></td> 
 					</tr>
 					</c:forEach>
 				</table>
+				<div id="createServant" style="width: 35%;float: left;">
+				<h3>新增服務員</h3>
+					<form id="formData" method="post" action="<c:url value="/createServant.admin"/>" enctype="multipart/form-data">
+						<label>姓名：</label><input type="text" name="name"><br>
+						<label>年資：</label><input type="number" name="experience">&nbsp;年<br>
+						<label>接案類型：</label>
+						<input type="radio" name="type" value="9小時">&nbsp;9小時
+						<input type="radio" name="type" value="24小時">&nbsp;24小時
+						<input type="radio" name="type" value="9小時,24小時皆可">&nbsp;9小時,24小時皆可<br>
+						<label>服務區域：</label><input type="text" name="area"><br>
+						<label>服務員介紹：</label>
+						<textarea name="introduction" id="introduction"></textarea><br>
+						<script src="<c:url value="/ckeditorbasic/ckeditor.js"/>"></script> 
+						<script>
+							CKEDITOR.replace("introduction", {
+								width : 500
+							});
+						</script>
+						<label>服務員照片：</label><input type="file" name="photo" id="photo"><br>
+						<img id="previewArea" style="max-width:200px;"><br><br>
+						<input id="gogo" type="submit">
+					</form>
+				</div>
+				<div id="manageServant" style="width: 55%;float: right;"> 
+				<h3>服務員清單</h3>
+					<table id="ServantTable">
+						<tr>
+							<th>編號</th>
+							<th>姓名</th>
+							<th>年資</th>
+							<th>接案類型</th>
+							<th>服務區域</th>
+							<th>管理</th> 
+						</tr>
+					</table>
+				</div>
 			</div>
 
           </div>

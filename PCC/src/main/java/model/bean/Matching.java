@@ -17,7 +17,7 @@ public class Matching {
 	private Integer matchingId;
 	private Integer serviceId;
 	private Integer reservationId;
-	// 0剛配 1審核成功 2審核後拒絕
+	//0剛配 1審核成功 2審核後拒絕 3該申請人已有其他配對審核通過
 	private Integer status;
 	private Date date;
 

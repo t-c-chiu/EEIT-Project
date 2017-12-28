@@ -30,7 +30,7 @@ public class SystemMessageDAO {
 
 	public List<SystemMessage> selectAllByMemberId(String memberId) {
 		return getSession()
-				.createQuery("from SystemMessage where memberId = :memberId order by status, date", SystemMessage.class)
+				.createQuery("from SystemMessage where memberId = :memberId order by status, date desc", SystemMessage.class)
 				.setParameter("memberId", memberId).list();
 	}
 

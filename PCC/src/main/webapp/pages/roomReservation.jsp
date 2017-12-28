@@ -481,8 +481,8 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDYpbCt__aSkFOPc8En0xCzF6G
 				</div><!-- Widget Area /- -->
 		
 		<div id="main" class="col-md-8">
-				<div style="height:800px;overflow:hidden">
-				<div style="height:100%;width:770px;overflow-y:auto;overflow-x:hidden;">
+<!-- 				<div style="height:800px;overflow:hidden"> -->
+<!-- 				<div style="height:100%;width:770px;overflow-y:auto;overflow-x:hidden;"> -->
 		<div class="container">
 				<!-- Content Area -->
 			            <c:forEach var="room" items="${listOfRooms}">		
@@ -521,11 +521,7 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDYpbCt__aSkFOPc8En0xCzF6G
 		</div>
 		</div>			        			        			        
 		</div>
-						
-		</div>
-						
-		</div>
-			
+									
 		<div id="allForm" class="container-fluid no-left-padding no-right-padding woocommerce-checkout">
 			<!-- Container -->
 			<div class="container">
