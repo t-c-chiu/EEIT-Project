@@ -68,7 +68,7 @@ ul#login-back {
     left: 9%;
     top: -1%;
 }
-/***/
+
 .profile{
     border: 3px solid #B7B7B7;
     padding: 10px;
@@ -82,7 +82,7 @@ ul#login-back {
 .head a{float: right;}
 .profile img{width: 100px;float: left;margin: 0px 10px 10px 0px;}
 .proDetails{float: left;}
-/***/
+
 .product-section1 .products .product .heart-shop a{
 	width: 19%;
     margin-left: 2%;
