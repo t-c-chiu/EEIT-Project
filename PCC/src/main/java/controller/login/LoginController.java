@@ -144,7 +144,7 @@ public class LoginController {
 
 	}
 
-	@RequestMapping(path= {"/changePassword.login"},method = {RequestMethod.POST},produces = {"text/plain;charset=utf-8"})
+	@RequestMapping(path= {"/changePassword.login"},method = {RequestMethod.POST,RequestMethod.GET},produces = {"text/plain;charset=utf-8"})
 	public @ResponseBody String method5(Member member,String oldPassword, String newPassword,HttpSession session) {
 		//取得 member 的 email
 		Member themember= (Member)session.getAttribute("member");
@@ -159,7 +159,7 @@ public class LoginController {
 			member=memberCenterService.updatePSW(member);
 			//寄信
 			String title="PCC會員密碼更改通知";
-			String body="<h1>Hi~</h1><br><a href='http://192.168.40.10:8080/PCC/pages/center.jsp'>前往PCC官網確認<a/>";
+			String body="<h2>PCC會員  "+memberId+" 已更改會員密碼</h2><br><h4>如有任何問題，請透過官方網站查詢、或與我們連絡 </h4><h4><a href='http://192.168.40.10:8080/PCC/index.jsp' style='background-color:#EB7C81;color:#fff;padding:5%;'>前往PCC官網確認</a></h4><br><h6>Postnatal Care Center 敬上</h6>";
 			EmailUtil.sendEmail(email, title, body, null);
 			//日期轉格式
 //			SimpleDateFormat sdFormat = new SimpleDateFormat("yyyy/MM/dd");

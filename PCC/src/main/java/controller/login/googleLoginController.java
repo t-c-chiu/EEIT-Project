@@ -24,6 +24,7 @@ import com.google.api.client.json.JsonFactory;
 import com.google.api.client.json.jackson.JacksonFactory;
 
 import model.bean.Member;
+import model.bean.PointDetails;
 import model.service.GoogleLoginService;
 import model.service.MemberService;
 import model.service.RegistyService;
@@ -41,7 +42,7 @@ public class googleLoginController {
 	private static final String GOOGLE_CLIENT_ID = "368506092635-g2qmv1vf4gu9tbs24d644k0kgqqg79kr.apps.googleusercontent.com";
 
 	@RequestMapping(path = { "/google.login" }, method = { RequestMethod.POST, RequestMethod.GET },produces= {"text/plain;charset=utf-8"})
-	public @ResponseBody String method(String idtoken, Member member,Model model) throws Exception {
+	public @ResponseBody String method(String idtoken, Member member,PointDetails pointDetails,Model model) throws Exception {
 		System.out.println("test start");
 
 		JacksonFactory jacksonFactory = new JacksonFactory();
@@ -84,12 +85,14 @@ public class googleLoginController {
 					member.setPassword(userId.getBytes());
 					member.setName(familyName + givenName);
 					member.setEmail(email);
-					member.setRole(1);
+					member.setRole(2);
 					Member i = registyService.registy(member);
 					System.out.println("i=" + i);
 //					Member bean = googleLoginService.update(member);
 //					System.out.println("quick bean="+bean);
 					model.addAttribute("member", i);
+					pointDetails.setMemberId(member.getMemberId());
+					registyService.insertMemberFirstTime(pointDetails);
 					return "正在註冊";
 				} else {
 					model.addAttribute("member", mm);

@@ -22,7 +22,7 @@ public class RegistyService {
 	public Member registy(Member member) {
 		Member resulte = null;
 		if (member != null) {
-			member.setRole(1);
+			member.setRole(2);
 			member.setStatus(0);
 			member.setPoint(50);
 			resulte = memberDao.insertRegisty(member);
