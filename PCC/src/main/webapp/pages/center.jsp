@@ -92,7 +92,7 @@
 						<aside class="widget widget_categories">
 							<h3 class="widget-title">交易訂單</h3>
 							<ul>
-								<li><a id="favorite-product" class="center-li">收藏商品<span>(4)</span></a></li>
+								<li><a id="favorite-product" class="center-li">收藏商品<span id="FP-quanity">(4)</span></a></li>
 								<li><a id="shopping-cart" class="center-li">我的購買清單<span></span></a></li>
 								<li><a id="order-list" class="center-li">訂單明細</a></li>
 								<li><a id="course-list" class="center-li">我的課程<span></span></a></li>
@@ -257,6 +257,27 @@
 					<!-- 收藏商品 -->
 					<div id="center-change-5" class="col-md-8 col-sm-7 col-xs-12 content-area product-section2 no-left-padding">
 					<h3 class="center-title">收藏商品</h3>
+					
+					<table id="FPtable" class="forumTable">
+						<tr>
+							<th>商品編號</th>
+							<th>商品名稱</th>
+							<th>內容小圖</th>
+							<th>價格</th>
+							<th></th>
+						</tr>
+<!-- 						<tr> -->
+<!-- 							<th></th> -->
+<!-- 							<th></th> -->
+<!-- 							<th></th> -->
+<!-- 							<th>從收藏清單中刪除</th> -->
+<!-- 						</tr>							 -->
+					</table>
+					
+					
+					
+					
+					
 					</div>
 					<!-- 購物車 -->
 					<div id="center-change-6" class="col-md-8 col-sm-7 col-xs-12 content-area product-section2 no-left-padding">
