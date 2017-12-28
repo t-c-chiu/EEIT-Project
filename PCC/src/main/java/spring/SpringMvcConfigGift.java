@@ -22,13 +22,13 @@ public class SpringMvcConfigGift extends AbstractAnnotationConfigDispatcherServl
 	@Autowired
 	private ServletContext application;
 						
-	@Override
-	public void configureViewResolvers(ViewResolverRegistry registry) {
-		XmlViewResolver XmlViewResolver = new XmlViewResolver();
-		Resource resource=new ServletContextResource(application, "/WEB-INF/giftViews.xml");
-		XmlViewResolver.setLocation(resource);
-		registry.viewResolver(XmlViewResolver);
-	}
+//	@Override
+//	public void configureViewResolvers(ViewResolverRegistry registry) {
+//		XmlViewResolver XmlViewResolver = new XmlViewResolver();
+//		Resource resource=new ServletContextResource(application, "/WEB-INF/giftViews.xml");
+//		XmlViewResolver.setLocation(resource);
+//		registry.viewResolver(XmlViewResolver);
+//	}
 
 	@Override
 	protected Class<?>[] getRootConfigClasses() {
