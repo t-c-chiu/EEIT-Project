@@ -128,7 +128,7 @@ public class AdminService {
 				break;
 			}
 		}
-		if (!isOKRecommend) {
+		if (!isOKRecommend && recommend != 0) {
 			return "無此服務員，請重新推薦。";
 		}
 		if (recommend == 0) {
