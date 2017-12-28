@@ -132,39 +132,27 @@
 						<li><a href="<c:url value="/index.jsp"/>" title="Home"
 							class="dropdown-toggle" role="button" aria-haspopup="true"
 							aria-expanded="false">首頁</a></li>
-						<li><a href="<c:url value="/fullServantList.match"/>" title="Reservation">線上預約</a></li>
-						<li><a href="<c:url value="/servantList.match"/>" title="Partner">服務夥伴</a></li>
-						<li class="dropdown"><a href="pages/shop.html" title="Shop"
+						<li><a href="<c:url value="/fullServantList.match"/>"
+							title="Reservation">線上預約</a></li>
+						<li><a href="<c:url value="/servantList.match"/>"
+							title="Partner">服務夥伴</a></li>
+						<li class="dropdown"><a title="Shop" id="shoppingMall"
 							class="dropdown-toggle" role="button" aria-haspopup="true"
 							aria-expanded="false">購物商城 </a> <i
 							class="ddl-switch fa fa-angle-down"></i>
+							<form id="shoppingMallForm" action="/PCC/star.shopping" method="post">
+								<input name="pageName" type="text" value="searchPage" hidden /> 
+								<input id="startInput" type="text" value="lorded" hidden />
+								<input id="startCategory" type="text" name="categoryName" value="一開始" hidden />	
+							</form>
 							<ul id="categoryUL" class="dropdown-menu">
 								<!-- 12/18 修改成功..>0< -->
-								<%-- 								<c:forEach var="category" items="${categorys}"> --%>
 
-<!-- 								<li class="categoryli"><a href="#" title="">藥膳</a> -->
-<%-- 									<form action='<c:url value="/searchCatagory.shopping"/>' --%>
-<!-- 										method="get"> -->
-<!-- 										<input type="text" name="category" value="藥膳" hidden /> -->
-<!-- 									</form></li> -->
-
-<!-- 								<li class="categoryli"><a href="#" title="">產前產品</a> -->
-<%-- 									<form action='<c:url value="/searchCatagory.shopping"/>' --%>
-<!-- 										method="get"> -->
-<!-- 										<input type="text" name="category" value="產前產品" hidden /> -->
-<!-- 									</form></li> -->
-<!-- 								<li class="categoryli"><a href="#" title="">產後產品</a> -->
-<%-- 									<form action='<c:url value="/searchCatagory.shopping"/>' --%>
-<!-- 										method="get"> -->
-<!-- 										<input type="text" name="category" value="產後產品" hidden /> -->
-<!-- 									</form></li> -->
-<!-- 								<li class="categoryli"><a href="#" title="">嬰兒產品</a> -->
-<%-- 									<form action='<c:url value="/searchCatagory.shopping"/>' --%>
-<!-- 										method="get"> -->
-<!-- 										<input type="text" name="category" value="嬰兒產品" hidden /> -->
-<!-- 									</form></li> -->
-
-								<%-- 								</c:forEach> --%>
+								<!-- 								<li class="categoryli"><a href="#" title="">藥膳</a>   -->
+								<%-- 									<form action='<c:url value="/searchCatagory.shopping"/>' --%>
+								<!-- 										method="get"> -->
+								<!-- 										<input type="text" name="category" value="藥膳" hidden /> -->
+								<!-- 									</form></li> -->
 								<!-- /12/18 修改成功..>0< -->
 							</ul></li>
 						<li class="dropdown"><a

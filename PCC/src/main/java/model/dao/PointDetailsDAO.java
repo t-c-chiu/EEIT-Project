@@ -29,9 +29,9 @@ public class PointDetailsDAO {
 	}
 	
 
-	public boolean insertPoint(PointDetails pointDetails) {
-		getSession().save(pointDetails);
-		return true;
+	public int insertPoint(PointDetails pointDetails) {
+		int key=(int)getSession().save(pointDetails);
+		return key;
 
 	}
 

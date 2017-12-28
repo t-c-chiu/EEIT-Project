@@ -47,6 +47,10 @@ $('#favorite-product').click(function() {
 	hide();
 	$('#center-change-5').fadeIn("slow", function() {
 		$('#center-change-5').show();
+		// 12/27瑋晨新增
+		
+		// 12/27瑋晨新增底部
+	
 	});
 });
 // 購物車
@@ -174,3 +178,75 @@ $('#send-newpassword').click(function(){
 //        dataContainer.html(html);
 //    }
 //})
+
+
+//---------------------------------瑋晨工作區----------------------------------
+
+$(document).ready(function(){
+	//一開始就生成畫面
+	$.ajax({
+		url:"/PCC/ShowFavoriteProduct.shopping",
+		type:"GET",
+		success:function(data){
+			var i=0
+			var table=$("#FPtable");
+			
+			$.each(data,function(index,value){
+				var img=$("<img/>").attr("src",value.pictureAscii);
+				img.attr("width","150px");
+				img.attr("height","120px");
+				
+				var tr=$("<tr></tr>").addClass("tr"+value.productId);
+				
+				var th1=$("<td></td>").text(value.productId);
+				var th2=$("<td></td>").text(value.productName);
+				var th3=$("<td></td>").append(img);
+				var th4=$("<td></td>").text(value.price);
+				var th5=$("<td></td>");
+				var button=$("<input/>").attr("type","button");
+				
+				button.val("刪除");
+				button.addClass("eButton");
+				button.attr("id",value.productId);
+				th5.append(button);
+				tr.append([th1,th2,th3,th4,th5]);
+				
+				
+				table.append(tr);
+				i=i+1;
+			});
+			$("#FP-quanity").text("("+i+")");
+			
+		}
+	});
+	//點刪除就會刪除收藏商品
+	$("body").on("click",".eButton",function() {
+		
+		var productId=$(this).attr("id");
+		
+		$.ajax({
+			url:"/PCC/DeleteFavoriteProduct.shopping",
+			type:"GET",
+			data:{"productId":productId},
+			success:function(data){
+				
+				if(data=="已刪除!"){
+					$(".tr"+productId).css("display","none");
+					
+				}else if(data=="刪除失敗!"){
+					
+					alert("不知道哪裡出問題，刪除失敗!");
+				}
+			}
+			
+		});
+		
+		
+	});
+	
+	
+});
+
+
+
+
