@@ -1,11 +1,13 @@
 package controller.login;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Enumeration;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,8 +21,9 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import model.bean.Member;
 import model.bean.PointDetails;
+import model.dao.SystemMessageDAO;
+import model.service.MemberCenterService;
 import model.service.MemberService;
-import model.service.PointDetailsService;
 import model.service.RegistyService;
 
 @Controller
@@ -30,6 +33,10 @@ public class LoginController {
 	private MemberService memberService;
 	@Autowired
 	private RegistyService registyService;
+	@Autowired
+	private MemberCenterService memberCenterService;
+	@Autowired
+	private SystemMessageDAO systemMessageDAO;
 
 	// 登入 成功版
 	@RequestMapping(path = "/login.login", method = { RequestMethod.POST, RequestMethod.GET }, produces = {
@@ -115,25 +122,21 @@ public class LoginController {
 
 	}
 
-	@RequestMapping(path = "/registy.insert.login", method = { RequestMethod.POST }, produces = {
-			"text/plain;charset=utf-8" })
-	public @ResponseBody String method3(Member member, Model model) {
+
+	@RequestMapping(path = "/registy.insert.login", method = { RequestMethod.POST }, produces = {"text/plain;charset=utf-8" })
+	public @ResponseBody String method3(Member member, PointDetails pointDetails,Model model) {
 		if (member != null) {
 			Member bean = registyService.registy(member);
+			pointDetails.setMemberId(member.getMemberId());
+			registyService.insertMemberFirstTime(pointDetails);
 			return "成功註冊";
 		}
 		return "註冊失敗";
-
-		// 12/15
-		// 把登入跟註冊的controller分開寫，才不會取到登入的 memberId 的 session
-		// 還有 註冊成功的時候 並不會跳出 alert 居然直接轉跳!!m
-
 	}
-
-	@RequestMapping(path = "/personal.update.login", method = { RequestMethod.POST }, produces = {
-			"application/json;charset=utf-8" })
-	public @ResponseBody Member method4(Member member, Model model) {
-		if (member != null) {
+	
+	@RequestMapping(path="/personal.update.login",method= {RequestMethod.POST},produces= {"application/json;charset=utf-8"})
+	public @ResponseBody Member method4(Member member,Model model) {
+		if(member!=null) {
 			Member bean = memberService.updatePersonal(member);
 			return bean;
 		}
@@ -142,4 +145,35 @@ public class LoginController {
 
 	}
 
+	@RequestMapping(path= {"/changePassword.login"},method = {RequestMethod.POST,RequestMethod.GET},produces = {"text/plain;charset=utf-8"})
+	public @ResponseBody String method5(Member member,String oldPassword, String newPassword,HttpSession session) {
+		//取得 member 的 email
+		Member themember= (Member)session.getAttribute("member");
+		String memberId=themember.getMemberId();
+		String email=themember.getEmail();
+		System.out.println("member / Email = "+memberId+"/"+email);
+		Member bean=memberService.login(memberId, oldPassword);
+		System.out.println("up="+oldPassword+"/"+newPassword);
+		if(bean !=null) {
+			//update new password
+			member.setPassword(newPassword.getBytes());
+			member=memberCenterService.updatePSW(member);
+			//寄信
+			String title="PCC會員密碼更改通知";
+			String body="<h2>PCC會員  "+memberId+" 已更改會員密碼</h2><br><h4>如有任何問題，請透過官方網站查詢、或與我們連絡 </h4><h4><a href='http://192.168.40.10:8080/PCC/index.jsp' style='background-color:#EB7C81;color:#fff;padding:5%;'>前往PCC官網確認</a></h4><br><h6>Postnatal Care Center 敬上</h6>";
+			EmailUtil.sendEmail(email, title, body, null);
+			//日期轉格式
+//			SimpleDateFormat sdFormat = new SimpleDateFormat("yyyy/MM/dd");
+//			Date current = new Date();
+//			System.out.println(sdFormat.format(current));
+			//寄系統信
+			systemMessageDAO.insert(memberId, "會員密碼更改", "會員"+memberId+"更改密碼成功");
+			
+			return "更改密碼成功";
+		}
+
+		return "密碼不正確";
+	}
+
+	
 }

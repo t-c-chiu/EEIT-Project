@@ -5,7 +5,7 @@
 <script src="<c:url value="/js/login.js"/>"></script>
 
 <!-- jquery -->
-<script src="../js/jquery.min.js"></script>
+<!-- <script src="../js/jquery.min.js"></script> -->
 <!-- Header -->
 <header class="header-section container-fluid no-padding">
 	<!-- Menu Block -->
@@ -100,18 +100,19 @@
 					</ul>
 					<div class="login cart">
 						<a href="#" id="member" title="User" data-toggle="modal"
-							data-target="#exampleModal" onclick="login();"> <i id="user"
-							class="icon icon-User"></i>
+							data-target="#exampleModal">
+							<i id="user" class="icon icon-User"></i>
 						</a>
 
 						<ul id="login-back" class="droplogin dropdown-menu no-padding">
-							<li id="who-is-login" class="button logbtn"><a id="log-log"
-								href="#" data-toggle="modal" data-target="#exampleModal"
-								onclick="login();">登入</a> <a id="log-reg"
-								href="/PCC/pages/registy.jsp">註冊</a> <a id="log-cen"
-								href="/PCC/pages/center.jsp">會員中心</a> <a id="log-out" href="#"
-								class="change-ds">登出</a></li>
 
+						<li id="who-is-login" class="button logbtn">
+							<a id="log-log" href="#" data-toggle="modal"
+							data-target="#exampleModal">登入</a> 
+							<a id="log-reg" href="/PCC/pages/registy.jsp">註冊</a>
+							<a id="log-cen" href="/PCC/pages/center.jsp">會員中心</a>
+							<a id="log-out" href="#" class="change-ds">登出</a>
+						</li>
 						</ul>
 						<!-- 						<ul class="dropdown-menu no-padding droplogin "> -->
 						<!-- 							<li class="button"><a href="#" title="Login">登入</a></li> -->
@@ -200,7 +201,3 @@
 
 </header>
 <!-- Header /- -->
-
-
-
-

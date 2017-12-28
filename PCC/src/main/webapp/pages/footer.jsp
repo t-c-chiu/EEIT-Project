@@ -78,6 +78,7 @@
 								<!-- google -->
 <!-- 								<div class="g-signin2" data-onsuccess="onSignIn"></div> -->
 							<div id="pop" class="modal-footer">
+							<div id="my-signin2"></div><div id="out"></div>
 								<button type="button" class="btn btn-secondary"
 									data-dismiss="modal">取消</button>
 								<button type="button" id="sub" class="btn btn-primary">登入</button>
@@ -86,4 +87,5 @@
 						</div>
 					</div>
 				</div>
-				
+<!-- google login -->		
+<script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>

@@ -868,15 +868,41 @@ a {
 .footer-main-1 .copyright-section li a {
     color: #AEC5CA;
 }
-
 .footer-send{
-    color:#fff;
-    border-radius: 0;  
-    background-color: #EB7C81;
+	color: #fff;
+	font-size: 1.27em;
+	outline: none;
+	padding: 0.9em 1em;
+	border: 1px solid #f36464;
+	-webkit-appearance: none;
+	background: #f36464;
+	width: 100%;
+	cursor: pointer;
+	margin-top: 1.5em;
+	text-transform: uppercase;
+	letter-spacing: 4px;
+	line-height: 5px;
+	-webkit-transition: 0.5s all;
+	-moz-transition: 0.5s all;
+	transition: 0.5s all;
+	padding: 2%;
 }
 .footer-send:hover{
-    background-color: #d4d4d4;
-    color:#2C3536;
+	background: transparent;
+    background-image: initial;
+    background-position-x: initial;
+    background-position-y: initial;
+    background-size: initial;
+    background-repeat-x: initial;
+    background-repeat-y: initial;
+    background-attachment: initial;
+    background-origin: initial;
+    background-clip: initial;
+    background-color: transparent;
+    color: #f36464;
+    letter-spacing: 8px;
+	background-color: #fff;
+	border: 1px solid #f36464;
 }
 /* * Section Header */
 

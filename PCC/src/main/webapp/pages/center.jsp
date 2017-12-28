@@ -221,28 +221,24 @@
 					<div id="center-change-4" class="col-md-8 col-sm-7 col-xs-12 content-area product-section2 no-left-padding">
 					<h3 class="center-title">更改密碼</h3>
 					<div class="checkout-form">
-						<form method="POST">
+						<form id="change-psd-form" method="POST">
 							<div class="col-md-8 col-sm-12 col-xs-12 col-md-push-2 ">
 								<div class="billing-field">
-<!-- 									<div class="col-md-12 form-group"> -->
-<!-- 										<label>E-mail *</label><span id="emailchange-span"></span>  -->
-<!-- 										<input onblur="emailChangeCheck();" id="emailchange" name="emailchange" class="form-control" type="email" required /> -->
-<!-- 									</div> -->
 									<div class="col-md-12 form-group">
 									<label>舊密碼 *</label><span id="psold-span"></span> <input
-										onblur="" id="old-password" name="old-password"
+										onblur="" id="old-password" name="oldPassword"
 										class="form-control" type="password" autocomplete="off"
 										maxlength="20" required />
 									</div>
 									<div class="col-md-12 form-group">
 									<label>新密碼 *</label><span id="ps-span"></span> <input
-										onblur="psw();" id="r-password" name="password"
+										onblur="psw();" id="r-password" name="newpassword"
 										class="form-control" type="password" autocomplete="off"
 										maxlength="20" required />
 									</div>
 									<div class="col-md-12 form-group">
 									<label>重複新密碼 *</label><span id="ps2-span"></span> <input
-										onblur="match();" id="passwordMatch" class="form-control"
+										onblur="match();" id="passwordMatch" name="rePassword" class="form-control"
 										type="password" autocomplete="off" maxlength="20"
 										maxlength="20" required />
 									</div>

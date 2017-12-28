@@ -136,6 +136,10 @@
 		            }
 		        });
 		    });
+			
+			$('#matchToggle').click(function(){
+				$('#matchingTable').slideToggle(1000);
+			});
 		})
 	</script>
   </head>
@@ -151,7 +155,7 @@
           <div class="">
             <div class="page-title">
               <div class="title_left">
-                <h3>配對審核系統</h3>
+                <h3 style="display:inline;">配對審核系統</h3><button id="matchToggle">展開資料</button>
                 <hr>
               </div>
             </div>
@@ -159,6 +163,7 @@
             <div class="clearfix"></div>
 
 			<div id="matchingArea">
+			<div id="matchingTable">
 				<table>
 				<c:forEach var="matching" items="${listOfMatchingDetails}">
 				<tr class="apTr">
@@ -207,6 +212,7 @@
 					</tr>
 					</c:forEach>
 				</table>
+				</div>
 				<div id="createServant" style="width: 35%;float: left;">
 				<h3>新增服務員</h3>
 					<form id="formData" method="post" action="<c:url value="/createServant.admin"/>" enctype="multipart/form-data">

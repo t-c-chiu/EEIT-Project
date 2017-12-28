@@ -1,12 +1,3 @@
-/*------------------------------------
-	Theme Name: Maxshop
-	Start Date : 
-	End Date : 
-	Last change: 
-	Version: 1.0
-	Assigned to:
-	Primary use:
----------------------------------------*/
 /*	
 	- Google Map
 	
@@ -579,7 +570,7 @@
     $(window).on("load", function () {
         /* - Site Loader* */
         if (!$("html").is(".ie6, .ie7, .ie8")) {
-            $("#site-loader").delay(1000).fadeOut("slow");
+            $("#site-loader").delay(100).fadeOut("slow");
         } else {
             $("#site-loader").css("display", "none");
         }
@@ -590,7 +581,7 @@
             $container.isotope({
                 itemSelector: ".products > li",
                 gutter: 0,
-                transitionDuration: "0.5s"
+                transitionDuration: "0.1s"
             });
 
             $("#filters a").on("click", function () {

@@ -22,6 +22,7 @@ public class PointDetailsService {
 		}
 		return null;
 	}
+	
 
 	
 	public int insertPointDetail(PointDetails pointDetails) {

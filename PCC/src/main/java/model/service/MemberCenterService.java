@@ -15,6 +15,7 @@ import model.bean.Order;
 import model.bean.RoomReservation;
 import model.bean.Student;
 import model.dao.ClazzDAO;
+import model.dao.MemberDAO;
 import model.dao.OrderDAO;
 import model.dao.RoomReservationDAO;
 import model.dao.StudentDAO;
@@ -31,9 +32,13 @@ public class MemberCenterService {
 	private OrderDAO orderDAO;
 	@Autowired
 	private ClazzDAO clazzDAO;
-
-	public Member updatePersonal(Member member) {
-		return null;
+	@Autowired
+	private MemberDAO memberDAO;
+	
+	public Member updatePSW(Member member) {
+		member=memberDAO.updatePSW(member);
+		System.out.println("service member="+member);
+		return member;
 	}
 
 	public Map<String, Object> showMyBePaidList(String memberId) {
