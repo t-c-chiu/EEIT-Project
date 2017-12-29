@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,11 +39,16 @@ public class AdminController {
 	private MemberCenterService memberCenterService;
 
 	@RequestMapping(path = "/adminLogin.admin", method = RequestMethod.POST)
-	public String adminLogin(String memberId, String password, Model model) {
+	public String adminLogin(String memberId, String password, Model model, HttpServletResponse response) {
 		Member admin = adminService.adminLogin(memberId, password);
 		if (admin != null) {
 			model.addAttribute("admin", admin);
-			return "matching";
+			try {
+				response.sendRedirect("/PCC/matching.admin");
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			return null;
 		} else {
 			model.addAttribute("worngMsg", "帳密輸入錯誤，請重新輸入。");
 			return "adminLogin";
@@ -109,7 +115,7 @@ public class AdminController {
 	@RequestMapping(path = "/adminLogout.admin", method = RequestMethod.GET)
 	public String adminLogout(HttpSession session) {
 		session.removeAttribute("admin");
-		return "index";
+		return "adminLogin";
 	}
 
 	@RequestMapping(path = "/createServant.admin", method = RequestMethod.POST, produces = "text/plain;charset=UTF-8")
