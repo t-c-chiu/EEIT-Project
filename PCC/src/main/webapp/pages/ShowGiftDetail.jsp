@@ -103,44 +103,20 @@ display:none
 src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDYpbCt__aSkFOPc8En0xCzF6G8S_hD1Yg">
 </script>
 <script>
-function initGift(){			
-	$.get('${pageContext.request.contextPath}/selectGift.gift',function(data){
+
+function initDetails(){			
+	$.get('${pageContext.request.contextPath}/selectDetails.gift',function(data){
 		console.log(data)
-		var ul=$('<ul></ul>').addClass('products')
-		$('#main').empty().append(ul)
 		
-		$.each(data,function(i,gift){
-			var li=$('<li></li>').addClass("product design")
-			var img=$('<img></img>').addClass("image")
-									.attr('src','../images/gift/'+gift.giftId+'.jpg')
-			                        .attr('alt',gift.giftName)
-			var h= $('<h5></h5>').text(gift.giftName)                       
-			var span=$('<span></span>').addClass("price")
-			                            .text(gift.point+"points")
-			   
-			var a=$('<a></a>').addClass("addto-cart")
-			                  .text("加入兌換")
-			                  .attr('id',gift.giftId)
-			li.append([img,h,span,a])
-			ul.append(li)
-		})
 	})
-	
 }
+	
+
 
 	$(function() {				
-		initGift()	
-
-		$('body').on('click','.addto-cart',function(){
-			var giftId=$(this).attr("id")
-			$.post('${pageContext.request.contextPath}/insertDetails.gift',{'giftId':giftId,'number':1},function(data){
-			alert(data)			
-		})
+		initDetails()	
 				
-	})
-	
-		
-	});
+	})			
 </script>
 
 </head>
@@ -183,39 +159,10 @@ function initGift(){
 			class="product-section container-fluid no-padding">
 			<!-- Container -->
 			<div class="container">
-				<div class="row">
-					<!-- Section Header -->
-					<div class="section-header">
-						<h3>Our Products</h3>
-						<p>our vision is to be Earth's most customer centric company</p>
-						<img src="../images/section-seprator.png" alt="section-seprator" />
-					</div>
-					<!-- Section Header /- -->
-					<ul id="filters" class="products-categories no-left-padding">
-						<li><a data-filter="*" class="active" href="#">All
-								Products</a></li>
-						<li><a data-filter=".design" href="#">jewellery</a></li>
-						<li><a data-filter=".video" href="#">books</a></li>
-						<li><a data-filter=".photography" href="#">watches</a></li>
-						<li><a data-filter=".web" href="#">shoes</a></li>
-						<li><a data-filter=".design" href="#">electronics</a></li>
-						<li><a data-filter=".photography" href="#">mobiles</a></li>
-						<li><a data-filter=".video" href="#">more<i
-								class="fa fa-angle-down"></i></a></li>								
-					</ul>
-				</div>
+				
 				<div id="main">
 					<!-- Products -->
-					<ul class="products">
-					
-				
-						<li class="product design"><img src="../images/product-1.jpg" alt="Product" />
-						<h5>Stylish Chair</h5> 
-						<span class="price">50 points</span>				
-						<a class="addto-cart" title="Add To Cart">加入兌換</a></li>
-				
-					
-					</ul>
+
 					<!-- Products /- -->
                 </div>
 				</div>

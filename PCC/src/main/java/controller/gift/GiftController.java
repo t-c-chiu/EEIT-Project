@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import model.bean.ExchangeDetails;
 import model.bean.Gift;
 import model.bean.Member;
 import model.service.GiftService;
@@ -30,6 +31,12 @@ public class GiftController {
 			return "加入成功";
 		}
 		return "加入失敗";
+	}
+	
+	@RequestMapping(path = "/selectDetails.gift", method = RequestMethod.GET, produces = {"application/json;charset=UTF-8" })
+	public @ResponseBody List<ExchangeDetails> selectDetails(Member member){
+		return giftService.selectDetail(member);
+		
 	}
 
 }

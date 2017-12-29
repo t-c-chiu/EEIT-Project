@@ -42,5 +42,9 @@ public class GiftService {
 		exchangeDetails.setNumber(number);		
 		return exchangeDetailsDAO.insertExchangeDetails(exchangeDetails);
 	}
+	
+	public List<ExchangeDetails> selectDetail(Member member){
+		return exchangeDetailsDAO.selectDetail(member.getMemberId());		
+	}
 
 }
