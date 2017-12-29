@@ -1,17 +1,14 @@
 package model.dao;
 
-import java.util.List;
-
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import model.bean.Gift;
+import model.bean.Exchange;
 
 @Repository
-public class GiftDAO {
+public class ExchangeDAO {
 	
 	@Autowired
 	private SessionFactory sessionFactory;
@@ -20,13 +17,9 @@ public class GiftDAO {
 		return sessionFactory.getCurrentSession();
 	}
 	
-	public List<Gift> selectGift(){
-		Query<Gift> query=getSession().createQuery("from Gift",Gift.class);
-		return query.list();
+	public boolean insertExchange(Exchange exchange) {
+		getSession().save(exchange);
+		return true;
 	}
-	
-	public Gift selectGiftById(int GiftId) {
-		return getSession().get(Gift.class, GiftId);
-	}
-	
+
 }

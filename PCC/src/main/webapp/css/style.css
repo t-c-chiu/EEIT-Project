@@ -873,9 +873,9 @@ a {
 	font-size: 1.27em;
 	outline: none;
 	padding: 0.9em 1em;
-	border: 1px solid #f36464;
+	border: 1px solid #EB7C81;
 	-webkit-appearance: none;
-	background: #f36464;
+	background: #EB7C81;
 	width: 100%;
 	cursor: pointer;
 	margin-top: 1.5em;
@@ -899,10 +899,10 @@ a {
     background-origin: initial;
     background-clip: initial;
     background-color: transparent;
-    color: #f36464;
+    color: #EB7C81;
     letter-spacing: 8px;
 	background-color: #fff;
-	border: 1px solid #f36464;
+	border: 1px solid #EB7C81
 }
 /* * Section Header */
 

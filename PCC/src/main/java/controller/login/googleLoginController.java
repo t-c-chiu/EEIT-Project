@@ -93,6 +93,30 @@ public class googleLoginController {
 					model.addAttribute("member", i);
 					pointDetails.setMemberId(member.getMemberId());
 					registyService.insertMemberFirstTime(pointDetails);
+					//寄信 給更改密碼成功
+					String title="歡迎加入PCC會員";
+					String body="<h2>親愛的  "+member.getMemberId()+" 會員 您好，感謝您加入Postnatal Care Center</h2>\r\n" + 
+							"    <P style=\"line-height:26px;\">\r\n" + 
+							"        PCC以滿懷喜悅、張開雙臂擁抱新生兒的母親，代表著希望與朝氣，也象徵新生兒的美好開始。\r\n" + 
+							"    <br />\r\n" + 
+							"    在這個美好的時刻，PCC團隊將秉持著 『 專業用心、待客如親 』 之精神，提供您全方位的照護、客製化的服務，打造最懂妳的產後護理之家，讓坐月子成為妳與寶寶最美好的蜜月之旅！\r\n" + 
+							"    <br />\r\n" + 
+							"        配對平台提供服務人員刊登資料，讓使用者有更多選擇，輕鬆找到適合幫忙坐月子的人員。\r\n" + 
+							"    <br />\r\n" + 
+							"        商城採用流暢的介面做商品的瀏覽、訂購，並提供多樣的搜尋方式。結帳採用第三方歐付寶線上付款或超商付款。\r\n" + 
+							"    <br />\r\n" + 
+							"        論壇有發文、回文、刪文、收藏、檢舉、依分類排序、輸入主題搜尋文章功能。\r\n" + 
+							"    <br />\r\n" + 
+							"        訂房專區可依需要的房型、價格做房間篩選，一鍵帶入功能自動填寫資料，也能使用會員點數折抵訂房金額，完成訂購後可獲得當次金額相應的點數。\r\n" + 
+							"    <br />\r\n" + 
+							"        課程中心顯示最新上架課程、報名人數百分比、依分類和輸入主題搜尋、網站後台可以自訂課程類型上架新課程\r\n" + 
+							"    </p>\r\n" + 
+							"    <br />\r\n" + 
+							"    <a href='http://192.168.40.10:8080/PCC/index.jsp' style='background-color:#EB7C81;color:#fff;padding:10px;margin:10px 0px;text-decoration: none;'>前往PCC官方網站</a>\r\n" + 
+							"    <br />\r\n" + 
+							"    <h5>如有任何問題，歡迎透過官方網站查詢、或直接與我們聯繫<br/>(02) 6631 6666    /   thepccteam@gmail.com <br/>Postnatal Care Center 敬上</h5>";
+					EmailUtil.sendEmail(email, title, body, null);
+					
 					return "正在註冊";
 				} else {
 					model.addAttribute("member", mm);
