@@ -52,7 +52,7 @@
         $(function(){
         	$('button[name="choose"]').on('click',function(){
         		var serviceId = $(this).val();
-				$.post('/PCC/chooseServant.match',{'serviceId':serviceId},function(data){
+				$.get('/PCC/chooseServant.match?serviceId=' + serviceId, function(data){
 					alert(data);
 				})
         	})

@@ -26,6 +26,16 @@ public class ProductDAO {
 	private Session getSession() {
 		return sessionFactory.getCurrentSession();
 	}
+	
+	//根據price來搜尋
+	// FROM Product where price >= 550 and price<= 1000
+	public List<Product> selectPrice(int lowPrice,int hightPrice) {
+		Query<Product> query = getSession().createQuery("FROM Product where price >= :lowPrice and price<= :hightPrice",Product.class);
+		query.setParameter("lowPrice", lowPrice);
+		query.setParameter("hightPrice", hightPrice);
+		return query.list();
+	}
+	
 
 	// 根據ID搜尋
 	public Product selectId(int productId) {

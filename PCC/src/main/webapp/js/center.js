@@ -201,15 +201,34 @@ $(document).ready(function(){
 				img.attr("width","150px");
 				img.attr("height","120px");
 				
-				var tr=$("<tr></tr>").addClass("tr"+value.productId);
+				var a1=$("<a></a>").text(value.productId);
+				var a2=$("<a></a>").text(value.productName);
+				var a3=$("<a></a>").append(img);
+				var a4=$("<a></a>").text(value.price);
 				
-				var th1=$("<td></td>").text(value.productId);
-				var th2=$("<td></td>").text(value.productName);
-				var th3=$("<td></td>").append(img);
-				var th4=$("<td></td>").text(value.price);
+				
+				
+				
+				var tr=$("<tr></tr>").addClass("tr"+value.productId);
+					tr.attr("id",value.productId);
+					
+				var th1=$("<td></td>");
+					th1.addClass("td");
+					th1.append(a1);
+					
+				var th2=$("<td></td>");
+					th2.addClass("td");
+					th2.append(a2);
+				var th3=$("<td></td>");
+					th3.addClass("td");
+					th3.append(a3);
+				var th4=$("<td></td>");
+					th4.addClass("td");
+					th4.append(a4);
+					
 				var th5=$("<td></td>");
 				var button=$("<input/>").attr("type","button");
-				
+
 				button.val("刪除");
 				button.addClass("eButton");
 				button.attr("id",value.productId);
@@ -249,6 +268,27 @@ $(document).ready(function(){
 		
 	});
 	
+	//點擊商品會跳回商品區
+	$("body").on("click",".td",function() {
+		
+		var productId=$(this).parent("tr").attr("id");
+
+		$.ajax({
+			url:"/PCC/center.shopping",
+			type:"GET",
+			data:{"productId":productId},
+			success:function(data){
+				
+				if(data=="請前往"){
+					location.replace("/PCC/shoppingMall/productContext.jsp");
+					
+				}
+			}
+			
+		});
+		
+		
+	});
 	
 });
 
