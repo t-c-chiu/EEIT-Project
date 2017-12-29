@@ -15,13 +15,35 @@ public class ExchangeDetails {
 	private String giftName;
 	private Integer point;
 	private Integer number;
-			
+	private String memberId;
+	private int status;
+	private Integer exchangeId;
+					
 	@Override
 	public String toString() {
 		return "ExchangeDetails [exchangeDetailsId=" + exchangeDetailsId + ", giftId=" + giftId + ", giftName="
-				+ giftName + ", point=" + point + ", number=" + number + "]";
+				+ giftName + ", point=" + point + ", number=" + number + ", memberId=" + memberId + ", status=" + status
+				+ ", exchangeId=" + exchangeId + "]";
 	}
 	
+	public Integer getExchangeId() {
+		return exchangeId;
+	}
+	public void setExchangeId(Integer exchangeId) {
+		this.exchangeId = exchangeId;
+	}
+	public String getMemberId() {
+		return memberId;
+	}
+	public void setMemberId(String memberId) {
+		this.memberId = memberId;
+	}
+	public int getStatus() {
+		return status;
+	}
+	public void setStatus(int status) {
+		this.status = status;
+	}
 	public Integer getExchangeDetailsId() {
 		return exchangeDetailsId;
 	}

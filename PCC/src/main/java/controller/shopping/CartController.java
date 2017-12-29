@@ -112,11 +112,19 @@ public class CartController {
 	
 	//將商品加入訂單，狀態為0
 	@RequestMapping(path = { "/addOrder.shopping" }, method = RequestMethod.GET,produces= {"text/plain;charset=UTF-8" })
-	public @ResponseBody String useCartPage(Order order,HttpSession session,OrderDetail orderDetail ,PointDetails pointDetails,Model model ) {
+	public @ResponseBody String useCartPage(Order order,HttpSession session,OrderDetail orderDetail ,PointDetails pointDetails,Model model) {
 	
 		if (order!=null) {
 			//1.先成立訂單
 			Member member = (Member) session.getAttribute("member");
+			
+			if(member==null) {
+				return "請先登入";
+				
+			}
+			
+			
+			
 			String memberId = member.getMemberId();
 			Date today = new Date();
 			order.setDate(today);

@@ -17,4 +17,9 @@
 		<property name="contextRelative" value="true"></property>
 		<property name="url" value="/index.jsp"></property>
 	</bean>
+	
+	<bean id="adminLogin" class="org.springframework.web.servlet.view.RedirectView">
+		<property name="contextRelative" value="true"></property>
+		<property name="url" value="/admin/production/login.jsp"></property>
+	</bean>
 </beans>

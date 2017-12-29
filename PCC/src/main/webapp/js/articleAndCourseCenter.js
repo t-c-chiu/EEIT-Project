@@ -19,7 +19,9 @@ $(function(){
 				td6.text('配對成功');
 			}else if(v[0].status == 2){
 				td6.text('審核未通過');
-			}
+			}else if(v[0].status == 3){
+				td6.text('您已有服務員');
+			} 
 			var tr = $('<tr></tr>').append(td1,td2,td3,td4,td5,td6);
 			$('#matchingTable').append(tr);
 		})

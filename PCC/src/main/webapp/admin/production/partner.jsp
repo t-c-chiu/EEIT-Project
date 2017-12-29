@@ -54,7 +54,6 @@
 		$(function(){
 			
 			$.getJSON('/PCC/giveMeServant.admin', function(data){
-				console.log(data);
 				$.each(data, function(i,v){
 					var td1 = $('<td></td>').text(v.serviceId);
 					var td2 = $('<td></td>').text(v.name);
