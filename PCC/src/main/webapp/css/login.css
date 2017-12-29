@@ -62,13 +62,13 @@ ul#login-back {
 }
 .quick{
 	margin-top:10%;
-
+}
 /*  heart-shop  */
+
 .product-section1 .products .product .heart-shop{
-    left: 9%;
+	left: 9%;
     top: -1%;
 }
-
 .profile{
     border: 3px solid #B7B7B7;
     padding: 10px;
@@ -92,8 +92,9 @@ ul#login-back {
 .product-section1 .products .product .heart-shop a:hover{
 	color:red;
 	opacity: 1;
+	cursor: pointer;
 }
-i.fa.fa-heart-o {
+.forheart i.fa.fa-heart-o {
     margin-top: 23%;
 }
 .product-con{

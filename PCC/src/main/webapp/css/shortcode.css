@@ -43,7 +43,7 @@
 }
 .slider-section .uranus.tparrows {
     background-color: transparent;
-	border: 1px solid #d4b5a8;
+	border: 1px solid #EB7C81;
     height: 50px;
     width: 50px;
 	line-height: 50px;
@@ -56,7 +56,7 @@
 	line-height: 50px;
 }
 .slider-section .uranus.tparrows:hover {
-	background-color: #fff;
+	background-color: #EB7C81;
 }
 .goto-next {
     bottom: 30px;
@@ -69,7 +69,7 @@
     width: 100%;
 }
 .goto-next a {
-    color: #b6795f;
+    color: #EB7C81;
     text-decoration: none;
 }
 .goto-next a i {
@@ -2038,7 +2038,7 @@
 	text-transform: uppercase;
 }
 .about-section .about-content span {
-	color: #b6795f;
+	color: #EB7C81;
 }
 .about-section .about-content p {
 	color: #777;
@@ -2059,7 +2059,7 @@
 }
 .about-section .about-content ul li::before {
 	content: "\f0c8";
-	color: #b6795f;
+	color: #539EA4;
 	font-family:'FontAwesome';
 	font-size: 10px;
 	padding-right: 15px;

@@ -216,7 +216,7 @@
 								</a> <!-- 圖案旁邊的icon --> 									
 								<div  class="wishlist-box heart-shop">
 										<a class="heart" name="${products8.productId}"> 
-										<h1 ><i class="fa fa-heart-o"></i></h1>
+										<h1 class="forheart"><i class="fa fa-heart-o"></i></h1>
 										</a> 
 
 								</div>

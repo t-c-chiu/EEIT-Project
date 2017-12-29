@@ -3,6 +3,20 @@
 //	$("#site-loader").remove();
 //});
 
+//footer-message send
+$(function(){
+	$('#send-messsage-btn').click(function(){
+		$.post("/PCC/sendMessage.login",$('#main-contact-form').serialize(),function(data){
+			if(data=="寄送聯絡信"){
+				alert("感謝您的聯繫");
+				$(':input').val("");
+			}else{
+				alert("寄送失敗，請重新輸入");
+			}
+		});
+	});
+});
+
 //Google Login
 function onSuccess(googleUser) {
 	var profile = googleUser.getBasicProfile();
@@ -152,7 +166,7 @@ $(function() {
 		});
 	});
 });
-
+//偷偷的角色判斷
 $(document).ready(function() {
 	var save = $("#save").val();
 	console.log(save);

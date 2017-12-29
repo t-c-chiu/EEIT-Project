@@ -118,9 +118,9 @@ public class LoginController {
 
 	}
 
-
-	@RequestMapping(path = "/registy.insert.login", method = { RequestMethod.POST }, produces = {"text/plain;charset=utf-8" })
-	public @ResponseBody String method3(Member member, PointDetails pointDetails,Model model) {
+	@RequestMapping(path = "/registy.insert.login", method = { RequestMethod.POST }, produces = {
+			"text/plain;charset=utf-8" })
+	public @ResponseBody String method3(Member member, PointDetails pointDetails, Model model) {
 		if (member != null) {
 			Member bean = registyService.registy(member);
 			pointDetails.setMemberId(member.getMemberId());
@@ -129,10 +129,11 @@ public class LoginController {
 		}
 		return "註冊失敗";
 	}
-	
-	@RequestMapping(path="/personal.update.login",method= {RequestMethod.POST},produces= {"application/json;charset=utf-8"})
-	public @ResponseBody Member method4(Member member,Model model) {
-		if(member!=null) {
+
+	@RequestMapping(path = "/personal.update.login", method = { RequestMethod.POST }, produces = {
+			"application/json;charset=utf-8" })
+	public @ResponseBody Member method4(Member member, Model model) {
+		if (member != null) {
 			Member bean = memberService.updatePersonal(member);
 			return bean;
 		}
@@ -141,39 +142,50 @@ public class LoginController {
 
 	}
 
-	@RequestMapping(path= {"/changePassword.login"},method = {RequestMethod.POST,RequestMethod.GET},produces = {"text/plain;charset=utf-8"})
-	public @ResponseBody String method5(Member member,String oldPassword, String newPassword,HttpSession session) {
-		//取得 member 的 email
-		Member themember= (Member)session.getAttribute("member");
-		String memberId=themember.getMemberId();
-		String email=themember.getEmail();
-		System.out.println("member / Email = "+memberId+"/"+email);
-		Member bean=memberService.login(memberId, oldPassword);
-		System.out.println("up="+oldPassword+"/"+newPassword);
-		if(bean !=null) {
-			//update new password
+	@RequestMapping(path = { "/changePassword.login" }, method = { RequestMethod.POST, RequestMethod.GET }, produces = {
+			"text/plain;charset=utf-8" })
+	public @ResponseBody String method5(Member member, String oldPassword, String newPassword, HttpSession session) {
+		// 取得 member 的 email
+		Member themember = (Member) session.getAttribute("member");
+		String memberId = themember.getMemberId();
+		String email = themember.getEmail();
+		System.out.println("member / Email = " + memberId + "/" + email);
+		Member bean = memberService.login(memberId, oldPassword);
+		System.out.println("up=" + oldPassword + "/" + newPassword);
+		if (bean != null) {
+			// update new password
 			member.setPassword(newPassword.getBytes());
-			member=memberCenterService.updatePSW(member);
-			//寄信 給更改密碼成功
-			String title="PCC會員密碼更改通知";
-			String body="<h2>PCC會員  "+memberId+" 已更改會員密碼</h2>\r\n" + 
-					"    <h4>如有任何問題，請透過官方網站查詢、或與我們連絡 </h4>\r\n" + 
-					"        <a href='http://192.168.40.10:8080/PCC/index.jsp' style='background-color:#EB7C81;color:#fff;padding:10px;margin:10px;'>前往PCC官網確認</a>\r\n" + 
-					"    <br>\r\n" + 
-					"    <h6>Postnatal Care Center 敬上</h6>";
+			member = memberCenterService.updatePSW(member);
+			// 寄信 給更改密碼成功
+			String title = "PCC會員密碼更改通知";
+			String body = "<h2>PCC會員  " + memberId + " 已更改會員密碼</h2>\r\n" + "    <h4>如有任何問題，請透過官方網站查詢、或與我們連絡 </h4>\r\n"
+					+ "        <a href='http://192.168.40.10:8080/PCC/index.jsp' style='background-color:#EB7C81;color:#fff;padding:10px;margin:10px;'>前往PCC官網確認</a>\r\n"
+					+ "    <br>\r\n" + "    <h6>Postnatal Care Center 敬上</h6>";
 			EmailUtil.sendEmail(email, title, body, null);
-			//日期轉格式
-//			SimpleDateFormat sdFormat = new SimpleDateFormat("yyyy/MM/dd");
-//			Date current = new Date();
-//			System.out.println(sdFormat.format(current));
-			//寄系統信
-			systemMessageDAO.insert(memberId, "會員密碼更改", "會員"+memberId+"更改密碼成功");
-			
+			// 日期轉格式
+			// SimpleDateFormat sdFormat = new SimpleDateFormat("yyyy/MM/dd");
+			// Date current = new Date();
+			// System.out.println(sdFormat.format(current));
+			// 寄系統信
+			systemMessageDAO.insert(memberId, "會員密碼更改", "會員" + memberId + "更改密碼成功");
+
 			return "更改密碼成功";
 		}
 
 		return "密碼不正確";
 	}
 
-	
+	@RequestMapping(path = { "/sendMessage.login" }, method = { RequestMethod.POST }, produces = {
+			"text/plain;charset=utf-8" })
+	public @ResponseBody String method6(String email, String message) {
+		if (email != null && message != null && email.trim().length() != 0 && message.trim().length() != 0) {
+			// 寄信 聯絡我們
+			String title = "聯絡我們PCC聯絡信件";
+			EmailUtil.sendEmail("thepccteam@gmail.com", title, message, null);
+			return "寄送聯絡信";
+		} else {
+			return "寄送失敗";
+		}
+	}
+
 }
