@@ -27,7 +27,7 @@ import model.service.AdminService;
 import model.service.MemberCenterService;
 
 @Controller
-@SessionAttributes({ "all", "listOfMatchingDetails" })
+@SessionAttributes({ "all", "listOfMatchingDetails", "worngMsg", "admin" })
 public class AdminController {
 
 	@Autowired
@@ -36,6 +36,18 @@ public class AdminController {
 	private AdminService adminService;
 	@Autowired
 	private MemberCenterService memberCenterService;
+
+	@RequestMapping(path = "/adminLogin.admin", method = RequestMethod.POST)
+	public String adminLogin(String memberId, String password, Model model) {
+		Member admin = adminService.adminLogin(memberId, password);
+		if (admin != null) {
+			model.addAttribute("admin", admin);
+			return "matching";
+		} else {
+			model.addAttribute("worngMsg", "帳密輸入錯誤，請重新輸入。");
+			return "adminLogin";
+		}
+	}
 
 	@RequestMapping(path = "/article.admin", method = RequestMethod.GET)
 	public String showArticleAdmin(Model model) {
