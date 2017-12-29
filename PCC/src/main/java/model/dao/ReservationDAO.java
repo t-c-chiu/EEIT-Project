@@ -26,8 +26,8 @@ public class ReservationDAO{
 	// 選擇預約表Id(reservantionId)(有預約表才可選)
 	public Integer selectReservationId(String memberId) {
 		try {
-			return getSession().createQuery("select reservationId from Reservation where memberId = ?", Integer.class)
-					.setParameter(0, memberId).getSingleResult();
+			return getSession().createQuery("select reservationId from Reservation where memberId = :memberId", Integer.class)
+					.setParameter("memberId", memberId).getSingleResult();
 		} catch (Exception e) {
 			e.printStackTrace();
 			return null;
