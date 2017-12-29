@@ -28,7 +28,6 @@ public class MemberDAO {
 
 	// SELECT memberId,password FROM Member WHERE memberId='Tester';
 	public Member select(String memberId) {
-
 		return getSession().get(Member.class, memberId);
 	}
 

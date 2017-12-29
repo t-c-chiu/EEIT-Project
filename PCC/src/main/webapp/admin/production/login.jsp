@@ -1,4 +1,6 @@
-<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -7,7 +9,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Gentelella Alela! | </title>
+    <title>Gentelella Alela!</title>
 
     <!-- Bootstrap -->
     <link href="../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -20,6 +22,32 @@
 
     <!-- Custom Theme Style -->
     <link href="../build/css/custom.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script>
+    	$(function(){
+    		$('#loginAction').click(function(e){
+    			e.preventDefault();
+    			$('#memberId').next().text('');
+    			$('#password').next().text('');
+    			$('#loginAction').next().text('');
+    			var memberId = $('#memberId').val();
+    			var password = $('#password').val();
+    			var isOK = true;
+    			if(memberId.trim().length == 0){
+    				$('#memberId').next().text('請輸入帳號');
+    				isOK = false;
+    			}
+    			if(password.trim().length == 0){
+    				$('#password').next().text('請輸入密碼');
+    				isOK = false;
+    			}
+    			if(isOK){
+    				$('#loginForm').submit();
+    			} 
+    			
+    		})
+    	})
+    </script>
   </head>
 
   <body class="login">
@@ -30,16 +58,17 @@
       <div class="login_wrapper">
         <div class="animate form login_form">
           <section class="login_content">
-            <form>
+            <form id="loginForm" action="/PCC/adminLogin.admin" method="post">
               <h1>登入後台系統</h1>
               <div>
-                <input type="text" class="form-control" placeholder="Username" required="" />
+                <input type="text" class="form-control" placeholder="Username" id="memberId" name="memberId"/><span></span>
               </div>
               <div>
-                <input type="password" class="form-control" placeholder="Password" required="" />
+                <input type="password" class="form-control" placeholder="Password" id="password" name="password"/><span></span>
               </div>
               <div>
-                <a class="btn btn-default submit" href="index.html">Log in</a>
+                <a id="loginAction" class="btn btn-default submit" style="display: block;">登入</a>
+                <span>${worngMsg}</span>
               </div>
 
               <div class="clearfix"></div>
@@ -72,7 +101,7 @@
                 <input type="password" class="form-control" placeholder="Password" required="" />
               </div>
               <div>
-                <a class="btn btn-default submit" href="index.html">Submit</a>
+                <a id="loginAction" class="btn btn-default submit" href="index.html">Submit</a>
               </div>
 
               <div class="clearfix"></div>

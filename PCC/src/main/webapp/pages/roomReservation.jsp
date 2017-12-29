@@ -92,6 +92,17 @@ display:none
     color:#2C3536;
 }
 
+.button-send{
+	margin:0 3%;
+	width:94%;
+	height: 50px;
+	letter-spacing: 1.54px;
+	font-size:16px;
+    color: #fff;
+    border-radius: 0;
+    background-color: #EB7C81;
+}
+
 </style>
 
 <link rel="stylesheet" type="text/css" href="../css/login.css">
@@ -253,12 +264,14 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDYpbCt__aSkFOPc8En0xCzF6G
 			var span2=$('<span></span>').addClass("post-admin").text('房價 '+room.price)
 			var div8=$('<div></div>').addClass("entry-content")
 			var p1=$('<p></p>').text(room.info)
+		 	var h1=$('<h4></h4').attr('style','color:#FF8888').text(room.address)
+		 	
 			
 			span1.append(img2)
 			div5.append(img)
 			div4.append(div5)		
 			div7.append([span1,span2])
-			div8.append(p1)				
+			div8.append([h1,p1])				
 			div6.append([h3,div7,div8])		
 			div3.append([div4,div6])						
 			div2.append(div3)
@@ -508,6 +521,7 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDYpbCt__aSkFOPc8En0xCzF6G
 						</div>
 							
 						<div class="entry-content">
+						<h4 style="color:#FF8888">${room.address}</h4>
                         <p>${room.info}</p> 
 	  	
                         
@@ -577,7 +591,7 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDYpbCt__aSkFOPc8En0xCzF6G
 								</div>
 								<c:if test="${!empty member}">							
 								<div class="col-md-4 form-group">
-									<label>&#160;</label> <input class="btn btn-default form-control footer-send" type="submit"
+									<label>&#160;</label> <input class="btn btn-default form-control button-send" type="submit"
 										id="commit" value="送出訂單">
 								</div>
 								</c:if>
