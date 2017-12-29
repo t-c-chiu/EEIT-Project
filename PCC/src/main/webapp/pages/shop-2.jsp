@@ -142,14 +142,15 @@
 							<div class="latest-box">
 								<div class="post-box">
 
-									<span class="productItem">
-										<form id="${asideProducts.productId}ProductForm" action="/PCC/productId.shopping" method="get">
-											<input type="text" name="productId"
-												value="${asideProducts.productId}" hidden />
-										</form> <a href="#"><img src="${asideProducts.pictureAscii}"
-											width="85px" height="75px" alt="Post" /></a>
+									<div class="productItem">
+										<form  action="/PCC/productId.shopping" method="get">
+											<input type="text" name="productId" value="${asideProducts.productId}" hidden />
+										</form> 
+										<a >
+										<img src="${asideProducts.pictureAscii}" width="85px" height="75px" alt="Post" />
+										</a>
 										<h5>
-											<a href="#" title="need max shop.">${asideProducts.productName}</a>
+											<a title="need max shop.">${asideProducts.productName}</a>
 										</h5>
 
 
@@ -157,8 +158,9 @@
 											<i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
 												class="fa fa-star"></i> <i class="fa fa-star"></i> <i
 												class="fa fa-star-o"></i>
-										</div> <span class="price"><del>${asideProducts.price}</del>${asideProducts.price}</span>
-									</span>
+										</div> 
+										<span class="price"><del>${asideProducts.price}</del>${asideProducts.price}</span>
+									</div>
 
 								</div>
 							</div>
@@ -171,8 +173,7 @@
 							<c:forEach var="category" items="${categorys}">
 
 								<a href="#" class="categoryli">${category.categoryName}
-									<form action="<c:url value="/searchCatagory.shopping"/>"
-										method="get">
+									<form action="<c:url value='/searchCatagory.shopping'/>" method="get">
 										<input type="text" name="category"
 											value="${category.categoryName}" hidden />
 									</form>
@@ -199,7 +200,7 @@
 								</form>
 
 								<li class="product"><a id="${products8.productId}"
-									class="productItem" href="#"> <img
+									class="" href="#"> <img
 										src="${products8.pictureAscii }" alt="Product" width="375px"
 										height="300px" />
 
@@ -349,15 +350,9 @@
 			//點圖轉跳頁面
 
 			$(".productItem").click(function() {
-				var id = $(this).attr("id") + "ProductForm";
-				alert(id);
-				$("#" + id).submit();
+				$(this).find("form").submit();
 			});
 
-			//點擊旁邊小圖轉跳頁面
-			$(".post-box").click(function() {
-				location.replace("/PCC/shoppingMall/productContext.jsp");
-			});
 			
 			//點擊愛心加到我的最愛
 			$(".heart").click(function(){

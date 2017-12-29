@@ -207,7 +207,7 @@
 	<!-- Library - Theme JS -->
 	<script src="../js/functions.js"></script>
 	<!-- login  -->
-	<!-- 	<script type="text/javascript" src="../js/login.js"></script> -->
+		<script type="text/javascript" src="../js/login.js"></script>
 	<script type="text/javascript">
 		$(document).ready(function() {
 			//隱藏購物車內的東西
@@ -267,7 +267,10 @@
 						},
 					success:function(data){
 						alert(data);
-						location.replace("/PCC/pages/shop-2.jsp");
+						
+						if(data!="請先登入"){
+							location.replace("/PCC/pages/shop-2.jsp");
+						}
 					}				
 				});
 				

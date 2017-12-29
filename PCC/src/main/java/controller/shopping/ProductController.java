@@ -36,7 +36,8 @@ public class ProductController {
 
 	// 前往商品頁面
 	@RequestMapping(path = { "/productId.shopping" }, method = RequestMethod.GET)
-	public String saveId(int productId, Model model, HttpSession session) {
+	public String saveId(int productId, Model model) {
+		System.out.println("跳跳 sse"+productId);
 		if (productId != 0) {
 			Product product = productService.search(productId);
 			model.addAttribute("productPage", product);

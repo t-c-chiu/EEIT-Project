@@ -397,6 +397,12 @@ $(function() {
 	$("#shoppingMall").click(function(){
 		$("#shoppingMallForm").submit();
 	});
+	//點購物車小圖會跑去商品頁面
+	$(".shop-thumbnail").click(function(){
+		alert("ininini");
+		$(this).find("form").submit();
+			
+	});
 	
 
 
