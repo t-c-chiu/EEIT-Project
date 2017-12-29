@@ -472,7 +472,7 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDYpbCt__aSkFOPc8En0xCzF6G
 						    <li>房型：${roomType}</li>
 					
 						    <li>每晚最低價格：<input id="range" type="range" min="500" max="4000" step="500">
-						        NTD：<input id="rangeValue" type="text" readonly="readonly" style="border:none" placeholder="2500" ></li>																	    						    
+						        NTD：<input id="rangeValue" type="text" readonly="readonly" style="border:none" placeholder="全部顯示" ></li>																	    						    
 <!-- 							<li><input type="text" id="order">&#160;&#160;<button id="orderByP">調順序</button></li> -->				
 							</ul>
 						</aside><!-- Widget Categories /-  -->

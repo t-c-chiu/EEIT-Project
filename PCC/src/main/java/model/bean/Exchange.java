@@ -13,18 +13,17 @@ public class Exchange {
 	private Integer exchangeId;
 	private Integer totalpoint;
 	private String memberId;
-	private int status;
 	private String address;
 	private String name;
 	private String phone;
 	private String email;
-				
+					
 	@Override
 	public String toString() {
 		return "Exchange [exchangeId=" + exchangeId + ", totalpoint=" + totalpoint + ", memberId=" + memberId
-				+ ", status=" + status + ", address=" + address + ", name=" + name + ", phone=" + phone + ", email="
-				+ email + "]";
+				+ ", address=" + address + ", name=" + name + ", phone=" + phone + ", email=" + email + "]";
 	}
+	
 	public Integer getExchangeId() {
 		return exchangeId;
 	}
@@ -42,12 +41,6 @@ public class Exchange {
 	}
 	public void setMemberId(String memberId) {
 		this.memberId = memberId;
-	}
-	public int getStatus() {
-		return status;
-	}
-	public void setStatus(int status) {
-		this.status = status;
 	}
 	public String getAddress() {
 		return address;
