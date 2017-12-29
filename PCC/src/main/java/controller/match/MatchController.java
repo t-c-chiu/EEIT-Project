@@ -64,7 +64,7 @@ public class MatchController {
 	}
 
 	// 選擇服務員
-	@RequestMapping(path = "/chooseServant.match", method = RequestMethod.POST, produces = "text/plain;charset=UTF-8")
+	@RequestMapping(path = "/chooseServant.match", method = RequestMethod.GET, produces = "text/plain;charset=UTF-8")
 	public @ResponseBody String chooseServant(Integer serviceId, @SessionAttribute("member") Member member) {
 		return matchService.matching(member.getMemberId(), serviceId);
 	}

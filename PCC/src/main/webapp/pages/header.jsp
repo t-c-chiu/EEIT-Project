@@ -46,18 +46,35 @@
 							<ul class="dropdown-menu no-padding" id="dropdownCart">
 								<c:forEach var="cart" items="${addToCart}">
 									<li class="mini_cart_item" id="${cart.value.productId}SS">
-										<!-- 刪除的X --> <a title="Remove this item" class="remove"
-										href="#">&#215;</a> <!-- /刪除的X --> <!-- 圖案+文字 --> <a href="#"
-										class="shop-thumbnail"> <img alt="poster_2_up"
-											class="attachment-shop_thumbnail"
-											src="${cart.value.pictureAscii}" width="60px" height="62px" />
-											${cart.value.productName}
-									</a> <!-- /圖案+文字 --> <span class="quantity"> <!-- 數量 --> <span
-											class="cartSpan" id="${cart.value.productId}span">${cart.value.quantity}</span>
-											&#215; <!-- /數量 --> <!-- 單價 --> <span class="amount">Rs.
-												${cart.value.price}</span> <!-- 單價 -->
-									</span> <!-- /圖案+文字 -->
+										<!-- 刪除的X --> 
+										<a title="Remove this item" class="remove" href="#">&#215;</a> 
+										<!-- /刪除的X --> 
+										<!-- 圖案+文字 --> 
+										<a  class="shop-thumbnail"> 
+											<img alt="poster_2_up" class="attachment-shop_thumbnail" src="${cart.value.pictureAscii}" width="60px" height="62px"  />
+												${cart.value.productName}
+											
+											<!-- 隱藏的form -->
+										<form action="/PCC/productId.shopping" method="get" hidden>
+												<input type="text" name="productId" value="${cart.value.productId}" hidden>
+										</form>
+											<!-- /隱藏的form -->	
+										</a>
+									 	<!-- /圖案+文字 --> 
+														
+									
+										<span class="quantity">
+										 	<!-- 數量 --> 
+										 	<span class="cartSpan" id="${cart.value.productId}span">${cart.value.quantity}</span>
+											&#215; 
+											<!-- /數量 --> 
+											<!-- 單價 --> 
+											<span class="amount"><span>$</span>${cart.value.price}</span>
+											<!-- 單價 -->
+										</span> 
+																
 									</li>
+									
 								</c:forEach>
 
 
@@ -65,14 +82,27 @@
 								<c:forEach var="cartItem" items="${products}">
 									<li class="mini_cart_item" style="display: none"
 										id="${cartItem.productId}"><a title="Remove this item"
-										class="remove" href="#">&#215;</a> <a href="#"
-										class="shop-thumbnail"> <img alt="poster_2_up"
+										class="remove" href="#">&#215;</a> <a class="shop-thumbnail"> <img alt="poster_2_up"
 											class="attachment-shop_thumbnail"
 											src="${cartItem.pictureAscii}" width="60px" height="62px">
 											${cartItem.productName}
-									</a> <span class="quantity"><span class="cartSpan"
+											
+										<form  action="/PCC/productId.shopping" method="get" hidden>
+											<input type="text" name="productId" value="${cartItem.productId}" hidden/>
+
+										</form>			
+											
+									</a> 
+									
+									
+									
+									
+									<span class="quantity"><span class="cartSpan"
 											id="${cartItem.productId}span">0</span> &#215; <span
 											class="amount">Rs. ${cartItem.price}</span> </span></li>
+
+											
+											
 								</c:forEach>
 								<!-- /item X -->
 
@@ -114,12 +144,6 @@
 							<a id="log-out" href="#" class="change-ds">登出</a>
 						</li>
 						</ul>
-						<!-- 						<ul class="dropdown-menu no-padding droplogin "> -->
-						<!-- 							<li class="button"><a href="#" title="Login">登入</a></li> -->
-						<!-- 							<li class="button"><a href="#" title="Registy">註冊</a></li> -->
-						<!-- 						</ul> -->
-
-
 					</div>
 
 				</div>
