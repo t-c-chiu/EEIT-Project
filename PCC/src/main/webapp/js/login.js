@@ -3,6 +3,20 @@
 //	$("#site-loader").remove();
 //});
 
+//footer-message send
+$(function(){
+	$('#send-messsage-btn').click(function(){
+		$.post("/PCC/sendMessage.login",$('#main-contact-form').serialize(),function(data){
+			if(data=="寄送聯絡信"){
+				alert("感謝您的聯繫");
+				$(':input').val("");
+			}else{
+				alert("寄送失敗，請重新輸入");
+			}
+		});
+	});
+});
+
 //Google Login
 function onSuccess(googleUser) {
 	var profile = googleUser.getBasicProfile();
@@ -33,6 +47,9 @@ function onSuccess(googleUser) {
 				$('#log-reg').css("display", "none");
 				$('#log-cen').css("display", "block");
 				$('#log-out').css("display", "block");
+				//small menu
+				$('#small-center').css("display", "block");
+				$('#small-logout').css("display", "block");
 				if (!window.location.hash) {
 					window.location = window.location + '#loaded';
 					window.location.reload();
@@ -94,6 +111,25 @@ $(function() {
 		});
 	})
 });
+//small登出
+$(function() {
+	$('#small-logout').click(function() {
+		$('#my-signin2').remove();
+		var _iframe = $('<iframe src="https://accounts.google.com/logout" style="display:none;"></iframe>');
+		$("#out").append(_iframe);
+		$.ajax({
+			url : "/PCC/logout.login",
+			type : "POST",
+			success : function(data) {
+				if (data == "登出") {
+					var thesave=$("#save").val();
+					console.log(thesave);
+					setTimeout("location.replace('/PCC/index.jsp');", 500);
+				}
+			}
+		});
+	})
+});
 
 // JQ 成功的 登入
 $(function() {
@@ -111,6 +147,9 @@ $(function() {
 						$('#log-reg').css("display", "none");
 						$('#log-cen').css("display", "block");
 						$('#log-out').css("display", "block");
+						//small menu
+						$('#small-center').css("display", "block");
+						$('#small-logout').css("display", "block");
 						window.location.reload();
 					}
 				} else if (data == "登入失敗") {
@@ -118,13 +157,16 @@ $(function() {
 					$('#log-reg').css("display", "block");
 					$('#log-cen').css("display", "none");
 					$('#log-out').css("display", "none");
+					//small menu
+					$('#small-center').css("display", "none");
+					$('#small-logout').css("display", "none");
 					location.replace('/PCC/pages/registy.jsp');
 				}
 			}
 		});
 	});
 });
-
+//偷偷的角色判斷
 $(document).ready(function() {
 	var save = $("#save").val();
 	console.log(save);
@@ -133,11 +175,17 @@ $(document).ready(function() {
 		$('#log-reg').css("display", "none");
 		$('#log-cen').css("display", "block");
 		$('#log-out').css("display", "block");
+		//small menu
+		$('#small-center').css("display", "block");
+		$('#small-logout').css("display", "block");
 	} else {
 		$('#log-log').css("display", "block");
 		$('#log-reg').css("display", "block");
 		$('#log-cen').css("display", "none");
 		$('#log-out').css("display", "none");
+		//small menu
+		$('#small-center').css("display", "none");
+		$('#small-logout').css("display", "none");
 	}
 });
 

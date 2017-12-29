@@ -22,14 +22,14 @@
                         </aside>
                         <!-- Widget About /- -->
                         <!-- Widget Newsletter -->
-                        <form action="#" method="post" name="contact-form" class="col-md-6 col-sm-6 col-xs-12" id="main-contact-form ">
+                        <form  method="post" name="contact-form" class="col-md-6 col-sm-6 col-xs-12" id="main-contact-form">
                             <div class="form-group">
                                 <input type="email" required="" placeholder="Email" class="form-control" name="email">
                             </div>
                             <div class="form-group">
                                 <textarea required="" placeholder="Message" rows="8" class="form-control" name="message"></textarea>
                             </div>
-                            <button class="btn btn-default form-control footer-send " type="button"><i class="fa fa-paper-plane-o"></i> 送出</button>
+                            <button id="send-messsage-btn" class="btn btn-default form-control footer-send " type="button"><i class="fa fa-paper-plane-o"></i> 送出</button>
                         </form>
                         <div class="copyright-section">
                             <div class="coyright-content">
