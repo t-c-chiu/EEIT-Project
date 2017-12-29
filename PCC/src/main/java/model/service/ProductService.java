@@ -21,6 +21,15 @@ public class ProductService {
 	private CategoryDAO categoryDAO;
 
 
+	//根據價錢來搜尋
+	public List<Product> selectByPrice(int lowPrice,int hightPrice){
+		
+		return productDAO.selectPrice(lowPrice, hightPrice);
+	}
+	
+	
+	
+	
 	// 根據ID搜尋
 	public Product search(int productId) {
 		if (productId != 0) {
