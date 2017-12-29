@@ -48,6 +48,16 @@ href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" />
 <!-- fontawesome -->
 <link href="../revolution/fonts/fontawesome-all.css">
 
+ <!-- jquery.tablesorter -->
+<!-- load jQuery and tablesorter scripts -->
+<script type="text/javascript" src="../tablesorter-master/js/jquery.tablesorter.js"></script>
+
+<!-- tablesorter widgets (optional) -->
+<script type="text/javascript" src="../tablesorter-master/js/jquery.tablesorter.widgets.js"></script>
+    
+    
+    
+
 <style>
 
 .zoom {
@@ -95,6 +105,57 @@ display:none
     color:#2C3536;
 }
 
+.table-bordered {
+    border: 1px solid #c2cfd6;
+}
+.table {
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: 1rem;
+    background-color: transparent;
+}
+table {
+    border-collapse: collapse;
+}
+thead {
+    display: table-header-group;
+    vertical-align: middle;
+    border-color: inherit;
+    background-color:#FF8888;
+}
+tr {
+    display: table-row;
+    vertical-align: inherit;
+    border-color: inherit;
+}
+.table-bordered thead th, .table-bordered thead td {
+    border-bottom-width: 2px;
+}
+.table thead th {
+    vertical-align: bottom;
+    border-bottom: 2px solid #c2cfd6;
+}
+tbody {
+    display: table-row-group;
+    vertical-align: middle;
+    border-color: inherit;
+}
+.table-bordered th, .table-bordered td {
+    border: 1px solid #c2cfd6;
+}
+.table th, .table td {
+    padding: 0.75rem;
+    vertical-align: top;
+    border-top: 1px solid #c2cfd6;
+}
+.table-bordered th, .table-bordered td {
+    border: 1px solid #c2cfd6;
+}
+
+
+
+
+
 </style>
 
 <link rel="stylesheet" type="text/css" href="../css/login.css">
@@ -107,15 +168,36 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDYpbCt__aSkFOPc8En0xCzF6G
 function initDetails(){			
 	$.get('${pageContext.request.contextPath}/selectDetails.gift',function(data){
 		console.log(data)
+		var tbody=$('<tbody></tbody>')
+		
+		$('#detailTable>tbody').remove()
+		$('#detailTable').append(tbody)
+		$.each(data,function(i,details){
+			var td0=$('<td></td>').text(details.exchangeDetailsId)
+			var td1=$('<td></td>').text(details.giftName)
+			var td2=$('<td></td>').text(details.point)
+			var td3=$('<td></td>').text(details.number)
+			var td4=$('<td></td>')			
+			var button=$('<button>刪除</button>').addClass("delete")
+    			                                .attr("id",details.giftId)
+    		td4.html(button) 
+						
+			var tr1=$('<tr></tr>')
+			tr1.append([td0,td1,td2,td3,td4])
+			tbody.append(tr1)       
+		})
 		
 	})
 }
 	
 
 
-	$(function() {				
-		initDetails()	
-				
+	$(function() {
+		$('#test').click(function(){
+			alert("QQ")
+			initDetails()	
+		})
+			
 	})			
 </script>
 
@@ -148,30 +230,94 @@ function initDetails(){
 				</div>
 				<ol class="breadcrumb">
 					<li><a href="../index.html" title="Home">首頁</a></li>
-					<li class="active">禮物中心</li>
+					<li class="active">禮物中心</li>					
 				</ol>
 			</div>
+			<button id="test">QQ</button>
 			<!-- Container /- -->
 		</div>
 		<!-- Page Banner /- --> <!-- Product Section -->
 		
-	<div id="product-section"
-			class="product-section container-fluid no-padding">
-			<!-- Container -->
+					<!-- Container -->
 			<div class="container">
-				
-				<div id="main">
-					<!-- Products -->
 
+				<!-- Billing -->
+				
+				<div class="checkout-form">
+         
+					<div class="col-md-12 col-sm-12 col-xs-12">
+					
+					<div id="main">
+					<!-- Products -->
+				<table id="detailTable" class="table table-bordered">
+ 					 <thead>
+   						 <tr style="color:white">
+      						<th>流水號</th>
+     					    <th>商品名稱</th>
+      						<th>點數</th>
+      						<th>數量</th>
+      						<th>刪除</th>
+    					</tr>
+  					</thead>
+  					<tbody>
+ 					</tbody>
+				</table>
 					<!-- Products /- -->
-                </div>
+                </div>													
+						<form action="<c:url value="/show.room"/>" method="get">
+							<div class="billing-field">
+								<div class="col-md-4 form-group">
+									<label>地區<span style="color:red" class="content" id="areaSpan"></span></label><input class="form-control" type="text"
+										name="area" id="area" >
+								</div>
+								
+								<div class="col-md-4 form-group">
+									<label>地區<span style="color:red" class="content" id="areaSpan"></span></label><input class="form-control" type="text"
+										name="area" id="area" >
+								</div>
+								
+								<div class="col-md-4 form-group">
+									<label>地區<span style="color:red" class="content" id="areaSpan"></span></label><input class="form-control" type="text"
+										name="area" id="area" >
+								</div>
+							
+						
+								<div class="col-md-4 form-group">
+									<label>地區<span style="color:red" class="content" id="areaSpan"></span></label><input class="form-control" type="text"
+										name="area" id="area" >
+								</div>
+								
+								<div class="col-md-4 form-group">
+									<label>房型<span style="color:red" class="content" id="roomTypeSpan"></span></label> 
+									<div class="select">
+										<select class="form-control" name="roomType">										
+											<option value="標準房">標準房</option>
+											<option value="貴賓房">貴賓房</option>
+										</select>
+									</div>
+								</div>
+								
+								
+								<div class="col-md-4 form-group">
+									<label>&#160;<span style="color:red" class="content"></span></label><input class="btn btn-default form-control button-send" type="submit"
+										value="送出">
+								</div>																
+							</div>
+						</form>
+					</div>
+					
+
 				</div>
-				<!-- Row /- -->
+				<!-- Billing /- -->		
 			</div>
 			<!-- Container /- -->
-		</div>
-									
-		
+				
+				
+			</div>
+			<!-- Container /- -->
+
+			
+	
 		<!-- Content Area /- --> <!-- Clients /- --> </main>
 		<!--	內容結束	-->
 		<!-- Footer Main 1 -->
