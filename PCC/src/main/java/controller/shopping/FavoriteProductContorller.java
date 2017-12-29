@@ -39,6 +39,10 @@ public class FavoriteProductContorller {
 			Model model) {
 		if (favoriteProudct != null) {
 			Member member = (Member) session.getAttribute("member");
+			if(member==null) {
+				return "請先登入會員";
+			}
+			
 			String id = member.getMemberId();
 			favoriteProudct.setMemberId(id);
 			int result = favoriteProudctService.insertFP(favoriteProudct);

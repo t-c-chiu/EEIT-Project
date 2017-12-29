@@ -32,7 +32,7 @@
           
           <li><a href="<c:url value="/matching.admin"/>"><i class="fa fa-table"></i> 配對審核 </a>
           </li>
-          <li><a><i class="fa fa-desktop"></i> 商城管理 </a>
+          <li><a  href="productsAdmin.jsp"><i class="fa fa-desktop"></i> 商城管理 </a>
           </li>
           <li><a href="order.jsp"><i class="fa fa-desktop"></i> 訂單管理 </a>
           </li>
