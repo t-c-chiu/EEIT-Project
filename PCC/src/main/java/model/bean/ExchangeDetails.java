@@ -11,7 +11,7 @@ public class ExchangeDetails {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer exchangeDetailsId;	
-	private String giftId;
+	private Integer giftId;
 	private String giftName;
 	private Integer point;
 	private Integer number;
@@ -50,10 +50,10 @@ public class ExchangeDetails {
 	public void setExchangeDetailsId(Integer exchangeDetailsId) {
 		this.exchangeDetailsId = exchangeDetailsId;
 	}
-	public String getGiftId() {
+	public Integer getGiftId() {
 		return giftId;
 	}
-	public void setGiftId(String giftId) {
+	public void setGiftId(Integer giftId) {
 		this.giftId = giftId;
 	}
 	public String getGiftName() {
