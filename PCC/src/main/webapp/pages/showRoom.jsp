@@ -46,7 +46,16 @@ href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" />
 
 <!-- fontawesome -->
 <style>
-
+.button-send{
+	margin:0 3%;
+	width:94%;
+	height: 50px;
+	letter-spacing: 1.54px;
+	font-size:16px;
+    color: #fff;
+    border-radius: 0;
+    background-color: #EB7C81;
+}
 </style>
 
 <link href="../revolution/fonts/fontawesome-all.css">
@@ -252,15 +261,15 @@ $('#area').keyup(function(){
 									<label>房型<span style="color:red" class="content" id="roomTypeSpan"></span></label> 
 									<div class="select">
 										<select class="form-control" name="roomType">										
-											<option value="normal">標準房</option>
-											<option value="good">貴賓房</option>
+											<option value="標準房">標準房</option>
+											<option value="貴賓房">貴賓房</option>
 										</select>
 									</div>
 								</div>
 								
 								
 								<div class="col-md-4 form-group">
-									<label>&#160;<span style="color:red" class="content"></span></label><input class="btn btn-default form-control footer-send" type="submit"
+									<label>&#160;<span style="color:red" class="content"></span></label><input class="btn btn-default form-control button-send" type="submit"
 										value="送出">
 								</div>																
 						</div>
