@@ -1,6 +1,7 @@
 package model.service;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -162,7 +163,18 @@ public class AdminService {
 	}
 
 	public Integer createServant(Servant servant) {
+		servant.setIntroduction(servant.getIntroduction().substring(1));
 		return servantDAO.insert(servant);
+	}
+
+	public Member adminLogin(String memberId, String password) {
+		Member admin = memberDAO.select(memberId);
+		if (admin != null && admin.getRole() == 1) {
+			if (Arrays.equals(admin.getPassword(), password.getBytes())) {
+				return admin;
+			}
+		}
+		return null;
 	}
 
 }
