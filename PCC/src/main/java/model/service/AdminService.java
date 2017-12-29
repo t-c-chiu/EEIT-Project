@@ -145,10 +145,18 @@ public class AdminService {
 					reason + "<br>推薦給您的服務員：" + "<br>服務員姓名：" + servant.getName() + "<br>服務經驗:：" + servant.getExperience()
 							+ "年" + "<br>服務員介紹：" + servant.getIntroduction()
 							+ "<br><br><img style='width:120px;height:120px;' src='/PCC/images/match/"
-							+ servant.getServiceId() + ".jpg'>" + "<br><br><button class='chooseServant" + recommend
-							+ "'>選擇此服務員</button>" + "<script>$('button').unbind();" + "$('.chooseServant" + recommend
-							+ "').click(function(){" + "$.post('/PCC/chooseServant.match',{'serviceId':" + recommend
-							+ "},function(data){" + "alert(data);" + "})" + "})</script>");
+							+ servant.getServiceId() + ".jpg'>"
+							+ "<br><br>"
+							+ "<button>"
+							+ "<a class='chooseServant' href='/PCC/chooseServant.match?serviceId=" + recommend + "'>選擇此服務員</a>"
+							+ "</button>"
+							+ "<script>"
+							+ "$('.chooseServant').unbind();"
+							+ "$('.chooseServant').click(function(e){"
+							+ "e.preventDefault();"
+							+ "$.get($(this).attr('href'),function(data){alert(data);})"
+							+ "})"
+							+ "</script>");
 		}
 		return "已拒絕該申請並發送訊息給申請人";
 	}
