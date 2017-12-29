@@ -96,7 +96,12 @@
 	background-color: transparent;
 	color: #EB7C81;
 }
-
+li#small-center{
+	display:none;
+}
+li#small-logout{
+	display:none;
+}
 /* - Navigation Menu > 991 RES. */
 @media (min-width: 992px) {
 	.header-section-1 .ow-navigation a.navbar-brand {
@@ -135,7 +140,12 @@
 	.header-section-1 .ow-navigation.navbar-default .navbar-nav > li > a {
 		padding: 20px 0 20px;
 	}
-	
+	li#small-center{
+	display:none;
+	}
+	li#small-logout{
+	display:none;
+}
 	/* Dropdown */
 	.ow-navigation .navbar-collapse > ul > li > .dropdown-menu {
 		top: 100%;
@@ -283,6 +293,12 @@
 	.menu-icon a {
 		padding: 10px 12px 10px 0;
 	}
+	li#small-center{
+	display:none;
+	}
+	li#small-logout{
+	display:none;
+	}
 }
 
 /* - Navigation Menu Switch < 991 RES */
@@ -331,7 +347,12 @@
 		min-height: 0; 
 		float: none; 
 	}
-	
+	li#small-center{
+	display:block;
+	}
+	li#small-logout{
+	display:block;
+	}
 	/* since 3.1.0 */
 	.ow-navigation .navbar-collapse.collapse.in {  
 		display: block!important; 

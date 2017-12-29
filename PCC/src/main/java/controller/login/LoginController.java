@@ -158,9 +158,13 @@ public class LoginController {
 			//update new password
 			member.setPassword(newPassword.getBytes());
 			member=memberCenterService.updatePSW(member);
-			//寄信
+			//寄信 給更改密碼成功
 			String title="PCC會員密碼更改通知";
-			String body="<h2>PCC會員  "+memberId+" 已更改會員密碼</h2><br><h4>如有任何問題，請透過官方網站查詢、或與我們連絡 </h4><h4><a href='http://192.168.40.10:8080/PCC/index.jsp' style='background-color:#EB7C81;color:#fff;padding:5%;'>前往PCC官網確認</a></h4><br><h6>Postnatal Care Center 敬上</h6>";
+			String body="<h2>PCC會員  "+memberId+" 已更改會員密碼</h2>\r\n" + 
+					"    <h4>如有任何問題，請透過官方網站查詢、或與我們連絡 </h4>\r\n" + 
+					"        <a href='http://192.168.40.10:8080/PCC/index.jsp' style='background-color:#EB7C81;color:#fff;padding:10px;margin:10px;'>前往PCC官網確認</a>\r\n" + 
+					"    <br>\r\n" + 
+					"    <h6>Postnatal Care Center 敬上</h6>";
 			EmailUtil.sendEmail(email, title, body, null);
 			//日期轉格式
 //			SimpleDateFormat sdFormat = new SimpleDateFormat("yyyy/MM/dd");
