@@ -8,7 +8,6 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="google-signin-client_id" content="368506092635-g2qmv1vf4gu9tbs24d644k0kgqqg79kr.apps.googleusercontent.com">
 <title>PCC - Shop</title>
 <!-- Standard Favicon -->
 <link rel="icon" type="image/x-icon" href="../images/pcc/pcc.png" />
@@ -49,7 +48,7 @@
 
 <body data-offset="200" data-spy="scroll" data-target=".ow-navigation">
 	<div class="main-container">
-		<%@ include file="header.jsp"%>
+		<%@ include file="../pages/header.jsp"%>
 
 		<!-- Header -->
 
@@ -59,10 +58,8 @@
 			<!-- Container -->
 			<div class="container">
 				<div class="banner-content">
-					<h3 id="shoppingTitil"><a>購物商城</a></h3>
+					<h3>購物商城</h3>
 					<p>our vision is to be Earth's most customer centric company</p>
-
-
 				</div>
 				<ol class="breadcrumb">
 					<li><a href="../index.html" title="Home">首頁</a></li>
@@ -130,7 +127,7 @@
 							<div class="price-input">
 								<span id="amount"></span> <span id="amount2"></span>
 							</div>
-							<a id="priceFilter" title="filter">Filter</a>
+							<a href="#" title="filter">Filter</a>
 						</div>
 						</aside>
 						<!-- Widget Price /- -->
@@ -141,16 +138,15 @@
 						<c:forEach var="asideProducts" items="${asideProducts}">
 							<div class="latest-box">
 								<div class="post-box">
-
-									<div class="productItem">
-										<form  action="/PCC/productId.shopping" method="get">
-											<input type="text" name="productId" value="${asideProducts.productId}" hidden />
-										</form> 
-										<a >
-										<img src="${asideProducts.pictureAscii}" width="85px" height="75px" alt="Post" />
-										</a>
+									<span class="productItem">
+										<form id="${asideProducts.productId}ProductForm"
+											action="/PCC/productId.shopping" method="get">
+											<input type="text" name="productId"
+												value="${asideProducts.productId}" hidden />
+										</form> <a href="#"><img src="${asideProducts.pictureAscii}"
+											width="85px" height="75px" alt="Post" /></a>
 										<h5>
-											<a title="need max shop.">${asideProducts.productName}</a>
+											<a href="#" title="need max shop.">${asideProducts.productName}</a>
 										</h5>
 
 
@@ -158,9 +154,8 @@
 											<i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
 												class="fa fa-star"></i> <i class="fa fa-star"></i> <i
 												class="fa fa-star-o"></i>
-										</div> 
-										<span class="price"><del>${asideProducts.price}</del>${asideProducts.price}</span>
-									</div>
+										</div> <span class="price"><del>${asideProducts.price}</del>${asideProducts.price}</span>
+									</span>
 
 								</div>
 							</div>
@@ -173,7 +168,8 @@
 							<c:forEach var="category" items="${categorys}">
 
 								<a href="#" class="categoryli">${category.categoryName}
-									<form action="<c:url value='/searchCatagory.shopping'/>" method="get">
+									<form action="<c:url value="/searchCatagory.shopping"/>"
+										method="get">
 										<input type="text" name="category"
 											value="${category.categoryName}" hidden />
 									</form>
@@ -188,76 +184,138 @@
 					<!-- Content Area -->
 					<div
 						class="col-md-8 col-sm-7 col-xs-12 content-area product-section2 no-left-padding">
-						<!-- Products -->
-						<ul class="products">
-							<!-- 商品點選區  Product -->
-							<c:forEach var="products8" items="${products}">
+<!---------------------------------------------- Product------------------------------------------------------ -->
 
+						<div style="margin-left: 20px">
 
+							<div>
+								<h2 style="color: gray;">
+									<lable>${productPage.productName}</lable>
+									商品編號： <span id="Id${productPage.productId}">${productPage.productId}</span>
+								</h2>
+								<p>
+									<span style="color: gray;"> ${productPage.context} </span>
+								</p>
 
-								<li class="product">
-								<a id="${products8.productId}" class="productItem" href="#"> 
-									<img src="${products8.pictureAscii }" alt="Product" width="375px" height="300px" />
-										<h5>${products8.productName}</h5> 
-									<span class="price">
-										<del>${products8.price}</del> ${products8.price}
-									</span>
-									<form id="${products8.productId}ProductForm" action="/PCC/productId.shopping" method="get" hidden>
-										<input type="text" name="productId"	value="${products8.productId}" hidden />
-									</form>
-								</a> 
-								
-								<a href="#" class="add-to-cart1" title="Add To Cart"> Add
-										To Cart
-										<p hidden>${products8.productId}</p>
-										
-								</a> <!-- 圖案旁邊的icon --> 									
-								<div  class="wishlist-box heart-shop">
-										<a class="heart" name="${products8.productId}"> 
-										<h1 ><i class="fa fa-heart-o"></i></h1>
-										</a> 
+							</div>
+							<table class="infolist product-con">
+								<colgroup>
+									<col width="19%"></col>
+									<col width="81%"></col>
+								</colgroup>
 
+								<tr class="webprice">
+									<th scope="row">原價</th>
+									<td><del>
+											<span class="price">${productPage.price}元</span>
+										</del></td>
+								</tr>
+								<tr class="cp_promo">
+									<th scope="row"><span style="color: red">特價</span></th>
+									<td><span class="price" style="color: red">${productPage.price}元</span></td>
+								</tr>
+
+								<tr class="js-cccart">
+									<th scope="row">付款方式</th>
+									<td>
+										<ul class="list paytypes clearfix">
+											<li>
+												<div class="paytype">
+													信用卡 <img
+														src="https://s.yimg.com/f/i/tw/mall/yps/ico_credi_201008.png"
+														alt="接受信用卡刷卡">
+												</div>
+											</li>
+											<li>
+												<div class="paytype">
+													ATM轉帳 <img
+														src="https://s.yimg.com/f/i/tw/mall/yps/ico_atm_0109.gif"
+														alt="接受ATM轉帳付款">
+												</div>
+											</li>
+											<li class="familymart">
+												<div class="paytype">
+													全家付款取貨 <img
+														src="https://s.yimg.com/qs/mall/yps/ico_famimart.gif"
+														alt="全家付款取貨">
+												</div>
+											</li>
+											<li class="sevenmart">
+												<div class="paytype">
+													7-11付款取貨 <img
+														src="https://s.yimg.com/f/i/tw/mall/yps/ico_711.gif"
+														alt="接受超商付款取貨">
+												</div>
+											</li>
+										</ul>
+									</td>
+								</tr>
+								<tr>
+
+									<th scope="row">交貨方式</th>
+									<td>
+										<ul>
+											<li><a href="#" title="貨運 / 宅配" class="trans"
+												hpp="r_shipfee">貨運 / 宅配 (購物滿599元免運費) </a>、 <a href="#"
+												title="7-11取貨付款" class="trans" hpp="r_shipfee">7-11取貨付款
+													(購物滿599元免運費) </a>、 <a href="#" title="全家取貨付款" class="trans"
+												hpp="r_shipfee">全家取貨付款 (購物滿599元免運費) </a></li>
+										</ul>
+									</td>
+								</tr>
+
+								<tr>
+									<th scope="row">訂購數量</th>
+									<td><input id="number" name="qunaity " type="number"
+										min="1" max="10"  />
+
+										<button class="button button-white"
+											data-ylk="sec:buyinfo;slk:加入購物車;" id="e2e-item-add2cart-top"
+											type="button">
+											<span class="sprite sprite-cart-default"></span> <span>加入購物車</span>
+										</button></td>
+								</tr>
+
+							</table>
+
+							<!-- [WD] inc/ps_item_tab.html//-->
+							<div id="ypsitb" class="ypsmodule ypstab">
+								<div class="hd"></div>
+								<div class="bd clearfix">
+									<ul>
+										<li class="on"><span>商品詳細說明</span> <em></em></li>
+									</ul>
 								</div>
-							 </li>
-							</c:forEach>
-					</div>
-					<!-- Content Area /- -->
-				</div>
-				<!-- Row /- -->
-				<nav class="ow-pagination">
-				<ul class="pager">
-					<li class="number"><a href="#">1</a></li>
-					<li class="load-more"><a href="#">Load More</a></li>
-					<li class="previous"><a href="#"><i
-							class="fa fa-angle-right"></i></a></li>
-					<li class="next"><a href="#"><i class="fa fa-angle-left"></i></a></li>
-				</ul>
-				</nav>
-			</div>
+								<div class="ft"></div>
+							</div>
 
-		</div>
-		<!-- Product Section2 /- --> </main>
+							<!-- 之後商品內容在這邊 -->
+							<img alt="商品內容" src="${productPage.pictureAscii}">
+							<!-- /之後商品內容在這邊 -->
+
+						</div>
+<!---------------------------------------------- /Product------------------------------------------------------ -->
+					</div>
+				</div>
+		</main>
 		<!--	內容結束	-->
 
 		<!-- Footer Main 1 -->
-		<%@ include file="footer.jsp"%>
+		<%@ include file="../pages/footer.jsp"%>
 		<!-- Footer Main 1 -->
 		<!-- Container /- -->
 	</div>
 	<form id="startForm" action="/PCC/star.shopping" method="post">
-		<input name="pageName" type="text" value="searchPage" hidden /> 
-		<input id="startInput" type="text" value="${start}" hidden />
-		<input id="startCategory" type="text" name="categoryName" value="${categoryName}" hidden />	
-	</form>
+		<input name=pageName type="text" value="prodcutPage" hidden /> <input
+			id=startInput type="text" value="${start}" hidden />
 
-
-	<form  id="priceFilterForm" action="/PCC/searchByPrice.shopping" method="get" hidden>
-			<input id="lowPrice" type="text" name="lowPrice" hidden/>
-			<input id="hightPrice" type="text" name="hightPrice" hidden/>
 	</form>
+	<input id="productId" type="text" value="${productPage.productId}"
+		hidden />
+
 
 	<!-- JQuery v1.12.4 -->
-	<script src="../js/jquery.min.js"></script>
+	<!-- 	<script src="../js/jquery.min.js"></script> -->
 
 	<!-- Library - Js -->
 	<script src="../libraies/lib.js"></script>
@@ -289,25 +347,16 @@
 	<script type="text/javascript" src="../js/login.js"></script>
 	<script type="text/javascript">
 		$(document).ready(function() {
-
 			var starInput = $('#startInput').val();
-			var startCategory=$("#startCategory");
+			console.log(productId);
 			ViewCart();
-
-			if (starInput == "" || startCategory.val()=="") {
-				startCategory.val("一開始");
+			initNumber();
+		
+			
+			//為了初始化的載入
+			if (starInput == "") {
 				$('#startForm').submit();
 			}
-				
-// 			//回到熱門商品首頁
-			$("#shoppingTitil").click(function(){
-				$("#startForm").submit();
-				
-			});
-			
-			
-			
-			
 			// 搜尋欄搜尋商品名
 			$('#serch-btn').click(function() {
 				// alert("已點");
@@ -319,79 +368,67 @@
 				} else {
 					$('#searchForm').submit();
 				}
-			})
+			});
 			// 分類欄點選分類
 			$(".categoryli").click(function() {
-				$(this).find("form").submit();
+				// alert(".categoryli被點選");
+				var formid = $(this).find("input").val();
+				// alert(formid);
+				if (formid != '') {
+					$(this).find("form").submit();
+				}
+
 			});
 
 			// 加入購物車
 
-			$(".add-to-cart1").click(function() {
-				var productId = $(this).find("p").text();
-				var producIdCartLi = $("#" + productId + "SS");
+			$("#e2e-item-add2cart-top").click(function() {
+				var productId = $("#productId").val();
+				var producIdCartLi = $("#"+ productId + "SS");
+				var number =$("#number").val();
 				$.ajax({
 					url : "/PCC/addCart.shopping",
 					type : "POST",
 					data : {
 						"productId" : productId,
-						"number":1
+						"number":number
 					},
 					success : function(data) {
 						if (producIdCartLi.text() == "") {
-							var item = $("#" + data.productId);
-							item.css("display", "");
-							alert("已加入購物車喔!!");
+							var item = $("#"+ data.productId);
+							item.css("display","");
 						}
 						// 抓數量的數字
-						$("#" + data.productId + "span").text(data.quantity);
+						$("#"+ data.productId+"span").text(data.quantity);
 						// 只要購物車內有東西，就打開View Cart 和Check Out
 						ViewCart();
-					}
-				});
+						alert("已經入購物車!!")
+				}});
+
 			});
 
-			//點旁邊的小圖轉跳頁面
+			//點圖轉跳頁面
 
 			$(".productItem").click(function() {
-				$(this).find("form").submit();
-			});
-
-			
-			//點擊愛心加到我的最愛
-			$(".heart").click(function(){
-				var id=$(this).attr("name");
-		
+				var id = $(this).attr("id");
 				$.ajax({
-					url:"/PCC/addToFavoriteProduct.shopping",
-					type:"GET",
-					data:{"productId":id},
-					success:function(data){
-						alert(data);						
+					url : "/PCC/controller.shopping",
+					type : "GET",
+					data : {"productId" : id},
+					success : function(data) {
+						location.replace("/PCC/shoppingMall/productContext.jsp");
 					}
-					
 				});
-				
+
 			});
 			
-			
-			//點擊filter可以藉由價錢來搜尋
-			$("#priceFilter").click(function(){
-				
-				var lowPrice1=$("#amount").text();
-				var lowPrice=lowPrice1.split("$");
-				var hightPrice1=$("#amount2").text();
-				var hightPrice=hightPrice1.split("$");
-				$("#lowPrice").val(lowPrice[1]);
-				$("#hightPrice").val(hightPrice[1]);
-				$("#priceFilterForm").submit();
-				
-			});
-			
-			
+		//跳轉去結帳
+		$("#e2e-item-checkout-top").click(function() {
+			location.replace("/PCC/pages/check.jsp");
 		});
 
-		// 是否打開 ViweCart
+});
+		// 是否打開 ViweCart和Check out
 		function ViewCart() {
 			var sum = 0;
 			$(".cartSpan").each(function() {
@@ -408,28 +445,11 @@
 
 		}
 		
-//autocompelte for 搜尋Text
-$(function() {
-	keywords=[]	
-	$('#searchText').autocomplete({
-		source:keywords		
-	})
-	
-	
-$('#searchText').keyup(function(){
-	var searchText=$('#searchText').val();
-	keywords.length = 0
-	
-	$.get('${pageContext.request.contextPath}/autocomplete.shopping','searchText='+searchText,function(data){		
-		$.each(data,function(i,searchText){
-			console.log(searchText)
-			keywords.push(searchText)	
-		})			
-	  })		
-	})	
-})
 		
-		
+		function initNumber(){
+			
+			document.getElementById("number").defaultValue='1';
+		}
 	</script>
 </body>
 </html>

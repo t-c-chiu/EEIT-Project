@@ -123,10 +123,18 @@
 					<c:forEach var="item" items="${addToCart}">
 						<tr id="${item.key}tr">
 							<td>
-								<ul>
-									<li style="list-style-type: none"><img alt="衣服"
-										src="${item.value.pictureAscii}" width="140px" height="140px" /></li>
-									<li style="list-style-type: none"><label>${item.value.productName}</label></li>
+								<ul class="formLi">
+									<li style="list-style-type: none" >
+									<img alt="衣服" src="${item.value.pictureAscii}" width="140px" height="140px" />
+									</li>
+									<li style="list-style-type: none">
+									<label>${item.value.productName}</label>
+										<form  action="/PCC/productId.shopping" method="get" hidden>
+											<input type="text" name="productId" value="${item.key}" hidden />
+										</form> 
+									</li>
+							
+				
 								</ul>
 							</td>
 
@@ -276,6 +284,12 @@
 				
  				
 			})
+			//按下圖片或商品名，可以轉跳頁面
+			$(".formLi").click(function(){
+				alert("jiojsofjowejr");
+				$(this).find("form").submit();
+				
+			});
 
 		})
 		
