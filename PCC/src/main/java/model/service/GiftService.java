@@ -46,5 +46,17 @@ public class GiftService {
 	public List<ExchangeDetails> selectDetail(Member member){
 		return exchangeDetailsDAO.selectDetail(member.getMemberId());		
 	}
+	
+	public boolean deleteDetailbyId(int exchangeDetailsId) {
+		return exchangeDetailsDAO.deleteDetailbyId(exchangeDetailsId);
+	}
+	
+	public boolean insertExchange(Exchange exchange,Member member) {
+		String memberId=member.getMemberId();
+		exchange.setMemberId(memberId);
+		int exchangeId=exchangeDAO.insertExchange(exchange);
+//		exchangeDetailsDAO.updateDetail(memberId, exchangeId);
+		return true;
+	}
 
 }

@@ -17,9 +17,8 @@ public class ExchangeDAO {
 		return sessionFactory.getCurrentSession();
 	}
 	
-	public boolean insertExchange(Exchange exchange) {
-		getSession().save(exchange);
-		return true;
+	public int insertExchange(Exchange exchange) {
+		return (int) getSession().save(exchange);
 	}
 
 }

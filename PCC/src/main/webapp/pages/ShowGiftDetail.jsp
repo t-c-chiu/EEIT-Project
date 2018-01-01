@@ -166,7 +166,7 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDYpbCt__aSkFOPc8En0xCzF6G
 <script>
 
 function initDetails(){			
-	$.get('${pageContext.request.contextPath}/selectDetails.gift',function(data){
+	$.get('${pageContext.request.contextPath}/selectDetail.gift',function(data){
 		console.log(data)
 		var tbody=$('<tbody></tbody>')
 		
@@ -179,7 +179,7 @@ function initDetails(){
 			var td3=$('<td></td>').text(details.number)
 			var td4=$('<td></td>')			
 			var button=$('<button>刪除</button>').addClass("delete")
-    			                                .attr("id",details.giftId)
+    			                                .attr("id",details.exchangeDetailsId)
     		td4.html(button) 
 						
 			var tr1=$('<tr></tr>')
@@ -192,10 +192,31 @@ function initDetails(){
 	
 
 
-	$(function() {
-		$('#test').click(function(){
-			alert("QQ")
-			initDetails()	
+	$(function() {				
+		initDetails()	
+	
+		
+		$("body").on('click','.delete',function() {
+			var exchangeDetailsId=$(this).attr('id')
+			$.post('${pageContext.request.contextPath}/deleteDetail.gift','exchangeDetailsId='+exchangeDetailsId,function(data){
+				alert(data)
+				
+			})
+			$(this).parents('tr').remove()				
+		})
+		
+		$('#submit').click(function(){
+			var totalPoint=$('#totalPoint').val()
+			var data=$('#form').serialize()
+						
+			$.ajax({
+				type: "POST",
+    			url: '${pageContext.request.contextPath}/insertExchange.gift',    			
+    			data: data,
+    			success:function(data){
+    				alert(data)
+    			}				
+			})					
 		})
 			
 	})			
@@ -233,7 +254,6 @@ function initDetails(){
 					<li class="active">禮物中心</li>					
 				</ol>
 			</div>
-			<button id="test">QQ</button>
 			<!-- Container /- -->
 		</div>
 		<!-- Page Banner /- --> <!-- Product Section -->
@@ -263,44 +283,40 @@ function initDetails(){
  					</tbody>
 				</table>
 					<!-- Products /- -->
-                </div>													
-						<form action="<c:url value="/show.room"/>" method="get">
+                </div>	
+                											
+						<form id="form">
 							<div class="billing-field">
 								<div class="col-md-4 form-group">
-									<label>地區<span style="color:red" class="content" id="areaSpan"></span></label><input class="form-control" type="text"
-										name="area" id="area" >
+									<label>收件人<span style="color:red" class="content" id="nameSpan"></span></label><input class="form-control" type="text"
+										name="name" id="name" >
 								</div>
 								
 								<div class="col-md-4 form-group">
-									<label>地區<span style="color:red" class="content" id="areaSpan"></span></label><input class="form-control" type="text"
-										name="area" id="area" >
+									<label>地址<span style="color:red" class="content" id="addressSpan"></span></label><input class="form-control" type="text"
+										name="address" id="address" >
 								</div>
 								
 								<div class="col-md-4 form-group">
-									<label>地區<span style="color:red" class="content" id="areaSpan"></span></label><input class="form-control" type="text"
-										name="area" id="area" >
+									<label>電話<span style="color:red" class="content" id="phoneSpan"></span></label><input class="form-control" type="text"
+										name="phone" id="phone" >
 								</div>
 							
 						
 								<div class="col-md-4 form-group">
-									<label>地區<span style="color:red" class="content" id="areaSpan"></span></label><input class="form-control" type="text"
-										name="area" id="area" >
+									<label>email<span style="color:red" class="content" id="areaSpan"></span></label><input class="form-control" type="text"
+										name="email" id="email" >
 								</div>
 								
 								<div class="col-md-4 form-group">
-									<label>房型<span style="color:red" class="content" id="roomTypeSpan"></span></label> 
-									<div class="select">
-										<select class="form-control" name="roomType">										
-											<option value="標準房">標準房</option>
-											<option value="貴賓房">貴賓房</option>
-										</select>
-									</div>
+									<label>點數合計<span style="color:red" class="content" id="pointSpan"></span></label><input class="form-control" type="text"
+										name="totalPoint" id="totalPoint" >
 								</div>
 								
 								
 								<div class="col-md-4 form-group">
 									<label>&#160;<span style="color:red" class="content"></span></label><input class="btn btn-default form-control button-send" type="submit"
-										value="送出">
+										id="submit" value="確認兌換">
 								</div>																
 							</div>
 						</form>

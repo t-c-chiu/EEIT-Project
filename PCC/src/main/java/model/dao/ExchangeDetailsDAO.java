@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import model.bean.ExchangeDetails;
+import model.bean.RoomReservation;
 
 @Repository
 public class ExchangeDetailsDAO {
@@ -29,6 +30,20 @@ public class ExchangeDetailsDAO {
 		Query<ExchangeDetails> query=getSession().createQuery("from ExchangeDetails where memberId=? and status=0",ExchangeDetails.class);
 		query.setParameter(0, memberId);
 		return query.list();
+	}
+	
+	public boolean deleteDetailbyId(int exchangeDetailsId) {		
+		ExchangeDetails result = (ExchangeDetails) getSession().get(ExchangeDetails.class, exchangeDetailsId);
+		getSession().delete(result);
+		return true;				
+	}
+	
+	public boolean updateDetail(String memberId,int exchangeId) {
+		Query<?> query = getSession().createQuery("update ExchangeDetails set exchangeId=:exchangeId" + "where status=:status and memberId=:memberId");
+		query.setParameter("exchangeId", exchangeId);
+		query.setParameter("status", 0);
+		query.setParameter("memberId", memberId);
+		return true;	
 	}
 	
 }
