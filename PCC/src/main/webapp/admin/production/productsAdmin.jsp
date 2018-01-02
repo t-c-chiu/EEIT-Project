@@ -93,7 +93,7 @@ label {
 
 						<!-- -----------商品查詢與修改區 ------------------------ -->
 						<div id="productSelectAndUpdataArea" class="hideClass">
-							我是商品查詢與修改區 <input type="button" class="slideUP" value="收起" />
+							我是商品查詢與修改區 <input type="button" class="slideUP btn btn-success" value="收起" />
 							<table>
 								<thead style="border: gray 3px soild;">
 									<tr>
@@ -118,7 +118,7 @@ label {
 
 						<!-- --------------上架新品區------------------------- -->
 						<div id="productInsertArea" class="hideClass">
-							上架新商品區 <input type="button" class="slideUP" value="收起" />
+							上架新商品區 <input type="button" class="slideUP btn btn-success" value="收起" />
 						</div>
 						<!-- --------------/上架新品區------------------------- -->
 
@@ -148,7 +148,7 @@ label {
 
 
 
-							<input type="button" class="slideUP" value="收起" />
+							<input type="button" class="slideUP btn btn-success" value="收起" />
 						</div>
 						<!-- --------------/訂單查詢與修正 ---------------------------->
 					</div>
