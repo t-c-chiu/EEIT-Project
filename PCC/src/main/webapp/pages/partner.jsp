@@ -118,7 +118,7 @@
 					<h3>服務夥伴</h3>
 				</div>
 				<ol class="breadcrumb">
-					<li><a href="../index.html" title="Home">首頁</a></li>
+					<li><a href="../index.jsp" title="Home">首頁</a></li>
 					<li class="active">服務夥伴</li>
 				</ol>
 			</div>
