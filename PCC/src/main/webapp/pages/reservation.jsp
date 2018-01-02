@@ -87,15 +87,15 @@
 						<table width="100%" border="0" cellspacing="1" cellpadding="5" bgcolor="#F19FAE">
               <tbody><tr>
                 <td width="18%" height="30" align="center" bgcolor="#FAD6DB"><span class="color_name">※ </span> 申請者姓名</td>
-                <td colspan="2" bgcolor="#FFFFFF" width="82%"><input type="text" name="name" id="name" style="width:100px;" class="borderall"></td>
+                <td colspan="2" bgcolor="#FFFFFF" width="82%"><input type="text" name="name" id="name" style="width:100px;" class="borderall" required="required"></td>
               </tr>
               <tr>
                 <td height="30" align="center" bgcolor="#FAD6DB"><span class="color_name">※ </span>手機</td>
-                <td colspan="2" bgcolor="#FFFFFF"><input type="text" name="phone" id="phone" class="linbox borderall" style="width:150px;"></td>
+                <td colspan="2" bgcolor="#FFFFFF"><input type="text" name="phone" id="phone" class="linbox borderall" maxlength="10" style="width:150px;" required="required"></td>
               </tr>
               <tr>
                 <td height="30" align="center" bgcolor="#FAD6DB"><span class="color_name">※ </span>預產期 </td>
-                <td colspan="2" bgcolor="#FFFFFF"><input type="date" name="expectedday" id="dy" style="width:150px;" class="borderall">
+                <td colspan="2" bgcolor="#FFFFFF"><input type="date" name="expectedday" id="dy" style="width:150px;" class="borderall" required="required">
 <!--    年
                   <input type="text" name="dm" id="dm" style="width:30px;" class="borderall">
                   月
@@ -122,11 +122,11 @@
               </tr>
               <tr>
                 <td height="30" align="center" bgcolor="#FAD6DB"><span class="color_name">※ </span><span class="inportem">EMAIL</span></td>
-                <td colspan="2" bgcolor="#FFFFFF"><input type="text" name="email" id="useremail" class="linbox borderall" style="width:240px;"></td>
+                <td colspan="2" bgcolor="#FFFFFF"><input type="text" name="email" id="useremail" class="linbox borderall" style="width:240px;" required="required"></td>
               </tr>
               <tr>
                 <td height="30" align="center" bgcolor="#FAD6DB"><span class="color_name">※ </span>實際服務地址</td>
-                <td colspan="2" bgcolor="#FFFFFF"><input type="text" name="address" id="addr" class="linbox borderall" style="width:240px;"></td>
+                <td colspan="2" bgcolor="#FFFFFF"><input type="text" name="address" id="addr" class="linbox borderall" style="width:240px;" required="required"></td>
               </tr>
               <tr>
                 <td height="30" rowspan="3" align="center" bgcolor="#FAD6DB"><span class="color_name">※ </span>坐月子需求<br>
@@ -178,7 +178,7 @@
               <tr>
                 <td height="30" align="center" bgcolor="#FAD6DB"><span class="color_name">※ </span>服務時間</td>
                 <td colspan="2" bgcolor="#FFFFFF">服務天數：預計
-                  <input type="text" name="time" id="service_days" style="width:50px;" class="borderall">
+                  <input type="text" name="time" id="service_days" style="width:50px;" class="borderall" required="required">
                   天<br>
               </td>
               </tr>           

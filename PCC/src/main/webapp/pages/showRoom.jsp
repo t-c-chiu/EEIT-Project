@@ -209,9 +209,6 @@ $('#area').keyup(function(){
 		<div class="about-section container-fluid no-padding">
 		<!-- Container -->
 			<div class="container">
-				<div class="goto-next">
-				<a href="#about2"><i class="icon icon-Mouse bounce"></i></a>
-			</div>	
 				<div id="about2" class="col-md-6 col-sm-6 col-xs-6">
 				<div class="about-content">
 						<h3>
@@ -233,6 +230,11 @@ $('#area').keyup(function(){
 					<img src="../images/room/doubleRoom.jpg" alt="about" />
 				</div>
 				
+		</div>
+		<div class="container">
+			<div class="goto-next">
+				<a href="#about2"><i class="icon icon-Mouse bounce"></i></a>
+			</div>	
 		</div>		
 		</div>
 		

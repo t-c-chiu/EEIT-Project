@@ -206,6 +206,8 @@
 								<li><a href="<c:url value="/showAll.forum?category=心情分享"/>">心情分享</a></li>
 							</ul></li>
 						<li><a href="#footer-main" title="Contact Us">聯絡資訊</a></li>
+						<li id="small-center"><a href="/PCC/pages/center.jsp" title="Center">會員中心</a></li>
+						<li id="small-logout"><a href="#" title="logout">登出</a></li>
 					</ul>
 				</div>
 

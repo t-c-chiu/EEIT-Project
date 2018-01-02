@@ -97,7 +97,7 @@
 					<div class="type-post">
 						<div class="entry-cover">
 							<a><img src="../images/match/${servant.serviceId}.jpg"
-								alt="blog"></a>
+								alt="blog" style="width:350px;height:300px;"></a>
 						</div>
 						<div class="blog-content">
 							<h3 class="entry-title">
