@@ -5,9 +5,6 @@ $(function() {
 		$('#productSelectAndUpdataArea').css("display", "block");
 		$('#productSelectAndUpdataQQ').css("display", "block");
 		
-		
-		
-		
 		var pageOrder=$("#pageOrder").val()
 		if(pageOrder=="上架商品"){
 			$('#productInsert').css("color", "red");
@@ -40,7 +37,7 @@ $(function() {
 					var tbody=$('#tbodyForOrder');
 					tbody.empty();
 					$.each(data,function(i,v){
-						var tr1=$("<tr></tr>").html("<form><td><a class='orderLink'>"+v.orderId+"</a><input type='text' name='orderId' size='2' value="+v.orderId+" hidden /></td><td><input type='text' name='memberId' size='4'value="+v.memberId+" /></td><td><input type='number' name='totalPrice' size='2' min='1' value="+v.totalPrice+" /></td><td><input type='text' name='date' size='3' value="+v.date+" /></td><td><input type='number' name='status' size='2' min='0' max='1' value="+v.status+" /></td><td><input type='text' name='recipient' size='4'value="+v.recipient+" /></td><td><input type='text' name='location' size='10' value="+v.location+" /></td><td><input type='text' name='recipientPhone' size='10'value="+v.recipientPhone+" /></td><td><input type='button' name='orderButton' value='修改' /><input type='button' name='orderButton' value='刪除' /></td></form>");
+						var tr1=$("<tr></tr>").html("<form><td><a class='orderLink' style='cursor: pointer;'>"+v.orderId+"</a><input type='text' name='orderId' size='2' value="+v.orderId+" hidden /></td><td><input type='text' name='memberId' size='4'value="+v.memberId+" /></td><td><input type='number' name='totalPrice' size='2' min='1' value="+v.totalPrice+" /></td><td><input type='text' name='date' size='3' value="+v.date+" /></td><td><input type='number' name='status' size='2' min='0' max='1' value="+v.status+" /></td><td><input type='text' name='recipient' size='4'value="+v.recipient+" /></td><td><input type='text' name='location' size='10' value="+v.location+" /></td><td><input type='text' name='recipientPhone' size='10'value="+v.recipientPhone+" /></td><td><input type='button' name='orderButton' value='修改' /><input type='button' name='orderButton' value='刪除' /></td></form>");
 						var tr2=$("<tr></tr>").html("<td colspan='8'></td><td><input class='slideUpForOD' type='button' value='收起' /></td>");
 						tr2.attr("id",v.orderId+'a');
 						tbody.append(tr1);
@@ -49,7 +46,7 @@ $(function() {
 					});
 
 						
-						slideDownTable(500);
+						slideDownTable(100);
 						$("#originalArea").css("display","none");
 					
 					
@@ -91,9 +88,10 @@ $(function() {
 					if(data=="刪除成功!"){
 						
 						parent.css("display","none");
-						var id=parent.find("a").text();
-						$("#"+id+"a").css("display","none");
-						
+
+						var id=parent.find('a').text();
+						$('#'+id+'a').css("display","none");
+
 					}
 					
 					alert(data);
@@ -169,18 +167,12 @@ $(function() {
 					tbody.empty();
 					
 					$.each(data,function(i,v){
-//					var form=$("<form></form>");
-//					form.attr("id","form"+v.productId+"form");
-//					form.attr("name","updataForm");
-//					form.attr("action","/PCC/adminUpdata.shopping");
-//					form.attr("method","post");
-//					form.attr("enctype","multipart/form-data");
-					var tr=$("<tr></tr>").html("<form id='form"+v.productId+"form' name='updataForm' action='/PCC/adminUpdata.shopping' method='post' enctype='multipart/form-data'><td><input type='text' size='2' value="+v.productId+" readonly style='background-color: pink;' name='productId'/></td><td><input name='productName' type='text' size='5' value="+v.productName+" /></td><td><input name='category' type='text' value="+v.category+" size='2' /></td><td><input type='text' value="+v.price+" size='2' name='price'/></td><td><input type='text' value="+v.stock+" size='1' name='stock'/></td><td><input type='text' value="+v.status+" size='1' name='status'/></td><td><img class='preview' src="+v.pictureAscii+" width='100px' height='75px' /><input class='upl' type='file' accept='image/*' name='photo' /></td><td><input type='textarea' value="+v.context+" size='5' name='context'/></td><td><input class='updataButton' type='button' value='修改' /></td></form>");
+
+					var tr=$("<tr></tr>").html("<form id='form"+v.productId+"form' name='updataForm' method='post' action='/PCC/adminUpdata.shopping' enctype='multipart/form-data'><td><input type='text' size='2' value="+v.productId+" readonly style='background-color: pink;' name='productId'/></td><td><input name='productName' type='text' size='5' value="+v.productName+" /></td><td><input name='category' type='text' value="+v.category+" size='2' /></td><td><input type='text' value="+v.price+" size='2' name='price'/></td><td><input type='text' value="+v.stock+" size='1' name='stock'/></td><td><input type='text' value="+v.status+" size='1' name='status'/></td><td><img class='preview' src="+v.pictureAscii+" width='100px' height='75px' /><input class='upl' type='file' accept='image/*' name='photo' /></td><td><input type='textarea' value="+v.context+" size='5' name='context'/></td><td><input class='updataButton btn btn-danger' type='button' value='修改' /></td></form>");
+
 					tr.addClass("tr");
 					tbody.append(tr);
-//					form.append(tr);
-//					tbody.append(form);
-					
+				
 						
 					});
 					slideDownTable(500);

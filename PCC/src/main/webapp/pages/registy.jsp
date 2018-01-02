@@ -157,8 +157,8 @@
 
 							</div>
 						</div>
-						<div class="Container">
-							<div class="col-md-6">
+						<div class="Container" style="clear:both;">
+							<div class="col-md-6 col-md-push-3">
 							<button id="registy-btn" class="btn btn-default form-control footer-send " type="button">確定註冊</button>
 							</div>
 						</div>

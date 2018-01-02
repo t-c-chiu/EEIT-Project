@@ -11,7 +11,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Contact Form | Gentelella Alela! by Colorlib</title>
+    <title>PCC Admin Partner</title>
 
     <!-- Bootstrap -->
     <link href="../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -71,6 +71,7 @@
 						})
 						$(this).parents('tr').remove();
 					});
+					btn.addClass('btn btn-danger');
 					var td6 = $('<td></td>').append(btn);
 					var tr = $('<tr></tr>').append(td1,td2,td3,td4,td5,td6);
 					$('#ServantTable').append(tr);
@@ -154,7 +155,7 @@
           <div class="">
             <div class="page-title">
               <div class="title_left">
-                <h3 style="display:inline;">配對審核系統</h3><button id="matchToggle">展開資料</button>
+                <h3 style="display:inline;">配對審核系統</h3><button id="matchToggle" class="btn btn-success">展開資料</button>
                 <hr>
               </div>
             </div>
@@ -222,7 +223,7 @@
 						<input type="radio" name="type" value="24小時">&nbsp;24小時
 						<input type="radio" name="type" value="9小時,24小時皆可">&nbsp;9小時,24小時皆可<br>
 						<label>服務區域：</label><input type="text" name="area"><br>
-						<label>服務員介紹：</label>
+						<label style="width:100px;">服務員介紹：</label>
 						<textarea name="introduction" id="introduction"></textarea><br>
 						<script src="<c:url value="/ckeditorbasic/ckeditor.js"/>"></script> 
 						<script>
@@ -230,9 +231,9 @@
 								width : 500
 							});
 						</script>
-						<label>服務員照片：</label><input type="file" name="photo" id="photo"><br>
+						<label style="width:100px;">服務員照片：</label><input type="file" name="photo" id="photo"><br>
 						<img id="previewArea" style="max-width:200px;"><br><br>
-						<input id="gogo" type="submit">
+						<input id="gogo" type="submit" class="btn btn-warning">
 					</form>
 				</div>
 				<div id="manageServant" style="width: 55%;float: right;"> 

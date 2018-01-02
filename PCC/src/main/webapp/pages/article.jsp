@@ -124,7 +124,7 @@
 <!--	內容開始	-->		
 		<main>
 			<!-- Page Banner -->
-			<div class="page-banner container-fluid no-padding" style="height:100px;">
+			<div class="page-banner container-fluid no-padding">
 				<!-- Container -->
 				<div class="container">
 					<div class="banner-content">
