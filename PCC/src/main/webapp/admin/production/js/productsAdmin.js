@@ -203,7 +203,7 @@ $(function() {
 		//按下按鈕更新產品class='updataButton'
 		$("body").on('click','.updataButton',function(event) {
 			event.preventDefault();
-			var id=$(this).parents('tr').find('input[name="productId"]').val();
+			var id=$(this).parents('form').find('input[name="productId"]').val();
 			var form=$("#form"+id+"form")[0];
  	   		var data=new FormData(form);
 // 	   		data.append('info',CKEDITOR.instances.info.getData());   		
