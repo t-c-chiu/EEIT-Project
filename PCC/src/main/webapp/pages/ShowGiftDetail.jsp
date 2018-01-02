@@ -187,20 +187,20 @@ function initDetails(){
 			tr1.append([td0,td1,td2,td3,td4])
 			tbody.append(tr1)       
 		})
+		calculateSum()
 		
 	})
 }
 	
 function calculateSum(){
-	var sum=0;
-	$('.price').each(function(){
-		if(!isNan(this.value)&&this.value.length!=0){
-			sum+=parseFloat(this.value)
-		}				
+	var sum=0
+
+	$('.price').each(function(){		
+		sum += Number($(this).text());						
 	})
 	
 	$('#totalPoint').val(sum)
-		
+
 }
 
 	$(function() {				
@@ -213,7 +213,8 @@ function calculateSum(){
 				alert(data)
 				
 			})
-			$(this).parents('tr').remove()				
+			$(this).parents('tr').remove()
+			calculateSum()
 		})
 		
 		$('#submit').click(function(){
@@ -321,7 +322,7 @@ function calculateSum(){
 								
 								<div class="col-md-4 form-group">
 									<label>點數合計<span style="color:red" class="content" id="pointSpan"></span></label><input class="form-control" type="text"
-										name="totalPoint" id="totalPoint" >
+										name="totalPoint" id="totalPoint" readonly="readonly" >
 								</div>
 								
 								
