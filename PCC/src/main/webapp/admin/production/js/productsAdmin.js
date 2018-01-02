@@ -167,11 +167,19 @@ $(function() {
 					tbody.empty();
 					
 					$.each(data,function(i,v){
-
-					var tr=$("<tr></tr>").html("<form id='form"+v.productId+"form' name='updataForm' method='post' action='/PCC/adminUpdata.shopping' enctype='multipart/form-data'><td><input type='text' size='2' value="+v.productId+" readonly style='background-color: pink;' name='productId'/></td><td><input name='productName' type='text' size='5' value="+v.productName+" /></td><td><input name='category' type='text' value="+v.category+" size='2' /></td><td><input type='text' value="+v.price+" size='2' name='price'/></td><td><input type='text' value="+v.stock+" size='1' name='stock'/></td><td><input type='text' value="+v.status+" size='1' name='status'/></td><td><img class='preview' src="+v.pictureAscii+" width='100px' height='75px' /><input class='upl' type='file' accept='image/*' name='photo' /></td><td><input type='textarea' value="+v.context+" size='5' name='context'/></td><td><input class='updataButton btn btn-danger' type='button' value='修改' /></td></form>");
-
-					tr.addClass("tr");
-					tbody.append(tr);
+					var form=$("<form></form>");
+					form.attr("id","form"+v.productId+"form");
+					form.attr("name",'updataForm');
+					form.attr("method","post");
+					form.attr("action",'/PCC/adminUpdata.shopping' );
+					form.attr("enctype",'multipart/form-data');
+					form.css("display","table-row");
+					form.addClass("tr");
+//					var tr=$("<tr></tr>").html("<td><input type='text' size='2' value="+v.productId+" readonly style='background-color: pink;' name='productId'/></td><td><input name='productName' type='text' size='5' value="+v.productName+" /></td><td><input name='category' type='text' value="+v.category+" size='2' /></td><td><input type='text' value="+v.price+" size='2' name='price'/></td><td><input type='text' value="+v.stock+" size='1' name='stock'/></td><td><input type='text' value="+v.status+" size='1' name='status'/></td><td><img class='preview' src="+v.pictureAscii+" width='100px' height='75px' /><input class='upl' type='file' accept='image/*' name='photo' /></td><td><input type='textarea' value="+v.context+" size='5' name='context'/></td><td><input class='updataButton btn btn-danger' type='button' value='修改' /></td>");
+					form.html("<td><input type='text' size='2' value="+v.productId+" readonly style='background-color: pink;' name='productId'/></td><td><input name='productName' type='text' size='5' value="+v.productName+" /></td><td><input name='category' type='text' value="+v.category+" size='2' /></td><td><input type='text' value="+v.price+" size='2' name='price'/></td><td><input type='text' value="+v.stock+" size='1' name='stock'/></td><td><input type='text' value="+v.status+" size='1' name='status'/></td><td><img class='preview' src="+v.pictureAscii+" width='100px' height='75px' /><input class='upl' type='file' accept='image/*' name='photo' /></td><td><input type='textarea' value="+v.context+" size='5' name='context'/></td><td><input class='updataButton btn btn-danger' type='button' value='修改' /></td>");
+//					tr.addClass("tr");
+//					form.append(tr)
+					tbody.append(form);
 				
 						
 					});
@@ -195,7 +203,7 @@ $(function() {
 		//按下按鈕更新產品class='updataButton'
 		$("body").on('click','.updataButton',function(event) {
 			event.preventDefault();
-			var id=$(this).parents('tr').find('input[name="productId"]').val();
+			var id=$(this).parents('form').find('input[name="productId"]').val();
 			var form=$("#form"+id+"form")[0];
  	   		var data=new FormData(form);
 // 	   		data.append('info',CKEDITOR.instances.info.getData());   		
