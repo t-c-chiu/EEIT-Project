@@ -1,11 +1,16 @@
 $(function() {
-		//一開始就藏起來	
+		//一開始就打開商品搜尋區區	
 		init();
+		$('#productSearchAndUpdata').css("color", "red");
+		$('#productSelectAndUpdataArea').css("display", "block");
+		$('#productSelectAndUpdataQQ').css("display", "block");
+		
 		var pageOrder=$("#pageOrder").val()
 		if(pageOrder=="上架商品"){
 			$('#productInsert').css("color", "red");
 			$('#productInsertArea').css("display", "block");
 			$('#productInsertQQ').css("display", "block");
+			alert("新增成功!!");
 			
 		}
 		
@@ -32,7 +37,7 @@ $(function() {
 					var tbody=$('#tbodyForOrder');
 					tbody.empty();
 					$.each(data,function(i,v){
-						var tr1=$("<tr></tr>").html("<form><td><a class='orderLink'>"+v.orderId+"</a><input type='text' name='orderId' size='2' value="+v.orderId+" hidden /></td><td><input type='text' name='memberId' size='4'value="+v.memberId+" /></td><td><input type='number' name='totalPrice' size='2' min='1' value="+v.totalPrice+" /></td><td><input type='text' name='date' size='3' value="+v.date+" /></td><td><input type='number' name='status' size='2' min='0' max='1' value="+v.status+" /></td><td><input type='text' name='recipient' size='4'value="+v.recipient+" /></td><td><input type='text' name='location' size='10' value="+v.location+" /></td><td><input type='text' name='recipientPhone' size='10'value="+v.recipientPhone+" /></td><td><input type='button' name='orderButton' value='修改' /><input type='button' name='orderButton' value='刪除' /></td></form>");
+						var tr1=$("<tr></tr>").html("<form><td><a class='orderLink' style='cursor: pointer;'>"+v.orderId+"</a><input type='text' name='orderId' size='2' value="+v.orderId+" hidden /></td><td><input type='text' name='memberId' size='4'value="+v.memberId+" /></td><td><input type='number' name='totalPrice' size='2' min='1' value="+v.totalPrice+" /></td><td><input type='text' name='date' size='3' value="+v.date+" /></td><td><input type='number' name='status' size='2' min='0' max='1' value="+v.status+" /></td><td><input type='text' name='recipient' size='4'value="+v.recipient+" /></td><td><input type='text' name='location' size='10' value="+v.location+" /></td><td><input type='text' name='recipientPhone' size='10'value="+v.recipientPhone+" /></td><td><input type='button' name='orderButton' value='修改' /><input type='button' name='orderButton' value='刪除' /></td></form>");
 						var tr2=$("<tr></tr>").html("<td colspan='8'></td><td><input class='slideUpForOD' type='button' value='收起' /></td>");
 						tr2.attr("id",v.orderId+'a');
 						tbody.append(tr1);
@@ -41,7 +46,7 @@ $(function() {
 					});
 
 						
-						slideDownTable(500);
+						slideDownTable(100);
 						$("#originalArea").css("display","none");
 					
 					
@@ -83,6 +88,10 @@ $(function() {
 					if(data=="刪除成功!"){
 						
 						parent.css("display","none");
+
+						var id=parent.find('a').text();
+						$('#'+id+'a').css("display","none");
+
 					}
 					
 					alert(data);
@@ -102,7 +111,7 @@ $(function() {
 			var id=$(this).text();
 			
 			var tr=$("#"+id+"a");
-				tr.slideDown(1000);
+				tr.slideDown(800);
 			$.ajax({
 				url:"/PCC/adminOrderDetail.shopping",
 				type:"get",
@@ -110,6 +119,7 @@ $(function() {
 				success:function(data){
 					console.log(data);
 					var td=tr.find("td[colspan='8']");
+					td.empty();
 					var table=$("<table></table>").html("<thead><tr><th>產品編號</th><th>產品名稱</th><th>產品價錢</th><th>購買數量</th></tr></thead>");
 					var tbody=$("<tbody></tbldy>");
 					$.each(data,function(i,o){
@@ -128,7 +138,7 @@ $(function() {
 		$("body").on('click',".slideUpForOD",function() {
 		
 		
-		$(this).parents("tr").slideUp(1000);
+		$(this).parents("tr").slideUp(800);
 			
 		});
 		
@@ -157,10 +167,12 @@ $(function() {
 					tbody.empty();
 					
 					$.each(data,function(i,v){
-					var tr=$("<tr></tr>").html("<form name='updataForm' method='post' action='/PCC/adminUpdata.shopping' enctype='multipart/form-data'><td><input type='text' size='2' value="+v.productId+" readonly style='background-color: pink;' name='productId'/></td><td><input name='productName' type='text' size='5' value="+v.productName+" /></td><td><input name='category' type='text' value="+v.category+" size='2' /></td><td><input type='text' value="+v.price+" size='2' name='price'/></td><td><input type='text' value="+v.stock+" size='1' name='stock'/></td><td><input type='text' value="+v.status+" size='1' name='status'/></td><td><img class='preview' src="+v.pictureAscii+" width='100px' height='75px' /><input class='upl' type='file' accept='image/*' name='photo' /></td><td><input type='textarea' value="+v.context+" size='5' name='context'/></td><td><input class='updataButton' type='button' value='修改' /></td></form>");
+
+					var tr=$("<tr></tr>").html("<form id='form"+v.productId+"form' name='updataForm' method='post' action='/PCC/adminUpdata.shopping' enctype='multipart/form-data'><td><input type='text' size='2' value="+v.productId+" readonly style='background-color: pink;' name='productId'/></td><td><input name='productName' type='text' size='5' value="+v.productName+" /></td><td><input name='category' type='text' value="+v.category+" size='2' /></td><td><input type='text' value="+v.price+" size='2' name='price'/></td><td><input type='text' value="+v.stock+" size='1' name='stock'/></td><td><input type='text' value="+v.status+" size='1' name='status'/></td><td><img class='preview' src="+v.pictureAscii+" width='100px' height='75px' /><input class='upl' type='file' accept='image/*' name='photo' /></td><td><input type='textarea' value="+v.context+" size='5' name='context'/></td><td><input class='updataButton btn btn-danger' type='button' value='修改' /></td></form>");
+
 					tr.addClass("tr");
 					tbody.append(tr);
-					
+				
 						
 					});
 					slideDownTable(500);
@@ -182,45 +194,25 @@ $(function() {
 		
 		//按下按鈕更新產品class='updataButton'
 		$("body").on('click','.updataButton',function(event) {
-			alert("hahahah");
-			var form=$(this).parent('td').parent('tr').find('form').submit();
-// 	   		var data=new FormData(form);
+			event.preventDefault();
+			var id=$(this).parents('tr').find('input[name="productId"]').val();
+			var form=$("#form"+id+"form")[0];
+ 	   		var data=new FormData(form);
 // 	   		data.append('info',CKEDITOR.instances.info.getData());   		
-// 	   		$.ajax({
-// 	   			type: "POST",
-// 	   			enctype: 'multipart/form-data',
-// 	   			url: '${pageContext.request.contextPath}/adminUpdata.shopping',    			
-// 	   			data: data,
-// 	   			processData: false,
-// 	   			contentType: false,
-// 	   			cache: false,
-// 	   			success:function(data){
-// 	   				alert(data)			
-// 	   			}
-// 	   		})
-			// 			var form=$(this).parents("form").serialize();
-// 			var parent=$(this).parent('td').parent('tr');
-// 			var productId=parent.find("input[name='productId']").val();
-// 			var productName=parent.find("input[name='productName']").val();
-// 			var status=parent.find("input[name='status']").val();
-// 			var stock=parent.find("input[name='stock']").val();
-// 			var price=parent.find("input[name='price']").val();
-// 			var category=parent.find("input[name='category']").val();
-// 			var context=parent.find("input[name='context']").val();
-// 			var photo=parent.find("input[name='photo']");
-			
-// 			$.post("/PCC/adminUpdata.shopping",
-// 					{"productId":productId,
-// 					 "productName":productName,
-// 					 "status":status,
-// 					 "stock":stock,
-// 					 "price":price,
-// 					 "category":category,
-// 					 "context":context,
-// 					 "photo":photo}
-// 					, function(data) {
-// 					alert(data);
-// 			});
+ 	   		$.ajax({
+ 	   			type: "POST",
+ 	   			enctype: 'multipart/form-data',
+ 	   			url: '/PCC/adminUpdata.shopping',    			
+ 	   			data: data,
+ 	   			processData: false,
+ 	   			contentType: false,
+ 	   			cache: false,
+ 	   			success:function(data){
+ 	   				console.log(data);
+ 	   				alert(data);			
+ 	   			}
+ 	   		})
+
 		});
 		
 		

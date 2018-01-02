@@ -27,15 +27,15 @@
     <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
       <div class="menu_section">
         <ul class="nav side-menu">
-          <li><a href="admin.jsp"><i class="fa fa-home"></i> 首頁 </a>
-          </li>
+<!--           <li><a href="admin.jsp"><i class="fa fa-home"></i> 首頁 </a> -->
+<!--           </li> -->
           
           <li><a href="<c:url value="/matching.admin"/>"><i class="fa fa-table"></i> 配對審核 </a>
           </li>
           <li><a  href="productsAdmin.jsp"><i class="fa fa-desktop"></i> 商城管理 </a>
           </li>
-          <li><a href="order.jsp"><i class="fa fa-desktop"></i> 訂單管理 </a>
-          </li>
+<!--           <li><a href="order.jsp"><i class="fa fa-desktop"></i> 訂單管理 </a> -->
+<!--           </li> -->
           <li><a href="room.jsp"><i class="fa fa-desktop"></i> 房間管理 </a>
           </li>
           
@@ -43,14 +43,14 @@
           </li>
           <li><a href="course.jsp"><i class="fa fa-edit"></i> 課程管理 </a>
           </li>
-          <li><a><i class="fa fa-bar-chart-o"></i> 報表查詢 <span class="fa fa-chevron-down"></span></a>
-            <ul class="nav child_menu">
-              <li><a href="#">網站</a></li>
-              <li><a href="#">配對</a></li>
-              <li><a href="#">房間</a></li>
-              <li><a href="#">課程</a></li>
-            </ul>
-          </li>
+<!--           <li><a><i class="fa fa-bar-chart-o"></i> 報表查詢 <span class="fa fa-chevron-down"></span></a> -->
+<!--             <ul class="nav child_menu"> -->
+<!--               <li><a href="#">網站</a></li> -->
+<!--               <li><a href="#">配對</a></li> -->
+<!--               <li><a href="#">房間</a></li> -->
+<!--               <li><a href="#">課程</a></li> -->
+<!--             </ul> -->
+<!--           </li> -->
         </ul>
       </div>
 

@@ -28,7 +28,7 @@ a:hover {
 }
 
 .daterangepicker .ranges li {
-    color: #73879C
+    color: #777572
 }
 
 .daterangepicker .ranges li.active,
@@ -70,7 +70,7 @@ a:hover {
 
 .daterangepicker td.in-range {
     background: #E4E7EA;
-    color: #73879C
+    color: #777572
 }
 
 .daterangepicker td.active,
@@ -137,7 +137,7 @@ a:hover {
 }
 
 .daterangepicker.picker_2 .calendar-table thead tr:first-child {
-    color: #73879C
+    color: #777572
 }
 
 .daterangepicker.picker_3 .calendar-table thead tr:first-child {
@@ -185,7 +185,7 @@ a:hover {
 }
 
 .left_col {
-    background: #2A3F54
+    background: #757575;
 }
 
 .nav-sm .container.body .col-md-3.left_col {
@@ -354,7 +354,7 @@ table.tile_info td p {
 .profile_info span {
     font-size: 13px;
     line-height: 30px;
-    color: #BAB8B8
+    color: #fff;
 }
 
 .profile_info h2 {
@@ -448,7 +448,7 @@ body .container.body .right_col {
 .nav_title {
     width: 230px;
     float: left;
-    background: #2A3F54;
+    background: #585858;
     border-radius: 0;
     height: 57px
 }
@@ -548,7 +548,7 @@ body .container.body .right_col {
 .bg-white {
     background: #fff!important;
     border: 1px solid #fff!important;
-    color: #73879C
+    color: #777572
 }
 
 .bg-green {
@@ -601,10 +601,10 @@ body .container.body .right_col {
 }
 
 body {
-    color: #73879C;
-    background: #2A3F54;
-    font-family: "Helvetica Neue", Roboto, Arial, "Droid Sans", sans-serif;
-    font-size: 13px;
+    color: #777572;
+    background: #757575;
+    font-family: '微軟正黑體', "Helvetica Neue", Roboto, Arial, "Droid Sans", sans-serif;
+    font-size: 15px;
     font-weight: 400;
     line-height: 1.471
 }
@@ -781,7 +781,9 @@ h3 {
     margin-top: 10px;
     margin-bottom: 10px
 }
-
+a#menu_toggle{
+	color:#EB7C81;
+}
 a {
     color: #5A738E
 }
@@ -877,11 +879,11 @@ a:visited {
 .nav.side-menu>li>a:hover,
 .nav>li>a:focus {
     text-decoration: none;
-    background: 0 0
+    rgba(0, 0, 0, .05);
 }
 
 .nav.child_menu {
-    display: none
+    display: none;
 }
 
 .nav.child_menu li.active,
@@ -949,7 +951,7 @@ a:visited {
 }
 
 .nav li.current-page {
-    background: rgba(255, 255, 255, .05)
+    background: linear-gradient(#585858, #423d3d), #585858;
 }
 
 .nav li li li.current-page {
@@ -965,7 +967,7 @@ a:visited {
 
 .nav.side-menu>li.active>a {
     text-shadow: rgba(0, 0, 0, .25) 0 -1px 0;
-    background: linear-gradient(#334556, #2C4257), #2A3F54;
+    background: linear-gradient(#585858, #423d3d), #585858;
     box-shadow: rgba(0, 0, 0, .25) 0 1px 0, inset rgba(255, 255, 255, .16) 0 1px 0
 }
 
@@ -1977,7 +1979,7 @@ span.right {
     padding: 5px 0 0;
     position: fixed;
     width: 230px;
-    background: #2A3F54;
+    background: #585858;
     z-index: 999
 }
 
@@ -1988,12 +1990,14 @@ span.right {
     font-size: 17px;
     display: block;
     float: left;
-    background: #172D44;
+    background: #585858;
+	color:rgba(255,255,255,0.6);
     cursor: pointer
 }
 
 .sidebar-footer a:hover {
-    background: #425567
+    background: #1e3f42;
+	color: #fff;
 }
 
 .tile_count {
@@ -2175,7 +2179,7 @@ h4.graph_title {
     width: 26px;
     opacity: .99;
     display: inline-block;
-    font-family: FontAwesome;
+    font-family: '微軟正黑體', FontAwesome;
     font-style: normal;
     font-weight: 400;
     font-size: 18px;
@@ -2921,7 +2925,7 @@ span.tag {
     margin-right: 5px;
     font-weight: 500;
     margin-bottom: 5px;
-    font-family: helvetica
+    font-family: '微軟正黑體', helvetica
 }
 
 span.tag a {
@@ -2937,7 +2941,7 @@ span.tag a {
 .tagsinput input {
     width: 80px;
     margin: 0;
-    font-family: helvetica;
+    font-family: '微軟正黑體', helvetica;
     font-size: 13px;
     border: 1px solid transparent;
     padding: 3px;
@@ -3721,7 +3725,7 @@ ul.project_files li a i {
 }
 
 .view p {
-    font-family: Georgia, serif;
+    font-family: '微軟正黑體', Georgia, serif;
     font-size: 12px;
     color: #fff;
     padding: 10px 20px 20px;
@@ -3918,7 +3922,7 @@ ul.project_files li a i {
     color: #666;
     background: rgba(243, 242, 243, .8);
     border: 2px solid rgba(195, 194, 196, .8);
-    font-family: sans-serif;
+    font-family: '微軟正黑體', sans-serif;
     font-size: 12px;
     text-align: center
 }
@@ -4290,7 +4294,7 @@ div[data-role=editor-toolbar] {
 }
 
 .select2-container--default .select2-selection--single .select2-selection__rendered {
-    color: #73879C;
+    color: #777572;
     padding-top: 5px
 }
 
@@ -4848,7 +4852,7 @@ ul.notifications {
 
 .fc-state-default {
     background: #f5f5f5;
-    color: #73879C
+    color: #777572
 }
 
 .fc-state-active,
