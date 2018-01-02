@@ -64,7 +64,7 @@
 							data-easein="easeInOut" data-easeout="easeInOut"
 							data-masterspeed="2000" data-rotate="0" data-fstransition="fade"
 							data-fsmasterspeed="1500" data-fsslotamount="7"><img
-							src="images/babys/5.jpg" alt="slider"
+							src="images/babys/5-2.jpg" alt="slider"
 							data-bgposition="center center" data-bgfit="cover"
 							data-bgrepeat="no-repeat" data-bgparallax="10"
 							class="rev-slidebg" data-no-retina>
@@ -149,7 +149,7 @@
 							data-easein="easeInOut" data-easeout="easeInOut"
 							data-masterspeed="2000" data-rotate="0" data-fstransition="fade"
 							data-fsmasterspeed="1500" data-fsslotamount="7"><img
-							src="images/babys/4.jpg" alt="slider"
+							src="images/babys/4-2.jpg" alt="slider"
 							data-bgposition="center center" data-bgfit="cover"
 							data-bgrepeat="no-repeat" data-bgparallax="10"
 							class="rev-slidebg" data-no-retina>
@@ -234,7 +234,7 @@
 							data-easein="easeInOut" data-easeout="easeInOut"
 							data-masterspeed="2000" data-rotate="0" data-fstransition="fade"
 							data-fsmasterspeed="1500" data-fsslotamount="7"><img
-							src="images/babys/2.jpg" alt="slider"
+							src="images/babys/2-2.jpg" alt="slider"
 							data-bgposition="center center" data-bgfit="cover"
 							data-bgrepeat="no-repeat" data-bgparallax="10"
 							class="rev-slidebg" data-no-retina>
@@ -338,7 +338,7 @@
 				</div>
 				<!-- Section Header /- -->
 				<div class="col-md-6 col-sm-6 col-xs-6">
-					<img src="images/babys/3.jpg" alt="about" style="margin-top: 33px;"/>
+					<img src="images/babys/14.jpg" alt="about" style="margin-top: 33px;"/>
 				</div>
 				<div class="col-md-6 col-sm-6 col-xs-6">
 					<div class="about-content">

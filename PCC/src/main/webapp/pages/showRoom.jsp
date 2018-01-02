@@ -110,7 +110,6 @@ $('#area').keyup(function(){
 			<div class="container">
 				<div class="banner-content">
 					<h3>預約訂房</h3>
-					<p>our vision is to be Earth's most customer centric company</p>
 				</div>
 				<ol class="breadcrumb">
 					<li><a href="../index.html" title="Home">首頁</a></li>

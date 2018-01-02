@@ -168,7 +168,7 @@ li#small-logout{
 		margin-top: 30px;
 	}
 	.header-section .navbar-fixed-top.menu-block {
-		background-color: #fffcf;
+		background-color: rgba(255,255,255,.78);
 	}
 	.navbar-fixed-top.header-section .ow-navigation ul li > .dropdown-menu { 
 		box-shadow: none;
