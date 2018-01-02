@@ -49,25 +49,26 @@ public class MemberDAO {
 	public Member update(Member member) {
 		if (member != null) {
 			Member select = this.select(member.getMemberId());
-			if(select !=null) {
+			if (select != null) {
 				select.setName(member.getName());
 				select.setEmail(member.getEmail());
 				select.setPhone(member.getPhone());
 				select.setArea(member.getArea());
 				select.setAddress(member.getAddress());
+				select.setPoint(member.getPoint());
 				return member;
 			}
 		}
 		return null;
 	}
-	
-	//UPDATE Password
+
+	// UPDATE Password
 	public Member updatePSW(Member member) {
-		if(member !=null) {
-			Member select=this.select(member.getMemberId());
-			if(select !=null) {
+		if (member != null) {
+			Member select = this.select(member.getMemberId());
+			if (select != null) {
 				select.setPassword(member.getPassword());
-				System.out.println("UPDATE Password DAO member="+member);
+				System.out.println("UPDATE Password DAO member=" + member);
 				return member;
 			}
 		}
@@ -82,8 +83,7 @@ public class MemberDAO {
 		}
 		return false;
 	}
-	
-	
+
 	public List<Member> selectMemberByStatus(Integer status) {
 		return getSession().createQuery("from Member where status = :status", Member.class)
 				.setParameter("status", status).list();
