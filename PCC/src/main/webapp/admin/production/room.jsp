@@ -18,7 +18,7 @@
 	<link rel="stylesheet" type="text/css" href="../css/login.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-    <title>PCC Admin</title>
+    <title>PCC Admin Room</title>
 
     <!-- Bootstrap -->
     <link href="../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -187,7 +187,7 @@
                   <div class="x_title">
                     <h2>訂單一覽</h2>
                     <ul class="nav navbar-right panel_toolbox">
-                    <li><button id="showReservation">查看訂單</button></li>
+                    <li><button id="showReservation" class="btn btn-success">查看訂單</button></li>
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                       </li>
                       <li class="dropdown">
@@ -271,7 +271,7 @@
                           <td><input name="roomType" type="text" style="width:40px"></td>
                           <td><input name="price"    type="text" style="width:50px"></td>   
                           <td><input type="file" id="photo" name="photo" accept="image/*"></td>
-                          <td><input id="insertRoom" type="submit" value="新增"></td>                     
+                          <td><input id="insertRoom" type="submit" class="btn btn-warning" value="新增"></td>                     
                         </tr>
                      </tbody>                                       
                     </table>
@@ -297,7 +297,7 @@
                   <div class="x_title">
                     <h2>房間一覽</h2>
                     <ul class="nav navbar-right panel_toolbox">
-                    <li><button id="showRoom">查看房間</button></li>
+                    <li><button id="showRoom" class="btn btn-success">查看房間</button></li>
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a> </li>
                      
                       <li class="dropdown">

@@ -10,7 +10,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Gentelella Alela! | </title>
+    <title>PCC Admin Course</title>
     <!-- Bootstrap -->
 <link href="../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
 <!-- Font Awesome -->
@@ -106,8 +106,8 @@
 							width : 500
 						});
 					</script>
-					<input id="btnSubmit" type="submit" value="確定上架">
-					<input type="reset" value="重新填寫">
+					<input id="btnSubmit" type="submit" value="確定上架" class="btn btn-success">
+					<input type="reset" value="重新填寫" class="btn btn-warning">
 					<br>
 					<label>課程截圖：</label>
 					<input type="file" id="photo" name="photo" accept="image/*"><br>
