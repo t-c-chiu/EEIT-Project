@@ -91,13 +91,13 @@ $('#area').keyup(function(){
 <body data-offset="200" data-spy="scroll" data-target=".ow-navigation">
 	<div class="main-container">
 		<!-- Loader -->
-		<div id="site-loader" class="load-complete">
-			<div class="loader">
-				<div class="loader-inner ball-clip-rotate">
-					<div></div>
-				</div>
-			</div>
-		</div>
+<!-- 		<div id="site-loader" class="load-complete"> -->
+<!-- 			<div class="loader"> -->
+<!-- 				<div class="loader-inner ball-clip-rotate"> -->
+<!-- 					<div></div> -->
+<!-- 				</div> -->
+<!-- 			</div> -->
+<!-- 		</div> -->
 		<!-- Loader /- -->
 
 		<!-- Header -->
@@ -112,7 +112,7 @@ $('#area').keyup(function(){
 					<h3>預約訂房</h3>
 				</div>
 				<ol class="breadcrumb">
-					<li><a href="../index.html" title="Home">首頁</a></li>
+					<li><a href="../index.jsp" title="Home">首頁</a></li>
 					<li class="active">預約訂房</li>
 				</ol>
 			</div>

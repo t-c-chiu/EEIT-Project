@@ -99,7 +99,7 @@ table#alter th {
 					<p>our vision is to be Earth's most customer centric company</p>
 				</div>
 				<ol class="breadcrumb">
-					<li><a href="../index.html" title="Home">首頁</a></li>
+					<li><a href="../index.jsp" title="Home">首頁</a></li>
 					<li class="active">預約訂房</li>
 				</ol>
 			</div>
