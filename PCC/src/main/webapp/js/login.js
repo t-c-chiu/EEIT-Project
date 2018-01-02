@@ -111,7 +111,7 @@ $(function() {
 		});
 	})
 });
-//small登出
+//small menu 登出
 $(function() {
 	$('#small-logout').click(function() {
 		$('#my-signin2').remove();
