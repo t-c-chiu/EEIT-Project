@@ -112,7 +112,7 @@ $('#area').keyup(function(){
 					<h3>預約訂房</h3>
 				</div>
 				<ol class="breadcrumb">
-					<li><a href="../index.html" title="Home">首頁</a></li>
+					<li><a href="../index.jsp" title="Home">首頁</a></li>
 					<li class="active">預約訂房</li>
 				</ol>
 			</div>
