@@ -30,7 +30,7 @@ import model.service.ProductService;
 import spring.PrimitiveNumberEditor;
 
 @Controller
-@SessionAttributes(value = { "products", "productPage", "adminProduct", "categoryName","searchWay" })
+@SessionAttributes(value = { "products", "productPage", "adminProduct", "categoryName", "searchWay" })
 public class AdminShoppingController {
 	@Autowired
 	private ProductService productService;
@@ -41,22 +41,19 @@ public class AdminShoppingController {
 	@Autowired
 	private OrderDetailsService orderDetailsService;
 
-
-
 	@InitBinder
 	public void initlization(WebDataBinder webDataBinder) {
 		webDataBinder.registerCustomEditor(int.class, new PrimitiveNumberEditor(Integer.class, true));
 
 	}
-	
-	//後臺商品搜尋系列
-	@RequestMapping(path = { "/adminSearchProduct.shopping" }, 
-							method = RequestMethod.GET,
-							produces= {"application/json;charset=UTF-8"}
-					)
-	public @ResponseBody List<Product> adminSearchProduct(int productId,String productName,String category,int status, String searchType,Model model){
+
+	// 後臺商品搜尋系列
+	@RequestMapping(path = { "/adminSearchProduct.shopping" }, method = RequestMethod.GET, produces = {
+			"application/json;charset=UTF-8" })
+	public @ResponseBody List<Product> adminSearchProduct(int productId, String productName, String category,
+			int status, String searchType, Model model) {
 		model.addAttribute("searchWay", " ");
-		switch (searchType){
+		switch (searchType) {
 		case "編號查詢":
 			List<Product> adminProduct;
 			if (productId != 0) {
@@ -71,31 +68,28 @@ public class AdminShoppingController {
 				adminProduct = productService.searchText(productName);
 				return adminProduct;
 			}
-			
+
 			break;
 		case "分類查詢":
-			if (category != null ) {
+			if (category != null) {
 				adminProduct = productService.searchByCategory(category);
 				return adminProduct;
 			}
-			
+
 			break;
 		case "狀態查詢":
-			
-				adminProduct = productService.selectProductStatus(status);
-				return adminProduct;
-						
+
+			adminProduct = productService.selectProductStatus(status);
+			return adminProduct;
+
 		}
 		return null;
-	
-		
-	}
-	
 
+	}
 
 	// 後台新增商品
 	@RequestMapping(path = { "/adminInsert.shopping" }, method = RequestMethod.POST)
-	public String insertProduct(Product product, MultipartFile photo,String searchWay, Model model) {
+	public String insertProduct(Product product, MultipartFile photo, String searchWay, Model model) {
 		int saveOkId = productService.insertProducts(product);
 		if (photo != null) {
 			String path = this.imageHelper(saveOkId, photo);
@@ -110,35 +104,37 @@ public class AdminShoppingController {
 	@RequestMapping(path = { "/adminUpdata.shopping" }, method = RequestMethod.POST, produces = {
 			"text/plain;charset=utf-8" })
 	public @ResponseBody String updateProduct(Product product, MultipartFile photo) {
-		 System.out.println("product:"+product+", photo:"+photo);
+		System.out.println("product:" + product + ", photo:" + photo);
 		if (product != null) {
-			if(photo!=null) {
-			String path = this.imageHelper(product.getProductId(), photo);
-			productService.updateProduct(product, path);
-			
-			if (path == null) {
-				productService.updateProduct(product, product.getPictureAscii());
-			}
+			if (photo != null) {
+				String path = this.imageHelper(product.getProductId(), photo);
+				productService.updateProduct(product, path);
 
-		
-			}else {
-				
-				productService.updateProduct(product, product.getPictureAscii());
+				if (path == null) {
+					productService.updateProduct(product, product.getPictureAscii());
+					return "圖片更新失敗!";
+				}
+				return "更新成功!";
 			}
-			return "更新成功!";
+//			} else {
+//
+//				productService.updateProduct(product, product.getPictureAscii());
+//			}
+			
 		}
 		return "更新失敗!";
 	}
 
-	
-	//為了後台查訂單
-	@RequestMapping(path = { "/adminOrder.shopping" }, method = RequestMethod.GET,produces= {"application/json;charset=UTF-8"})
-	public @ResponseBody List<Order> orderSearch(int orderId,int status, String memberId, String searchType, Model model) {
+	// 為了後台查訂單
+	@RequestMapping(path = { "/adminOrder.shopping" }, method = RequestMethod.GET, produces = {
+			"application/json;charset=UTF-8" })
+	public @ResponseBody List<Order> orderSearch(int orderId, int status, String memberId, String searchType,
+			Model model) {
 
-		switch (searchType){
+		switch (searchType) {
 		case "訂單編號查詢":
 			return orderService.selectOrderById(orderId);
-			
+
 		case "訂單狀態查詢":
 			return orderService.selectOrderByStatus(status);
 		case "查詢所有訂單":
@@ -148,47 +144,40 @@ public class AdminShoppingController {
 		}
 		return null;
 	}
-	
-	//為了後台查詢訂單明細
-	@RequestMapping(path = { "/adminOrderDetail.shopping" }, method = RequestMethod.GET,produces= {"application/json;charset=UTF-8"})
+
+	// 為了後台查詢訂單明細
+	@RequestMapping(path = { "/adminOrderDetail.shopping" }, method = RequestMethod.GET, produces = {
+			"application/json;charset=UTF-8" })
 	public @ResponseBody List<OrderDetail> adminOrderDetail(Integer orderId) {
 		System.out.println("123467897");
 		return orderDetailsService.selectOrderDetail(orderId);
 	}
-	
-	
-	
-	//為了後台訂單的修改與刪除
+
+	// 為了後台訂單的修改與刪除
 	@RequestMapping(path = { "/adminOrderDU.shopping" }, method = RequestMethod.GET, produces = {
-	"text/plain;charset=utf-8" })
+			"text/plain;charset=utf-8" })
 	public @ResponseBody String adminOrderDU(Order order, String actionType) {
-		System.out.println("order"+order+",actionType"+actionType);
-		switch (actionType){
+		System.out.println("order" + order + ",actionType" + actionType);
+		switch (actionType) {
 		case "修改":
-			boolean b=orderService.updataOrder(order);
-			if(b) {
+			boolean b = orderService.updataOrder(order);
+			if (b) {
 				return "修改成功!";
-			}else {
+			} else {
 				return "修改失敗!";
 			}
 
 		case "刪除":
-			int i=orderService.deleteOrder(order);		
-//		if(i>0) {
-			return "刪除成功!";	
-//		}
-//		return "刪除失敗!";
+			int i = orderService.deleteOrder(order);
+			// if(i>0) {
+			return "刪除成功!";
+		// }
+		// return "刪除失敗!";
 
 		}
-	return "動作失敗!";	
+		return "動作失敗!";
 	}
-	
-	
-	
-	
-	
-	
-	
+
 	public String imageHelper(int id, MultipartFile photo) {
 
 		String name = photo.getOriginalFilename();
