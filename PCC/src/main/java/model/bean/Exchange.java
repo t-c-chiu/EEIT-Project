@@ -11,7 +11,7 @@ public class Exchange {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer exchangeId;
-	private Integer totalpoint;
+	private Integer totalPoint;
 	private String memberId;
 	private String address;
 	private String name;
@@ -20,7 +20,7 @@ public class Exchange {
 					
 	@Override
 	public String toString() {
-		return "Exchange [exchangeId=" + exchangeId + ", totalpoint=" + totalpoint + ", memberId=" + memberId
+		return "Exchange [exchangeId=" + exchangeId + ", totalPoint=" + totalPoint + ", memberId=" + memberId
 				+ ", address=" + address + ", name=" + name + ", phone=" + phone + ", email=" + email + "]";
 	}
 	
@@ -30,11 +30,11 @@ public class Exchange {
 	public void setExchangeId(Integer exchangeId) {
 		this.exchangeId = exchangeId;
 	}
-	public Integer getTotalpoint() {
-		return totalpoint;
+	public Integer getTotalPoint() {
+		return totalPoint;
 	}
-	public void setTotalpoint(Integer totalpoint) {
-		this.totalpoint = totalpoint;
+	public void setTotalPoint(Integer totalPoint) {
+		this.totalPoint = totalPoint;
 	}
 	public String getMemberId() {
 		return memberId;

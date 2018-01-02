@@ -181,7 +181,7 @@ $('#area').keyup(function(){
 		</div>
 		
 		
-		<div class="container-fluid no-padding">
+		<div class="about-section container-fluid no-padding">
 			<!-- Container -->
 			<div class="container">
 				<div class="col-md-6 col-sm-6 col-xs-6">

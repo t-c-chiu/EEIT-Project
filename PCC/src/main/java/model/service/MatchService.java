@@ -53,7 +53,7 @@ public class MatchService {
 		List<Matching> listOfMatching = matchDao.selectByReservationId(reservationId);
 		for (Matching matching : listOfMatching) {
 			if (matching.getServiceId() == serviceId)
-				return "你已經選擇過此服務員，請等待管理員審核。";
+				return "你已經選擇過此服務員，請等待管理員審核，可至會員中心查看。";
 		}
 		Matching matching = new Matching();
 		matching.setReservationId(reservationId);

@@ -133,7 +133,7 @@ function initGift(){
 
 		$('body').on('click','.addto-cart',function(){
 			var giftId=$(this).attr("id")
-			$.post('${pageContext.request.contextPath}/insertDetails.gift',{'giftId':giftId,'number':1},function(data){
+			$.post('${pageContext.request.contextPath}/insertDetail.gift',{'giftId':giftId,'number':1},function(data){
 			alert(data)			
 		})
 				
