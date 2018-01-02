@@ -273,7 +273,7 @@
 								<tr>
 									<th scope="row">訂購數量</th>
 									<td><input id="number" name="qunaity " type="number"
-										min="1" max="10"  placeholder="1"/>
+										min="1" max="10"  value="1"/>
 
 										<button class="button button-white"
 											data-ylk="sec:buyinfo;slk:加入購物車;" id="e2e-item-add2cart-top"
@@ -415,7 +415,7 @@
 				var producIdCartLi = $("#"+ productId + "SS");
 				var number =$("#number").val();
 				
-				alert(productId+" ,"+number);
+
 				$.ajax({
 					url : "/PCC/addCart.shopping",
 					type : "POST",
@@ -458,6 +458,11 @@
 					
 				});
 				
+			});
+			//數字改變要寫回去
+			$("#number").change(function(){
+				var n=$(this).val();
+				$("#number").val(n);
 			});
 			
 			
@@ -522,10 +527,7 @@ $('#searchText').keyup(function(){
 })
 
 
-function initNumber(){
-	
-	document.getElementById("number").defaultValue='1';
-}
+
 
 		
 		

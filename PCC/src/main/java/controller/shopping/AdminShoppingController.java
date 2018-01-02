@@ -125,6 +125,7 @@ public class AdminShoppingController {
 				
 				productService.updateProduct(product, product.getPictureAscii());
 			}
+			return "更新成功!";
 		}
 		return "更新失敗!";
 	}
@@ -173,11 +174,11 @@ public class AdminShoppingController {
 
 		case "刪除":
 			int i=orderService.deleteOrder(order);		
-		if(i>0) {
+//		if(i>0) {
 			return "刪除成功!";	
-		}
-		return "刪除失敗!";
-		
+//		}
+//		return "刪除失敗!";
+//		
 		}
 	return "動作失敗!";	
 	}

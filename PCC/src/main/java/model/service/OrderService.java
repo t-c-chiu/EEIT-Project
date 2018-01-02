@@ -40,11 +40,11 @@ public class OrderService {
 	// 刪除 ：必須先刪除訂單明細，再刪除訂單
 	public int deleteOrder(Order order) {
 		int i = orderDetailDAO.delete(order.getOrderId());
-		if (i > 0) {
+//		if (i > 0) {
 			int x = orderDAO.deleteOrder(order);
 			return x;
-		}
-		return 0;
+//		}
+//		return 0;
 	}
 
 	// 查詢所有訂單
