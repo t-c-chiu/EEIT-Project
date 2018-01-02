@@ -141,6 +141,7 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDYpbCt__aSkFOPc8En0xCzF6G
 			
 			$('#newPoint').empty().val(newPoint)
 			$('#getPoint').empty().val(getPoint)
+			$('#showPoint').empty().val(point)
 			
 							
 			if (!isNaN(totalPrice)&&!isNaN(newPoint)) {
@@ -422,13 +423,13 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDYpbCt__aSkFOPc8En0xCzF6G
 <body data-offset="200" data-spy="scroll" data-target=".ow-navigation">
 	<div class="main-container">
 		<!-- Loader -->
-		<div id="site-loader" class="load-complete">
-			<div class="loader">
-				<div class="loader-inner ball-clip-rotate">
-					<div></div>
-				</div>
-			</div>
-		</div>
+<!-- 		<div id="site-loader" class="load-complete"> -->
+<!-- 			<div class="loader"> -->
+<!-- 				<div class="loader-inner ball-clip-rotate"> -->
+<!-- 					<div></div> -->
+<!-- 				</div> -->
+<!-- 			</div> -->
+<!-- 		</div> -->
 		<!-- Loader /- -->
 
 		<!-- Header -->
@@ -481,7 +482,7 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDYpbCt__aSkFOPc8En0xCzF6G
 						
 							<h3 class="widget-title">點數資訊</h3>
 							<ul>
-							<li>持有點數：${member.point}</li>
+							<li>持有點數：<input id="showPoint" type="text" readonly="readonly"  style="border:none"></li>
 						    <li>使用點數：<input id="showUse" type="text" readonly="readonly"  style="border:none"></li>						
 						    <li>增加點數：<input id="showPlus" type="text" readonly="readonly"  style="border:none"></li>
 						    <li>合計點數：<input id="showNew" type="text" readonly="readonly"  style="border:none"></li>	

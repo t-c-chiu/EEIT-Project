@@ -104,6 +104,14 @@ ul#login-back {
 	list-style-type: none;
 	padding: 0;
 }
+.spanCartA{
+	
+  display : inline-block;
+  overflow : hidden;
+  text-overflow : ellipsis;
+  white-space : nowrap;
+  width : 100px;
+}
 div .span-ad-title span{
 	padding:10px;
 }

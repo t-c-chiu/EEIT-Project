@@ -176,6 +176,7 @@ function initDetails(){
 			var td0=$('<td></td>').text(details.exchangeDetailsId)
 			var td1=$('<td></td>').text(details.giftName)
 			var td2=$('<td></td>').text(details.point)
+								  .addClass("price")
 			var td3=$('<td></td>').text(details.number)
 			var td4=$('<td></td>')			
 			var button=$('<button>刪除</button>').addClass("delete")
@@ -186,11 +187,21 @@ function initDetails(){
 			tr1.append([td0,td1,td2,td3,td4])
 			tbody.append(tr1)       
 		})
+		calculateSum()
 		
 	})
 }
 	
+function calculateSum(){
+	var sum=0
 
+	$('.price').each(function(){		
+		sum += Number($(this).text());						
+	})
+	
+	$('#totalPoint').val(sum)
+
+}
 
 	$(function() {				
 		initDetails()	
@@ -202,7 +213,8 @@ function initDetails(){
 				alert(data)
 				
 			})
-			$(this).parents('tr').remove()				
+			$(this).parents('tr').remove()
+			calculateSum()
 		})
 		
 		$('#submit').click(function(){
@@ -310,7 +322,7 @@ function initDetails(){
 								
 								<div class="col-md-4 form-group">
 									<label>點數合計<span style="color:red" class="content" id="pointSpan"></span></label><input class="form-control" type="text"
-										name="totalPoint" id="totalPoint" >
+										name="totalPoint" id="totalPoint" readonly="readonly" >
 								</div>
 								
 								

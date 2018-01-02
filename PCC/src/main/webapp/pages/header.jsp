@@ -52,7 +52,7 @@
 										<!-- 圖案+文字 --> 
 										<a  class="shop-thumbnail"> 
 											<img alt="poster_2_up" class="attachment-shop_thumbnail" src="${cart.value.pictureAscii}" width="60px" height="62px"  />
-												${cart.value.productName}
+												<span class="spanCartA">${cart.value.productName}</span>
 											
 											<!-- 隱藏的form -->
 										<form action="/PCC/productId.shopping" method="get" hidden>
@@ -85,7 +85,7 @@
 										class="remove" href="#">&#215;</a> <a class="shop-thumbnail"> <img alt="poster_2_up"
 											class="attachment-shop_thumbnail"
 											src="${cartItem.pictureAscii}" width="60px" height="62px">
-											${cartItem.productName}
+											<span class="spanCartA">${cartItem.productName}</span>
 											
 										<form  action="/PCC/productId.shopping" method="get" hidden>
 											<input type="text" name="productId" value="${cartItem.productId}" hidden/>
@@ -98,8 +98,8 @@
 									
 									
 									<span class="quantity"><span class="cartSpan"
-											id="${cartItem.productId}span">0</span> &#215; <span
-											class="amount">Rs. ${cartItem.price}</span> </span></li>
+											id="${cartItem.productId}span">0</span> &#215; <sapn>$</sapn><span
+											class="amount"> ${cartItem.price}</span> </span></li>
 
 											
 											

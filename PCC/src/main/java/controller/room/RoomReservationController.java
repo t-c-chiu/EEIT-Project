@@ -54,6 +54,7 @@ public class RoomReservationController {
 	public String reserveRoom(@SessionAttribute("member") Member member, RoomReservation roomReservation,Model model,int newPoint,PointDetails pointDetails) {
 		roomReservationService.insert(member,roomReservation,newPoint,pointDetails);
 		model.addAttribute("newPoint",newPoint);
+
 		return "reserve.ok";
 	}
 
@@ -77,8 +78,6 @@ public class RoomReservationController {
 	
 	@RequestMapping(path="/insertRoom.room",method=RequestMethod.POST,produces= {"text/plain;charset=UTF-8"})
 	public @ResponseBody String insertRoom(Room room,MultipartFile photo) {
-		System.out.println(room.getRoomId());
-		System.out.println(room.getRoomId());
 		roomReservationService.insertRoom(room);
 		String ImageId=room.getRoomImage();
 		String name=photo.getOriginalFilename();
