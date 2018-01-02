@@ -11,7 +11,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<title>Contact Form | Gentelella Alela! by Colorlib</title>
+<title>PCC Admin Product</title>
 
 <!-- Bootstrap -->
 <link href="../vendors/bootstrap/dist/css/bootstrap.min.css"
@@ -158,10 +158,10 @@ label {
 						<div id="productSelectAndUpdataQQ" class="hideClass">
 							<label>商品編號</label> <input id="productId" type="text"
 								name="productId" size="5" /> <br> <input id="IDButton"
-								type="button" value="編號查詢" class="submit" /> <br> <br>
+								type="button" value="編號查詢" class="submit btn btn-success" /> <br> <br>
 							<label>商品名稱：</label> <input id="productName" type="text"
 								name="productName" size="5"><br> <input
-								id="nameButton" type="button" value="名稱查詢" class="submit"><br>
+								id="nameButton" type="button" value="名稱查詢" class="submit btn btn-success"><br>
 							<br> <label>商品分類：</label> <select name="category"
 								id="category">
 								<option value="">請選擇</option>
@@ -170,12 +170,12 @@ label {
 								<option value="產後產品">產後產品</option>
 								<option value="嬰兒產品">嬰兒產品</option>
 							</select> <br> <input id="categoryButton" type="button" value="分類查詢"
-								class="submit"><br> <br> <label>狀態:</label> <input
+								class="submit btn btn-success"><br> <br> <label>狀態:</label> <input
 								type="radio" name="status" value="1" checked />上架 <input
 								type="radio" name="status" value="0" />下架 <input type="radio"
 								name="status" value="2" />熱門商品 <input type="radio"
 								name="status" value="3" />新上架商品 <br> <input id="status"
-								type="button" value="狀態查詢" class="submit"> <br> <br>
+								type="button" value="狀態查詢" class="submit btn btn-success"> <br> <br>
 
 
 						</div>
@@ -207,8 +207,8 @@ label {
 								<br> <label>商品截圖：</label> <input type="file" id="photo"
 									name="photo" accept="image/*"><br> <img
 									id="previewPhoto" style="max-width: 250px;" /> <br> <input
-									id="btnSubmit" type="submit" value="確定上架"> <input
-									type="reset" value="重新填寫">
+									id="btnSubmit" type="submit" value="確定上架" class="btn btn-success"> <input
+									type="reset" value="重新填寫" class="btn btn-warning">
 							</form>
 							<br> <br>
 
@@ -220,19 +220,19 @@ label {
 
 						<div id="orderSelectQQ" class="hideClass">
 
-							<label>查詢所有訂單</label> 
-							<input id="orderAllButton" type="button" value="查詢所有訂單" class="submitOrder" /> <br> <br> <label>訂單編號</label>
+							<label style="width:100px;">查詢所有訂單</label> 
+							<input id="orderAllButton" type="button" value="查詢所有訂單" class="submitOrder btn btn-success" /> <br> <br> <label>訂單編號</label>
 							<input id="orderId" type="text" name="orderId" size="5" /> <br>
 							<input id="orderIdButton" type="button" value="訂單編號查詢"
-								class="submitOrder" /> <br> <br> <label>購買人查詢訂單</label>
+								class="submitOrder btn btn-success" /> <br> <br> <label style="width:110px;">購買人查詢訂單</label>
 							<input id="orderMemberId" type="text" name="memberId" size="5" />
 							<br> <input id="orderMemberIdButton" type="button"
-								value="購買人查詢訂單" class="submitOrder" /> <br> <br> <label>訂單狀態:</label>
+								value="購買人查詢訂單" class="submitOrder btn btn-success" /> <br> <br> <label>訂單狀態:</label>
 							<input id="statusOrderRadio" type="radio" name="status" value="0"
 								checked />未付費 <input type="radio" name="status" value="1" />已繳清
 
 							<br> <input id="statusOrder" type="button" value="訂單狀態查詢"
-								class="submitOrder"> <br> <br>
+								class="submitOrder btn btn-success"> <br> <br>
 
 
 
