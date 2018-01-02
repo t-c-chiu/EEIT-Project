@@ -42,7 +42,7 @@ public class MatchingDAO {
 	public List<Object[]> selectMatchingAndServantByReservationId(Integer reservationId) {
 		try {
 			return getSession().createQuery(
-					"from Matching m, Servant s where m.serviceId = s.serviceId and m.reservationId = :reservationId",
+					"from Matching m, Servant s where m.serviceId = s.serviceId and m.reservationId = :reservationId order by m.date desc",
 					Object[].class).setParameter("reservationId", reservationId).list();
 		} catch (Exception e) {
 			e.printStackTrace();
