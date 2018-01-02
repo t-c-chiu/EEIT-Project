@@ -446,7 +446,7 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDYpbCt__aSkFOPc8En0xCzF6G
 					<p>our vision is to be Earth's most customer centric company</p>
 				</div>
 				<ol class="breadcrumb">
-					<li><a href="../index.html" title="Home">首頁</a></li>
+					<li><a href="../index.jsp" title="Home">首頁</a></li>
 					<li class="active">預約訂房</li>
 				</ol>
 			</div>
