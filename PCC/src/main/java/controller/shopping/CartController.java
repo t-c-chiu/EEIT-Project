@@ -1,9 +1,8 @@
 package controller.shopping;
 
-import java.util.ArrayList;
+import java.sql.SQLException;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -20,11 +19,11 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import model.bean.Cart;
 import model.bean.Member;
 import model.bean.Order;
-import model.bean.OrderDetail;
 import model.bean.PointDetails;
 import model.bean.Product;
 import model.dao.SystemMessageDAO;
 import model.service.MemberService;
+import model.service.OrderDetailsService;
 import model.service.OrderService;
 import model.service.PointDetailsService;
 import model.service.ProductService;
@@ -36,6 +35,8 @@ public class CartController {
 	private ProductService productService;
 	@Autowired
 	private OrderService orderService;
+	@Autowired
+	private OrderDetailsService orderDetailsService;
 	@Autowired
 	private SystemMessageDAO systemMessageDAO;
 	@Autowired
@@ -112,7 +113,7 @@ public class CartController {
 	
 	//將商品加入訂單，狀態為0
 	@RequestMapping(path = { "/addOrder.shopping" }, method = RequestMethod.GET,produces= {"text/plain;charset=UTF-8" })
-	public @ResponseBody String useCartPage(Order order,HttpSession session,OrderDetail orderDetail ,PointDetails pointDetails,Model model) {
+	public @ResponseBody String useCartPage(Order order,HttpSession session,PointDetails pointDetails,Model model) throws SQLException {
 	
 		if (order!=null) {
 			//1.先成立訂單
@@ -122,9 +123,7 @@ public class CartController {
 				return "請先登入";
 				
 			}
-			
-			
-			
+
 			String memberId = member.getMemberId();
 			Date today = new Date();
 			order.setDate(today);
@@ -132,16 +131,7 @@ public class CartController {
 			int orderId = orderService.insertOrder(order);
 			//2.加入訂單明細
 			Map<Integer, Cart> map = (Map<Integer, Cart>) session.getAttribute("addToCart");
-			List<OrderDetail> listOrderDetail = new ArrayList<OrderDetail>();
-			for (Object key : map.keySet()) {
-				orderDetail.setOrderId(orderId);
-				orderDetail.setPrice(map.get(key).getPrice());
-				orderDetail.setQuantity(map.get(key).getQuantity());
-				orderDetail.setProductName(map.get(key).getProductName());
-				orderDetail.setProductId(map.get(key).getProductId());
-
-				listOrderDetail.add(orderDetail);
-			}
+			orderDetailsService.insertOrderDetails(map,orderId);
 			//3.把購物車清除
 			map.clear();
 			model.addAttribute("addToCart", map);

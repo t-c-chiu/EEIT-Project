@@ -229,6 +229,7 @@
 
 				var product=$(this);
 				var number = product.val();
+				
 				var id=product.attr("id");
 				var price=parseInt($("#"+id+"price").text());
 				var subtoal=price*number;

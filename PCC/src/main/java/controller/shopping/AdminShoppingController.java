@@ -17,89 +17,91 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
+import model.bean.Order;
+import model.bean.OrderDetail;
 import model.bean.Product;
+import model.service.OrderDetailsService;
+import model.service.OrderService;
 import model.service.ProductService;
 import spring.PrimitiveNumberEditor;
 
 @Controller
-@SessionAttributes(value = { "products", "productPage", "adminProduct", "categoryName" })
+@SessionAttributes(value = { "products", "productPage", "adminProduct", "categoryName","searchWay" })
 public class AdminShoppingController {
 	@Autowired
 	private ProductService productService;
 	@Autowired
 	private ServletContext application;
+	@Autowired
+	private OrderService orderService;
+	@Autowired
+	private OrderDetailsService orderDetailsService;
 
-	private String searchWay;
+
 
 	@InitBinder
 	public void initlization(WebDataBinder webDataBinder) {
 		webDataBinder.registerCustomEditor(int.class, new PrimitiveNumberEditor(Integer.class, true));
 
 	}
-
-	// 後台ID搜尋商品
-	@RequestMapping(path = { "/adminSearchIdForProduct.shopping" }, method = RequestMethod.GET)
-	public String adminSearchIdForProduct(int productId, String searchWay, Model model) {
-
-		if (productId != 0) {
+	
+	//後臺商品搜尋系列
+	@RequestMapping(path = { "/adminSearchProduct.shopping" }, 
+							method = RequestMethod.GET,
+							produces= {"application/json;charset=UTF-8"}
+					)
+	public @ResponseBody List<Product> adminSearchProduct(int productId,String productName,String category,int status, String searchType,Model model){
+		model.addAttribute("searchWay", " ");
+		switch (searchType){
+		case "編號查詢":
 			List<Product> adminProduct;
-			this.searchWay = searchWay;
-			adminProduct = new ArrayList<Product>();
-			Product pp = productService.search(productId);
-			adminProduct.add(pp);
-			model.addAttribute("adminProduct", adminProduct);
-
+			if (productId != 0) {
+				adminProduct = new ArrayList<Product>();
+				Product pp = productService.search(productId);
+				adminProduct.add(pp);
+				return adminProduct;
+			}
+			break;
+		case "名稱查詢":
+			if (productName != null) {
+				adminProduct = productService.searchText(productName);
+				return adminProduct;
+			}
+			
+			break;
+		case "分類查詢":
+			if (category != null ) {
+				adminProduct = productService.searchByCategory(category);
+				return adminProduct;
+			}
+			
+			break;
+		case "狀態查詢":
+			
+				adminProduct = productService.selectProductStatus(status);
+				return adminProduct;
+						
 		}
-
-		return "admin.product";
+		return null;
+	
+		
 	}
+	
 
-	// 後臺搜尋商品名
-	@RequestMapping(path = { "/adminSearchNameForProduct.shopping" }, method = RequestMethod.GET)
-	public String adminSearchNameForProduct(String productName, String searchWay, Model model) {
-		List<Product> adminProduct;
-		if (productName != null) {
-			this.searchWay = searchWay;
-			adminProduct = productService.searchText(productName);
-			model.addAttribute("adminProduct", adminProduct);
-		}
-
-		return "admin.product";
-	}
-
-	// 後臺搜尋分類欄
-	@RequestMapping(path = { "/adminSearchCategoryForProduct.shopping" }, method = RequestMethod.GET)
-	public String adminSearchCategoryForProduct(String category, String searchWay, Model model) {
-		if (category != null) {
-			List<Product> adminProduct;
-			this.searchWay = searchWay;
-			adminProduct = productService.searchByCategory(category);
-			model.addAttribute("adminProduct", adminProduct);
-		}
-		return "admin.product";
-	}
-
-	// 後臺搜尋狀態欄
-	@RequestMapping(path = { "/adminSearchStatusForProduct.shopping" }, method = RequestMethod.GET)
-	public String adminSearchStatusForProduct(int status, String searchWay, Model model) {
-		this.searchWay = searchWay;
-		List<Product> adminProduct;
-		adminProduct = productService.selectProductStatus(status);
-		model.addAttribute("adminProduct", adminProduct);
-		return "admin.product";
-	}
 
 	// 後台新增商品
 	@RequestMapping(path = { "/adminInsert.shopping" }, method = RequestMethod.POST)
-	public String insertProduct(Product product, MultipartFile photo, Model model) {
+	public String insertProduct(Product product, MultipartFile photo,String searchWay, Model model) {
 		int saveOkId = productService.insertProducts(product);
 		if (photo != null) {
 			String path = this.imageHelper(saveOkId, photo);
 			productService.updateProduct(product, path);
 		}
+		model.addAttribute("searchWay", searchWay);
 		return "admin.product";
 
 	}
@@ -107,39 +109,85 @@ public class AdminShoppingController {
 	// 為了後台更新產品
 	@RequestMapping(path = { "/adminUpdata.shopping" }, method = RequestMethod.POST, produces = {
 			"text/plain;charset=utf-8" })
-	public String updateProduct(Product product, MultipartFile photo, Model model) {
-		List<Product> adminProduct = null;
+	public @ResponseBody String updateProduct(Product product, MultipartFile photo) {
+		 System.out.println("product:"+product+", photo:"+photo);
 		if (product != null) {
+			if(photo!=null) {
 			String path = this.imageHelper(product.getProductId(), photo);
 			productService.updateProduct(product, path);
+			
 			if (path == null) {
 				productService.updateProduct(product, product.getPictureAscii());
 			}
-			// 為了及時更新商品圖案
-			switch (searchWay) {
-			case "id":
-				adminProduct = new ArrayList<Product>();
-				Product pp = productService.search(product.getProductId());
-				adminProduct.add(pp);
-				break;
-			case "name":
-				adminProduct = productService.searchText(product.getProductName());
-				break;
-			case "category":
-				adminProduct = productService.searchByCategory(product.getCategory());
-				break;
-			case "status":
-				adminProduct = productService.selectProductStatus(product.getStatus());
-				break;
 
+		
+			}else {
+				
+				productService.updateProduct(product, product.getPictureAscii());
 			}
-			model.addAttribute("adminProduct", adminProduct);
+		}
+		return "更新失敗!";
+	}
 
-			return "admin.product";
+	
+	//為了後台查訂單
+	@RequestMapping(path = { "/adminOrder.shopping" }, method = RequestMethod.GET,produces= {"application/json;charset=UTF-8"})
+	public @ResponseBody List<Order> orderSearch(int orderId,int status, String memberId, String searchType, Model model) {
+
+		switch (searchType){
+		case "訂單編號查詢":
+			return orderService.selectOrderById(orderId);
+			
+		case "訂單狀態查詢":
+			return orderService.selectOrderByStatus(status);
+		case "查詢所有訂單":
+			return orderService.selectAllOrder();
+		case "購買人查詢訂單":
+			return orderService.selectOrderByMember(memberId);
 		}
 		return null;
 	}
+	
+	//為了後台查詢訂單明細
+	@RequestMapping(path = { "/adminOrderDetail.shopping" }, method = RequestMethod.GET,produces= {"application/json;charset=UTF-8"})
+	public @ResponseBody List<OrderDetail> adminOrderDetail(Integer orderId) {
+		System.out.println("123467897");
+		return orderDetailsService.selectOrderDetail(orderId);
+	}
+	
+	
+	
+	//為了後台訂單的修改與刪除
+	@RequestMapping(path = { "/adminOrderDU.shopping" }, method = RequestMethod.GET, produces = {
+	"text/plain;charset=utf-8" })
+	public @ResponseBody String adminOrderDU(Order order, String actionType) {
+		System.out.println("order"+order+",actionType"+actionType);
+		switch (actionType){
+		case "修改":
+			boolean b=orderService.updataOrder(order);
+			if(b) {
+				return "修改成功!";
+			}else {
+				return "修改失敗!";
+			}
 
+		case "刪除":
+			int i=orderService.deleteOrder(order);		
+		if(i>0) {
+			return "刪除成功!";	
+		}
+		return "刪除失敗!";
+		
+		}
+	return "動作失敗!";	
+	}
+	
+	
+	
+	
+	
+	
+	
 	public String imageHelper(int id, MultipartFile photo) {
 
 		String name = photo.getOriginalFilename();
