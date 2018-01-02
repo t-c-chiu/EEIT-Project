@@ -71,8 +71,8 @@ public class ProductDAO {
 
 	// 根据商品狀態來搜尋
 	public List<Product> selectProductStatus(int status) {
-		Query<Product> query = getSession().createQuery("from Product where status = ?", Product.class);
-		query.setParameter(0, status);
+		Query<Product> query = getSession().createQuery("from Product where status = :status", Product.class);
+		query.setParameter("status", status);
 		return query.list();
 
 	}

@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
 import javax.sql.DataSource;
 
@@ -14,15 +15,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate5.SessionFactoryUtils;
 import org.springframework.stereotype.Repository;
 
+import model.bean.Cart;
 import model.bean.OrderDetail;
+import model.bean.PostArticle;
 
 @Repository
 public class OrderDetailDAO {
 
 	@Autowired
 	private SessionFactory sessionFactory;
-	private final String inserSqr = "INSERT INTO OrderDetail (orderId,productName,price,quantity)  VALUES (?,?,?,?)";
-	private final String deleteSqr = "DELETE FROM OrderDetail WHERE orderDetailId=?";
+	private final String inserSqr = "INSERT INTO OrderDetail (orderId,productName,price,quantity,productId)  VALUES (?,?,?,?,?)";
+	private final String deleteSqr = "DELETE FROM OrderDetail WHERE orderId=:orderId";
 
 	public Session getSession() {
 		return sessionFactory.getCurrentSession();
@@ -31,21 +34,22 @@ public class OrderDetailDAO {
 	// 一次新增很多OrderDetail
 	// "INSERT INTO OrderDetail (orderId,productName,price,quantity) VALUES
 	// (?,?,?,?)"
-	public boolean insertOrderDetails(List<OrderDetail> listOrderDetail) throws SQLException {
+	public boolean insertOrderDetails(Map<Integer, Cart> map,int orderId) throws SQLException {
 		DataSource ds=SessionFactoryUtils.getDataSource(sessionFactory);
 		Connection conn=ds.getConnection();
 		PreparedStatement stat = conn.prepareStatement(inserSqr);
 
-		if (listOrderDetail != null) {
-			for (OrderDetail od : listOrderDetail) {
-				stat.setInt(1, od.getOrderId());
-				stat.setString(2, od.getProductName());
-				stat.setInt(3, od.getPrice());
-				stat.setInt(4, od.getQuantity());
+		if (map != null) {
+			for (Object key : map.keySet()) {
+				stat.setInt(1, orderId);
+				stat.setString(2, map.get(key).getProductName());
+				stat.setInt(3, map.get(key).getPrice());
+				stat.setInt(4, map.get(key).getQuantity());
+				stat.setInt(5, map.get(key).getProductId());
 				stat.addBatch();
 			}
 
-			stat.executeQuery();
+			stat.executeBatch();
 			conn.commit();
 			return true;
 		}
@@ -54,36 +58,24 @@ public class OrderDetailDAO {
 
 	// 一次刪除很多OrderDetail
 	// "DELETE FROM OrderDetail WHERE orderDetailId=?";
-	public int delete(List<Integer> orderDetailIdList) throws SQLException {
-		DataSource ds=SessionFactoryUtils.getDataSource(sessionFactory);
-		Connection conn=ds.getConnection();
-		PreparedStatement stat = conn.prepareStatement(deleteSqr);
-		int deleteCount = 0;
-
-		if (orderDetailIdList != null) {
-			for (Integer i : orderDetailIdList) {
-
-				stat.setInt(1, i);
-				stat.addBatch();
-				deleteCount++;
-			}
-			stat.executeQuery();
-			conn.commit();
-			return deleteCount;
-		}
-
-		return 0;
+	public int delete(int orderId)  {
+		
+		Query<?> query = getSession().createQuery(deleteSqr);
+		query.setParameter("orderId", orderId);
+		int result = query.executeUpdate();
+		return result;
 	}
 
 	// 查詢OrderDetail by OrderId
 
-	public List<OrderDetail> selectByOrderId(Integer OrderdId) {
-		if (OrderdId != 0) {
-			Query<OrderDetail> query = getSession().createQuery("select * from ORDERDETAIL where ORDERID = ?",
-					OrderDetail.class);
-			query.setParameter(1, OrderdId);
+	public List<OrderDetail> selectByOrderId(Integer orderId) {
+		System.out.println(orderId);
+		if (orderId != 0) {
+			return getSession().createQuery("from OrderDetail where orderId = :orderId ", OrderDetail.class)
+					.setParameter("orderId", orderId).list();
+//			query.setParameter("orderId", orderdId);
 
-			return query.list();
+	
 		}
 		return null;
 	}
