@@ -37,13 +37,5 @@ public class ExchangeDetailsDAO {
 		getSession().delete(result);
 		return true;				
 	}
-	
-	public boolean updateDetail(String memberId,int exchangeId) {
-		Query<?> query = getSession().createQuery("update ExchangeDetails set exchangeId=:exchangeId" + "where status=:status and memberId=:memberId");
-		query.setParameter("exchangeId", exchangeId);
-		query.setParameter("status", 0);
-		query.setParameter("memberId", memberId);
-		return true;	
-	}
-	
+		
 }
