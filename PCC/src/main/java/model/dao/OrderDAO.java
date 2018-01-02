@@ -41,16 +41,14 @@ public class OrderDAO {
 				select.setDate(order.getDate());
 				select.setRecipient(order.getRecipient());
 				select.setRecipientPhone(order.getRecipientPhone());
-				
-			}		
-		}		
+				return true;
+			}
+		}
 		return false;
 	}
-	
 
-	
-	//會員查詢自己所有的訂單
-	
+	// 會員取消自己的訂單
+
 	public boolean cancelOrder(String memberId) {
 		getSession().delete(memberId);
 		return true;
@@ -58,14 +56,14 @@ public class OrderDAO {
 
 	// 會員查詢自己所有的訂單
 	public List<Order> selectAllOrder(String memberId) {
-		Query<Order> query = getSession().createQuery("select * from Order where memberId = ?", Order.class);
+		Query<Order> query = getSession().createQuery("from Order where memberId = ?", Order.class);
 		query.setParameter(0, memberId);
 		return query.list();
 	}
 
 	// 管理員查詢所有訂單
 	public List<Order> selectAllOrderByAd() {
-		List<Order> listQuery = getSession().createQuery("select * from Order", Order.class).list();
+		List<Order> listQuery = getSession().createQuery("from Order", Order.class).list();
 		return listQuery;
 	}
 
@@ -73,16 +71,22 @@ public class OrderDAO {
 	public Order selectOrderId(int orderId) {
 		return getSession().get(Order.class, orderId);
 	}
-	
-	
+
+	// 管理員按照訂單狀態查詢
+	public List<Order> selectAllByStatus(int status) {
+		return getSession().createQuery("from Order where status =:status", Order.class).setParameter("status", status)
+				.list();
+	}
+
 	// 刪除：管理員或系統管理用
-	public int deleteOrder(int orderId) {
-		if(orderId!=0)
-		getSession().delete(orderId);
-		
+	public int deleteOrder(Order order) {
+		if (order != null) {
+
+			getSession().delete(order);
+			return 1;
+		}
 		return 0;
 	}
-	
 
 	public List<Order> selectAllByMemberIdStatus0(String memberId) {
 		return getSession().createQuery("from Order where memberId = :memberId and status = 0", Order.class)

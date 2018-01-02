@@ -111,7 +111,7 @@ $(function() {
 		});
 	})
 });
-//small登出
+//small menu 登出
 $(function() {
 	$('#small-logout').click(function() {
 		$('#my-signin2').remove();
@@ -443,6 +443,7 @@ $(function() {
 	});
 	//跑去購物商城首頁
 	$("#shoppingMall").click(function(){
+		alert("2u032u04u9320vwkharhulah4uvlahaehravw o;");
 		$("#shoppingMallForm").submit();
 	});
 	//點購物車小圖會跑去商品頁面

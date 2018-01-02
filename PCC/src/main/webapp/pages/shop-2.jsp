@@ -59,16 +59,13 @@
 			<!-- Container -->
 			<div class="container">
 				<div class="banner-content">
-					<h3 id="shoppingTitil"><a>購物商城</a></h3>
-					<p>our vision is to be Earth's most customer centric company</p>
-
-
+					<h3 id="shoppingTitil">購物商城</h3>
 				</div>
 				<ol class="breadcrumb">
 					<li><a href="../index.html" title="Home">首頁</a></li>
 
 					<!-- 須回到購物商城的首頁 也就是 熱賣商品中心 -->
-					<li class="active"><a href="#">購物商城</a></li>
+					<li class="active">購物商城</li>
 					<!-- 須回到購物商城的首頁 也就是 熱賣商品中心 -->
 				</ol>
 			</div>
