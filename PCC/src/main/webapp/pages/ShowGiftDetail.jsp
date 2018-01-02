@@ -176,6 +176,7 @@ function initDetails(){
 			var td0=$('<td></td>').text(details.exchangeDetailsId)
 			var td1=$('<td></td>').text(details.giftName)
 			var td2=$('<td></td>').text(details.point)
+								  .addClass("price")
 			var td3=$('<td></td>').text(details.number)
 			var td4=$('<td></td>')			
 			var button=$('<button>刪除</button>').addClass("delete")
@@ -190,7 +191,17 @@ function initDetails(){
 	})
 }
 	
-
+function calculateSum(){
+	var sum=0;
+	$('.price').each(function(){
+		if(!isNan(this.value)&&this.value.length!=0){
+			sum+=parseFloat(this.value)
+		}				
+	})
+	
+	$('#totalPoint').val(sum)
+		
+}
 
 	$(function() {				
 		initDetails()	
