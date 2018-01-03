@@ -48,6 +48,7 @@
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <!--/購物車表單的下載  -->
 
 <!-- fontawesome -->
@@ -55,6 +56,11 @@
 <!-- css -->
 <link rel="stylesheet" type="text/css" href="../css/login.css">
 <!-- <link rel="stylesheet" type="text/css" href="../css/center.css"> -->
+<style>
+	#payForm label{
+		width: 100px;
+	}
+</style>
 </head>
 
 
@@ -64,118 +70,13 @@
 		<!-- Loader -->
 		<%@ include file="/pages/header.jsp"%>
 
-		<!-- Loader /- -->
-
-		<!-- Header -->
-
 		<!--	內容開始	-->
 		<main> <!-- Page Banner -->
 
-
-		<div class="page-banner container-fluid no-padding">
-			<!-- Container -->
-			<div class="container">
-				<div class="banner-content">
-					<h3>購物商城</h3>
-					<p>our vision is to be Earth's most customer centric company</p>
-				</div>
-				<ol class="breadcrumb">
-					<li><a href="../index.html" title="Home">首頁</a></li>
-					<li class="active">購物商城</li>
-				</ol>
-			</div>
-			<!-- Container /- -->
-		</div>
-		<!-- Page Banner /- -->
-
 		<div class="container" style="margin-bottom: 100px">
-			<!-- 無購物會出現的圖， -->
-
-			<%
-				if (session.getAttribute("addToCart") == null) {
-					session.setAttribute("addToCart", new HashMap<Integer, Cart>());
-				}
-			%>
-
-			<div align='center' id='noShoppingImg' style="display: none">
-				<img alt='noShopping' src='../images/noShopping.jpg'>
-				<button id="gotoShoppingButtoun"
-					class="btn btn-default form-control footer-send " type="button"
-					style="border-color: pink">我要去購物</button>
-				<!-- 					<input id="gotoShoppingButtoun" type="button" value="去購物" style="width:200px;height:70px;font-size:20px; dashed;background-color:pink;"/> -->
-			</div>
-
-
-			<!-- 有購物後，出現的表單 -->
-			<form action="/PCC/insertOrder.shopping" method="post">
-				<div style="margin-bottom: 100px" class="table-responsive">
-					<table class="table" width="600" height="300"
-						style="border: 3px #cccccc solid;">
-						<caption style="font-size: 50px">購物車</caption>
-						<tr style="height: 15px">
-							<th>商品名稱</th>
-							<th>數量及規格</th>
-							<th>價格</th>
-							<th>小計</th>
-							<th></th>
-						</tr>
-
-						<c:forEach var="item" items="#{addToCart}">
-							<tr id="${item.key}tr">
-								<td>
-									<ul>
-										<li style="list-style-type: none"><img alt="衣服"
-											src="/PCC/images/deal-5.jpg"></li>
-										<li style="list-style-type: none"><label>${item.value.productName}</label></li>
-									</ul>
-								</td>
-
-								<td>
-									<ul style="padding: 0px">
-										<li
-											style="list-style-type: none; padding: 5px; list-style-position: inside; margin-left: 0px;">規格：
-											<select>
-												<option>請選擇</option>
-												<option>F</option>
-										</select>
-										</li>
-										<li style="list-style-type: none; padding: 5px">樣式： <select>
-												<option>請選擇</option>
-												<option>F</option>
-										</select>
-										</li>
-										<li style="list-style-type: none; padding: 5px">數量： <input
-											style="font-size: 11px; font-family: serif;" type="number"
-											min="1" max="10" size="7" value="${item.value.quantity}"
-											id="${item.key}" class="quantityNumber" />
-										</li>
-									</ul>
-								</td>
-								<td><span>$</span><span class="price" id="${item.key}price">${item.value.price}</span></td>
-								<td><span>$</span><span class="subtal"
-									id="${item.key}subtotal">${item.value.subtotal}</span></td>
-								<td class="eliminate" id="${item.key}eliminate">刪除</td>
-							</tr>
-
-						</c:forEach>
-						<tr>
-
-							<th></th>
-							<th></th>
-							<th></th>
-							<th></th>
-							<th><label>共$<span id="tatlePrice"
-									style="font-size: 20px; font-weight: bold; color: red"></span>元
-							</label> <input name="totalPrice" hidden value="" /></th>
-						</tr>
-					</table>
-
-				</div>
-				<!--/ 有購物後，出現的表單 -->
 
 				<div class="checkout-form">
-
-
+					
 					<div class="col-md-8 col-sm-12 col-xs-12 col-md-push-2 ">
 						<div style="background-color: #FFB6C1">
 							<h3>
@@ -205,98 +106,45 @@
 									value="${member.phone }" required />
 							</div>
 							<div class="col-md-6 form-group">
-								<label>縣市 *</label>
-								<div class="select">
-									<select id="${member.area }" name="area" class="form-control">
-										<option value="基隆市">基隆市</option>
-										<option value="臺北市">臺北市</option>
-										<option value="新北市">新北市</option>
-										<option value="宜蘭縣">宜蘭縣</option>
-										<option value="新竹市">新竹市</option>
-										<option value="新竹縣">新竹縣</option>
-										<option value="桃園市">桃園市</option>
-										<option value="苗栗縣">苗栗縣</option>
-										<option value="臺中市">臺中市</option>
-										<option value="彰化縣">彰化縣</option>
-										<option value="南投縣">南投縣</option>
-										<option value="嘉義市">嘉義市</option>
-										<option value="嘉義縣">嘉義縣</option>
-										<option value="雲林縣">雲林縣</option>
-										<option value="臺南市">臺南市</option>
-										<option value="高雄市">高雄市</option>
-										<option value="屏東縣">屏東縣</option>
-										<option value="臺東縣">臺東縣</option>
-										<option value="花蓮縣">花蓮縣</option>
-										<option value="金門縣">金門縣</option>
-										<option value="連江縣">連江縣</option>
-										<option value="澎湖縣">澎湖縣</option>
-									</select>
-								</div>
+								<label>縣市 *</label><span></span> <input 
+									name="area" class="form-control" type="text" maxlength="10"
+									value="${member.area }" required />
 							</div>
 							<div class="col-md-12 form-group">
 								<label>地址 *</label><span></span> <input onblur="addressCheck();"
 									name="address" class="form-control" type="text"
 									value="${member.address }" required />
 							</div>
-
-							<div class="col-md-12 form-group">
-								<label>信用卡卡號 * </label> <input class="card" type="text" size="4"
-									maxlength="4" />-<input class="card" type="text" size="4"
-									maxlength="4" />-<input class="card" type="password" size="4"
-									maxlength="4" />-<input class="card" type="text" size="4"
-									maxlength="4" />
+							
+							<form id="payForm" style="margin: 30px;text-align: center;">
+							<div class="col-md-6 form-group">
+								<div class="card-wrapper"></div>
 							</div>
 							<div class="col-md-6 form-group">
-								<label>有效日期 * </label> <select>
-									<option>請選擇</option>
-									<option value="01">01</option>
-									<option value="02">02</option>
-									<option value="03">03</option>
-									<option value="04">04</option>
-									<option value="05">05</option>
-									<option value="06">06</option>
-									<option value="07">07</option>
-									<option value="08">08</option>
-									<option value="09">09</option>
-									<option value="10">10</option>
-									<option value="11">11</option>
-									<option value="12">12</option>
-								</select>月 <select>
-									<option>請選擇</option>
-									<option value="2017">2017</option>
-									<option value="2018">2018</option>
-									<option value="2019">2019</option>
-									<option value="2020">2020</option>
-									<option value="2021">2021</option>
-									<option value="2022">2022</option>
-									<option value="2023">2023</option>
-									<option value="2024">2024</option>
-									<option value="2025">2025</option>
-									<option value="2026">2026</option>
-									<option value="2027">2027</option>
-									<option value="2028">2028</option>
-									<option value="2029">2029</option>
-									<option value="2030">2030</option>
-									<option value="2031">2031</option>
-									<option value="2032">2032</option>
-									<option value="2033">2033</option>
-								</select>年
-
+								<label>信用卡卡號 * </label><input type="tel" name="number">
 							</div>
 							<div class="col-md-6 form-group">
-								<label>背面末三碼：</label> <input type="text" size="4" maxlength="3" />
+								<label>全名* </label><input type="text" name="name">
 							</div>
-
+							<div class="col-md-6 form-group">
+								<label>有效日期 * </label><input placeholder="MM/YY" type="tel" name="expiry">
+							</div>
+							<div class="col-md-6 form-group">
+								<label>背面末三碼 * </label><input placeholder="CVC" type="number" name="cvc">
+							</div>
+							</form>
+							<script src="../card-master/dist/card.js"></script>
+						    <script>
+						        new Card({
+						            form: document.querySelector('#payForm'),
+						            container: '.card-wrapper'
+						        });
+						    </script>
 						</div>
 
 					</div>
 
-
-
 					<!-- 收件人資料 -->
-
-
-
 
 					<div class="col-md-8 col-sm-12 col-xs-12 col-md-push-2 ">
 						<div style="background-color: #FFB6C1">
@@ -318,33 +166,9 @@
 									maxlength="10" value="${member.phone }" required />
 							</div>
 							<div class="col-md-6 form-group">
-								<label>縣市 *</label>
-								<div class="select">
-									<select id="${member.area }" name="area" class="form-control">
-										<option value="基隆市">基隆市</option>
-										<option value="臺北市">臺北市</option>
-										<option value="新北市">新北市</option>
-										<option value="宜蘭縣">宜蘭縣</option>
-										<option value="新竹市">新竹市</option>
-										<option value="新竹縣">新竹縣</option>
-										<option value="桃園市">桃園市</option>
-										<option value="苗栗縣">苗栗縣</option>
-										<option value="臺中市">臺中市</option>
-										<option value="彰化縣">彰化縣</option>
-										<option value="南投縣">南投縣</option>
-										<option value="嘉義市">嘉義市</option>
-										<option value="嘉義縣">嘉義縣</option>
-										<option value="雲林縣">雲林縣</option>
-										<option value="臺南市">臺南市</option>
-										<option value="高雄市">高雄市</option>
-										<option value="屏東縣">屏東縣</option>
-										<option value="臺東縣">臺東縣</option>
-										<option value="花蓮縣">花蓮縣</option>
-										<option value="金門縣">金門縣</option>
-										<option value="連江縣">連江縣</option>
-										<option value="澎湖縣">澎湖縣</option>
-									</select>
-								</div>
+								<label>縣市 *</label><span></span> <input 
+									name="area" class="form-control" type="text" maxlength="10"
+									value="${member.area }" required />
 							</div>
 							<div class="col-md-12 form-group">
 								<label>地址 *</label><span></span> <input onblur="addressCheck();"
@@ -352,25 +176,17 @@
 									value="${member.address }" required />
 							</div>
 
-
-
-
 						</div>
 						<button id="personal-updatebtn"
 							class="btn btn-default form-control password-send " type="button"
 							style="background-color: pink">確認送出</button>
 					</div>
-
-
-
 				</div>
-			</form>
+			</div>
 		</div>
-	</div>
 
 	<!-- Container /- -->
 	<%@ include file="/pages/footer.jsp"%>
-	</div>
 
 	<!-- JQuery v1.12.4 -->
 	<script src="../js/jquery.min.js"></script>
@@ -405,6 +221,14 @@
 	<!-- 	<script type="text/javascript" src="../js/login.js"></script> -->
 	<script type="text/javascript">
 		$(document).ready(function() {
+			
+			$('#personal-updatebtn').click(function(){
+				$.post('/PCC/checkOut.admin', function(data){
+					alert(data);
+					location.replace('/PCC/pages/center.jsp');
+				})
+			})
+			
 			//信用卡卡號填寫
 			$('.card').keyup(function(e) {
 				if ($(this).val().length == $(this).attr('maxlength'))

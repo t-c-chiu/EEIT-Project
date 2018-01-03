@@ -36,7 +36,7 @@ public class RoomReservationService {
 	@Autowired
 	SystemMessageDAO systemMessageDAO;
 
-	public int insert(Member member, RoomReservation roomReservation, int newPoint, PointDetails pointDetails) {
+	public boolean insert(Member member, RoomReservation roomReservation, int newPoint, PointDetails pointDetails) {
 		String memberId=member.getMemberId();		
 		roomReservation.setMemberId(memberId);
 		roomReservationDAO.insert(roomReservation);
@@ -45,7 +45,7 @@ public class RoomReservationService {
 		memberDAO.updateMemberPoint(member, newPoint);		
 		systemMessageDAO.insert(memberId, "訂房成功！", "謝謝您的訂房 "+memberId+"一共: "+roomReservation.getTotalPrice()+" 請盡快付款!");
 		
-		return newPoint;
+		return true;
 	};
 
 	public List<RoomReservation> selectByMemberId(Member member) {

@@ -54,8 +54,15 @@ public class GiftService {
 	public boolean insertExchange(Exchange exchange,Member member) {
 		String memberId=member.getMemberId();
 		exchange.setMemberId(memberId);
-		int exchangeId=exchangeDAO.insertExchange(exchange);
-//		exchangeDetailsDAO.updateDetail(memberId, exchangeId);
+		int exchangeId=exchangeDAO.insertExchange(exchange);		
+		List<ExchangeDetails> details=exchangeDetailsDAO.selectDetail(memberId);
+		//update 禮物名細的狀態跟exchangeId
+		for(ExchangeDetails detail:details) {
+			detail.setExchangeId(exchangeId);
+			detail.setStatus(1);
+			Gift gift=giftDAO.selectGiftById(detail.getGiftId());
+			gift.setStock(gift.getStock()-detail.getNumber());		    
+		}
 		return true;
 	}
 
