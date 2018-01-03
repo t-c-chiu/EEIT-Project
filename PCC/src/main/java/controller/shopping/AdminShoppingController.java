@@ -1,10 +1,7 @@
 package controller.shopping;
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -88,8 +85,8 @@ public class AdminShoppingController {
 	}
 
 	// 後台新增商品
-	@RequestMapping(path = { "/adminInsert.shopping" }, method = RequestMethod.POST,produces = {
-	"text/plain;charset=utf-8" })
+	@RequestMapping(path = { "/adminInsert.shopping" }, method = RequestMethod.POST, produces = {
+			"text/plain;charset=utf-8" })
 	public @ResponseBody String insertProduct(Product product, MultipartFile photo) {
 		int saveOkId = productService.insertProducts(product);
 		if (photo != null) {
@@ -114,7 +111,7 @@ public class AdminShoppingController {
 
 				if (path == null) {
 					productService.updateProduct(product, product.getPictureAscii());
-					
+
 				}
 				return "更新成功!";
 			}
@@ -166,7 +163,7 @@ public class AdminShoppingController {
 			}
 
 		case "刪除":
-			int i = orderService.deleteOrder(order);
+			orderService.deleteOrder(order);
 			// if(i>0) {
 			return "刪除成功!";
 		// }
@@ -202,20 +199,10 @@ public class AdminShoppingController {
 		}
 		name = id + expandedName;
 		String path = "/PCC/images/productImages/" + name;
-
-		byte[] photoByte = new byte[(int) photo.getSize()];
 		try {
-			InputStream is = photo.getInputStream();
-			is.read(photoByte);
-			OutputStream os = new FileOutputStream(
-					new File("C:\\Maven\\git\\PCC\\src\\main\\webapp\\images\\productImages", name));
-			os.write(photoByte);
-			os.close();
 			photo.transferTo(new File(application.getRealPath("/images/productImages"), name));
-
 		} catch (IOException e) {
 			e.printStackTrace();
-			return "null";// 失敗
 		}
 
 		return path;
