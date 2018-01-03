@@ -78,7 +78,8 @@
 					<div class="col-md-4 col-sm-4 col-xs-12 widget-area no-right-padding">
 						<!-- Widget Member -->
 						<aside class="widget widget_categories center-aside">
-							<h3 class="widget-title">會員資訊</h3>
+							<h3 id="member-bar" class="widget-title" style="cursor:pointer;">會員資訊</h3>
+							<div id="member-ul" style="display:none;">
 							<ul>
 								<li><a id="center-message" class="center-li">系統訊息<span></span></a></li>
 								<li><a id="personal-information" class="center-li">個人資料</a></li>
@@ -86,28 +87,33 @@
 								<li><a id="change-password" class="center-li">更改密碼</a></li>
 								<li><a id="matchingInfo" class="center-li">配對資訊<span></span></a></li>
 							</ul>
+							</div>
 						</aside>
 						<!-- Widget Member /-  -->
 						<!-- Widget order -->
 						<aside class="widget widget_categories">
-							<h3 class="widget-title">交易訂單</h3>
+							<h3 id="transaction-bar" class="widget-title" style="cursor:pointer;">交易訂單</h3>
+							<div id="transaction-ul" style="display:none;">
 							<ul>
 								<li><a id="favorite-product" class="center-li">收藏商品<span id="FP-quanity">(4)</span></a></li>
 								<li><a id="shopping-cart" class="center-li">我的購買清單<span></span></a></li>
 								<li><a id="order-list" class="center-li">訂單明細</a></li>
 								<li><a id="course-list" class="center-li">我的課程<span></span></a></li>
 							</ul>
+							</div>
 						</aside>
 						<!-- Widget oder /-  -->
 						<!-- Widget article -->
 						<aside class="widget widget_categories">
-							<h3 class="widget-title">文章管理</h3>
+							<h3 id="article-bar" class="widget-title" style="cursor:pointer;">文章管理</h3>
+							<div id="article-ul" style="display:none;">
 							<ul>
 								<li><a id="my-article" class="center-li">我的文章<span></span></a></li>
 								<li><a id="favorite-article" class="center-li">我的收藏<span></span></a></li>
 								<li><a id="reply-article" class="center-li">參與的討論<span></span></a></li>
 								<li><a id="reported-article" class="center-li">檢舉的文章<span></span></a></li>
 							</ul>
+							</div>
 						</aside>
 						<!-- Widget article /-  -->
 					</div>
