@@ -82,7 +82,7 @@
 			<div class="container">
 
 				<!-- Billing -->
-				<div class="checkout-form"  style="float: left;width:800px;">
+				<div class="checkout-form"  style="float: left;width:600px;">
 					<form action="<c:url value="/submitReservationForm.match"/>" method="post">
 						<table width="100%" border="0" cellspacing="1" cellpadding="5" bgcolor="#F19FAE">
               <tbody><tr>

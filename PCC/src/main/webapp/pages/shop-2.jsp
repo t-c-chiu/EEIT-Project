@@ -194,7 +194,7 @@
 
 								<li class="product">
 								<a id="${products8.productId}" class="productItem" href="#"> 
-									<img src="${products8.pictureAscii }" alt="Product" width="375px" height="300px" />
+									<img src="${products8.pictureAscii }" alt="Product"/>
 										<h5>${products8.productName}</h5> 
 									<span class="price">
 										<del>${products8.price}</del> ${products8.price}

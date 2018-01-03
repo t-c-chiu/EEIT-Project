@@ -111,15 +111,15 @@
 		
 		<!--	內容開始	-->
 		<main> <!-- Page Banner -->
-		<div class="page-banner container-fluid no-padding">
+		<div class="page-banner container-fluid no-padding" style="background-image:url('../images/match/mame01.jpg');">
 			<!-- Container -->
 			<div class="container">
 				<div class="banner-content">
 					<h3>服務夥伴</h3>
 				</div>
-				<div>
-				<img src="../images/match/mame1.jpg">
-				</div>
+<!-- 				<div> -->
+<!-- 				<img src="../images/match/mame1.jpg"> -->
+<!-- 				</div> -->
 				<ol class="breadcrumb">
 					<li><a href="../index.jsp" title="Home">首頁</a></li>
 					<li class="active">服務夥伴</li>
