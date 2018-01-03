@@ -1,8 +1,12 @@
 package controller.match;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
@@ -42,7 +46,16 @@ public class MatchController {
 
 	// 線上預約(正式服務夥伴清單)
 	@RequestMapping(path = "/fullServantList.match", method = RequestMethod.GET)
-	public String fullServantList(@SessionAttribute("member") Member member, Model model) {
+	public String fullServantList(HttpSession session, Model model, HttpServletResponse response) {
+		Member member = (Member) session.getAttribute("member");
+		if (member == null) {
+			try {
+				response.sendRedirect("/PCC/servantList.match");
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			return null;
+		}
 		Boolean isComplete = matchService.completeReservationForm(member.getMemberId());
 		if (isComplete) {
 			List<Servant> servantList = matchService.showServantList();
