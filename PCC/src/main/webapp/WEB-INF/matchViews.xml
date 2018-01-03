@@ -3,23 +3,21 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <bean id="showFullServantList" class="org.springframework.web.servlet.view.RedirectView">
-        <property name="contextRelative" value="true"></property>
+	<bean id="showFullServantList" class="org.springframework.web.servlet.view.RedirectView">
+		<property name="contextRelative" value="true"></property>
 		<property name="url" value="/pages/partnerFull.jsp"></property>
 	</bean>
 	<bean id="showServantList" class="org.springframework.web.servlet.view.RedirectView">
-        <property name="contextRelative" value="true"></property>
+		<property name="contextRelative" value="true"></property>
 		<property name="url" value="/pages/partner.jsp"></property>
 	</bean>
-    <bean id="reservationForm" class="org.springframework.web.servlet.view.RedirectView">
-        <property name="contextRelative" value="true"></property>
+	<bean id="reservationForm" class="org.springframework.web.servlet.view.RedirectView">
+		<property name="contextRelative" value="true"></property>
 		<property name="url" value="/pages/reservation.jsp"></property>
 	</bean>
 	<bean id="memberCenter" class="org.springframework.web.servlet.view.RedirectView">
-        <property name="contextRelative" value="true"></property>
+		<property name="contextRelative" value="true"></property>
 		<property name="url" value="/pages/back.jsp"></property>
 	</bean>
 
-
-                       <!-- org.springframework.web.servlet.view.InternalResourceView -->
 </beans>

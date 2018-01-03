@@ -149,9 +149,9 @@ public class LoginController {
 		Member themember = (Member) session.getAttribute("member");
 		String memberId = themember.getMemberId();
 		String email = themember.getEmail();
-		System.out.println("member / Email = " + memberId + "/" + email);
+//		System.out.println("member / Email = " + memberId + "/" + email);
 		Member bean = memberService.login(memberId, oldPassword);
-		System.out.println("up=" + oldPassword + "/" + newPassword);
+//		System.out.println("up=" + oldPassword + "/" + newPassword);
 		if (bean != null) {
 			// update new password
 			member.setPassword(newPassword.getBytes());

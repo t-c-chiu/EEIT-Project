@@ -103,7 +103,7 @@ public class AdminShoppingController {
 	@RequestMapping(path = { "/adminUpdata.shopping" }, method = RequestMethod.POST, produces = {
 			"text/plain;charset=utf-8" })
 	public @ResponseBody String updateProduct(Product product, MultipartFile photo) {
-		System.out.println("product:" + product + ", photo:" + photo);
+//		System.out.println("product:" + product + ", photo:" + photo);
 		if (product != null) {
 			if (photo != null) {
 				String path = this.imageHelper(product.getProductId(), photo);
@@ -144,7 +144,7 @@ public class AdminShoppingController {
 	@RequestMapping(path = { "/adminOrderDetail.shopping" }, method = RequestMethod.GET, produces = {
 			"application/json;charset=UTF-8" })
 	public @ResponseBody List<OrderDetail> adminOrderDetail(Integer orderId) {
-		System.out.println("123467897");
+//		System.out.println("123467897");
 		return orderDetailsService.selectOrderDetail(orderId);
 	}
 
@@ -152,7 +152,7 @@ public class AdminShoppingController {
 	@RequestMapping(path = { "/adminOrderDU.shopping" }, method = RequestMethod.GET, produces = {
 			"text/plain;charset=utf-8" })
 	public @ResponseBody String adminOrderDU(Order order, String actionType) {
-		System.out.println("order" + order + ",actionType" + actionType);
+//		System.out.println("order" + order + ",actionType" + actionType);
 		switch (actionType) {
 		case "修改":
 			boolean b = orderService.updataOrder(order);

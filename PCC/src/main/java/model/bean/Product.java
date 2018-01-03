@@ -56,12 +56,12 @@ public String getContext() {
 		this.category = category;
 	}
 	public String getPictureAscii() {
-		System.out.println("picture "+pictureAscii);
+//		System.out.println("picture "+pictureAscii);
 		return pictureAscii;
 	}
 	public void setPictureAscii(String pictureascii) {
 		this.pictureAscii = pictureascii;
-		System.out.println("picture "+pictureascii);
+//		System.out.println("picture "+pictureascii);
 	}
 	public int getStatus() {
 		

@@ -60,7 +60,7 @@ public class GoogleLoginService extends HttpServlet {
 			 * System.out.println("User name: " + name); System.out.println("User email: " +
 			 * email); System.out.println("Picture URL: " + picture);
 			 */
-			System.out.println(email);
+//			System.out.println(email);
 			HttpSession session = request.getSession(true);
 			session.setAttribute("userName", name);	
 			session.setAttribute("email", email);

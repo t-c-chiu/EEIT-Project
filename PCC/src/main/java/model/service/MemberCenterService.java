@@ -37,7 +37,7 @@ public class MemberCenterService {
 	
 	public Member updatePSW(Member member) {
 		member=memberDAO.updatePSW(member);
-		System.out.println("service member="+member);
+//		System.out.println("service member="+member);
 		return member;
 	}
 

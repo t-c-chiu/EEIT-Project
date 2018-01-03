@@ -39,7 +39,7 @@ public class RegistyService {
 			pointDetails.setGetWay("會員註冊成功");
 			pointDetails.setGetPoint(50);
 			pointDetailsDAO.insertPointDetails(pointDetails);
-			System.out.println("The pointDetails="+pointDetails);
+//			System.out.println("The pointDetails="+pointDetails);
 			return pointDetails;
 
 	}

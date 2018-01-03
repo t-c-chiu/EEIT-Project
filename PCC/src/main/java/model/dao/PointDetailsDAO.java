@@ -39,7 +39,7 @@ public class PointDetailsDAO {
 	// INSERT INTO PointDetails(gettingDate,memberId,getWay,getPoint)values('2017-12-25','Tester','聖誕節點活動',10);
 	public PointDetails insertPointDetails(PointDetails pointDetails) {
 		getSession().save(pointDetails);
-		System.out.println("PointDetailsDAO pointDetails=" + pointDetails);
+//		System.out.println("PointDetailsDAO pointDetails=" + pointDetails);
 		return pointDetails;
 	}
 
