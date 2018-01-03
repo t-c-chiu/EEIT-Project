@@ -82,7 +82,7 @@
 			<div class="container">
 
 				<!-- Billing -->
-				<div class="checkout-form">
+				<div class="checkout-form"  style="float: left;width:800px;">
 					<form action="<c:url value="/submitReservationForm.match"/>" method="post">
 						<table width="100%" border="0" cellspacing="1" cellpadding="5" bgcolor="#F19FAE">
               <tbody><tr>
@@ -106,7 +106,7 @@
                 <td height="30" align="center" bgcolor="#FAD6DB"><span class="color_name">※ </span>生產方式</td>
                 <td colspan="2" bgcolor="#FFFFFF"><input name="way" type="radio" id="status" value="自然產" checked="CHECKED" class="borderall">
                   自然產
-                  <input type="radio" name="way" id="status" value="剖附產" class="borderall">
+                  <input type="radio" name="way" id="status1" value="剖附產" class="borderall">
                   剖腹產　第
                   <select name="way" id="status_num" class="borderall">
                     <option value="第1胎">1</option>
@@ -168,7 +168,7 @@
                 <td height="30" align="center" bgcolor="#FAD6DB"><span class="color_name">※ </span>房屋型態</td>
                 <td colspan="2" bgcolor="#FFFFFF"><input name="house" type="radio" id="room" value="公寓" checked="CHECKED" class="borderall">
                   公寓
-                  <input type="radio" name="house" id="room" value="透天" class="borderall">
+                  <input type="radio" name="house" id="room1" value="透天" class="borderall">
                   透天
 <!--                   <input type="radio" name="room" id="room" value="透天" class="borderall"> -->
 <!--                   透天 -->
@@ -189,6 +189,11 @@
 					</form>
 				</div>
 				<!-- Billing /- -->
+				<!-- 右邊裝飾圖片 -->
+	<div style="float: right;">
+	  <img src="../images/match/mame2.jpg" style="width:250px;height:250px;">
+	  <img src="../images/match/mame3.jpg" style="width:250px;height:250px;">
+	</div>
 			</div>
 			<!-- Container /- -->
 		</div>
@@ -199,6 +204,7 @@
 		<!-- Footer Main 1 -->
 
 	</div>
+	
 
 	<!-- JQuery v1.12.4 -->
 	<script src="../js/jquery.min.js"></script>
