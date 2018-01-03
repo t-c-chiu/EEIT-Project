@@ -33,7 +33,7 @@ import model.service.RoomReservationService;
 
 
 @Controller
-@SessionAttributes({"roomReservation","listOfRooms","newPoint","area","roomType"})
+@SessionAttributes({"roomReservation","listOfRooms","newPoint","area","roomType","member"})
 public class RoomReservationController {
 	
 	@Autowired
@@ -54,6 +54,8 @@ public class RoomReservationController {
 	public String reserveRoom(@SessionAttribute("member") Member member, RoomReservation roomReservation,Model model,int newPoint,PointDetails pointDetails) {
 		roomReservationService.insert(member,roomReservation,newPoint,pointDetails);
 		model.addAttribute("newPoint",newPoint);
+		member.setPoint(newPoint);//配合更新session用
+		model.addAttribute("member",member);//配合更新session用,加到"member"物件(會員中心)
 
 		return "reserve.ok";
 	}

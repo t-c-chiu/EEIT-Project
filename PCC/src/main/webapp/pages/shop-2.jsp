@@ -62,7 +62,7 @@
 					<h3 id="shoppingTitil">購物商城</h3>
 				</div>
 				<ol class="breadcrumb">
-					<li><a href="../index.html" title="Home">首頁</a></li>
+					<li><a href="../index.jsp" title="Home">首頁</a></li>
 
 					<!-- 須回到購物商城的首頁 也就是 熱賣商品中心 -->
 					<li class="active">購物商城</li>

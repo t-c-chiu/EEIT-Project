@@ -79,8 +79,7 @@ $(function(){
 		var td11 = $('<td></td>').text(totalPrice).css('font-size','16px');
 		var tr4 = $('<tr></tr>').append(td10,td11);
 		var btn = $('<button></button>').text('結帳').click(function(){
-			$(this).remove();
-			$('#payFormAndCardArea').slideDown(3000);
+			location.replace('/PCC/pages/check.jsp?p=' + totalPrice);
 		}); 
 		var td11 = $('<td></td>').attr('colspan','3').append(btn).css('text-align','center');
 		var tr5 = $('<tr></tr>').append(td11);
