@@ -34,10 +34,10 @@ public class MemberCenterService {
 	private ClazzDAO clazzDAO;
 	@Autowired
 	private MemberDAO memberDAO;
-	
+
 	public Member updatePSW(Member member) {
-		member=memberDAO.updatePSW(member);
-//		System.out.println("service member="+member);
+		member = memberDAO.updatePSW(member);
+		// System.out.println("service member="+member);
 		return member;
 	}
 
@@ -60,13 +60,17 @@ public class MemberCenterService {
 		return map;
 	}
 
-	public String checkOut(String memberId) {
+	public String checkOut(Member member) {
+		String memberId = member.getMemberId();
 		for (Student student : studentDAO.selectByMemberId(memberId)) {
 			if (clazzDAO.selectByClassId(student.getClassId()).getStatus() == 1)
 				student.setStatus(1);
 		}
 		for (Order order : orderDAO.selectAllByMemberIdStatus0(memberId)) {
 			order.setStatus(1);
+			order.setLocation(member.getAddress());
+			order.setRecipientPhone(member.getPhone());
+			order.setRecipient(member.getName());
 		}
 		for (RoomReservation roomReservation : roomReservationDAO.selectByMemberId(memberId)) {
 			roomReservation.setStatus(1);

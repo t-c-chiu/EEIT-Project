@@ -79,7 +79,7 @@
 						<!-- Widget Member -->
 						<aside class="widget widget_categories center-aside">
 							<h3 id="member-bar" class="widget-title" style="cursor:pointer;">會員資訊</h3>
-							<div id="member-ul" style="display:none;">
+							<div id="member-ul">
 							<ul>
 								<li><a id="center-message" class="center-li">系統訊息<span></span></a></li>
 								<li><a id="personal-information" class="center-li">個人資料</a></li>
@@ -97,7 +97,7 @@
 							<ul>
 								<li><a id="favorite-product" class="center-li">收藏商品<span id="FP-quanity">(4)</span></a></li>
 								<li><a id="shopping-cart" class="center-li">我的購買清單<span></span></a></li>
-								<li><a id="order-list" class="center-li">訂單明細</a></li>
+<!-- 								<li><a id="order-list" class="center-li">訂單明細</a></li> -->
 								<li><a id="course-list" class="center-li">我的課程<span></span></a></li>
 							</ul>
 							</div>

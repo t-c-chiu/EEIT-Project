@@ -80,7 +80,7 @@ public class AdminController {
 
 	@RequestMapping(path = "/checkOut.admin", method = RequestMethod.POST, produces = "text/plain;charset=UTF-8")
 	public @ResponseBody String checkOut(@SessionAttribute("member") Member member) {
-		return memberCenterService.checkOut(member.getMemberId());
+		return memberCenterService.checkOut(member);
 	}
 
 	@RequestMapping(path = "/matching.admin", method = RequestMethod.GET)
