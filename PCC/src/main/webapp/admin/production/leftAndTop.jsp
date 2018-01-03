@@ -4,7 +4,7 @@
 <div class="col-md-3 left_col">
         <div class="left_col scroll-view">
           <div class="navbar nav_title" style="border: 0;">
-      <a href="admin.jsp" class="site_title"><img class="logo-xs" src="images/pcc/pcc.png" /> <span> PCC Admin </span></a>
+      <a class="site_title"><img class="logo-xs" src="images/pcc/pcc.png" /> <span> PCC Admin </span></a>
     </div>
 
     <div class="clearfix"></div>
