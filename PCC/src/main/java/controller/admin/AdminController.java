@@ -1,10 +1,7 @@
 package controller.admin;
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.util.List;
 import java.util.Map;
 
@@ -134,18 +131,10 @@ public class AdminController {
 			expandedName = ".bmp";
 		}
 		name = serviceId + expandedName;
-		byte[] photoByte = new byte[(int) photo.getSize()];
 		try {
-			InputStream is = photo.getInputStream();
-			is.read(photoByte);
-			OutputStream os = new FileOutputStream(
-					new File("C:\\Maven\\git\\PCC\\src\\main\\webapp\\images\\match", name));
-			os.write(photoByte);
-			os.close();
 			photo.transferTo(new File(application.getRealPath("/images/match"), name));
 		} catch (IOException e) {
 			e.printStackTrace();
-			return "新增失敗";
 		}
 		return "新增服務員成功，該服務員的編號為" + serviceId + "。";
 	}

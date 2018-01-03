@@ -197,7 +197,7 @@
 									<img src="${products8.pictureAscii }" alt="Product"/>
 										<h5>${products8.productName}</h5> 
 									<span class="price">
-										<del>${products8.price}</del> ${products8.price}
+										特價 ${products8.price}
 									</span>
 									<form id="${products8.productId}ProductForm" action="/PCC/productId.shopping" method="get" hidden>
 										<input type="text" name="productId"	value="${products8.productId}" hidden />
