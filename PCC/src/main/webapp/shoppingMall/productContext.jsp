@@ -44,6 +44,13 @@
 <link href="../revolution/fonts/fontawesome-all.css">
 <!-- css -->
 <link rel="stylesheet" type="text/css" href="../css/login.css">
+<style type="text/css">
+.the-product{
+	border-bottom:1px solid #e6e6e6;
+	padding:2% 0 2% 0;
+	margin-bottom:2%;
+}
+</style>
 </head>
 
 
@@ -213,64 +220,9 @@
 									<col width="81%"></col>
 								</colgroup>
 
-								<tr class="webprice">
-									<th scope="row">原價</th>
-									<td><del>
-											<span class="price">${productPage.price}元</span>
-										</del></td>
-								</tr>
 								<tr class="cp_promo">
 									<th scope="row"><span style="color: red">特價</span></th>
 									<td><span class="price" style="color: red">${productPage.price}元</span></td>
-								</tr>
-
-								<tr class="js-cccart">
-									<th scope="row">付款方式</th>
-									<td>
-										<ul class="list paytypes clearfix">
-											<li>
-												<div class="paytype">
-													信用卡 <img
-														src="https://s.yimg.com/f/i/tw/mall/yps/ico_credi_201008.png"
-														alt="接受信用卡刷卡">
-												</div>
-											</li>
-											<li>
-												<div class="paytype">
-													ATM轉帳 <img
-														src="https://s.yimg.com/f/i/tw/mall/yps/ico_atm_0109.gif"
-														alt="接受ATM轉帳付款">
-												</div>
-											</li>
-											<li class="familymart">
-												<div class="paytype">
-													全家付款取貨 <img
-														src="https://s.yimg.com/qs/mall/yps/ico_famimart.gif"
-														alt="全家付款取貨">
-												</div>
-											</li>
-											<li class="sevenmart">
-												<div class="paytype">
-													7-11付款取貨 <img
-														src="https://s.yimg.com/f/i/tw/mall/yps/ico_711.gif"
-														alt="接受超商付款取貨">
-												</div>
-											</li>
-										</ul>
-									</td>
-								</tr>
-								<tr>
-
-									<th scope="row">交貨方式</th>
-									<td>
-										<ul>
-											<li><a href="#" title="貨運 / 宅配" class="trans"
-												hpp="r_shipfee">貨運 / 宅配 (購物滿599元免運費) </a>、 <a href="#"
-												title="7-11取貨付款" class="trans" hpp="r_shipfee">7-11取貨付款
-													(購物滿599元免運費) </a>、 <a href="#" title="全家取貨付款" class="trans"
-												hpp="r_shipfee">全家取貨付款 (購物滿599元免運費) </a></li>
-										</ul>
-									</td>
 								</tr>
 
 								<tr>
@@ -292,10 +244,8 @@
 							<!-- [WD] inc/ps_item_tab.html//-->
 							<div id="ypsitb" class="ypsmodule ypstab">
 								<div class="hd"></div>
-								<div class="bd clearfix">
-									<ul>
-											<span style="color: gray;"> ${productPage.context} </span>
-									</ul>
+								<div class="bd clearfix the-product">
+										<span>商品介紹</span>
 								</div>
 								<div class="ft"></div>
 							</div>
