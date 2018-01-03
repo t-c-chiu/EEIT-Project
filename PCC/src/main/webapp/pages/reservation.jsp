@@ -104,11 +104,11 @@
 						<table width="100%" border="0" cellspacing="1" cellpadding="5" bgcolor="#F19FAE">
               <tbody><tr>
                 <td width="18%" height="30" align="center" bgcolor="#FAD6DB"><span class="color_name">※ </span> 申請者姓名</td>
-                <td colspan="2" bgcolor="#FFFFFF" width="82%"><input type="text" name="name" id="name" style="width:100px;" class="borderall" required="required"></td>
+                <td colspan="2" bgcolor="#FFFFFF" width="82%"><input type="text" name="name" id="name" style="width:200px;" class="borderall" required="required"></td>
               </tr>
               <tr>
                 <td height="30" align="center" bgcolor="#FAD6DB"><span class="color_name">※ </span>手機</td>
-                <td colspan="2" bgcolor="#FFFFFF"><input type="text" name="phone" id="phone" class="linbox borderall" maxlength="10" style="width:150px;" required="required"></td>
+                <td colspan="2" bgcolor="#FFFFFF"><input type="text" name="phone" id="phone" class="linbox borderall" maxlength="10" style="width:200px;" required="required"></td>
               </tr>
               <tr>
                 <td height="30" align="center" bgcolor="#FAD6DB"><span class="color_name">※ </span>預產期 </td>
