@@ -88,15 +88,17 @@ public class AdminShoppingController {
 	}
 
 	// 後台新增商品
-	@RequestMapping(path = { "/adminInsert.shopping" }, method = RequestMethod.POST)
-	public String insertProduct(Product product, MultipartFile photo, String searchWay, Model model) {
+	@RequestMapping(path = { "/adminInsert.shopping" }, method = RequestMethod.POST,produces = {
+	"text/plain;charset=utf-8" })
+	public @ResponseBody String insertProduct(Product product, MultipartFile photo) {
 		int saveOkId = productService.insertProducts(product);
 		if (photo != null) {
 			String path = this.imageHelper(saveOkId, photo);
 			productService.updateProduct(product, path);
+			return "上架成功!";
 		}
-		model.addAttribute("searchWay", searchWay);
-		return "admin.product";
+
+		return "上架失敗!";
 
 	}
 
@@ -112,15 +114,11 @@ public class AdminShoppingController {
 
 				if (path == null) {
 					productService.updateProduct(product, product.getPictureAscii());
-					return "圖片更新失敗!";
+					
 				}
 				return "更新成功!";
 			}
-//			} else {
-//
-//				productService.updateProduct(product, product.getPictureAscii());
-//			}
-			
+
 		}
 		return "更新失敗!";
 	}

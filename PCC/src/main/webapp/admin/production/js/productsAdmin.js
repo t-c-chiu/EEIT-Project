@@ -5,14 +5,6 @@ $(function() {
 		$('#productSelectAndUpdataArea').css("display", "block");
 		$('#productSelectAndUpdataQQ').css("display", "block");
 		
-		var pageOrder=$("#pageOrder").val()
-		if(pageOrder=="上架商品"){
-			$('#productInsert').css("color", "red");
-			$('#productInsertArea').css("display", "block");
-			$('#productInsertQQ').css("display", "block");
-			alert("新增成功!!");
-			
-		}
 		
 		
 		//訂單搜尋
@@ -143,6 +135,31 @@ $(function() {
 		});
 		
 		
+		//按btnSubmit新增商品，上架。
+		$("#btnSubmit").click(function(){
+			var form=$("#formData")[0];
+ 	   		var data=new FormData(form);
+// 	   		data.append('info',CKEDITOR.instances.info.getData());   		
+ 	   		$.ajax({
+ 	   			type: "POST",
+ 	   			enctype: 'multipart/form-data',
+ 	   			url: '/PCC/adminInsert.shopping',    			
+ 	   			data: data,
+ 	   			processData: false,
+ 	   			contentType: false,
+ 	   			cache: false,
+ 	   			success:function(data){
+ 	   				console.log(data);
+ 	   				alert(data);	
+ 	   				$('#reset-btn-ad').click();
+ 	   			}
+ 	   		})
+			
+		});
+		
+		
+		
+		
 		
 		//商品搜尋區class=sumbit
 		$(".submit").click(function() {
@@ -202,7 +219,7 @@ $(function() {
 		
 		//按下按鈕更新產品class='updataButton'
 		$("body").on('click','.updataButton',function(event) {
-			event.preventDefault();
+//			event.preventDefault();
 			var id=$(this).parents('form').find('input[name="productId"]').val();
 			var form=$("#form"+id+"form")[0];
  	   		var data=new FormData(form);

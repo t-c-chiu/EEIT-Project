@@ -71,9 +71,7 @@ label {
 							<h2 style="display: inline;">商品管理系統</h2>
 							<hr>
 
-							<input id="pageOrder" type="text" name="searchWay"
-								value="${searchWay}" hidden />
-							<div>
+
 								<font size="5px" class="span-ad-title"/> 
 									<span id="productSearchAndUpdata" class="forntT">商品查詢與修改</span> 
 									<span id="productInsert" class="forntT">上架新商品</span> 
@@ -200,16 +198,16 @@ label {
 								</select> <br> <label>商品價位：</label><input type="number" name="price"
 									min="1" id="price" /><br> <label>商品存貨：</label><input
 									type="number" name="stock" min="1" id="stock" /><br> <label>狀態</label>
-								<input type="checkbox" name="status" value="1" checked="checked" />上架
-								<input type="checkbox" name="status" value="0" />下架 <input
-									type="checkbox" name="status" value="2" />熱門商品 <input
-									type="checkbox" name="status" value="3" />新上架商品 <br> <label>商品內容：</label>
+								<input type="radio" name="status" value="1" checked="checked" />上架
+								<input type="radio" name="status" value="0" />下架 <input
+									type="radio" name="status" value="2" />熱門商品 <input
+									type="radio" name="status" value="3" />新上架商品 <br> <label>商品內容：</label>
 								<textarea name="context" id="introduction"></textarea>
 								<br> <label>商品截圖：</label> <input type="file" id="photo"
 									name="photo" accept="image/*"><br> <img
 									id="previewPhoto" style="max-width: 250px;" /> <br> <input
-									id="btnSubmit" type="submit" value="確定上架" class="btn btn-success"> <input
-									type="reset" value="重新填寫" class="btn btn-warning">
+									id="btnSubmit" type="button" value="確定上架" class="btn btn-success"> <input
+									id="reset-btn-ad" type="reset" value="重新填寫" class="btn btn-warning">
 							</form>
 							<br> <br>
 
