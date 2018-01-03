@@ -43,7 +43,7 @@ public class googleLoginController {
 
 	@RequestMapping(path = { "/google.login" }, method = { RequestMethod.POST, RequestMethod.GET },produces= {"text/plain;charset=utf-8"})
 	public @ResponseBody String method(String idtoken, Member member,PointDetails pointDetails,Model model) throws Exception {
-		System.out.println("test start");
+//		System.out.println("test start");
 
 		JacksonFactory jacksonFactory = new JacksonFactory();
 		GoogleIdTokenVerifier googleIdTokenVerifier = new GoogleIdTokenVerifier(new NetHttpTransport(), jacksonFactory);
@@ -60,11 +60,11 @@ public class googleLoginController {
 
 			if (token != null) {
 				Payload payload = token.getPayload();
-				System.out.println(payload);
+//				System.out.println(payload);
 
 				// Print user identifier
 				String userId = payload.getSubject();
-				System.out.println("User ID: " + userId);
+//				System.out.println("User ID: " + userId);
 
 				// Get profile information from payload
 				String email = payload.getEmail();
@@ -87,7 +87,7 @@ public class googleLoginController {
 					member.setEmail(email);
 					member.setRole(2);
 					Member i = registyService.registy(member);
-					System.out.println("i=" + i);
+//					System.out.println("i=" + i);
 //					Member bean = googleLoginService.update(member);
 //					System.out.println("quick bean="+bean);
 					model.addAttribute("member", i);
@@ -127,7 +127,7 @@ public class googleLoginController {
 			
 
 		} else {
-			System.out.println("Invalid ID token.");
+//			System.out.println("Invalid ID token.");
 			throw new IllegalArgumentException("id token cannot be verified");
 		}
 		return null;

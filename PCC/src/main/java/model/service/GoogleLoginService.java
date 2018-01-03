@@ -16,7 +16,6 @@ public class GoogleLoginService {
 	public Member update(Member member) {
 		Member bean = memberDAO.update(member);
 		if(bean!=null) {
-			System.out.println("GoogleLoginService bean="+bean);
 			return bean;
 		}
 		return null;
