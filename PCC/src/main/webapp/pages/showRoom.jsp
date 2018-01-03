@@ -181,7 +181,12 @@ $('#area').keyup(function(){
 		</div>
 		
 		
-		<div class="about-section container-fluid no-padding">
+		<div class="about-section container-fluid no-padding" style="margin-bottom:0;">
+			<div class="container">
+			<div class="goto-next" style="position:relative; margin-top:30px;">
+				<a href="#about2"><i class="icon icon-Mouse bounce"></i></a>
+			</div>	
+		</div>	
 			<!-- Container -->
 			<div class="container">
 				<div class="col-md-6 col-sm-6 col-xs-6">
@@ -229,12 +234,7 @@ $('#area').keyup(function(){
 					<img src="../images/room/doubleRoom.jpg" alt="about" />
 				</div>
 				
-		</div>
-		<div class="container">
-			<div class="goto-next">
-				<a href="#about2"><i class="icon icon-Mouse bounce"></i></a>
-			</div>	
-		</div>		
+		</div>	
 		</div>
 		
 					<div id="allForm" class="container-fluid no-left-padding no-right-padding woocommerce-checkout">

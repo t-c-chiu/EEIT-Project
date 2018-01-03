@@ -50,7 +50,24 @@
 <script type="text/javascript">
 
 </script>
-
+<style type="text/css">
+.for-reservation{
+	margin-left:0px;
+}
+.for-reservation tr td{
+	padding-left:15px;
+}
+.borderall{
+	border: 1px solid rgb(209, 209, 209);
+    border-radius: 0;
+    box-shadow: none;
+    height: auto;
+    letter-spacing: 0.325px;
+    outline: medium none;
+    padding: 10px 20px;
+    margin:10px;
+}
+</style>
 </head>
 
 <body data-offset="200" data-spy="scroll" data-target=".ow-navigation">
@@ -82,8 +99,8 @@
 			<div class="container">
 
 				<!-- Billing -->
-				<div class="checkout-form"  style="float: left;width:800px;">
-					<form action="<c:url value="/submitReservationForm.match"/>" method="post">
+				<div class="checkout-form"  style="float: left;width:700px;">
+					<form action="<c:url value="/submitReservationForm.match"/>" method="post" class="for-reservation">
 						<table width="100%" border="0" cellspacing="1" cellpadding="5" bgcolor="#F19FAE">
               <tbody><tr>
                 <td width="18%" height="30" align="center" bgcolor="#FAD6DB"><span class="color_name">※ </span> 申請者姓名</td>
@@ -95,7 +112,7 @@
               </tr>
               <tr>
                 <td height="30" align="center" bgcolor="#FAD6DB"><span class="color_name">※ </span>預產期 </td>
-                <td colspan="2" bgcolor="#FFFFFF"><input type="date" name="expectedday" id="dy" style="width:150px;" class="borderall" required="required">
+                <td colspan="2" bgcolor="#FFFFFF"><input type="date" name="expectedday" id="dy" style="width:200px;" class="borderall" required="required">
 <!--    年
                   <input type="text" name="dm" id="dm" style="width:30px;" class="borderall">
                   月
@@ -131,8 +148,7 @@
               <tr>
                 <td height="30" rowspan="3" align="center" bgcolor="#FAD6DB"><span class="color_name">※ </span>坐月子需求<br>
                   (服務項目)</td>
-                <td width="13%" height="30" align="center" bgcolor="#FFFFFF">
-                  陪伴照顧</td>
+                <td width="15%" height="30" align="center" bgcolor="#FFFFFF">陪伴照顧</td>
                 <td width="69%" bgcolor="#FFFFFF">(
                   <input type="checkbox" name="demand" id="accompany" value="嬰兒" class="borderall">
 嬰兒/
@@ -140,7 +156,7 @@
 產婦)</td>
               </tr>
               <tr>
-                <td width="13%" height="30" align="center" bgcolor="#FFFFFF"> 膳食月子餐</td>
+                <td width="15%" height="30" align="center" bgcolor="#FFFFFF"> 膳食月子餐</td>
                 <td bgcolor="#FFFFFF">(
                   <input type="checkbox" name="demand" id="food" value="葷食" class="borderall">
 葷食/
@@ -148,7 +164,7 @@
 素食) 　</td>
               </tr>
               <tr>
-                <td width="13%" height="30" align="center" bgcolor="#FFFFFF">須準備晚餐</td>
+                <td width="15%" height="30" align="center" bgcolor="#FFFFFF">須準備晚餐</td>
                 <td bgcolor="#FFFFFF"><select name="demand" id="foodnum" class="borderall">
                   <option selected="selected" value="1">0</option>
                   <option value="1餐">1</option>
@@ -178,21 +194,25 @@
               <tr>
                 <td height="30" align="center" bgcolor="#FAD6DB"><span class="color_name">※ </span>服務時間</td>
                 <td colspan="2" bgcolor="#FFFFFF">服務天數：預計
-                  <input type="text" name="time" id="service_days" style="width:50px;" class="borderall" required="required">
+                  <input type="text" name="time" id="service_days" style="width:80px;" class="borderall" required="required">
                   天<br>
               </td>
               </tr>           
               
             </tbody></table>
-            <input type="submit" value="送出">
+            <input type="submit" value="送出" class="footer-send" style="width:70%;">
             
 					</form>
 				</div>
 				<!-- Billing /- -->
 				<!-- 右邊裝飾圖片 -->
-	<div style="float: right;">
-	  <img src="../images/match/mame2.jpg" style="width:250px;height:250px;">
-	  <img src="../images/match/mame3.jpg" style="width:250px;height:250px;">
+	<div>
+		<div>
+	 		<img src="../images/match/mame2.jpg" style="width:300px;height:300px;">
+  		</div>
+  		<div>
+	  		<img src="../images/match/mame3.jpg" style="width:300px;height:300px;">
+	  	</div>
 	</div>
 			</div>
 			<!-- Container /- -->

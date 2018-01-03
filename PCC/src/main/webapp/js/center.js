@@ -292,6 +292,24 @@ $(document).ready(function(){
 	
 });
 
+//-------------------------會員中心下拉選單--------------------------------
+
+$(function(){
+	
+	$('#member-bar').click(function(){
+		$('#member-ul').slideToggle(1000);
+	});
+	
+	$('#transaction-bar').click(function(){
+		$('#transaction-ul').slideToggle(1000);
+	});
+	
+	$('#article-bar').click(function(){
+		$('#article-ul').slideToggle(1000);
+	});
+	
+})
+
 
 
 
