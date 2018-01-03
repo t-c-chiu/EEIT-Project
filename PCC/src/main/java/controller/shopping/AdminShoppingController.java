@@ -111,7 +111,7 @@ public class AdminShoppingController {
 
 				if (path == null) {
 					productService.updateProduct(product, product.getPictureAscii());
-
+					return "更新成功，且沒更新圖片!";
 				}
 				return "更新成功!";
 			}
@@ -185,7 +185,7 @@ public class AdminShoppingController {
 		String expandedName = "";
 
 		if (mimeType.equals("image/jpeg")) {
-			System.out.println("5");
+
 			expandedName = ".jpg";
 		} else if (mimeType.equals("image/png")) {
 			expandedName = ".png";

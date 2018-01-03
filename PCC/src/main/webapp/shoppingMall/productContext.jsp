@@ -195,12 +195,15 @@
 						<div style="margin-left: 20px">
 
 							<div>
-								<h2 style="color: gray;">
+								<h1 style="color: #666666; margin-bottom: 30px; font-weight:900" align="center">
 									<lable>${productPage.productName}</lable>
-									商品編號： <span id="Id${productPage.productId}">${productPage.productId}</span>
-								</h2>
-								<p>
-									<span style="color: gray;"> ${productPage.context} </span>
+								
+								</h1>
+
+									
+								<p style="color: #666666; margin-top: 30px; font-size:18px;" >
+									<lable style="font-weight:900">商品編號：</lable> <span id="Id${productPage.productId}">${productPage.productId}</span>
+									
 								</p>
 
 							</div>
@@ -291,15 +294,16 @@
 								<div class="hd"></div>
 								<div class="bd clearfix">
 									<ul>
-										<li class="on"><span>商品詳細說明</span> <em></em></li>
+											<span style="color: gray;"> ${productPage.context} </span>
 									</ul>
 								</div>
 								<div class="ft"></div>
 							</div>
-
-							<!-- 之後商品內容在這邊 -->
-							<img alt="商品內容" src="${productPage.pictureAscii}">
-							<!-- /之後商品內容在這邊 -->
+							
+								<!-- 之後商品內容在這邊 -->
+								<img alt="商品內容" src="${productPage.pictureAscii}">
+								<!-- /之後商品內容在這邊 -->
+			
 
 						</div>
 <!------------------------------------------------------/ 商品介紹區  Product---------------------------------------------------- -->
