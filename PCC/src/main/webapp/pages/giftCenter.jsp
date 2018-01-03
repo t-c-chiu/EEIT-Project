@@ -116,7 +116,7 @@ function initGift(){
 			                        .attr('alt',gift.giftName)
 			var h= $('<h5></h5>').text(gift.giftName)                       
 			var span=$('<span></span>').addClass("price")
-			                            .text(gift.point+"points")
+			                            .text(gift.point+"點   剩餘 "+gift.stock+" 組")
 			   
 			var a=$('<a></a>').addClass("addto-cart")
 			                  .text("加入兌換")
