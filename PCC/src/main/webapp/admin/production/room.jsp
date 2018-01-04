@@ -145,8 +145,9 @@
     			cache: false,
     			success:function(data){
     				alert(data)
-    				$("#btnSubmit").prop("disabled", false);
-    				$('#previewPhoto').removeAttr('src')
+    				location.reload();
+//     				$("#btnSubmit").prop("disabled", false);
+//     				$('#previewPhoto').removeAttr('src')
     			},
     		     error: function (e) {
  	                console.log("ERROR : ", e);
