@@ -180,8 +180,8 @@ public class LoginController {
 	public @ResponseBody String method6(String email, String message) {
 		if (email != null && message != null && email.trim().length() != 0 && message.trim().length() != 0) {
 			// 寄信 聯絡我們
-			String title = "聯絡我們PCC聯絡信件";
-			EmailUtil.sendEmail("thepccteam@gmail.com", title, message, null);
+//			String title = "TO PCC CONTACT Mail";
+			EmailUtil.sendEmail("thepccteam@gmail.com", "TO PCC CONTACT Mail", message, null);
 			return "寄送聯絡信";
 		} else {
 			return "寄送失敗";
