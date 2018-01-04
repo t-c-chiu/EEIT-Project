@@ -264,7 +264,7 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDYpbCt__aSkFOPc8En0xCzF6G
 			var span1=$('<span></span>').addClass("post-like")
 			var span2=$('<span></span>').addClass("post-admin").text('房價 '+room.price)
 			var div8=$('<div></div>').addClass("entry-content")
-			var p1=$('<p></p>').text(room.info)
+			var p1=$('<p></p>').html(room.info)
 		 	var h1=$('<h4></h4').attr('style','color:#FF8888').text(room.address)
 		 	
 			
