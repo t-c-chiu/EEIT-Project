@@ -22,13 +22,13 @@ public class OrderService {
 	// 新增訂單
 	public int insertOrder(Order order) {
 		if(order.getLocation()==null) {
-			order.setLocation("未結帳，未填寫。");
+			order.setLocation("未結帳");
 		}
 		if(order.getRecipient()==null) {
-			order.setRecipient("未結帳，未填寫。");
+			order.setRecipient("未結帳");
 		}
 		if(order.getRecipientPhone()==null) {
-			order.setRecipientPhone("未結帳，未填寫。");
+			order.setRecipientPhone("未結帳");
 		}
 
 		int i = orderDAO.insertOlder(order);
