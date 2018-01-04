@@ -137,10 +137,10 @@
 					<div class="type-post">
 						<div class="col-md-12 col-sm-12 col-xs-12 blog-content">
 							<div class="entry-content">
-								<p><span class="personal-content">姓名:</span><span id="nameEl">${member.name}</span></p>
-								<p><span class="personal-content">E-mail:</span><span id="emailEl">${member.email }</span></p>
-								<p><span class="personal-content">電話:</span><span id="phoneEl">${member.phone }</span></p>
-								<p><span class="personal-content">地址:</span><span id="areaEl">${member.area }</span> , <span id="addressEl">${member.address }</span></p>
+								<p><span class="personal-content" style="padding-left:0px;">姓名:</span><span id="nameEl">${member.name}</span></p>
+								<p><span class="personal-content" style="padding-left:0px;padding-right:0px;">E-mail:</span><span id="emailEl">${member.email }</span></p>
+								<p><span class="personal-content" style="padding-left:0px;">電話:</span><span id="phoneEl">${member.phone }</span></p>
+								<p><span class="personal-content" style="padding-left:0px;">地址:</span><span id="areaEl">${member.area }</span> , <span id="addressEl">${member.address }</span></p>
 							</div>
 						</div>
 					</div>
@@ -151,7 +151,7 @@
 							<div class="col-md-8 col-sm-12 col-xs-12 col-md-push-2 ">
 								<div class="billing-field">
 									<div class="col-md-12 form-group">
-									<label>姓名 *</label><span id="name-span"></span> <input
+									<label>姓名 *</label><span id="name-span" ></span> <input
 										onblur="nameCheck();" id="name" name="name"
 										class="form-control" type="text" value="${member.name }" required />
 								</div>
