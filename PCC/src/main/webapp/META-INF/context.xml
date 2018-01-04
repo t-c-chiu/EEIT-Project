@@ -1,16 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Context>
 
-<!-- 	<Resource name="jdbc/pcc" auth="Container" type="javax.sql.DataSource" -->
-<!-- 		maxTotal="100" maxIdle="30" maxWaitMillis="10000" username="sa" -->
-<!-- 		password="passw0rd" driverClassName="com.microsoft.sqlserver.jdbc.SQLServerDriver" -->
-<!-- 		url="jdbc:sqlserver://localhost:1433;database=PCC" /> -->
+	<!-- <Resource name="jdbc/pcc" auth="Container" type="javax.sql.DataSource" -->
+	<!-- maxTotal="100" maxIdle="30" maxWaitMillis="10000" username="sa" -->
+	<!-- password="passw0rd" driverClassName="com.microsoft.sqlserver.jdbc.SQLServerDriver" -->
+	<!-- url="jdbc:sqlserver://localhost:1433;database=PCC" /> -->
 
-		<Resource name="jdbc/pcc" auth="Container"
-			type="javax.sql.DataSource"
-			driverClassName="com.microsoft.sqlserver.jdbc.SQLServerDriver"
-			url="jdbc:sqlserver://dbserverpcc.database.windows.net:1433;database=PCC"
-			username="eeit98pcc@dbserverpcc"
-			password= "xyz12345!"  />
-			
+	<Resource name="jdbc/pcc" auth="Container" type="javax.sql.DataSource"
+		driverClassName="com.microsoft.sqlserver.jdbc.SQLServerDriver"
+		url="jdbc:sqlserver://dbserverpcc.database.windows.net:1433;database=PCC"
+		username="eeit98pcc@dbserverpcc" password="xyz12345!" />
+
 </Context>

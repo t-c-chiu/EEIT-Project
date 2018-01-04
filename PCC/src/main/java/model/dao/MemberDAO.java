@@ -68,7 +68,7 @@ public class MemberDAO {
 			Member select = this.select(member.getMemberId());
 			if (select != null) {
 				select.setPassword(member.getPassword());
-				System.out.println("UPDATE Password DAO member=" + member);
+//				System.out.println("UPDATE Password DAO member=" + member);
 				return member;
 			}
 		}

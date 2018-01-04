@@ -69,7 +69,7 @@ public class OrderDetailDAO {
 	// 查詢OrderDetail by OrderId
 
 	public List<OrderDetail> selectByOrderId(Integer orderId) {
-		System.out.println(orderId);
+//		System.out.println(orderId);
 		if (orderId != 0) {
 			return getSession().createQuery("from OrderDetail where orderId = :orderId ", OrderDetail.class)
 					.setParameter("orderId", orderId).list();

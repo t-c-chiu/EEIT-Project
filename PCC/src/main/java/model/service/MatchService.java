@@ -36,7 +36,7 @@ public class MatchService {
 	// 決定預約表是否完成
 	public Boolean completeReservationForm(String memberId) {
 		Integer reservation = reservationDAO.selectCountByMemberId(memberId);
-		System.out.println(reservation);
+//		System.out.println(reservation);
 		if (reservation == 0) {
 			return false;
 		}
