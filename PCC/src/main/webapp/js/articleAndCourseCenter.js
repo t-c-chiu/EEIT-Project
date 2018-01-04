@@ -58,7 +58,7 @@ $(function(){
 			$.each(data.listOfMyReservation, function(i,v){
 				totalPrice += v.totalPrice;
 				var td4 = $('<td></td>').text('房間');
-				var td5 = $('<td></td>').text(v.name + '：' + v.beginDate + ' - ' + v.endDate);
+				var td5 = $('<td></td>').text(v.memberId + '：' + v.beginDate + ' - ' + v.endDate);
 				var td6 = $('<td></td>').text(v.totalPrice);
 				var tr2 = $('<tr></tr>').append(td4,td5,td6);
 				$('#myBePaidTable').append(tr2);
@@ -68,7 +68,7 @@ $(function(){
 			$.each(data.listOfMyOrder, function(i,v){
 				totalPrice += v.totalPrice;
 				var td7 = $('<td></td>').text('商城');
-				var td8 = $('<td></td>').text(v.name + '：' + v.date);
+				var td8 = $('<td></td>').text(v.memberId + '：' + v.date);
 				var td9 = $('<td></td>').text(v.totalPrice);
 				var tr3 = $('<tr></tr>').append(td7,td8,td9);
 				$('#myBePaidTable').append(tr3);
