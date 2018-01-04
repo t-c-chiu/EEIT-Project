@@ -29,9 +29,16 @@ $(function() {
 					var tbody=$('#tbodyForOrder');
 					tbody.empty();
 					$.each(data,function(i,v){
+						$.each(v,function(i,j){
+						
+							console.log("this:"+this);
+
+						});
+						
 						var tr1=$("<tr></tr>").html("<form><td><a class='orderLink' style='cursor: pointer;'>"+v.orderId+"</a><input type='text' name='orderId' size='2' value="+v.orderId+" hidden /></td><td><input type='text' name='memberId' size='4'value="+v.memberId+" /></td><td><input type='number' name='totalPrice' size='2' min='1' value="+v.totalPrice+" /></td><td><input type='text' name='date' size='3' value="+v.date+" /></td><td><input type='number' name='status' size='2' min='0' max='1' value="+v.status+" /></td><td><input type='text' name='recipient' size='4'value="+v.recipient+" /></td><td><input type='text' name='location' size='10' value="+v.location+" /></td><td><input type='text' name='recipientPhone' size='10'value="+v.recipientPhone+" /></td><td><input type='button' class='btn btn-warning' name='orderButton' value='修改' /><input type='button' class='btn btn-danger' name='orderButton' value='刪除' /></td></form>");
 						var tr2=$("<tr></tr>").html("<td colspan='8'></td><td><input class='slideUpForOD btn btn-success' type='button' value='收起' /></td>");
 						tr2.attr("id",v.orderId+'a');
+						
 						tbody.append(tr1);
 						tbody.append(tr2);
 						tr2.slideUp(0);
