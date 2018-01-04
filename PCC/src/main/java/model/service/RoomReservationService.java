@@ -97,6 +97,8 @@ public class RoomReservationService {
 
 	public boolean insertRoom(Room room) {
 		room.setInfo(room.getInfo().substring(1));
+		room.setArea(room.getArea().trim());
+		room.setRoomType(room.getRoomType().trim());				
 		return roomDAO.insertRoom(room);
 	}
 
