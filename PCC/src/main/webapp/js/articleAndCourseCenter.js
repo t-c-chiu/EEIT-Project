@@ -48,8 +48,7 @@ $(function(){
 			$.each(data.listOfMyClazz, function(i,v){
 				totalPrice += v.price;
 				var td1 = $('<td></td>').text('課程');
-				var a1 = $('<a></a>').attr('href','/PCC/clazzDetail.clazz?detail=' + v.classId).text(v.courseName);
-				var td2 = $('<td></td>').append(a1);
+				var td2 = $('<td></td>').text(v.courseName);
 				var td3 = $('<td></td>').text(v.price);
 				var tr1 = $('<tr></tr>').append(td1,td2,td3);
 				$('#myBePaidTable').append(tr1);
@@ -69,7 +68,7 @@ $(function(){
 			$.each(data.listOfMyOrder, function(i,v){
 				totalPrice += v.totalPrice;
 				var td7 = $('<td></td>').text('商城');
-				var td8 = $('<td></td>').text(v.memberId + '：' + v.date);
+				var td8 = $('<td></td>').text(v.name + '：' + v.date);
 				var td9 = $('<td></td>').text(v.totalPrice);
 				var tr3 = $('<tr></tr>').append(td7,td8,td9);
 				$('#myBePaidTable').append(tr3);
