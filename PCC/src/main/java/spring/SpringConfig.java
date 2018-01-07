@@ -59,7 +59,7 @@ public class SpringConfig extends AbstractContextLoaderInitializer {
 	@Bean
 	public SessionFactory sessionFactory() {
 		LocalSessionFactoryBuilder builder = new LocalSessionFactoryBuilder(dataSource());
-//		builder.setProperty("hibernate.show_sql", "true");
+		builder.setProperty("hibernate.show_sql", "true");
 		builder.setProperty("hibernate.dialect", "org.hibernate.dialect.SQLServerDialect");
 		builder.addAnnotatedClasses(Clazz.class, CollectArticle.class, Matching.class, Member.class, Order.class,
 				OrderDetail.class, PostArticle.class, Product.class, ReplyArticle.class, Reservation.class, Room.class,
